@@ -2,10 +2,13 @@
 import math
 import sys
 from pathlib import Path
+from types import SimpleNamespace
+import time
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
-from cargo_live_view import SAMPLE_COUNT, average_results, gate_result  # noqa: E402
+from cargo_live_view import LiveView, SAMPLE_COUNT, average_results, gate_result, height_slot  # noqa: E402
+from grid_board import Board, config_path  # noqa: E402
 
 
 class LiveViewGateTest(unittest.TestCase):
@@ -55,6 +58,55 @@ class LiveViewGateTest(unittest.TestCase):
         self.assertAlmostEqual(result['width'], 0.20)
         self.assertAlmostEqual(result['height'], 0.32)
         self.assertAlmostEqual(result['z_cam'], 0.82)
+
+    def test_height_goes_to_four_equal_bins(self):
+        sorting = {'min_m': 0.24, 'max_m': 0.50, 'columns': [1, 2, 3, 4]}
+        self.assertIsNone(height_slot(0.2399, sorting))
+        self.assertEqual(height_slot(0.24, sorting), 1)
+        self.assertEqual(height_slot(0.3049, sorting), 1)
+        self.assertEqual(height_slot(0.305, sorting), 2)
+        self.assertEqual(height_slot(0.37, sorting), 3)
+        self.assertEqual(height_slot(0.435, sorting), 4)
+        self.assertEqual(height_slot(0.50, sorting), 4)
+        self.assertIsNone(height_slot(0.5001, sorting))
+
+    def test_confirmation_sends_one_goal_only_after_valid_result(self):
+        class Publisher:
+            def __init__(self):
+                self.messages = []
+
+            def get_subscription_count(self):
+                return 1
+
+            def publish(self, message):
+                self.messages.append(message.data)
+
+        board = Board.load(config_path(True))
+        x, y = board.xy(2, 4)  # agv1 pickup (3,5)
+        state = {'accepted': None, 'sent': False, 'slot': None,
+                 'status': {'x': x, 'y': y, 'yaw': board.yaw, 'state': 'done'},
+                 'status_at': time.monotonic()}
+        node = SimpleNamespace(cars={'agv1': state}, board=board,
+                               sorting={'min_m': 0.24, 'max_m': 0.50}, drop_row=1,
+                               goal_pub=Publisher(), result_pub=Publisher())
+        ok, _ = LiveView.confirm(node, 'agv1')
+        self.assertFalse(ok)
+        self.assertEqual(node.goal_pub.messages, [])
+        state['accepted'] = {'width': 0.18, 'height': 0.313, 'z_cam': 0.84}
+        ok, _ = LiveView.confirm(node, 'agv1')  # out-of-range result has no slot
+        self.assertFalse(ok)
+        state['slot'] = 2
+        state['status_at'] = time.monotonic() - 3
+        ok, _ = LiveView.confirm(node, 'agv1')  # stale pose cannot dispatch
+        self.assertFalse(ok)
+        self.assertEqual(node.goal_pub.messages, [])
+        state['status_at'] = time.monotonic()
+        ok, _ = LiveView.confirm(node, 'agv1')
+        self.assertTrue(ok)
+        self.assertEqual(node.goal_pub.messages, ['1 1 2'])
+        ok, _ = LiveView.confirm(node, 'agv1')
+        self.assertFalse(ok)
+        self.assertEqual(node.goal_pub.messages, ['1 1 2'])
 
 
 if __name__ == '__main__':

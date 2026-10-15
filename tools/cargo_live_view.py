@@ -5,7 +5,9 @@
     python3 tools/cargo_live_view.py
 
 For each car, five valid frames are averaged once and the result is held on
-screen. Press R to measure both cars again, S to save images, Q/Esc to close.
+screen. After loading the box, click that car's DA NHAN HANG button to dispatch
+it to the height-based delivery cell. Press R to remeasure before dispatch,
+S to save images, Q/Esc to close.
 """
 import argparse
 from collections import deque
@@ -38,14 +40,17 @@ POSITION_TOL_M = 0.15
 LIDAR_WIDTH_TOL_M = 0.03
 SAMPLE_COUNT = 5
 MEASURE_KEYS = ('width', 'height', 'z_cam', 'face_yaw_deg')
+PANE_W, PANE_H = 340, 410
+BUTTON_TOP, BUTTON_BOTTOM = 358, 398
+WINDOW_NAME = 'AGV cargo | Click DA NHAN HANG after loading | R: remeasure S: save Q: quit'
 
 
 def angle_error_deg(a, b):
     return math.degrees(math.atan2(math.sin(a - b), math.cos(a - b)))
 
 
-def gate_result(result, status, status_age, target_xy, target_yaw):
-    """Return a reason to hide measurements, or None when checks pass."""
+def pose_gate(status, status_age, target_xy, target_yaw):
+    """Require a fresh, stopped robot at the pickup node and East heading."""
     if (status is None or status_age > FRAME_AGE or status.get('x') is None
             or status.get('y') is None or status.get('yaw') is None):
         return 'Waiting for robot pose'
@@ -55,6 +60,14 @@ def gate_result(result, status, status_age, target_xy, target_yaw):
         return 'Robot not at pickup cell'
     if abs(angle_error_deg(status['yaw'], target_yaw)) >= HEADING_TOL_DEG:
         return 'Align robot East (<1 deg)'
+    return None
+
+
+def gate_result(result, status, status_age, target_xy, target_yaw):
+    """Return a reason to hide measurements, or None when checks pass."""
+    pose_reason = pose_gate(status, status_age, target_xy, target_yaw)
+    if pose_reason:
+        return pose_reason
     if abs(result['face_yaw_deg']) > PARALLEL_TOL_DEG:
         return f'Box face angle {result["face_yaw_deg"]:+.1f} deg (max 3)'
     if result['lidar_points'] < 5:
@@ -67,6 +80,18 @@ def gate_result(result, status, status_age, target_xy, target_yaw):
     if any('khong thay vach mat tren/mat truoc' in w for w in result['warnings']):
         return 'Top edge uncertain'
     return None
+
+
+def height_slot(height_m, sorting):
+    """Equal-width height bins: lower inclusive, upper exclusive; final upper inclusive."""
+    lo, hi = float(sorting['min_m']), float(sorting['max_m'])
+    cols = [int(c) for c in sorting['columns']]
+    if not (0 < lo < hi and cols and len(set(cols)) == len(cols)):
+        raise ValueError('Invalid cargo.yaml height_sort configuration')
+    if not math.isfinite(height_m) or height_m < lo or height_m > hi:
+        return None
+    index = min(int((height_m - lo) / ((hi - lo) / len(cols))), len(cols) - 1)
+    return cols[index]
 
 
 def average_results(values):
@@ -89,6 +114,15 @@ class LiveView(Node):
         super().__init__('cargo_live_view')
         self.board = Board.load(config_path(True))
         self.base_cfg = cm.load_cfg()
+        self.sorting = self.base_cfg['height_sort']
+        self.drop_row = int(self.base_cfg['place']['deliver_row'])
+        if not (1 <= self.drop_row <= self.board.rows):
+            raise ValueError('cargo.yaml deliver_row is outside the board')
+        if any(not 1 <= int(c) <= self.board.cols for c in self.sorting['columns']):
+            raise ValueError('cargo.yaml height_sort column is outside the board')
+        height_slot(float(self.sorting['min_m']), self.sorting)  # validate bounds
+        self.goal_pub = self.create_publisher(String, '/fleet/goal', 10)
+        self.result_pub = self.create_publisher(String, '/fleet/cargo_result', 10)
         self.cars = {}
         for car in TARGETS:
             self.cars[car] = {
@@ -98,7 +132,8 @@ class LiveView(Node):
                 'last_measured_frame_seq': 0,
                 'status': None, 'status_at': 0.0,
                 'last_process': 0.0, 'history': deque(maxlen=SAMPLE_COUNT),
-                'accepted': None, 'reported': False,
+                'accepted': None, 'reported': False, 'slot': None,
+                'sent': False, 'action_note': '',
                 'view': None, 'reason': 'Waiting for camera',
             }
             self.create_subscription(
@@ -171,6 +206,8 @@ class LiveView(Node):
                         vis[:38] = und[:38]
                         s['view'] = vis
                         s['accepted'] = average
+                        s['slot'] = height_slot(average['height'], self.sorting)
+                        s['action_note'] = ''
                         s['reason'] = f'FINAL: mean of {SAMPLE_COUNT} valid images'
                     else:
                         s['reason'] = f'Measuring {len(s["history"])}/{SAMPLE_COUNT}'
@@ -182,14 +219,60 @@ class LiveView(Node):
             s['history'].clear()
 
     def reset(self):
-        for s in self.cars.values():
+        reset_cars = []
+        for car, s in self.cars.items():
+            if s['sent']:
+                continue  # a dispatched result remains locked
             s['history'].clear()
             s['accepted'] = None
             s['reported'] = False
+            s['slot'] = None
+            s['action_note'] = ''
             s['view'] = s['frame']
             s['reason'] = 'Waiting for 5 new valid images'
             s['last_measured_frame_seq'] = s['frame_seq']
             s['last_process'] = 0.0
+            reset_cars.append(car)
+        return reset_cars
+
+    def confirm(self, car):
+        """Supervisor clicked after loading: publish exactly one delivery goal."""
+        s = self.cars[car]
+        if s['sent']:
+            return False, f'{car}: da gui dich giao, khong gui lap'
+        if s['accepted'] is None:
+            return False, f'{car}: chua chot 5 lan do hop le'
+        if s['slot'] is None:
+            return False, (f'{car}: cao {s["accepted"]["height"] * 100:.1f} cm nam ngoai dai '
+                           f'{self.sorting["min_m"] * 100:.0f}-{self.sorting["max_m"] * 100:.0f} cm')
+        r, c = TARGETS[car]
+        pose_reason = pose_gate(s['status'], time.monotonic() - s['status_at'],
+                                self.board.xy(r - 1, c - 1), self.board.yaw)
+        if pose_reason:
+            return False, f'{car}: {pose_reason}'
+        if self.goal_pub.get_subscription_count() == 0:
+            return False, 'Chua thay traffic_manager tren /fleet/goal'
+        slot = s['slot']
+        x, y = self.board.xy(self.drop_row - 1, slot - 1)
+        for other, state in self.cars.items():
+            if other == car or not state['sent'] or state['slot'] != slot:
+                continue
+            o = state['status']
+            if o is None or o.get('x') is None or o.get('y') is None or \
+                    o.get('state') not in ('idle', 'done') or \
+                    math.hypot(o['x'] - x, o['y'] - y) < 0.3:
+                return False, f'O ({self.drop_row},{slot}) dang duoc {other} su dung'
+        goal = f'{list(TARGETS).index(car) + 1} {self.drop_row} {slot}'
+        self.goal_pub.publish(String(data=goal))
+        self.result_pub.publish(String(data=json.dumps({
+            'car': car, 'ok': True, 'confirmed': True,
+            'pickup_row': r, 'pickup_col': c,
+            'deliver_row': self.drop_row, 'deliver_col': slot,
+            'height_m': s['accepted']['height'], 'width_m': s['accepted']['width'],
+            'distance_m': s['accepted']['z_cam'], 'measurements': SAMPLE_COUNT,
+        })))
+        s['sent'] = True
+        return True, f'{car}: da nhan hang -> giao toi ({self.drop_row},{slot}), cao {s["accepted"]["height"] * 100:.1f} cm'
 
     def canvas(self):
         panes = []
@@ -200,7 +283,7 @@ class LiveView(Node):
                 frame = np.zeros((240, 320, 3), np.uint8)
             else:
                 frame = cv2.resize(frame, (320, 240))
-            pane = np.zeros((350, 340, 3), np.uint8)
+            pane = np.zeros((PANE_H, PANE_W, 3), np.uint8)
             pane[48:288, 10:330] = frame
             idx = car[-1]
             r, c = TARGETS[car]
@@ -216,6 +299,24 @@ class LiveView(Node):
             for i, label in enumerate(labels):
                 cv2.putText(pane, label, (10, 312 + i * 26),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.51, color, 1)
+            if s['sent']:
+                button = f'DA GUI DEN ({self.drop_row},{s["slot"]})'
+                button_color = (80, 80, 80)
+            elif s['action_note']:
+                button = s['action_note'][:39]
+                button_color = (0, 100, 180)
+            elif result and s['slot'] is not None:
+                button = f'DA NHAN HANG  -> ({self.drop_row},{s["slot"]})'
+                button_color = (40, 125, 45)
+            elif result:
+                button = f'HEIGHT NGOAI {self.sorting["min_m"] * 100:.0f}-{self.sorting["max_m"] * 100:.0f} CM'
+                button_color = (0, 100, 180)
+            else:
+                button = f'CHO DO DU {SAMPLE_COUNT} ANH'
+                button_color = (70, 70, 70)
+            cv2.rectangle(pane, (10, BUTTON_TOP), (330, BUTTON_BOTTOM), button_color, -1)
+            cv2.putText(pane, button, (17, BUTTON_TOP + 26),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.52, (255, 255, 255), 1)
             panes.append(pane)
         return np.hstack(panes)
 
@@ -228,6 +329,21 @@ def main():
         sys.exit('No graphical display (DISPLAY/WAYLAND_DISPLAY). Run in VS Code desktop terminal.')
     rclpy.init()
     node = LiveView()
+
+    def on_mouse(event, x, y, _flags, _param):
+        if event != cv2.EVENT_LBUTTONUP or not BUTTON_TOP <= y <= BUTTON_BOTTOM:
+            return
+        index = x // PANE_W
+        if not 0 <= index < len(TARGETS):
+            return
+        car = list(TARGETS)[index]
+        ok, message = node.confirm(car)
+        if not ok:
+            node.cars[car]['action_note'] = message.split(':', 1)[-1].strip()
+        print(message, flush=True)
+
+    cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_AUTOSIZE)
+    cv2.setMouseCallback(WINDOW_NAME, on_mouse)
     try:
         while rclpy.ok():
             rclpy.spin_once(node, timeout_sec=0.02)
@@ -243,13 +359,14 @@ def main():
                           f'mat lech {result["face_yaw_deg"]:+.1f} do '
                           f'(trung binh {SAMPLE_COUNT} lan; da chot)', flush=True)
                     s['reported'] = True
-            cv2.imshow('AGV cargo measurement | R: remeasure S: save Q: quit', node.canvas())
+            cv2.imshow(WINDOW_NAME, node.canvas())
             key = cv2.waitKey(1) & 0xff
             if key in (ord('q'), 27):
                 break
             if key == ord('r'):
-                node.reset()
-                print('Da xoa ket qua; dang do lai 5 lan moi cho moi xe', flush=True)
+                reset = node.reset()
+                print('Dang do lai 5 lan: ' + (', '.join(reset) if reset else 'khong co xe nao chua giao'),
+                      flush=True)
             if key == ord('s'):
                 out = Path(args.save_dir)
                 out.mkdir(parents=True, exist_ok=True)

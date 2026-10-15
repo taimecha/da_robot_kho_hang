@@ -502,6 +502,11 @@ Terminal 1 in lại `Xe agv2: wheel_radius ... m, coast ...` để xác nhận.
 
 ### Đo Hàng Bằng Camera (xe thật, ESP32-CAM)
 
+**Luồng có nút xác nhận nhận hàng và chia 4 ô theo chiều cao 24–50 cm:** xem
+[Chạy hai xe đến hộp và xem số đo trực tiếp](DO_HOP_TRUC_TIEP.md). Phần
+`cargo_task.py` bên dưới là luồng tự động cũ, phân loại theo rộng/cao và không
+đợi xác nhận; chỉ dùng một trong hai luồng cho mỗi lượt chạy.
+
 Xe tới ô **lấy hàng phía Đông cột 5** (ô (2..5, 5), quay Đông) → LiDAR đo khoảng cách + góc
 mặt hàng, **camera** tìm 4 mép → **rộng × cao** → bảng loại trong `cargo.yaml` → xe tự chạy
 về ô **trả hàng ở hàng 1** (cột theo loại). Xe không chở hàng. Ô (1,5) không dùng (sát vật

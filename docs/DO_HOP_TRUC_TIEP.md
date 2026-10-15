@@ -55,8 +55,29 @@ Cửa sổ đo chỉ hiện số khi xe đã dừng tại ô đích, sai lệch 
 và toàn bộ hộp nằm trong ảnh. Giao diện lấy **trung bình 5 lần đo hợp lệ** cho
 từng xe rồi **chốt** số, không tính lại cho tới khi bấm **R**. `DIST` là khoảng
 cách từ camera tới mặt trước hộp; `WIDTH`, `HEIGHT` là rộng, cao của mặt hộp.
-Khi không đủ điều kiện, dấu `--` và lý do được hiển thị. Bấm **S** để lưu ảnh
-vào `/tmp/cargo_live`, **Q** để đóng cửa sổ. Hai camera đang dùng:
+Khi không đủ điều kiện, dấu `--` và lý do được hiển thị. Với vị trí hộp cách
+tâm ô lấy hàng khoảng **85 cm**, khoảng chiều cao đo tin cậy chung của hai xe
+là **24–50 cm**: dưới 24 cm tia LiDAR có thể đi qua phía trên hộp; trên 50 cm
+xe 1 có thể cắt mất mép trên ảnh. Đây là giới hạn thực nghiệm/thận trọng từ
+góc tia LiDAR và hiệu chuẩn camera hiện tại, không phải thông số tuyệt đối của
+hai cảm biến. Chia đều khoảng này để chọn ô giao hàng:
+
+| Chiều cao trung bình 5 lần | Ô giao |
+|---|---|
+| 24 đến dưới 30,5 cm | (1,1) |
+| 30,5 đến dưới 37 cm | (1,2) |
+| 37 đến dưới 43,5 cm | (1,3) |
+| 43,5 đến 50 cm | (1,4) |
+
+Sau khi **đã đặt hàng lên xe**, bấm nút **DA NHAN HANG** ngay dưới ảnh của xe
+đó. Chương trình lấy chiều cao đã chốt để chọn ô và gửi một đích qua
+`/fleet/goal` cho `traffic_manager`; không gửi lặp nếu bấm lần hai. Hộp ngoài
+24–50 cm không được giao tự động. Nếu cả hai hộp thuộc cùng một ô, chờ xe trước
+hoàn tất và rời ô đó rồi mới xác nhận xe sau. **Không chạy `cargo_task.py` song
+song với giao diện này** vì đó là luồng đo/phân loại cũ và cũng gửi đích.
+
+Bấm **R** để đo lại các xe chưa giao, **S** để lưu ảnh vào `/tmp/cargo_live`,
+**Q** để đóng cửa sổ. Hai camera đang dùng:
 `192.168.1.201` (xe 1) và `192.168.1.200` (xe 2).
 
 Để dừng khẩn cả hai xe, ở terminal đã `source` môi trường chạy:

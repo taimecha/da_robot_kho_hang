@@ -63,6 +63,18 @@ place:
   # O TRA hang: hang deliver_row, cot = classes[].col
   deliver_row: 1
 
+# Phan loai theo CHIEU CAO sau khi giao dien cargo_live_view.py da chot
+# trung binh 5 anh va nguoi giam sat bam "DA NHAN HANG". Ap dung khi mat hop
+# cach TAM O lay hang 0.85 m nhu place.gap; doi khoang dat hang/camera/LiDAR thi
+# phai do lai gioi han nay. Can duoi 24 cm: tia LiDAR cao 19 cm + chech len
+# 1.3-2.7 do tai 0.85 m (~21-23 cm), de 1 cm du. Can tren 50 cm: xe 1 chi
+# nhin tron den ~50.1 cm (mep tren con 5 px), xe 2 ~52.8 cm; lay can chung.
+# 24..50 cm chia 4 khoang deu, moi khoang 6.5 cm; ngoai dai KHONG giao hang.
+height_sort:
+  min_m: 0.24
+  max_m: 0.50
+  columns: [1, 2, 3, 4]
+
 # Gioi han do (gap 0.85, camera xe that cach mat hang ~0.75 m): rong toi ~0.8 m, cao toi
 # ~0.55 m - hang cham mep anh thi bao loi, khong giao. Hang THAP hon camera (23.5 cm):
 # thay ca mat tren -> mep tren lay theo vach sang mat tren/mat truoc (mo phong sai <= 3.5 mm).
