@@ -73,7 +73,7 @@ rm -rf $L; mkdir -p $L
 # KHONG inf_is_valid (xe that tia cham tuong, tia khong ve la tia hong).
 for n in "${NAMES[@]}"; do
   sed -e "s#odom_topic: /odom#odom_topic: /$n/odom#" \
-      -e "s#topic: /scan#topic: /$n/scan#" -e "s#topic: \"/scan\"#topic: \"/$n/scan\"#" \
+      -e "s#topic: /scan#topic: /$n/scan_filtered#" -e "s#topic: \"/scan\"#topic: \"/$n/scan_filtered\"#" \
       -e "s#\"/local_costmap/published_footprint\"#\"/$n/local_costmap/published_footprint\"#" \
       -e 's#^\( *\)plugin: "nav2_costmap_2d::StaticLayer"#&\n\1map_topic: /map#' \
       "$CFG/navigation.yaml" > $L/navigation_$n.yaml
@@ -172,7 +172,9 @@ for n in "${NAMES[@]}"; do
 done
 echo "${PIDS[@]}" > $L/pids
 # Gop TF cac xe vao /tf chung cho RViz (tools/fleet.rviz): frame agvN/..., scan /fleet_viz/agvN/scan
-setsid python3 $WS/tools/fleet_viz.py ${NAMES[@]} > $L/fleet_viz.log 2>&1 & PIDS+=($!)
+SCAN_REMAPS=()
+for n in "${NAMES[@]}"; do SCAN_REMAPS+=(-r /$n/scan:=/$n/scan_filtered); done
+setsid python3 $WS/tools/fleet_viz.py ${NAMES[@]} --ros-args "${SCAN_REMAPS[@]}" > $L/fleet_viz.log 2>&1 & PIDS+=($!)
 echo "${PIDS[@]}" > $L/pids
 # ESP32-CAM tung xe -> /agvN/camera/image_raw (cargo.yaml cameras:). CAM=0: khong bat.
 # Camera chua bat nguon thi node tu thu lai moi 2 s - khong can bat lai he.

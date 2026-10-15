@@ -266,23 +266,36 @@ class FleetAgent(GridNavigator):
             if self.sent_upto < len(self.route) - 1:
                 self.state = 'waiting'          # het phan duoc phep, cho them o
                 return
+            fh = self.final_heading
+            if fh is None and len(self.route) >= 2:
+                (ra, ca), (rb, cb) = self.route[-2], self.route[-1]
+                xa, ya = self.get_coordinates(ra, ca)
+                xb, yb = self.get_coordinates(rb, cb)
+                fh = math.atan2(yb - ya, xb - xa)
+            rx, ry, yaw = self.get_robot_pose()
+            if rx is None or (fh is not None and yaw is None):
+                self.abort_route('khong do duoc vi tri/goc tai dich')
+                return
             if not self.final_done:
                 self.final_done = True
-                fh = self.final_heading
-                if fh is None and len(self.route) >= 2:
-                    (ra, ca), (rb, cb) = self.route[-2], self.route[-1]
-                    xa, ya = self.get_coordinates(ra, ca)
-                    xb, yb = self.get_coordinates(rb, cb)
-                    fh = math.atan2(yb - ya, xb - xa)
-                _, _, yaw = self.get_robot_pose()
                 if fh is not None and yaw is not None and \
-                        abs(self.normalize_angle(fh - yaw)) > self.rot_done:
+                        abs(self.normalize_angle(fh - yaw)) >= self.rot_done:
                     self.state = 'moving'
                     self.start_rotation(fh, finish=True)
                     return
+            if fh is not None and abs(self.normalize_angle(fh - yaw)) >= self.rot_done:
+                self.abort_route(f'sai so goc tai dich {abs(math.degrees(self.normalize_angle(fh - yaw))):.2f}° '
+                                 f'>= {math.degrees(self.rot_done):.1f}°')
+                return
             if self.state != 'done':
                 r, c = self.route[-1]
-                self.get_logger().info(f'[{self.name}] da toi ({r + 1},{c + 1})')
+                x, y = self.get_coordinates(r, c)
+                pos_err = math.hypot(rx - x, ry - y)
+                heading_err = abs(math.degrees(self.normalize_angle(fh - yaw))) if fh is not None else None
+                msg = f'[{self.name}] da toi ({r + 1},{c + 1}), sai so vi tri {pos_err * 100:.1f} cm'
+                if heading_err is not None:
+                    msg += f', sai so goc {heading_err:.2f}°'
+                self.get_logger().info(msg)
             self.state = 'done'
             self.target_node = None
             return

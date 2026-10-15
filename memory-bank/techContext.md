@@ -51,7 +51,7 @@ Firmware XE 1 biên dịch ra đúng kích thước bản cũ "1 Xe" khi chưa c
   `scripts/ns_relay.py`), `my_bot_description` (URDF xacro, `sim:=false` cho xe thật).
 - Bản đồ thật: `src/my_bot_bringup/config/real_room_map.yaml` (0.05 m/ô, 159×165).
   Sa bàn: `config/grid_real.yaml` (tâm nút (3,3) = (−0.545, +0.035), `yaw_deg` 0,
-  `rotate.coast: 0.36`, `done_deg: 3`); mô phỏng: `grid_sim.yaml`.
+  `rotate.coast: 0.36`, `done_deg: 0.9`, xung góc nhỏ bật); mô phỏng: `grid_sim.yaml`.
 - Arduino CLI có thể dùng để biên dịch kiểm tra: `arduino-cli compile --fqbn esp32:esp32:esp32 <thư mục sketch>`
   (thư mục phải có `wifi_config.h`).
 

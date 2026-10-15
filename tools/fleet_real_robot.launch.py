@@ -38,12 +38,13 @@ def nodes(context):
     amcl.update({
         'use_sim_time': False,
         'map_topic': '/map',          # ban do CHUNG, khong phai /<ns>/map
-        'scan_topic': 'scan',         # -> /<ns>/scan
+        'scan_topic': 'scan_filtered',
         'set_initial_pose': True,     # cho TF map->odom ngay -> Nav2 len duoc
         'initial_pose': {'x': x, 'y': y, 'z': 0.0, 'yaw': yaw},
     })
     common = dict(namespace=ns, output='screen', remappings=TF)
     return [
+        Node(package='my_bot_bringup', executable='scan_filter.py', **common),
         Node(package='robot_state_publisher', executable='robot_state_publisher',
              parameters=[{'use_sim_time': False, 'robot_description': ParameterValue(
                  Command(['xacro ', xacro_file, ' sim:=false']), value_type=str)}],

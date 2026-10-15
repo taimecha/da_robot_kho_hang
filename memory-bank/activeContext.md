@@ -97,6 +97,10 @@ Chỉ đo **rộng × cao**; camera nhìn thẳng, **Z + mặt phẳng mặt hà
   thẳng python, chờ ≥ 5 s.
 
 ## Gợi ý khi người dùng quay lại
+- 2026-10-15: yêu cầu góc tại goal < 1°. `grid_real.yaml` đặt `done_deg: 0.9`, bật xung
+  góc nhỏ và 12 lần bù; `fleet_agent` chỉ báo `done` khi đo được < 0,9° và ghi sai số
+  vị trí/góc, hết lần bù thì báo lỗi. Thử thực tế ngay tại (3,5)/(4,5): agv1 0,25°,
+  agv2 0,35°; sai số vị trí tương ứng 3,7/3,1 cm. Hai xe đã đứng yên ở đích.
 - Chạy: `tools/fleet_real.sh up` → `python3 tools/fleet_localize.py` → `traffic_manager.py`.
 - Lỗi xe không chạy: xem `/agvN/diag` (ESTOP + lý do), `tools/wheel_test.py agvN` (kê bánh).
 - Không cho xe chạy khi người dùng chưa cho phép trong phiên.

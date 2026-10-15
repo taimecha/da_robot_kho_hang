@@ -7,7 +7,7 @@ Repo `~/robot_ws_3`, GitHub `NguyenHuynh-2004/Robot_kho` (đẩy bằng git Wind
 
 **Bài toán:** sa bàn **5×5, ô 60 cm** (hàng 1–5 dưới→trên, cột 1–5 trái→phải). Nhập hàng, cột,
 hướng (Đ/T/B/N); xe chỉ đi trên cạnh, xoay tại chỗ, né nút/cạnh bị chặn. **Đạt = tại đích
-≤ 3 cm, ≤ 3°.** Hai xe do `traffic_manager.py` điều phối (giữ chỗ 2 nút, ưu tiên xe gần đích,
+vị trí mục tiêu ≤ 3 cm, góc chấp nhận < 0,9° từ 2026-10-15.** Hai xe do `traffic_manager.py` điều phối (giữ chỗ 2 nút, ưu tiên xe gần đích,
 gỡ kẹt).
 
 ## Chạy

@@ -35,6 +35,7 @@ install(DIRECTORY
 install(PROGRAMS
   scripts/wheel_odometry.py
   scripts/ns_relay.py
+  scripts/scan_filter.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

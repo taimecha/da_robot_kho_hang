@@ -17,7 +17,7 @@ bảo**).
   ưu tiên xe **gần đích hơn**, tự gỡ kẹt (đi vòng, né sang ô bên, đổi vai, dừng).
 
 ## Tiêu chí đạt (người dùng đặt)
-- **Tại đích:** sai số vị trí ≤ **3 cm**, hướng ≤ **3°**. (Đây là tiêu chí *tại đích*,
+- **Tại đích:** mục tiêu sai số vị trí ≤ **3 cm**, hướng phải **< 0,9°** mới báo hoàn thành. (Đây là tiêu chí *tại đích*,
   không phải khi đang bám quỹ đạo.)
 - Hai xe không va nhau (mô phỏng: khoảng cách tâm–tâm nhỏ nhất ≥ ~57 cm).
 

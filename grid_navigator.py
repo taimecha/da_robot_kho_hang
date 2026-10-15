@@ -79,6 +79,7 @@ class GridNavigator(Node):
         self.rot_start = math.radians(rot.get('start_deg', 10.0))   # lech hon -> xoay
         self.rot_tol = math.radians(rot.get('stop_deg', 2.0))       # du doan toi dich -> dung
         self.rot_done = math.radians(rot.get('done_deg', 5.0))      # con lech hon -> xoay bu
+        self.ROT_TRIES = int(rot.get('tries', self.ROT_TRIES))
         self.rot_wmax = rot.get('max_speed', 1.3)                   # rad/s
         self.rot_wmin = rot.get('min_speed', 0.7)                   # rad/s, tren vung chet
         self.rot_accel = rot.get('decel', 2.5)                      # rad/s2, do doc giam toc
@@ -773,7 +774,7 @@ class GridNavigator(Node):
             # Toi diem cuoi: dau xe phai theo huong canh vua di, lech <= rot_done
             fy, self.final_yaw = self.final_yaw, None
             _, _, yaw = self.get_robot_pose()
-            if yaw is not None and abs(self.normalize_angle(fy - yaw)) > self.rot_done:
+            if yaw is not None and abs(self.normalize_angle(fy - yaw)) >= self.rot_done:
                 self.start_rotation(fy, finish=True)
                 return
         if not self.waypoints:
@@ -1052,17 +1053,20 @@ class GridNavigator(Node):
                 f"{math.degrees(r['err0']):+.0f}°→{math.degrees(err):+.1f}° ({note})")
             r['err0'] = None
             r.pop('T', None)
-            if abs(err) > self.rot_done and r['tries'] < self.ROT_TRIES:
+            if abs(err) >= self.rot_done and r['tries'] < self.ROT_TRIES:
                 r['tries'] += 1
                 r['phase'] = 'turn'
                 return
             took = (now - r['t0']).nanoseconds * 1e-9
             msg = (f'Xoay xong sau {took:.1f} s, còn lệch {math.degrees(err):+.1f}° '
                    f'({r["tries"]} lần xoay bù: {", ".join(r["log"])})')
-            if abs(err) > self.rot_done:
-                self.get_logger().warn(msg + f' - CHƯA ĐẠT ≤ {math.degrees(self.rot_done):.0f}°')
-            else:
-                self.get_logger().info(msg)
+            if abs(err) >= self.rot_done:
+                self.get_logger().error(msg + f' - CHƯA ĐẠT < {math.degrees(self.rot_done):.1f}°')
+                self.stop_rotation()
+                self.abort_route(f'sai so goc con {math.degrees(abs(err)):.1f}° '
+                                 f'>= {math.degrees(self.rot_done):.1f}°')
+                return
+            self.get_logger().info(msg)
             finish = r['finish']
             self.stop_rotation()
             if finish:

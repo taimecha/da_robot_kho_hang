@@ -178,7 +178,9 @@ Nhập lần lượt:
 | Cột | `1`–`5` (1 = bên trái) | `5` |
 | Hướng tại đích | `D` Đông (phải) · `T` Tây (trái) · `B` Bắc (lên) · `N` Nam (xuống) · Enter = giữ hướng | `d` |
 
-Xe tới đích (sai số ≤ 3 cm) rồi xoay về hướng đã chọn (≤ 3°). Gõ `q` để thoát.
+Xe tới đích rồi xoay về hướng đã chọn; chỉ báo hoàn thành khi sai số góc đo được
+**< 0,9°**. Sai số vị trí được ghi trong log `fleet_agent` để kiểm tra riêng.
+Gõ `q` để thoát.
 
 > [!TIP]
 > **Dòng đầu Terminal 4** luôn hiện, kể cả lúc chờ nhập: góc IMU, vị trí, hướng xe

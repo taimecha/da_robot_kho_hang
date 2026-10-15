@@ -29,7 +29,8 @@ khung `map`).
   `edge_clearance` 0.20 m). `config_path(real)`.
 - `grid_navigator.py` — `GridNavigator` (1 xe): Dijkstra (ít cạnh, rồi ít chỗ rẽ) → các
   **đoạn thẳng** gửi action `follow_path`; xoay tại chỗ riêng bằng gyro: dừng lệnh khi
-  `err − coast·ω < 0`, giữ lệnh ≥ 0.15 s, settle, bù tối đa 5 lần, báo `CHƯA ĐẠT` nếu > 3°.
+  `err − coast·ω < 0`, giữ lệnh ≥ 0.15 s, settle, bù tối đa 12 lần trên xe thật;
+  nếu còn sai số góc ≥ 0,9° thì báo lỗi thay vì báo đã tới.
   Nút/cạnh bị chặn tính lại ở **mỗi** `local_costmap/costmap` (tên tương đối). Marker
   `/grid_visualization` 5 Hz.
 - `fleet_agent.py` — `FleetAgent(GridNavigator)` cho mỗi xe trong `/agvN`: nhận lệnh JSON
@@ -61,6 +62,6 @@ khung `map`).
 |---|---|
 | `navigation.yaml` goal checker | `xy_goal_tolerance 0.02` |
 | `navigation.yaml` local costmap | 6×6 m, 0.05 m, update 5 Hz, **publish 5 Hz, always_send_full_costmap** |
-| `grid_real.yaml rotate` | `done_deg 3`, `coast 0.36`, `pulse_max_deg 0` |
+| `grid_real.yaml rotate` | `done_deg 0.9`, `coast 0.36`, `pulse_max_deg 5`, `pulse_dead 0.35`, `tries 12` |
 | `traffic_manager.py` | `WAIT_S 3`, `STALE_S 1`, `REACH_R 0.15`, `RETRY_S 2`, `MAX_FAIL 5` |
 | `fleet_agent.py` | `STATUS_PERIOD 0.2`, `CMD_TIMEOUT 1.0`, `OTHER_ROBOT_R 0.25`, `NAV2_WAIT 5` |
