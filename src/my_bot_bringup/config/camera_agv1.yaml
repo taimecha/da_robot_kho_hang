@@ -13,5 +13,7 @@ x: 0.0967
 y: 0.0
 z: 0.235
 # Goc xoay (yaw, + = trai) / ngoc (pitch, + = len) camera, do - tools/cam_extrinsic.py 2026-10-15 14:21
-yaw: -2.49
-pitch: -2.29
+# Do lai voi hop nau rong 18.5 cm, cao 32.0 cm ngay 2026-10-16 (5 anh).
+# Camera da thay doi goc lap so voi lan hieu chuan 2026-10-15.
+yaw: -2.14
+pitch: 1.97

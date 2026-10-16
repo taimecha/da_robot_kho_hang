@@ -8,10 +8,15 @@ cx: 161.99
 cy: 130.02
 dist: [-0.02920, -0.01004, 0.00125, -0.00048, 0.00000]
 # Vi tri tam ong kinh so voi TAM TRUC BANH (m): x truoc, y trai, z cao tu san.
-# Do 2026-10-14: ong kinh truoc TAM THAN XE 82.7 mm (than xe truoc truc 14 mm), cao 23.5 cm.
-x: 0.0967
+# Hieu chuan rieng xe 2 ngay 2026-10-16: mat hop xanh do bang thuoc cach
+# mat kinh camera 78-79 cm; voi x=0.0967 thi LiDAR+camera bao 82.7 cm.
+# x=0.139 cho 78.3-78.6 cm qua 5 anh, rong 12.3-12.6 cm (hop that 12.0 cm).
+# Day la do lech hieu dung cua tam quang hoc so voi truc banh xe 2.
+x: 0.139
 y: 0.0
 z: 0.235
 # Goc xoay (yaw, + = trai) / ngoc (pitch, + = len) camera, do - tools/cam_extrinsic.py 2026-10-15 14:22
-yaw: 2.92
-pitch: -1.09
+# Do lai voi hop xanh rong 12.0 cm, cao 23.9 cm ngay 2026-10-16 (5 anh).
+# Camera da thay doi goc lap so voi lan hieu chuan 2026-10-15.
+yaw: 2.71
+pitch: 0.74

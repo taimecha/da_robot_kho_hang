@@ -61,7 +61,8 @@ LOOKAHEAD = 2               # o giu truoc
 WAIT_S = 3.0                # cho lau hon -> go ket
 STALE_S = 1.0               # khong co trang thai lau hon -> mat lien lac
 REACH_R = 0.15              # m - coi nhu da toi o
-TURN_COST = 0.3
+TURN_COST = 0.3              # chi phi moi 90 do quay
+TURN_START_COST = 0.3        # moi lan dung de xoay co thoi gian co dinh
 SOFT_NODE = 2.0
 SOFT_GOAL = 3.0
 SOFT_OPP = 6.0
@@ -230,7 +231,7 @@ class TrafficManager(Node):
                 nd = (nb[0] - n[0], nb[1] - n[1])
                 c = cost + 1.0
                 if d is not None and nd != d:
-                    c += TURN_COST * (2 if nd == (-d[0], -d[1]) else 1)
+                    c += TURN_START_COST + TURN_COST * (2 if nd == (-d[0], -d[1]) else 1)
                 if nb in soft_nodes:
                     c += SOFT_NODE
                 if nb in soft_goals and nb != goal:
@@ -445,6 +446,9 @@ class TrafficManager(Node):
                     rb.progress = i
             if rb.state == 'done':
                 self.on_route_done(rb, now)
+            elif rb.state == 'precision_failed':
+                rb.goal, rb.pending = None, False
+                self.clear_route(rb, 'sai so vi tri tai dich > 2 cm - can kiem tra, khong tu giao lai')
             elif rb.state in ('blocked', 'failed'):
                 self.on_trouble(rb, now)
 
@@ -459,7 +463,7 @@ class TrafficManager(Node):
         # 3. Cap them o, xe gan dich truoc
         movers = [rb for rb in self.robots.values()
                   if rb.route and rb.ack == rb.route_id and not rb.stale
-                  and rb.state not in ('blocked', 'failed')]
+                  and rb.state not in ('blocked', 'failed', 'precision_failed')]
         for rb in sorted(movers, key=self.prio):
             want = min(rb.progress + LOOKAHEAD, len(rb.route) - 1)
             while rb.upto < want:
@@ -864,8 +868,11 @@ def main():
     grid_file = argv[argv.index('--grid') + 1] if '--grid' in argv else None
     names = [a for a in argv if not a.startswith('--') and a != grid_file] or ['agv1', 'agv2']
     node = TrafficManager(names, grid_file, avoid='--no-avoid' not in argv)
-    loop = interactive_loop if sys.stdin.isatty() else stdin_loop
-    threading.Thread(target=loop, args=(node,), daemon=True).start()
+    if '--no-stdin' not in argv:
+        loop = interactive_loop if sys.stdin.isatty() else stdin_loop
+        threading.Thread(target=loop, args=(node,), daemon=True).start()
+    else:
+        print('Nhan dich qua /fleet/goal; khong doc lenh cu trong terminal.', flush=True)
     try:
         rclpy.spin(node)
     except (KeyboardInterrupt, ExternalShutdownException):

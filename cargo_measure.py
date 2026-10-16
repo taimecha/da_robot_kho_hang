@@ -391,6 +391,19 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     prof_h = gray[max(r0, 0):max(r1, r0 + 1), :].astype(float).mean(axis=0)
     ua = edge_in_window(prof_h, ua - 3, ua + 3) or ua
     ub = edge_in_window(prof_h, ub - 3, ub + 3) or ub
+    # GrabCut sometimes calls the dark label on a blue box its left boundary.
+    # That boundary sits well INSIDE the LiDAR endpoint. Search the strong outer
+    # brightness edge near the endpoint before deciding the box is unmeasurable.
+    if ua - uL > 4.0:
+        outer = edge_in_window(prof_h, uL - 12, uL + 4)
+        if outer is not None and outer < ua - 2:
+            ua = outer
+            warn.append('mep trai mat na bi cat; lay vach ngoai gan LiDAR')
+    if uR - ub > 4.0:
+        outer = edge_in_window(prof_h, uR - 4, uR + 12)
+        if outer is not None and outer > ub + 2:
+            ub = outer
+            warn.append('mep phai mat na bi cat; lay vach ngoai gan LiDAR')
     um = 0.5 * (ua + ub)
     if cam.ray_plane(um, va, n, d)[2] < cam.C[2] - 0.005:
         # mep tren mat na thap hon camera -> camera nhin thay mat tren hop
@@ -437,6 +450,10 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     return {'width': width, 'height': height, 'z_cam': float(-d - cam.C[0]),
             'face_yaw_deg': face['yaw_deg'], 'lidar_width': face['width'],
             'lidar_points': face['points'], 'bottom_z': float(PB[2]),
+            # A camera mask edge far INSIDE the corresponding LiDAR endpoint means
+            # GrabCut has cut off part of the box (seen on the blue box: 10.4 cm
+            # instead of ~12 cm, yet all five frames could agree on the error).
+            'lidar_edge_inset_px': max(0.0, ua - uL, uR - ub),
             'edges_px': [ua, ub, va, vb], 'face_n': n.tolist(), 'face_d': float(d),
             'warnings': warn}, vis
 

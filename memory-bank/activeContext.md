@@ -1,4 +1,19 @@
-# Active Context (cập nhật 2026-10-10 tối)
+# Active Context (cập nhật 2026-10-16)
+
+## Hiện tại
+- Workspace đang chạy: `/home/tai/Robot_kho_clone`; remote đẩy khi người dùng yêu cầu là
+  `https://github.com/taimecha/da_robot_kho_hang.git`.
+- Hai xe đã thử trên sàn với sa bàn 5×5. `fleet_agent` kiểm sai số vị trí ≤ 2 cm và góc
+  < 0,9° tại đích; `traffic_manager.py --no-stdin` nhận đích qua `/fleet/goal` và tránh
+  lệnh còn chờ trong terminal.
+- Đo hộp trực tiếp: `tools/cargo_live_view.py --agv1-pickup 3,5 --agv2-pickup 4,5` cho
+  bố trí hiện tại (xe 1 hộp nâu, xe 2 hộp xanh). Hộp nâu đo 18,5×31,4 cm, hộp xanh
+  12,3×23,9 cm (trung bình 5 ảnh); 23,9 cm được nhận vào ô (1,1) với nút xanh.
+  Nút chỉ gửi đích sau khi người giám sát đã đặt hàng lên xe và bấm xác nhận.
+  Giao diện tự đóng sau khi cả hai xe được xác nhận và tới đúng ô giao; chạy trực tiếp
+  trong terminal, không dùng `setsid` hoặc `&`.
+- LiDAR hai xe đã lọc nhiễu chấm đơn và kiểm tra lúc xe dừng/chạy; xem
+  `docs/LOC_LIDAR.md` và `docs/DO_HOP_TRUC_TIEP.md`.
 
 ## Trạng thái
 **Hai xe thật chạy được theo logic mô phỏng** (2026-10-10): 6 bước thử (từng xe → song song →

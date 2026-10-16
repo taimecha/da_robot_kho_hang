@@ -38,6 +38,13 @@ NAV2_WAIT = 5.0         # s - cho Nav2 (action follow_path) khi vua bat agent
 
 
 class FleetAgent(GridNavigator):
+    # FollowPath accepts a goal within 2 cm, but the final in-place rotation
+    # can move the wheel axle after that check. Keep the skip distance below
+    # the final tolerance so a short corrective segment is actually executed.
+    SNAP_DIST = 0.015
+    POSITION_TOL_M = 0.02
+    MAX_POSITION_CORRECTIONS = 2
+
     def __init__(self, name, use_sim_time=False, grid_file=None):
         # costmap_decay 1 s: o vat can KET tren local costmap mat sau ~1-2 s (xem
         # GridNavigator); dong INFO moi lan xoa da tat trong tools/fleet_nav.launch.py
@@ -50,7 +57,8 @@ class FleetAgent(GridNavigator):
         self.upto = 0               # duoc phep di toi route[upto]
         self.sent_upto = 0          # da giao cho Nav2 toi route[sent_upto]
         self.final_done = False
-        self.state = 'idle'         # idle | moving | waiting | done | blocked | failed
+        self.position_corrections = 0
+        self.state = 'idle'         # idle | moving | waiting | done | blocked | failed | precision_failed
         self.dyn_blocked_nodes = set()
         self.dyn_blocked_edges = set()
         self.others = {}            # ten -> (x, y, t)
@@ -143,6 +151,7 @@ class FleetAgent(GridNavigator):
         self.route = nodes
         self.final_heading = final_heading
         self.final_done = False
+        self.position_corrections = 0
         self.replan_attempts = 0
         if not nodes:
             self.state = 'idle'
@@ -287,10 +296,32 @@ class FleetAgent(GridNavigator):
                 self.abort_route(f'sai so goc tai dich {abs(math.degrees(self.normalize_angle(fh - yaw))):.2f}° '
                                  f'>= {math.degrees(self.rot_done):.1f}°')
                 return
+            r, c = self.route[-1]
+            x, y = self.get_coordinates(r, c)
+            pos_err = math.hypot(rx - x, ry - y)
+            if pos_err > self.POSITION_TOL_M:
+                if self.position_corrections >= self.MAX_POSITION_CORRECTIONS:
+                    # A regular failure is rerouted by traffic_manager. That
+                    # would repeat the same tiny pivot indefinitely. Stop this
+                    # goal and require an explicit new command instead.
+                    self.halt()
+                    self.state = 'precision_failed'
+                    self.get_logger().error(
+                        f'[{self.name}] sai so vi tri tai dich {pos_err * 100:.1f} cm '
+                        f'> {self.POSITION_TOL_M * 100:.0f} cm sau '
+                        f'{self.position_corrections} lan chinh - dung de kiem tra dinh vi')
+                    return
+                self.position_corrections += 1
+                self.final_done = False
+                self.waypoints = [(rx, ry, x, y)]
+                self.state = 'moving'
+                self.get_logger().warn(f'[{self.name}] lech tam o {pos_err * 100:.1f} cm '
+                                       f'> {self.POSITION_TOL_M * 100:.0f} cm sau khi xoay; '
+                                       f'chinh vi tri lan {self.position_corrections}/'
+                                       f'{self.MAX_POSITION_CORRECTIONS}')
+                self.send_next_waypoint()
+                return
             if self.state != 'done':
-                r, c = self.route[-1]
-                x, y = self.get_coordinates(r, c)
-                pos_err = math.hypot(rx - x, ry - y)
                 heading_err = abs(math.degrees(self.normalize_angle(fh - yaw))) if fh is not None else None
                 msg = f'[{self.name}] da toi ({r + 1},{c + 1}), sai so vi tri {pos_err * 100:.1f} cm'
                 if heading_err is not None:

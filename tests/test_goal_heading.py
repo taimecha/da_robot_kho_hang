@@ -15,17 +15,22 @@ class FakeTime:
         return SimpleNamespace(nanoseconds=int((self.seconds - other.seconds) * 1e9))
 
 
-def agent_at(yaw_deg, final_done=False):
-    logger = SimpleNamespace(info=Mock())
+def agent_at(yaw_deg, final_done=False, y=0.04, position_corrections=0):
+    logger = SimpleNamespace(info=Mock(), warn=Mock(), error=Mock())
     agent = SimpleNamespace(
         name='agv1',
         waypoints=[], active_segment=None, route=[(2, 4)], sent_upto=0,
         final_heading=0.0, final_done=final_done, rot_done=math.radians(0.9),
         state='moving', target_node=(0.655, 0.035),
-        get_robot_pose=lambda: (0.66, 0.04, math.radians(yaw_deg)),
+        position_corrections=position_corrections,
+        POSITION_TOL_M=FleetAgent.POSITION_TOL_M,
+        MAX_POSITION_CORRECTIONS=FleetAgent.MAX_POSITION_CORRECTIONS,
+        get_robot_pose=lambda: (0.66, y, math.radians(yaw_deg)),
         get_coordinates=lambda r, c: (0.655, 0.035),
         normalize_angle=lambda a: math.atan2(math.sin(a), math.cos(a)),
-        start_rotation=Mock(), abort_route=Mock(), get_logger=lambda: logger,
+        start_rotation=Mock(), abort_route=Mock(), send_next_waypoint=Mock(),
+        halt=Mock(),
+        get_logger=lambda: logger,
     )
     return agent
 
@@ -56,6 +61,22 @@ class GoalHeadingTests(unittest.TestCase):
         FleetAgent.send_next_waypoint(agent)
         agent.start_rotation.assert_called_once()
         self.assertNotEqual(agent.state, 'done')
+
+    def test_goal_rechecks_position_after_final_rotation(self):
+        agent = agent_at(0.2, final_done=True, y=0.083)
+        FleetAgent.send_next_waypoint(agent)
+        self.assertEqual(agent.state, 'moving')
+        self.assertEqual(agent.position_corrections, 1)
+        self.assertEqual(agent.waypoints, [(0.66, 0.083, 0.655, 0.035)])
+        agent.send_next_waypoint.assert_called_once()
+
+    def test_position_correction_is_bounded(self):
+        agent = agent_at(0.2, final_done=True, y=0.083, position_corrections=2)
+        FleetAgent.send_next_waypoint(agent)
+        agent.halt.assert_called_once()
+        self.assertEqual(agent.state, 'precision_failed')
+        agent.abort_route.assert_not_called()
+        agent.send_next_waypoint.assert_not_called()
 
     def test_rotation_exhaustion_reports_failure(self):
         logger = SimpleNamespace(error=Mock(), info=Mock())

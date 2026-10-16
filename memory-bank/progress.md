@@ -3,6 +3,7 @@
 ## Đã xong (mới nhất trước)
 | Ngày | Việc | Commit |
 |---|---|---|
+| 2026-10-16 | Hai xe thật: lọc nhiễu LiDAR, hiệu chuẩn lại hai camera, chốt trung bình 5 ảnh; hộp xanh 23,9 cm vào ô (1,1) với nút xanh; xe 1 đạt góc 0,39° và lệch tâm 1,7 cm; điều phối `--no-stdin`, giao diện tự đóng sau khi cả hai xe giao xong. 39 unit tests đạt | HEAD |
 | 2026-10-15 | **Đo hàng thật đạt, 2 xe trọn vòng**: GrabCut gieo từ LiDAR, camera yaw/pitch (`tools/cam_extrinsic.py --height`), cao tính tới sàn, giao lại khi bị chặn, firmware tự restart khi tạo entity lỗi; 18,5×32,0→18,7×32,0, 12,0×23,9→13,0×24,1 | 33c4443 |
 | 2026-10-14 | ESP32-CAM dùng firmware stream sẵn (`cameras.agvN.url`), ảnh khác cỡ hiệu chuẩn → phóng lên; **sửa DDS**: WSL rơi gói UDP > 1472 B trên loopback → `tools/fastdds_localhost.xml` (gói 1400) | (HEAD) |
 | 2026-10-13 | **Camera thật (code)**: `firmware/esp32_cam`, `tools/esp32_cam_node.py`, `tools/cam_calib.py`, camera riêng từng xe; lấy hàng cột 5 (quay Đông) → trả hàng 1; `fleet_real.sh` bật camera. Chưa thử phần cứng | (HEAD) |
