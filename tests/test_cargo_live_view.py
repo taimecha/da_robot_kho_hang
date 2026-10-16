@@ -1,5 +1,6 @@
 """Decision checks before publishing a live box measurement."""
 import math
+import json
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -122,6 +123,37 @@ class LiveViewGateTest(unittest.TestCase):
         cars['agv2']['status_at'] = now
         cars['agv2']['status']['x'] += 0.1
         self.assertFalse(deliveries_complete(cars, board, 1, now))
+
+    def test_delivery_success_event_is_sent_once_at_real_destination(self):
+        class Publisher:
+            def __init__(self):
+                self.messages = []
+
+            def publish(self, message):
+                self.messages.append(json.loads(message.data))
+
+        board = Board.load(config_path(True))
+        x, y = board.xy(0, 1)
+        now = time.monotonic()
+        state = {'sent': True, 'slot': 2, 'delivered_at': None,
+                 'pickup_route_id': 10,
+                 'accepted': {'height': 0.314, 'width': 0.185, 'z_cam': 0.872},
+                 'status_at': now,
+                 'status': {'x': x, 'y': y, 'yaw': board.yaw, 'state': 'moving',
+                            'route_id': 10}}
+        node = SimpleNamespace(cars={'agv1': state}, board=board, drop_row=1,
+                               result_pub=Publisher())
+        self.assertFalse(LiveView.record_delivery(node, 'agv1', now))
+        self.assertEqual(node.result_pub.messages, [])
+        state['status']['state'] = 'done'
+        self.assertFalse(LiveView.record_delivery(node, 'agv1', now))
+        state['status']['route_id'] = 11
+        self.assertTrue(LiveView.record_delivery(node, 'agv1', now))
+        self.assertFalse(LiveView.record_delivery(node, 'agv1', now + 0.1))
+        self.assertEqual(len(node.result_pub.messages), 1)
+        self.assertEqual(node.result_pub.messages[0]['event'], 'delivered')
+        self.assertEqual(node.result_pub.messages[0]['deliver_col'], 2)
+        self.assertEqual(node.result_pub.messages[0]['route_id'], 11)
 
     def test_confirmation_sends_one_goal_only_after_valid_result(self):
         class Publisher:

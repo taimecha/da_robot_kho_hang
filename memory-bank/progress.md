@@ -3,6 +3,8 @@
 ## Đã xong (mới nhất trước)
 | Ngày | Việc | Commit |
 |---|---|---|
+| 2026-10-16 | RViz hai xe: sửa xacro và launch để AGV1 thân/bánh xanh, AGV2 thân/bánh cam, trùng màu marker, footprint và hạt AMCL; chỉ đổi màu hiển thị, có hiệu lực khi khởi động lại robot_state_publisher | commit này |
+| 2026-10-16 | Chuẩn bị 6 video NCKH liên tiếp: đặt xe và định vị một lần, điều hướng tự chuyển sang vị trí đầu từng clip, terminal lệnh và bag riêng cho mỗi clip trong `docs/KICH_BAN_VIDEO_NCKH.md`; đã dọn ROS/điều phối cũ khi xe tắt điện. Giao diện đo báo giao hàng thành công từng xe, giữ 10 giây và phát `delivered` | commit này |
 | 2026-10-16 | Hai xe thật: lọc nhiễu LiDAR, hiệu chuẩn lại hai camera, chốt trung bình 5 ảnh; hộp xanh 23,9 cm vào ô (1,1) với nút xanh; xe 1 đạt góc 0,39° và lệch tâm 1,7 cm; điều phối `--no-stdin`, giao diện tự đóng sau khi cả hai xe giao xong. 39 unit tests đạt | HEAD |
 | 2026-10-15 | **Đo hàng thật đạt, 2 xe trọn vòng**: GrabCut gieo từ LiDAR, camera yaw/pitch (`tools/cam_extrinsic.py --height`), cao tính tới sàn, giao lại khi bị chặn, firmware tự restart khi tạo entity lỗi; 18,5×32,0→18,7×32,0, 12,0×23,9→13,0×24,1 | 33c4443 |
 | 2026-10-14 | ESP32-CAM dùng firmware stream sẵn (`cameras.agvN.url`), ảnh khác cỡ hiệu chuẩn → phóng lên; **sửa DDS**: WSL rơi gói UDP > 1472 B trên loopback → `tools/fastdds_localhost.xml` (gói 1400) | (HEAD) |
@@ -23,7 +25,7 @@
 | 2026-10-05 | Điều phối 2 xe (mô phỏng): giữ chỗ, ưu tiên gần đích, gỡ kẹt; firmware chân mạch in 2026-10-05 | 679f763, c3256a7 |
 | trước đó | 1 xe thật trên sa bàn: xoay tại chỗ bằng gyro + coast, PID Kf 3.0, goal 2 cm; đẩy GitHub "1 Xe" | da0278b |
 
-GitHub: đã đẩy 2026-10-15 (tới commit hướng dẫn chạy hằng ngày đo hàng; chỉ đẩy khi người dùng bảo).
+GitHub: đợt cập nhật này được đẩy lên `origin/main` theo yêu cầu ngày 2026-10-16; các lần sau chỉ đẩy khi người dùng bảo.
 
 ## Số đo
 - **Xe 1 thật (2026-10-03):** 9/9 lần xoay ≤ 2.8° trong 4–6 s; tới đích lệch 0.4–1.6 cm;

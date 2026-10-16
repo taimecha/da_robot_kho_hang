@@ -29,6 +29,8 @@ def nodes(context):
     y = float(LaunchConfiguration('y').perform(context))
     yaw = float(LaunchConfiguration('yaw').perform(context))
     wheel_radius = float(LaunchConfiguration('wheel_radius').perform(context))
+    # Match the RobotModel to traffic_manager and fleet.rviz: one hue per car.
+    viz_color = {'agv1': 'blue', 'agv2': 'orange'}.get(ns, 'orange')
 
     bringup = get_package_share_directory('my_bot_bringup')
     xacro_file = os.path.join(get_package_share_directory('my_bot_description'),
@@ -47,7 +49,8 @@ def nodes(context):
         Node(package='my_bot_bringup', executable='scan_filter.py', **common),
         Node(package='robot_state_publisher', executable='robot_state_publisher',
              parameters=[{'use_sim_time': False, 'robot_description': ParameterValue(
-                 Command(['xacro ', xacro_file, ' sim:=false']), value_type=str)}],
+                 Command(['xacro ', xacro_file, ' sim:=false body_color:=', viz_color,
+                          ' wheel_color:=', viz_color]), value_type=str)}],
              **common),
         Node(package='my_bot_bringup', executable='wheel_odometry.py', name='wheel_odometry',
              parameters=[{'use_sim_time': False, 'wheel_radius': wheel_radius,

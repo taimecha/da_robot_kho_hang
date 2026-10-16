@@ -80,7 +80,7 @@ Visualization Manager:
     - Class: nav2_rviz_plugins/ParticleCloud
       Name: Hat AMCL
       Enabled: true
-      Color: 51; 115; 255
+      Color: 38; 115; 242
       Alpha: 1
       Shape: Arrow (Flat)
       Min Arrow Length: 0.02
@@ -135,7 +135,7 @@ Visualization Manager:
     - Class: rviz_default_plugins/Polygon
       Name: Footprint
       Enabled: true
-      Color: 51; 115; 255
+      Color: 38; 115; 242
       Alpha: 1
       Topic:
         Depth: 5
@@ -147,7 +147,7 @@ Visualization Manager:
     - Class: rviz_default_plugins/Path
       Name: Doan dang chay
       Enabled: true
-      Color: 51; 115; 255
+      Color: 38; 115; 242
       Alpha: 1
       Buffer Length: 1
       Line Style: Lines
@@ -228,7 +228,7 @@ Visualization Manager:
     - Class: nav2_rviz_plugins/ParticleCloud
       Name: Hat AMCL
       Enabled: true
-      Color: 255; 128; 0
+      Color: 242; 128; 26
       Alpha: 1
       Shape: Arrow (Flat)
       Min Arrow Length: 0.02
@@ -283,7 +283,7 @@ Visualization Manager:
     - Class: rviz_default_plugins/Polygon
       Name: Footprint
       Enabled: true
-      Color: 255; 128; 0
+      Color: 242; 128; 26
       Alpha: 1
       Topic:
         Depth: 5
@@ -295,7 +295,7 @@ Visualization Manager:
     - Class: rviz_default_plugins/Path
       Name: Doan dang chay
       Enabled: true
-      Color: 255; 128; 0
+      Color: 242; 128; 26
       Alpha: 1
       Buffer Length: 1
       Line Style: Lines

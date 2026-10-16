@@ -40,6 +40,7 @@ POSITION_TOL_M = 0.15
 LIDAR_WIDTH_TOL_M = 0.03
 SAMPLE_COUNT = 5
 SAMPLE_WINDOW_S = 12.0
+SUCCESS_HOLD_S = 10.0
 HEIGHT_BOUNDARY_MARGIN_M = 0.005  # calibration error near a 24/30.5/37/43.5/50 cm boundary
 GREEN_LOWER_MARGIN_M = 0.002  # verified 23.9 cm box: accept up to 2 mm below nominal minimum
 MEASURE_KEYS = ('width', 'height', 'z_cam', 'face_yaw_deg')
@@ -153,21 +154,27 @@ def stable_result_reason(values):
     return None
 
 
+def delivery_arrived(state, board, drop_row, now):
+    """Require a fresh successful stop at the assigned delivery cell."""
+    status = state.get('status')
+    slot = state.get('slot')
+    if not state.get('sent') or slot is None or status is None:
+        return False
+    if now - state.get('status_at', 0.0) > FRAME_AGE or status.get('state') != 'done':
+        return False
+    pickup_route_id = state.get('pickup_route_id')
+    if pickup_route_id is not None and status.get('route_id') == pickup_route_id:
+        return False
+    if status.get('x') is None or status.get('y') is None:
+        return False
+    x, y = board.xy(drop_row - 1, slot - 1)
+    return math.hypot(status['x'] - x, status['y'] - y) <= 0.03
+
+
 def deliveries_complete(cars, board, drop_row, now):
-    """Close this measurement session only after both confirmed deliveries arrive."""
-    for state in cars.values():
-        status = state.get('status')
-        slot = state.get('slot')
-        if not state.get('sent') or slot is None or status is None:
-            return False
-        if now - state.get('status_at', 0.0) > FRAME_AGE or status.get('state') != 'done':
-            return False
-        if status.get('x') is None or status.get('y') is None:
-            return False
-        x, y = board.xy(drop_row - 1, slot - 1)
-        if math.hypot(status['x'] - x, status['y'] - y) > 0.03:
-            return False
-    return bool(cars)
+    """Both confirmed deliveries reached their assigned cells."""
+    return bool(cars) and all(delivery_arrived(s, board, drop_row, now)
+                              for s in cars.values())
 
 
 def image_to_bgr(msg):
@@ -210,7 +217,8 @@ class LiveView(Node):
                 'sample_started': 0.0,
                 'accepted': None, 'reported': False, 'slot': None,
                 'near_boundary': False,
-                'sent': False, 'action_note': '',
+                'sent': False, 'pickup_route_id': None,
+                'delivered_at': None, 'action_note': '',
                 'view': None, 'reason': 'Waiting for camera',
             }
             self.create_subscription(
@@ -356,6 +364,7 @@ class LiveView(Node):
                     math.hypot(o['x'] - x, o['y'] - y) < 0.3:
                 return False, f'O ({self.drop_row},{slot}) dang duoc {other} su dung'
         goal = f'{list(self.targets).index(car) + 1} {self.drop_row} {slot}'
+        s['pickup_route_id'] = s['status'].get('route_id')
         self.goal_pub.publish(String(data=goal))
         self.result_pub.publish(String(data=json.dumps({
             'car': car, 'ok': True, 'confirmed': True,
@@ -370,6 +379,25 @@ class LiveView(Node):
         return True, (f'{car}: da nhan hang -> giao toi ({self.drop_row},{slot}), '
                       f'cao {s["accepted"]["height"] * 100:.1f} cm{note}')
 
+    def record_delivery(self, car, now):
+        """Emit one verifiable arrival event and keep its result on screen."""
+        s = self.cars[car]
+        if (s.get('delivered_at') is not None or s.get('accepted') is None or
+                not delivery_arrived(s, self.board, self.drop_row, now)):
+            return False
+        s['delivered_at'] = now
+        status = s['status']
+        self.result_pub.publish(String(data=json.dumps({
+            'event': 'delivered', 'car': car, 'ok': True, 'confirmed': True,
+            'delivered': True, 'deliver_row': self.drop_row, 'deliver_col': s['slot'],
+            'height_m': s['accepted']['height'], 'width_m': s['accepted']['width'],
+            'distance_m': s['accepted']['z_cam'],
+            'x': status['x'], 'y': status['y'], 'yaw': status.get('yaw'),
+            'route_id': status.get('route_id'),
+            't_unix': time.time(),
+        })))
+        return True
+
     def canvas(self):
         panes = []
         for car in self.targets:
@@ -383,7 +411,10 @@ class LiveView(Node):
             pane[48:288, 10:330] = frame
             idx = car[-1]
             r, c = self.targets[car]
-            cv2.putText(pane, f'AGV {idx}  pickup ({r},{c}) EAST', (10, 30),
+            title = (f'AGV {idx}  GIAO XONG ({self.drop_row},{s["slot"]})'
+                     if s.get('delivered_at') is not None else
+                     f'AGV {idx}  pickup ({r},{c}) EAST')
+            cv2.putText(pane, title, (10, 30),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.57, (255, 255, 255), 1)
             result = s['accepted']
             color = (60, 220, 60) if result else (0, 180, 255)
@@ -395,7 +426,10 @@ class LiveView(Node):
             for i, label in enumerate(labels):
                 cv2.putText(pane, label, (10, 312 + i * 26),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.51, color, 1)
-            if s['sent']:
+            if s.get('delivered_at') is not None:
+                button = f'DA GIAO HANG THANH CONG ({self.drop_row},{s["slot"]})'
+                button_color = (40, 125, 45)
+            elif s['sent']:
                 button = f'DA GUI DEN ({self.drop_row},{s["slot"]})'
                 button_color = (80, 80, 80)
             elif s['action_note']:
@@ -428,7 +462,11 @@ def main():
                     metavar='ROW,COL', help='pickup cell for AGV 1')
     ap.add_argument('--agv2-pickup', type=pickup_arg, default=TARGETS['agv2'],
                     metavar='ROW,COL', help='pickup cell for AGV 2')
+    ap.add_argument('--success-hold-s', type=float, default=SUCCESS_HOLD_S,
+                    help='seconds to show both delivery successes before closing')
     args = ap.parse_args()
+    if args.success_hold_s < 0:
+        ap.error('--success-hold-s must be >= 0')
     if not os.environ.get('DISPLAY') and not os.environ.get('WAYLAND_DISPLAY'):
         sys.exit('No graphical display (DISPLAY/WAYLAND_DISPLAY). Run in VS Code desktop terminal.')
     rclpy.init()
@@ -448,16 +486,17 @@ def main():
 
     cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_AUTOSIZE)
     cv2.setMouseCallback(WINDOW_NAME, on_mouse)
+    both_delivered_at = None
     try:
         while rclpy.ok():
             rclpy.spin_once(node, timeout_sec=0.02)
             now = time.monotonic()
-            if deliveries_complete(node.cars, node.board, node.drop_row, now):
-                print('Ca hai xe da toi o giao hang; dong giao dien camera cho lan thu tiep.', flush=True)
-                break
             if cv2.getWindowProperty(WINDOW_NAME, cv2.WND_PROP_VISIBLE) < 1:
                 break
             for car in node.targets:
+                if node.record_delivery(car, now):
+                    slot = node.cars[car]['slot']
+                    print(f'{car}: DA GIAO HANG THANH CONG tai ({node.drop_row},{slot})', flush=True)
                 node.process(car, now)
                 s = node.cars[car]
                 result = s['accepted']
@@ -469,6 +508,13 @@ def main():
                           f'(trung binh {SAMPLE_COUNT} lan; da chot)', flush=True)
                     s['reported'] = True
             cv2.imshow(WINDOW_NAME, node.canvas())
+            if all(s['delivered_at'] is not None for s in node.cars.values()):
+                if both_delivered_at is None:
+                    both_delivered_at = now
+                    print(f'Ca hai xe giao xong; hien ket qua {args.success_hold_s:g} giay.', flush=True)
+                elif now - both_delivered_at >= args.success_hold_s:
+                    print('Dong giao dien camera cho lan thu tiep.', flush=True)
+                    break
             key = cv2.waitKey(1) & 0xff
             if key in (ord('q'), 27):
                 break

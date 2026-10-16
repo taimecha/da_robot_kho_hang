@@ -1,13 +1,14 @@
 # Chạy hai xe đến hộp và xem số đo trực tiếp
 
-Hai hộp đặt phía Đông ô lấy hàng: **hộp xanh** ở (hàng 4, cột 5) dành cho **xe 1**;
-**hộp nâu** ở (hàng 3, cột 5) dành cho **xe 2**. Cả hai xe quay **Đông**.
+Hai hộp đặt phía Đông ô lấy hàng theo bố trí quay hiện tại: **hộp nâu** ở
+(hàng 3, cột 5) dành cho **xe 1**; **hộp xanh** ở (hàng 4, cột 5) dành cho
+**xe 2**. Cả hai xe quay **Đông**.
 Hàng 1 ở dưới cùng, cột 1 ở bên trái
 trên RViz. Bật nguồn hai xe và hai ESP32-CAM; giữ xe đứng yên khoảng 2 giây
 sau lúc bật nguồn.
 
-Mở các terminal riêng trong VS Code. Ở terminal 1, lệnh dưới dùng vị trí cuối
-đã ghi nhận sau khi đổi chỗ: xe 1 ở (4,5), xe 2 ở (3,5), cùng quay Đông. Nếu đã bế xe sang
+Mở các terminal riêng trong VS Code. Ở terminal 1, ví dụ dưới dùng xe 1 ở
+(3,5), xe 2 ở (4,5), cùng quay Đông. Nếu đã bế xe sang
 chỗ khác, thay `AGV1`, `AGV2` bằng **hàng cột góc hướng** thực tế trước khi chạy.
 Chờ `Da bat` rồi mới chạy dòng định vị. Chỉ giao đích khi **cả hai** xe có dòng
 `da gui cho AMCL`, và vị trí hai xe trên RViz khớp vị trí thực:
@@ -15,7 +16,7 @@ Chờ `Da bat` rồi mới chạy dòng định vị. Chỉ giao đích khi **c�
 ```bash
 cd /home/tai/Robot_kho_clone
 source tools/setup_real_env.bash
-AGV1="4 5 0" AGV2="3 5 0" tools/fleet_real.sh up
+AGV1="3 5 0" AGV2="4 5 0" tools/fleet_real.sh up
 python3 tools/fleet_localize.py
 ```
 
@@ -40,19 +41,21 @@ Terminal 4, mở ảnh và số đo hai camera:
 ```bash
 cd /home/tai/Robot_kho_clone
 source tools/setup_real_env.bash
-python3 tools/cargo_live_view.py
+python3 tools/cargo_live_view.py --agv1-pickup 3,5 --agv2-pickup 4,5
 ```
 
 Chạy lệnh camera trực tiếp trong terminal này, không thêm `setsid` hoặc `&`.
 Đóng terminal hoặc bấm **Q** sẽ kết thúc phiên đo. Sau khi người giám sát xác
-nhận đã đặt hàng lên **cả hai xe**, giao diện tự đóng khi **cả hai** đến đúng ô
-giao hàng. Giao diện vẫn mở trong lúc chờ đặt hàng hoặc xe còn đang chạy.
+nhận đã đặt hàng lên **cả hai xe**, giao diện báo **DA GIAO HANG THANH CONG**
+riêng cho từng xe khi tới đúng ô và phát sự kiện `delivered` lên
+`/fleet/cargo_result`. Khi cả hai giao xong, giao diện giữ kết quả **10 giây**
+để quay video rồi tự đóng. Giao diện vẫn mở trong lúc chờ đặt hàng hoặc xe
+còn đang chạy. Kịch bản quay đầy đủ ở [KICH_BAN_VIDEO_NCKH.md](KICH_BAN_VIDEO_NCKH.md).
 
-Nếu xe 1 đang đứng ở (3,5) trước hộp nâu và xe 2 ở (4,5) trước hộp xanh,
-đo ngay tại chỗ bằng cách thay dòng cuối bằng:
+Nếu đổi lại chỗ hai hộp và xe, đặt đúng ô lấy hàng cho từng xe:
 
 ```bash
-python3 tools/cargo_live_view.py --agv1-pickup 3,5 --agv2-pickup 4,5
+python3 tools/cargo_live_view.py --agv1-pickup 4,5 --agv2-pickup 3,5
 ```
 
 Sau khi vị trí trên RViz khớp thực tế, terminal 5 giao hai đích cùng lúc:
@@ -60,7 +63,7 @@ Sau khi vị trí trên RViz khớp thực tế, terminal 5 giao hai đích cùn
 ```bash
 cd /home/tai/Robot_kho_clone
 source tools/setup_real_env.bash
-ros2 topic pub --once /fleet/goal std_msgs/msg/String "{data: 'pair 1 4 5 d ; 2 3 5 d'}"
+ros2 topic pub --once /fleet/goal std_msgs/msg/String "{data: 'pair 1 3 5 d ; 2 4 5 d'}"
 ```
 
 Cửa sổ đo chỉ hiện số khi xe đã dừng tại ô đích, sai lệch hướng Đông dưới

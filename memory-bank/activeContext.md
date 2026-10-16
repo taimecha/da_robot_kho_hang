@@ -14,6 +14,26 @@
   trong terminal, không dùng `setsid` hoặc `&`.
 - LiDAR hai xe đã lọc nhiễu chấm đơn và kiểm tra lúc xe dừng/chạy; xem
   `docs/LOC_LIDAR.md` và `docs/DO_HOP_TRUC_TIEP.md`.
+- Kế hoạch quay NCKH gồm 6 video: nhập đích/hướng, đổi chỗ đối đầu, giao nhau,
+  vật cản tĩnh, vật cản động, phân loại và giao hàng; quy trình/lệnh/bảng đo ở
+  `docs/KICH_BAN_VIDEO_NCKH.md`. Giao diện camera phát sự kiện `delivered` khi
+  xe đã tới đúng ô và giữ thông báo thành công 10 giây để quay video.
+- Theo yêu cầu mới nhất, tài liệu xếp 6 clip thành **một chuỗi**, đặt xe ban đầu
+  (2,2) Đông và (4,4) Tây, định vị một lần; giữa clip dùng `/fleet/goal` để
+  đưa xe về vị trí xuất phát kế tiếp, không bế xe. Phiên ROS cũ đã được dọn lúc
+  xe tắt điện; sau đó người dùng tự bật lại hệ để quay video.
+- RViz: mô hình URDF cũ sơn thân cam cho cả hai xe, trong khi marker AGV1 xanh;
+  đã sửa xacro/launch để AGV1 thân+bánh xanh và AGV2 thân+bánh cam, khớp marker,
+  footprint và hạt AMCL. Khi kiểm tra sau sửa, stack ROS đang chạy với
+  robot_state_publisher cũ; màu mới có hiệu lực khi nạp lại mô hình/lần bật hệ
+  tiếp theo, chưa động vào robot đang chạy.
+- 2026-10-16 tối: người dùng đặt AGV2 **(4,2) Đông** nhưng stack khởi tạo AMCL
+  ở (4,4) Tây (`AGV2="4 4 180"`). LiDAR và IMU vẫn có dữ liệu. ICP từ scan thô
+  tìm gần (4,2) Đông nhưng chỉ 35,7% tia khớp bản đồ trong 3 cm; scan lọc 39,0%,
+  thấp hơn ngưỡng tự gửi 40%. Sau khi người dùng xác nhận ô/hướng, đã phát riêng
+  `/agv2/initialpose` tại tâm (4,2) Đông (-1.145,+0.635,0°), AMCL nhận và
+  `/fleet/status` đứng yên 10 giây tại (-1.144,+0.634,-0.3°). Chưa thử xe chạy;
+  số lệch 0,2 cm chỉ là AMCL so với tâm ô, không phải sai số thực địa.
 
 ## Trạng thái
 **Hai xe thật chạy được theo logic mô phỏng** (2026-10-10): 6 bước thử (từng xe → song song →
