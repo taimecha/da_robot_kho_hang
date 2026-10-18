@@ -1,0 +1,10 @@
+{
+  "status": "completed",
+  "target_distance_m": 2.0,
+  "encoder_distance_m": 2.026083839276969,
+  "speed_setpoint_rpm": 40.0,
+  "command_duration_s": 14.822,
+  "stopped_below_1rpm": true,
+  "estop": "",
+  "command_duration_basis": "difference between first running and first after_stop encoder samples (~20 ms resolution)"
+}

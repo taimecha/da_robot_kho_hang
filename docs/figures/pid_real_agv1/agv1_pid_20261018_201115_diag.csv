@@ -1,0 +1,7 @@
+t_s,phase,left_pwm,right_pwm,left_target_rpm,right_target_rpm,estop
+0.41419995499973083,baseline,0,0,0.0,0.0,
+1.239706746000138,baseline,0,0,0.0,0.0,
+2.2404033029997663,running,226,226,40.0,40.0,
+3.2379131009997764,running,224,225,40.0,40.0,
+4.244117817999722,after_stop,0,0,0.0,0.0,
+5.239881455999694,after_stop,0,0,0.0,0.0,

@@ -147,7 +147,7 @@
 #define ENC_PULSES_PER_REV  2150.0f
 
 // Gioi han an toan
-#define MAX_WHEEL_RPM       120.0f     // tran RPM moi banh (L298N sut ap -> thap hon BTS7960)
+#define MAX_WHEEL_RPM        60.0f     // tran RPM moi banh theo dong co 60 RPM
 #define CMD_VEL_TIMEOUT_MS  500        // mat /cmd_vel qua lau -> dung xe
 
 // ============================================================================
@@ -251,10 +251,21 @@ const bool INVERT_ENC_R   = false;
 // Kf 1.8 do luc banh quay KHONG TAI. Tren san (2026-10-03, pin 12.08 V): chay
 // thang PWM ~193 chi duoc 29 v/p (~5.6 PWM/v/p), xoay tai cho con nang hon
 // -> banh chi dat 55% toc do lenh, lenh xoay < 0.8 rad/s banh dung im.
+#if XE == 1
+// Tai 40 RPM, PWM on dinh do duoc xap xi 220-230. Kf=3 du doan chi 150 PWM
+// sau khoi dong (40*3+30), nen I phai gom bu rat lau. Dung Kf=4.75 => 220 PWM.
+float Kf    = 4.75f;
+// Kp=8 da thu tren gia ke: tang nhanh hon nhung hut toc sau khi bo bu ma sat,
+// khong xac lap trong 2.5 s. Quay ve P=3 va cai thien feedforward.
+float Kp    = 3.00f;
+float Ki    = 0.16f;
+float Kd    = 4.00f;                 // ham theo bien thien RPM do, thu giam vot lo
+#else
 float Kf    = 3.0f;                  // feedforward: PWM tren moi RPM
 float Kp    = 0.30f;
 float Ki    = 0.04f;                 // 0.02 -> 0.04: tich nhanh hon, nhung da kep o INTEGRAL_MAX
 float Kd    = 0.01f;
+#endif
 int   deadbandPWM = 30;              // bu ma sat KHI BANH DANG QUAY
 // Ma sat TINH lon hon ma sat dong: banh dung yen thi cong them BREAKAWAY_PWM
 // cho toi khi no quay > BREAKAWAY_RPM. Do tren xe (2026-10-03): lenh xoay tai

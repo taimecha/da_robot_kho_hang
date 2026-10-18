@@ -1,0 +1,18 @@
+{
+  "status": "completed",
+  "command_mps": 0.12,
+  "command_duration_s": 5.0,
+  "target_rpm": 35.53226636470221,
+  "joint_samples": 430,
+  "diag_samples": 9,
+  "step_start_s": 3.2476232089999826,
+  "step_end_s": 8.248716477000016,
+  "actual_motion_s": 5.001093268000034,
+  "left_mean_rpm": 33.97126689910888,
+  "left_mae_rpm": 1.5609994655933224,
+  "left_mean_error_pct": -4.393188572806673,
+  "right_mean_rpm": 33.88157550811768,
+  "right_mae_rpm": 1.6506908565845333,
+  "right_mean_error_pct": -4.645610948769455,
+  "wheel_odom_distance_m": 0.49361253186615733
+}

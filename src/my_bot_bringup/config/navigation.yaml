@@ -109,7 +109,8 @@ controller_server:
     # RPP chi con xoay du phong khi lech > 20 do (rotate_to_heading_min_angle).
     FollowPath:
       plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
-      # Tran vat ly: MAX_WHEEL_RPM 120, banh 0.0328 m -> 0.41 m/s - nhung do
+      # Dong co 60 RPM, banh 0.0328 m -> tran ly thuyet ~0.20 m/s. Giu nguyen
+      # toc do dat 0.15 m/s de khong doi van toc chay thuong ngay. Theo phep do
       # tren xe that (2026-10-03, pin da dung ca ngay): lenh 0.25 m/s thi CA HAI
       # banh ket o 5.35 rad/s = 0.175 m/s (PWM 255) -> khong con du de mot banh
       # nhanh hon -> xe KHONG re duoc de chinh huong. 0.15 m/s (4.6 rad/s) chua

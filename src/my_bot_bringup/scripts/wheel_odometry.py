@@ -52,8 +52,10 @@ from sensor_msgs.msg import Imu, JointState
 from std_srvs.srv import Empty
 from tf2_ros import TransformBroadcaster
 
-# Banh khong the quay nhanh hon MAX_WHEEL_RPM cua firmware (120 v/p = 12.6
-# rad/s). Goc banh doi nhieu hon muc do (nhan 1.5 + 0.5 rad du phong) giua hai
+# Nguong loai xung encoder nhay dot bien duoc giu du phong rong (12.6 rad/s).
+# Tran lenh moi banh cua firmware la 60 v/p (~6.28 rad/s); khong ha nguong nay
+# khi doi RPM de tranh loai nham goi sau khoang lang Wi-Fi / encoder nhieu.
+# Goc banh doi nhieu hon muc do (nhan 1.5 + 0.5 rad du phong) giua hai
 # message thi khong phai chuyen dong that.
 MAX_WHEEL_RAD_S = 12.6
 

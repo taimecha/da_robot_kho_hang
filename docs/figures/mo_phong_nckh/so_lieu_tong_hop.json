@@ -1,0 +1,104 @@
+{
+  "doi_cho": {
+    "duration_s": 37.1,
+    "arrived": true,
+    "min_center_distance_m": 0.582,
+    "route_assignments": {
+      "agv1": 1,
+      "agv2": 2
+    },
+    "sample_count": 235,
+    "start": {
+      "agv1": [
+        3,
+        2
+      ],
+      "agv2": [
+        3,
+        4
+      ]
+    },
+    "goal": {
+      "agv1": [
+        3,
+        4
+      ],
+      "agv2": [
+        3,
+        2
+      ]
+    }
+  },
+  "giao_cat": {
+    "duration_s": 23.1,
+    "arrived": true,
+    "min_center_distance_m": 0.589,
+    "route_assignments": {
+      "agv1": 1,
+      "agv2": 1
+    },
+    "sample_count": 142,
+    "start": {
+      "agv1": [
+        2,
+        3
+      ],
+      "agv2": [
+        3,
+        2
+      ]
+    },
+    "goal": {
+      "agv1": [
+        4,
+        3
+      ],
+      "agv2": [
+        3,
+        4
+      ]
+    }
+  },
+  "vat_can_tinh": {
+    "duration_s": 39.1,
+    "arrived": true,
+    "min_center_distance_m": 0.587,
+    "route_assignments": {
+      "agv1": 1
+    },
+    "sample_count": 136,
+    "start": {
+      "agv1": [
+        3,
+        1
+      ]
+    },
+    "goal": {
+      "agv1": [
+        3,
+        5
+      ]
+    }
+  },
+  "vat_can_dong": {
+    "duration_s": 44.8,
+    "arrived": true,
+    "min_center_distance_m": 0.587,
+    "route_assignments": {
+      "agv1": 2
+    },
+    "sample_count": 140,
+    "start": {
+      "agv1": [
+        3,
+        1
+      ]
+    },
+    "goal": {
+      "agv1": [
+        3,
+        5
+      ]
+    }
+  }
+}
