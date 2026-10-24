@@ -14,12 +14,12 @@
 # Sai vai cm / vai do thi AMCL tu sua khi xe chay; lech nhieu thi:
 #   python3 tools/auto_initial_pose.py --ns agv1
 # Hieu chinh RIENG tung xe (mac dinh = so do tren xe 1):
-#   WHEEL_R_agv2=0.0330 COAST_agv2=0.30 tools/fleet_real.sh up
-#   WHEEL_R_*: ban kinh lan banh (m, wheel_odometry); COAST_*: he so xoay tai cho (s)
+#   WHEEL_R_agv2=0.0330 tools/fleet_real.sh up
+#   WHEEL_R_*: ban kinh lan banh (m, wheel_odometry).
 # CAM=0: khong bat tools/esp32_cam_node.py (anh ESP32-CAM cho cargo_task.py).
 # Da co agent chay rieng (vd bringup_real.launch.py) thi tu dung chung; AGENT=0
 # thi khong bat agent (thu voi ESP32 gia: tools/fleet_fake_robot.py --esp32,
-# them EMULATE=1: LiDAR gia khong co tuong -> inf_is_valid, xoay coast 0).
+# them EMULATE=1: LiDAR gia khong co tuong -> inf_is_valid).
 WS=$(cd "$(dirname "$0")/.." && pwd)
 L=${LOGDIR:-/tmp/fleet_real}   # tools/agvctl dat LOGDIR vao ~/agv_logs/run-*/fleet
 CFG=$WS/src/my_bot_bringup/config
@@ -80,21 +80,17 @@ for n in "${NAMES[@]}"; do
   # EMULATE=1: thu voi ESP32 GIA (LiDAR gia khong co tuong) - giong mo phong
   [ "${EMULATE:-0}" = 1 ] && sed -i 's#^\( *\)data_type: "LaserScan"#&\n\1inf_is_valid: True#' $L/navigation_$n.yaml
 done
-# File sa ban RIENG tung xe (chi khac rotate.coast): EMULATE -> 0 (xe gia khong
-# quan tinh), COAST_agvN -> so do rieng cua xe do, khong thi giu grid_real.yaml.
+# Xoay mot luot khong con dung mo hinh coast cu. Dung chung cau hinh
+# rotate trong grid_real.yaml; giu hieu chinh ban kinh banh rieng tung xe.
 declare -A GRID WHEEL_R
 for n in "${NAMES[@]}"; do
-  c="COAST_$n"; w="WHEEL_R_$n"
+  w="WHEEL_R_$n"; c="COAST_$n"
   WHEEL_R[$n]=${!w:-0.03281}
-  coast=${!c:-}
-  [ "${EMULATE:-0}" = 1 ] && coast=0
-  if [ -n "$coast" ]; then
-    sed -e "s/^\( *coast:\).*/\1 $coast/" "$CFG/grid_real.yaml" > $L/grid_$n.yaml
-    GRID[$n]=$L/grid_$n.yaml
-  else
-    GRID[$n]=$CFG/grid_real.yaml
+  GRID[$n]=$CFG/grid_real.yaml
+  if [ -n "${!c:-}" ]; then
+    echo "Chu y: $c khong con duoc dung trong bo xoay mot luot."
   fi
-  echo "Xe $n: wheel_radius ${WHEEL_R[$n]} m, coast $(grep -m1 -E '^ *coast:' ${GRID[$n]} | awk '{print $2}')"
+  echo "Xe $n: wheel_radius ${WHEEL_R[$n]} m, xoay mot luot (grid_real.yaml)"
 done
 
 pose() {   # "hang cot huong_do" -> "x y yaw_rad"

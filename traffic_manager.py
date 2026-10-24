@@ -214,17 +214,27 @@ class TrafficManager(Node):
         prev = {}
         heap = [(0.0, 0, start, d0)]
         seq = 0
+        desired = (self.heading_dir(me.goal_heading)
+                   if me.goal == goal and me.goal_heading is not None else None)
+        goal_key, goal_cost, goal_turn = None, float('inf'), float('inf')
         while heap:
             cost, _, n, d = heapq.heappop(heap)
+            if cost > goal_cost + 1e-9:
+                break
             if best.get((n, d), float('inf')) < cost - 1e-9:
                 continue
             if n == goal:
-                path = [n]
-                key = (n, d)
-                while key in prev:
-                    key = prev[key]
-                    path.append(key[0])
-                return path[::-1]
+                # Include the requested final heading in the route cost. An
+                # early return here used to prefer a route with an extra pivot
+                # AT the goal, even when an equally short aligned route exists.
+                turn = 0.0
+                if desired is not None and d is not None and d != desired:
+                    turn = TURN_START_COST + TURN_COST * (2 if desired == (-d[0],-d[1]) else 1)
+                total = cost+turn
+                if (total < goal_cost-1e-9 or
+                        (abs(total-goal_cost)<1e-9 and turn < goal_turn)):
+                    goal_key,goal_cost,goal_turn = (n,d),total,turn
+                continue
             for nb in self.board.neighbours(*n):
                 if nb in bn or edge_key(n, nb) in be:
                     continue
@@ -244,7 +254,14 @@ class TrafficManager(Node):
                     prev[key] = (n, d)
                     seq += 1
                     heapq.heappush(heap, (c, seq, nb, nd))
-        return None
+        if goal_key is None:
+            return None
+        path = [goal_key[0]]
+        while goal_key in prev:
+            goal_key = prev[goal_key]
+            path.append(goal_key[0])
+        return path[::-1]
+
 
     def assign_route(self, rb, nodes, final_heading, mode):
         rb.route = list(nodes)
@@ -448,7 +465,7 @@ class TrafficManager(Node):
                 self.on_route_done(rb, now)
             elif rb.state == 'precision_failed':
                 rb.goal, rb.pending = None, False
-                self.clear_route(rb, 'sai so vi tri tai dich > 2 cm - can kiem tra, khong tu giao lai')
+                self.clear_route(rb, 'khong dat do chinh xac vi tri/goc - can kiem tra, khong tu giao lai')
             elif rb.state in ('blocked', 'failed'):
                 self.on_trouble(rb, now)
 

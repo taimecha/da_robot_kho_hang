@@ -243,10 +243,10 @@ Chờ AGV1 (3,2) Đông và AGV2 (4,2) Đông.
 
 ## Video 6 — Đo, phân loại, giao hàng và báo thành công
 
-**Đầu clip:** AGV1 (3,2) Đông; AGV2 (4,2) Đông. Đặt hộp nâu phía Đông tâm
-ô lấy hàng **(3,5)** và hộp xanh phía Đông **(4,5)**, mỗi hộp cách tâm ô
-khoảng 85 cm. Kiểm tra đường tới hai ô lấy hàng vẫn thông. Mở E/F với
-`VIDEO=06`. **Terminal G — camera**, chạy foreground, không dùng `setsid` hay `&`:
+**Đầu clip:** AGV1 (3,2) Đông; AGV2 (4,2) Đông. Đặt hộp trước ô lấy
+(3,5) và (4,5), mặt hộp cách tâm ô lấy khoảng **35 cm** về phía Đông,
+kiểm tra costmap cho phép xe dừng tại ô lấy. Mở E/F với `VIDEO=06`.
+**Terminal G — camera**, chạy trực tiếp:
 
 ```bash
 cd /home/tai/Robot_kho_clone
@@ -255,21 +255,15 @@ export ROS_DOMAIN_ID=0
 python3 tools/cargo_live_view.py --agv1-pickup 3,5 --agv2-pickup 4,5
 ```
 
-**Terminal D mới** (sau `cd/source/export`) gửi hai đích lấy hàng:
-
-```bash
-ros2 topic pub --once /fleet/goal std_msgs/msg/String \
-  "{data: 'pair 1 3 5 d ; 2 4 5 d'}"
-```
-
-Quay xe dừng hướng Đông, giao diện chốt trung bình 5 ảnh với `DIST`, `WIDTH`,
-`HEIGHT` và ô giao: hộp nâu cao khoảng 31–32 cm → **(1,2)**, hộp xanh cao
-23,9 cm → **(1,1)**. **Sau khi đặt từng hộp thật lên xe tương ứng**, người
-giám sát bấm nút xanh **ĐÃ NHẬN HÀNG** của xe đó. Giao diện gửi đích giao
-theo chiều cao; quay hai xe đi tới ô giao. Khi mỗi xe tới đúng ô và agent báo
-`done`, giao diện hiện **DA GIAO HANG THANH CONG (hàng,cột)** riêng xe đó và
-phát sự kiện `event=delivered` trên `/fleet/cargo_result`. Sau khi cả hai
-đến nơi, thông báo vẫn hiện **10 giây** để quay rồi giao diện tự đóng.
+Bấm **BAT DAU** dưới ảnh mỗi xe. Không gửi thêm đích riêng ở terminal D.
+Quay đủ chuỗi: xe 1 tới ô quan sát (3,4), xe 2 tới (4,4), cùng hướng Đông;
+chốt 5 ảnh và phân loại; tự tiến tới (3,5)/(4,5); chờ người đặt hàng lên xe
+và bấm **DA NHAN HANG**; đi giao; báo **DA GIAO HANG THANH CONG**.
+Sau khi dỡ hàng, bấm **DA DO HANG - QUAY LAI LAY TIEP**. Đặt món khác loại
+ở lượt tiếp và quay cảnh cùng một xe giao tới ô tương ứng loại mới.
+Mỗi xe chỉ chở một món một lúc; mỗi ô giao vẫn dành riêng một loại.
+Giao diện giữ mở cho tới khi bấm Q. Chi tiết điều kiện đo và bố trí mới:
+[DO_HOP_TRUC_TIEP.md](DO_HOP_TRUC_TIEP.md).
 
 ## Sau khi quay xong
 

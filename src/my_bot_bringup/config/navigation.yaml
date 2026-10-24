@@ -72,9 +72,9 @@ bt_navigator:
 controller_server:
   ros__parameters:
     controller_frequency: 20.0
-    progress_checker_plugins: ["progress_checker"]
-    goal_checker_plugins: ["general_goal_checker"]
-    controller_plugins: ["FollowPath"]
+    progress_checker_plugins: ["progress_checker", "precision_progress_checker"]
+    goal_checker_plugins: ["general_goal_checker", "precision_goal_checker"]
+    controller_plugins: ["FollowPath", "PrecisionFollowPath"]
 
     # Xe phai di duoc 0.15 m trong 15 s. Truoc day 0.5 m / 10 s: o sa ban 60 cm
     # mot doan ngan + mot lan xoay tai cho la du bi bao "Failed to make progress".
@@ -82,6 +82,12 @@ controller_server:
       plugin: "nav2_controller::SimpleProgressChecker"
       required_movement_radius: 0.15
       movement_time_allowance: 15.0
+
+    # Tien do cho doan cuoi/vi chinh, khong doi di 15 cm khi dich chi 3 cm.
+    precision_progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.003
+      movement_time_allowance: 4.0
 
     # O sa ban 60 cm: yeu cau sai so dich <= 3 cm (2026-10-03). Dat 2 cm de
     # con du tru: 3 cm thi xe that dung o 2.6-2.9 cm (sat nguong), 2 cm thi
@@ -91,9 +97,18 @@ controller_server:
     general_goal_checker:
       plugin: "nav2_controller::SimpleGoalChecker"
       xy_goal_tolerance: 0.02
-      # FollowPath chi lo doan thang; fleet_agent tu xoay va xac nhan goc tai dich < 0.9 do.
+      # FollowPath chi lo doan thang; fleet_agent tu xoay va xac nhan goc tai dich < 2.5 do.
       yaw_goal_tolerance: 0.35
       stateful: true
+
+    # Can tam o truoc khi xoay huong cuoi; khong co bam nguong 5 mm qua chat.
+    # de con du tru cho dich chuyen sau lan xoay ve huong lay/giao hang.
+    # Nguong xac nhan cuoi cua fleet_agent van la <=2 cm va <2.5 do.
+    precision_goal_checker:
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.012
+      yaw_goal_tolerance: 0.35
+      stateful: false
 
     # REGULATED PURE PURSUIT - bam DUNG duong duoc giao.
     # grid_navigator.py giao tung doan thang nam tren canh sa ban (khong qua
@@ -107,7 +122,7 @@ controller_server:
     # tre 0.3 s). Da thu RotationShimController: ban Jazzy xoay voi toc do
     # KHONG DOI roi cat dot ngot -> xe ao tre 0.3 s vuot 30-40 do moi lan.
     # RPP chi con xoay du phong khi lech > 20 do (rotate_to_heading_min_angle).
-    FollowPath:
+    FollowPath: &grid_follow_path
       plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
       # Dong co 60 RPM, banh 0.0328 m -> tran ly thuyet ~0.20 m/s. Giu nguyen
       # toc do dat 0.15 m/s de khong doi van toc chay thuong ngay. Theo phep do
@@ -148,11 +163,20 @@ controller_server:
       max_allowed_time_to_collision_up_to_carrot: 1.0
       allow_reversing: false
       use_fixed_curvature_lookahead: false
+
       curvature_lookahead_dist: 0.6
       interpolate_curvature_after_goal: false
       max_robot_pose_search_dist: 10.0
       transform_tolerance: 0.5
       stateful: true
+
+    # Giu toc do chay 0.15 m/s, chi giam dan o 20 cm cuoi. Khi vi chinh
+    # vai cm, chay 0.025-0.04 m/s thay vi toi thieu 0.08 m/s.
+    PrecisionFollowPath:
+      <<: *grid_follow_path
+      min_approach_linear_velocity: 0.025
+      approach_velocity_scaling_dist: 0.20
+      use_rotate_to_heading: false
 
 local_costmap:
   local_costmap:

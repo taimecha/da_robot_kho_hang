@@ -136,7 +136,8 @@ def fit_face(P, rng=np.random.default_rng(0)):
     return {'n': n, 'd': d, 'mid': m, 'left': ends[0], 'right': ends[1],
             'yaw_deg': math.degrees(math.atan2(-n[1], -n[0])),
             'width': float(s.max() - s.min()), 'points': int(len(I)),
-            'dist': float(-d)}   # khoang cach tu goc base toi mat (doc phap tuyen)
+            'dist': float(-d),
+            'rms_m': float(np.sqrt(np.mean(((I-m) @ n)**2)))}   # khoang cach tu goc base toi mat (doc phap tuyen)
 
 
 # --------------------------------------------------------------------- camera
@@ -195,7 +196,66 @@ def segment(img):
     return mask
 
 
-def grabcut_mask(img, uL, uR, v_ref):
+def front_rectangle_hint(img, uL, uR, v_seed, v_floor):
+    """Closed image rectangle compatible with the LiDAR face and its floor.
+
+    Used ONLY to constrain segmentation, never as a substitute for measured
+    edges. Window/door rectangles above the cargo fail the floor/seed checks.
+    A clipped box cannot create a full-frame-safe rectangle proposal.
+    """
+    H,W=img.shape[:2]
+    lo,hi=sorted((float(uL),float(uR)));width=hi-lo
+    gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    candidates=[]
+    for g in (gray,cv2.createCLAHE(clipLimit=2.,tileGridSize=(8,8)).apply(gray)):
+        edges=cv2.Canny(g,30,80)
+        edges=cv2.morphologyEx(edges,cv2.MORPH_CLOSE,np.ones((3,3),np.uint8))
+        contours,_=cv2.findContours(edges,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+        for contour in contours:
+            perimeter=cv2.arcLength(contour,True)
+            poly=cv2.approxPolyDP(contour,.02*perimeter,True)
+            if len(poly)!=4 or not cv2.isContourConvex(poly):
+                continue
+            x,y,w,h=cv2.boundingRect(poly)
+            area=cv2.contourArea(contour)
+            tol=max(8.,.22*width)
+            if (x<3 or y<3 or x+w>=W-2 or y+h>=H-2 or
+                    abs(x-lo)>tol or abs(x+w-hi)>tol or
+                    abs(y+h-v_floor)>max(8.,.22*width) or
+                    h<max(12.,.4*width) or area/max(1.,w*h)<.7 or
+                    not (x<.5*(lo+hi)<x+w and y<v_seed<y+h)):
+                continue
+            score=(abs(x-lo)+abs(x+w-hi)+abs(y+h-v_floor)+
+                   5.*(1.-area/(w*h)))
+            candidates.append((score,(x,y,w,h)))
+    return min(candidates,key=lambda item:item[0])[1] if candidates else None
+
+
+def visible_bottom_edge(gray, left, right, mask_bottom, floor_bottom):
+    """Strong, coherent physical bottom edge, not a floor assumption/shadow.
+
+    Require agreement of edges across >=60% of the face columns, within a
+    narrow band around the segmented bottom and reasonably near the floor.
+    """
+    H,W=gray.shape
+    if not (3.<mask_bottom<H-3 and abs(mask_bottom-floor_bottom)<16.):
+        return None
+    cols=np.linspace(left+.2*(right-left),left+.8*(right-left),15).astype(int)
+    positions=[]
+    for c in cols:
+        profile=gray[:,max(c-1,0):min(c+2,W)].astype(float).mean(axis=1)
+        profile=cv2.GaussianBlur(profile.reshape(-1,1),(1,3),0).ravel()
+        gradient=np.abs(np.diff(profile))
+        lo=max(1,int(mask_bottom)-4);hi=min(H-2,int(mask_bottom)+5)
+        k=lo+int(np.argmax(gradient[lo:hi]))
+        if gradient[k]>=6.:
+            positions.append(k+.5)
+    if len(positions)<9 or np.percentile(positions,90)-np.percentile(positions,10)>3.:
+        return None
+    return float(np.median(positions))
+
+
+def grabcut_mask(img, uL, uR, v_ref, rectangle=None):
     """Mat na hop bang GrabCut, hat giong tu LiDAR: chac chan la hop = dai giua mat truoc
     o hang tia LiDAR; co the la hop = cot giua hai mut LiDAR; ngoai dai do la nen. Hoc mau
     hop/nen ngay tren anh -> chiu duoc rem sang, san bong, hop it mau (do that 2026-10-15:
@@ -209,7 +269,17 @@ def grabcut_mask(img, uL, uR, v_ref):
     m[:, max(int(uL) - 3, 0):min(int(uR) + 4, W)] = cv2.GC_PR_FGD
     vr = int(np.clip(v_ref, 6, H - 7))
     m[vr - 6:vr + 6, int(uL + 0.3 * w):int(uR - 0.3 * w) + 1] = cv2.GC_FGD
+    if rectangle is not None:
+        x,y,w,h=rectangle
+        # Seed from the real image rectangle prevents the full-height probable
+        # foreground strip from learning the door/window behind the cargo.
+        allowed=np.zeros((H,W),bool)
+        allowed[max(0,y-4):min(H,y+h+4),max(0,x-4):min(W,x+w+4)]=True
+        m[~allowed]=cv2.GC_BGD
     bgd, fgd = np.zeros((1, 65)), np.zeros((1, 65))
+    # Stable initialization: the same frame must not alternate between a
+    # correct box mask and a door/window mask on successive evaluations.
+    cv2.setRNGSeed(0)
     cv2.grabCut(img, m, None, bgd, fgd, 5, cv2.GC_INIT_WITH_MASK)
     fg = ((m == cv2.GC_FGD) | (m == cv2.GC_PR_FGD)).astype(np.uint8)
     k = np.ones((3, 3), np.uint8)
@@ -312,7 +382,7 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     und = cv2.undistort(img_bgr, cam.K, cam.D)
     H, W = und.shape[:2]
     n, d = face['n'], face['d']
-    if abs(face['yaw_deg']) > 8:
+    if abs(face['yaw_deg']) > 15:
         warn.append(f'mat hang lech {face["yaw_deg"]:+.1f} do')
     # diem giua mat truoc o do cao LiDAR -> pixel hat giong
     zl = cfg['lidar']['z']
@@ -325,8 +395,10 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     # Hat giong o NUA do cao tia LiDAR: hop dung tren san va LiDAR cham no, nen chac
     # chan phu tu san toi tia -> diem giua do nam tren mat truoc ke ca hop thap.
     _, v_seed = cam.project(np.r_[face['mid'], 0.5 * zl])
+    _,floor_ref=cam.project(np.r_[face['mid'],0.])
+    rectangle=front_rectangle_hint(und,uL,uR,v_seed,floor_ref)
     if cfg.get('segment', 'grabcut') == 'grabcut':
-        mask = grabcut_mask(und, uL, uR, v_seed)
+        mask = grabcut_mask(und, uL, uR, v_seed, rectangle=rectangle)
     else:
         mask = segment(und) > 0
     col = mask[:, ui]
@@ -421,11 +493,25 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     PL, PR = cam.ray_plane(ua, vm, n, d), cam.ray_plane(ub, vm, n, d)
     PT, PB = cam.ray_plane(um, va, n, d), cam.ray_plane(um, vb, n, d)
     width = float(np.linalg.norm(PL[:2] - PR[:2]))
+    height_source='visible_edges'
     if cam.has_pitch:
-        # hop dung tren san: cao = mep tren -> san. Mep duoi anh chi de kiem tra.
-        height = float(PT[2])
         vb_floor = float(cam.project(np.r_[(PL[:2] + PR[:2]) / 2, 0.0])[1])
-        touch_v = touch_top or vb_floor >= H - 1
+        bottom=visible_bottom_edge(gray,ua,ub,vb,vb_floor)
+        if bottom is not None:
+            bottom_point=cam.ray_plane(um,bottom,n,d)
+        else:
+            bottom_point=None
+        if bottom_point is not None and abs(bottom_point[2])<=.03:
+            # When BOTH physical edges are visible, use their difference. This
+            # cancels a common camera-height/floor offset instead of treating
+            # the old ground calibration as an exact observed box bottom.
+            vb=float(bottom);PB=bottom_point
+            height=float(PT[2]-PB[2])
+            touch_v=touch_top or vb>=H-1
+        else:
+            height=float(PT[2])
+            height_source='ground_plane'
+            touch_v=touch_top or vb_floor>=H-1
     else:
         height = float(PT[2] - PB[2])
     if touch_h or touch_v:
@@ -441,7 +527,7 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     vis = und.copy()
     cnts, _ = cv2.findContours(mask.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cv2.drawContours(vis, cnts, -1, (0, 255, 255), 1)
-    vb_draw = vb_floor if cam.has_pitch else vb
+    vb_draw = vb_floor if cam.has_pitch and height_source=='ground_plane' else vb
     cv2.rectangle(vis, (int(ua), int(va)), (int(ub), int(vb_draw)), (0, 0, 255), 2)
     for u in (uL, uR):
         cv2.line(vis, (int(u), int(v_ref) - 8), (int(u), int(v_ref) + 8), (255, 0, 0), 2)
@@ -450,6 +536,8 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     return {'width': width, 'height': height, 'z_cam': float(-d - cam.C[0]),
             'face_yaw_deg': face['yaw_deg'], 'lidar_width': face['width'],
             'lidar_points': face['points'], 'bottom_z': float(PB[2]),
+            'face_rms_m': face['rms_m'], 'height_source': height_source,
+            'rectangle_hint': list(rectangle) if rectangle is not None else None,
             # A camera mask edge far INSIDE the corresponding LiDAR endpoint means
             # GrabCut has cut off part of the box (seen on the blue box: 10.4 cm
             # instead of ~12 cm, yet all five frames could agree on the error).

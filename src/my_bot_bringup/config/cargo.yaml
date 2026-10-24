@@ -2,7 +2,9 @@
 # Doc boi cargo_measure.py / cargo_task.py / tools/esp32_cam_node.py, va
 # tools/sim_cargo.py (camera ao).
 #
-# Xe toi o lay hang (cot 5, quay Dong) -> LiDAR khop duong thang mat truoc hang
+# Giao dien: xe toi o quan sat (cot 4, truoc o lay mot buoc) -> do 5 anh ->
+# toi o lay (cot 5) -> nguoi xac nhan da nhan hang -> giao -> bam quay lai.
+# LiDAR khop duong thang mat truoc hang
 # (Z, goc lech) -> anh camera: tach hang khoi nen -> mep trai/phai/tren/duoi ->
 # chieu tia qua tung mep len mat phang mat truoc hang -> rong, cao (m)
 # -> bang phan loai -> xe chay ve o tra hang (hang 1, cot theo loai).
@@ -56,17 +58,20 @@ place:
   pickup_col: 5
   pickup_rows: [2, 3, 4, 5]
   pickup_heading: d
-  # 0.85: camera xe that cao 23.5 cm, hieu chuan xe 1 (2026-10-14): nhin xuong 19.7 do
-  # -> mat hang phai cach camera >= 0.66 m moi thay chan hop. gap 0.85: thay tu -3.5 cm
-  # (du cho xe dung lech) toi 55 cm cao, rong toi 80 cm, 1 px ~2.5 mm.
-  gap: 0.85
+  # Goi y dat mat hop cach tam o lay 0.35 m (mo phong dung gia tri nay).
+  # Luoi 0.60 m: quan sat tu o truoc -> cach tam o quan sat 0.95 m.
+  # Gap khong phai lenh tiep can theo LiDAR: xe van dung tai tam o lay.
+  # Xe that phai kiem tra footprint/costmap va tam nhin; khong giam clearance.
+  gap: 0.35
   # O TRA hang: hang deliver_row, cot = classes[].col
   deliver_row: 1
 
 # Phan loai theo CHIEU CAO sau khi giao dien cargo_live_view.py da chot
-# trung binh 5 anh va nguoi giam sat bam "DA NHAN HANG". Ap dung khi mat hop
-# cach TAM O lay hang 0.85 m nhu place.gap; doi khoang dat hang/camera/LiDAR thi
-# phai do lai gioi han nay. Can duoi 24 cm: tia LiDAR cao 19 cm + chech len
+# trung binh 5 anh O QUAN SAT, sau do xe toi o lay va nguoi giam sat bam
+# "DA NHAN HANG". Cung mot bang loai -> o giao cho MOI xe, khong gan loai cho xe.
+# Moc 24..50 cm duoc kiem tra o bo tri cu; o quan sat moi can do lai bang thuoc,
+# khong xem day la gioi han da kiem chung cho moi khoang cach. Can duoi 24 cm:
+# tia LiDAR cao 19 cm + chech len
 # 1.3-2.7 do tai 0.85 m (~21-23 cm), de 1 cm du. Can tren 50 cm: xe 1 chi
 # nhin tron den ~50.1 cm (mep tren con 5 px), xe 2 ~52.8 cm; lay can chung.
 # 24..50 cm chia 4 khoang deu, moi khoang 6.5 cm; ngoai dai KHONG giao hang.

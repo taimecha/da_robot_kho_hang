@@ -51,7 +51,7 @@ def hd_name(h):
 
 OUT = os.path.expanduser('~/agv_logs/cargo')
 ARRIVE_D = 0.05            # m: coi la da toi o
-ARRIVE_YAW = math.radians(0.9)  # cung nguong goc tai goal voi fleet_agent/grid_real.yaml
+ARRIVE_YAW = math.radians(2.5)  # cung nguong goc tai goal voi fleet_agent/grid_real.yaml
 SETTLE = 1.0               # s dung yen truoc khi do
 TIMEOUT = 300.0            # s cho moi chang (cho xe kia nhuong + di vong: 2026-10-14 > 180 s)
 # traffic_manager bo lo trinh sau 5 lan "blocked" (~10 s, vd nguoi dung canh sa ban):

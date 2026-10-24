@@ -1,7 +1,6 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
-from rclpy.duration import Duration
 from rclpy.executors import MultiThreadedExecutor
 from nav2_msgs.action import FollowPath
 from action_msgs.msg import GoalStatus
@@ -53,7 +52,6 @@ class GridNavigator(Node):
         self.create_subscription(Odometry, 'odom', self.cb_odom, 10)
         self.rot = None
         self.rot_timer = None
-        self.rot_hist = []          # (t, lenh w) trong rot_lag giay qua
         self.marker_pub = self.create_publisher(MarkerArray, '/grid_visualization', 10)
 
         self.tf_buffer = Buffer()
@@ -78,20 +76,17 @@ class GridNavigator(Node):
         rot = self.board.cfg.get('rotate', {}) or {}
         self.rot_start = math.radians(rot.get('start_deg', 10.0))   # lech hon -> xoay
         self.rot_tol = math.radians(rot.get('stop_deg', 2.0))       # du doan toi dich -> dung
-        self.rot_done = math.radians(rot.get('done_deg', 5.0))      # con lech hon -> xoay bu
-        self.ROT_TRIES = int(rot.get('tries', self.ROT_TRIES))
-        self.rot_wmax = rot.get('max_speed', 1.3)                   # rad/s
-        self.rot_wmin = rot.get('min_speed', 0.7)                   # rad/s, tren vung chet
-        self.rot_accel = rot.get('decel', 2.5)                      # rad/s2, do doc giam toc
-        self.rot_lag = rot.get('lag', 0.3)                          # s, lenh -> banh
-        self.rot_tau = rot.get('motor_tau', 0.12)                   # s, quan tinh dong co
-        # Goc xe con quay them sau lenh 0 = coast * w do duoc (s); 0 = mo hinh cu theo lenh
-        self.rot_coast = rot.get('coast', 0.0)
-        # Xung vong ho cho goc <= pulse_max_deg (0 = tat): bien do (rad/s) va
-        # phan dau xung bi ma sat nuot (s, tu hoc)
-        self.rot_pulse_max = math.radians(rot.get('pulse_max_deg', 0.0))
-        self.rot_wp = rot.get('pulse_speed', self.rot_wmin)
-        self.rot_T0 = rot.get('pulse_dead', 0.0)
+        self.rot_done = math.radians(rot.get('done_deg', 2.5))
+        # One continuous, single-direction turn. The old coast/pulse model
+        # was fitted before the wheel PID update and repeatedly stopped short.
+        self.rot_wmax = float(rot.get('max_speed', 0.65))
+        self.rot_wmin = float(rot.get('min_speed', 0.12))
+        self.rot_accel = float(rot.get('decel', 1.2))
+        self.rot_gain = float(rot.get('gain', 1.8))
+        self.rot_brake_delay = float(rot.get('brake_delay', 0.10))
+        self.rot_timeout = float(rot.get('timeout_s', 15.0))
+        self.rot_settle = float(rot.get('settle_s', 0.35))
+        self.rot_stall_timeout = float(rot.get('stall_timeout_s', 2.0))
         # Chỉ lấy ô vật cản THẬT (giá trị 100). Ngưỡng thấp hơn sẽ nuốt cả vùng
         # inflation của Nav2 và lại gây chặn quá tay.
         self.lethal_threshold = 99
@@ -584,12 +579,6 @@ class GridNavigator(Node):
         ahead = abs(self.normalize_angle(math.atan2(sy - ry, sx - rx) - yaw)) <= self.STAY_AHEAD
         return not ahead
 
-    # Xoay tai cho: so lan xoay bu toi da; thoi gian ra lenh ngan nhat moi lan (s)
-    ROT_TRIES = 5
-    ROT_MIN_CMD_S = 0.15
-    # Xung dai nhat bi ma sat nuot ma van chap nhan (s)
-    ROT_T0_MAX = 0.6
-
     def build_segments(self, nodes):
         """Chuoi diem luoi lien tiep -> cac DOAN THANG nam tren canh.
 
@@ -887,14 +876,8 @@ class GridNavigator(Node):
     # ------------------------------------------------------------------
     # XOAY TAI CHO o dau doan - tu lam thay vi de Nav2 xoay.
     #
-    # RPP / RotationShim (Jazzy) xoay voi toc do KHONG DOI roi cat dot ngot.
-    # Lenh toi banh tre ~0.3 s nen xe troi them toc_do x 0.3 s ~ 20-40 do roi
-    # xoay nguoc sua, qua lai. O day:
-    #   - du doan goc se troi: goc_con_lai - toc_do_quay_do_duoc * rot_lag,
-    #     ra lenh dung khi du doan da toi dich (bu tre);
-    #   - giam toc theo sqrt(2 * rot_accel * goc_con_lai) nhung khong duoi
-    #     rot_wmin: cham qua thi banh ket o ma sat tinh;
-    #   - dung han roi do lai, con lech > rot_done thi xoay bu (toi da 3 lan).
+    # Mot luot lien tuc: giam toc theo goc va gyro, dung mot lan,
+    # doi dung on dinh roi chap nhan hoac bao loi. Khong xung bu / dao chieu.
     # Lenh di vao cmd_vel_nav nhu lenh cua controller -> van qua
     # velocity_smoother va collision_monitor.
     # ------------------------------------------------------------------
@@ -943,32 +926,14 @@ class GridNavigator(Node):
         t = Twist()
         t.angular.z = float(w)
         self.cmd_pub.publish(t)
-        now = self.get_clock().now().nanoseconds * 1e-9
-        self.rot_hist.append((now, float(w)))
-        while self.rot_hist and now - self.rot_hist[0][0] > self.rot_lag:
-            self.rot_hist.pop(0)
-
-    def pending_rotation(self):
-        """Goc da RA LENH trong rot_lag giay vua qua nhung banh chua kip quay."""
-        return sum(w * 0.05 for _, w in self.rot_hist)
-
-    def learn_pulse(self, T, turned):
-        """Cap nhat rot_T0 (phan dau xung bi ma sat nuot) tu mot xung dai T
-        giay da lam xe quay `turned` rad (duong = dung chieu)."""
-        if turned < math.radians(1.0):
-            # Xe gan nhu khong nhuc nhich: ca xung bi nuot
-            if self.rot_T0 >= self.ROT_T0_MAX - 1e-6:
-                # Xung dai toi da van khong du: tang bien do xung
-                self.rot_wp = min(self.rot_wmax, self.rot_wp * 1.25)
-            self.rot_T0 = min(self.ROT_T0_MAX, max(self.rot_T0, T))
-            return
-        obs = T - turned / self.rot_wp
-        self.rot_T0 = min(self.ROT_T0_MAX, max(0.0, 0.5 * (self.rot_T0 + obs)))
 
     def start_rotation(self, yaw_des, finish=False):
-        self.rot = {'target': yaw_des, 'phase': None, 't': None, 'tries': 0,
-                    't0': self.get_clock().now(), 'finish': finish}
-        self.get_logger().info(f'Xoay tại chỗ tới hướng {math.degrees(yaw_des):+.0f}°')
+        now = self.get_clock().now()
+        self.rot = dict(target=yaw_des, phase='turn', t0=now, t_last=now,
+                        finish=finish, direction=None, command=0.0,
+                        progress_yaw=None, progress_t=now, wpeak=0.0)
+        self.get_logger().info(
+            f'Xoay mot luot toi huong {math.degrees(yaw_des):+.0f}°')
         if self.rot_timer is None:
             self.rot_timer = self.create_timer(0.05, self.rotate_tick)
 
@@ -980,99 +945,99 @@ class GridNavigator(Node):
             self.rot = None
             self.publish_w(0.0)
 
+    def rotation_failed(self, reason):
+        self.stop_rotation()
+        self.abort_route(reason)
+
     def rotate_tick(self):
+        """One direction, continuous deceleration, one stop; never pulse/reverse.
+
+        Feedback uses map heading and measured gyro rate. A stopped turn is
+        either accepted after settling or reported as a terminal error. It is
+        never restarted automatically to chase a small residual angle.
+        """
         r = self.rot
         if r is None:
             return
         now = self.get_clock().now()
+        elapsed = (now - r['t0']).nanoseconds * 1e-9
+        if elapsed > self.rot_timeout:
+            self.rotation_failed('xoay qua thoi gian cho phep - khong tu xoay lai')
+            return
         _, _, yaw = self.get_robot_pose()
-        if yaw is None:
-            self.publish_w(0.0)
+        if yaw is None or not math.isfinite(yaw):
+            self.rotation_failed('mat goc dinh vi khi xoay - dung xe')
+            return
+        if self.real and time.monotonic() - self.gyro_t > 0.35:
+            self.rotation_failed('mat IMU khi xoay - dung xe')
             return
         err = self.normalize_angle(r['target'] - yaw)
-        if r.get('err0') is None:
-            # Bat dau mot lan xoay (lan dau hoac xoay bu)
-            r['err0'], r['yaw0'], r['wpeak'], r['t_turn'] = err, yaw, 0.0, now
-            if abs(err) <= self.rot_pulse_max:
-                # Goc nho: XUNG vong ho. Lenh toi banh tre ~0.3 s nen vong kin
-                # khong dung chinh xac duoc goc nho (luc thay xe nhuc nhich da
-                # co 0.3 s lenh nam san tren duong ~12-17 do -> vot qua dich,
-                # hoac dung som khi xe con ket ma sat tinh -> dung im). Xung
-                # w*T thi tong goc quay = tich phan lenh, khong phu thuoc tre;
-                # rot_T0 = phan dau xung bi ma sat nuot, hoc dan sau moi xung.
-                T = abs(err) / self.rot_wp + self.rot_T0
-                r['phase'], r['T'] = 'pulse', T
-                r['pulse_end'] = now + Duration(seconds=T)
-            else:
-                r['phase'] = 'turn'
-        r['wpeak'] = max(r['wpeak'], abs(self.rot_w()))
-        if r['phase'] == 'pulse':
-            if now < r['pulse_end']:
-                self.publish_w(math.copysign(self.rot_wp, r['err0']))
-            else:
-                self.publish_w(0.0)
-                r['phase'], r['t'] = 'settle', now
+        speed = self.rot_w()
+        if not math.isfinite(speed):
+            self.rotation_failed('toc do quay khong hop le - dung xe')
             return
+        r['wpeak'] = max(r['wpeak'], abs(speed))
+        if r['direction'] is None:
+            r['direction'] = math.copysign(1.0, err)
+            r['err0'] = err
+            r['progress_yaw'] = yaw
+            if abs(err) < self.rot_done:
+                r.update(phase='settle', stopped_at=now, still_since=None)
         if r['phase'] == 'turn':
-            if self.rot_coast > 0:
-                # Goc xe con quay them sau khi ra lenh 0 ~ rot_coast * w DO DUOC
-                # (xe that 2026-10-03: 0.36 s, on dinh 0.3-0.45). Dua tren toc
-                # do THAT nen dung ca khi banh yeu khong theo kip lenh (lenh 1.3
-                # rad/s, xe chi quay 0.86) - tinh theo lenh thi dung som ~20 do.
-                pred = err - self.rot_coast * self.rot_w()
-            else:
-                # Mo hinh theo LENH (coast: 0): lenh trong rot_lag giay qua chac
-                # chan toi banh. Dung cho xe ao (khong ma sat). Xe that banh yeu,
-                # ma sat tinh nuot lenh ngan -> xoay bu dung im: dung coast > 0.
-                pred = err - self.pending_rotation() - self.rot_w() * self.rot_tau
-            # Ra lenh it nhat ROT_MIN_CMD_S: xoay bu 3-4 do chi ra lenh mot nhip
-            # 50 ms - velocity_smoother chua kip tang toc qua vung chet dong co,
-            # xe dung im, lan bu nao cung con nguyen goc lech.
-            held = (now - r['t_turn']).nanoseconds * 1e-9
-            if (abs(pred) <= self.rot_tol or pred * err < 0) and held >= self.ROT_MIN_CMD_S:
+            remaining = err * r['direction']
+            forward_speed = max(0.0, speed * r['direction'])
+            predicted = remaining - self.rot_brake_delay * forward_speed
+            # Brake using the CURRENT measured rate, not the old 0.36 s
+            # coasting constant. Never stop several degrees short merely
+            # because a stale model predicts a large coast.
+            if (remaining <= self.rot_tol or
+                    (remaining < self.rot_done and predicted <= self.rot_tol)):
                 self.publish_w(0.0)
-                r['phase'], r['t'] = 'settle', now
+                r.update(phase='settle', stopped_at=now, still_since=None)
                 return
-            w = math.sqrt(2.0 * self.rot_accel * abs(pred))
-            w = min(self.rot_wmax, max(self.rot_wmin, w))
-            self.publish_w(math.copysign(w, pred))
+            if abs(self.normalize_angle(yaw-r['progress_yaw'])) >= math.radians(0.4):
+                r['progress_yaw'], r['progress_t'] = yaw, now
+            if (now-r['progress_t']).nanoseconds * 1e-9 > self.rot_stall_timeout:
+                self.rotation_failed('xoay khong tien trien - dung, khong lap xoay')
+                return
+            dt = min(0.10, max(0.0, (now-r['t_last']).nanoseconds * 1e-9))
+            # Approach slowly while remaining in the original direction.
+            # Wheel PID now has its own breakaway compensation, so the old
+            # 0.7 rad/s minimum no longer belongs in the heading controller.
+            wanted = min(self.rot_wmax, max(self.rot_wmin,
+                         min(self.rot_gain * max(0.0, predicted),
+                             math.sqrt(2*self.rot_accel*remaining))))
+            command = min(wanted, r['command']+self.rot_accel*dt)
+            r['command'], r['t_last'] = command, now
+            self.publish_w(r['direction'] * command)
             return
-        # settle: cho xe dung han roi danh gia. Doi it nhat rot_lag + 3 tau:
-        # vua ra lenh dung thi lenh cu van dang tren duong toi banh, xe co the
-        # chua kip nhuc nhich (odom_w = 0) ma chua phai da xong.
         self.publish_w(0.0)
-        still_for = (now - r['t']).nanoseconds * 1e-9
-        min_wait = self.rot_lag + 3 * self.rot_tau
-        if (abs(self.rot_w()) < 0.05 and still_for > min_wait) or still_for > 2.5:
-            turned = self.normalize_angle(yaw - r['yaw0'])
-            note = f"ω max {math.degrees(r['wpeak']):.0f}°/s"
-            if 'T' in r:
-                self.learn_pulse(r['T'], turned * math.copysign(1.0, r['err0']))
-                note = f"xung {r['T']*1000:.0f} ms, quay {math.degrees(abs(turned)):.1f}°"
-            r.setdefault('log', []).append(
-                f"{math.degrees(r['err0']):+.0f}°→{math.degrees(err):+.1f}° ({note})")
-            r['err0'] = None
-            r.pop('T', None)
-            if abs(err) >= self.rot_done and r['tries'] < self.ROT_TRIES:
-                r['tries'] += 1
-                r['phase'] = 'turn'
-                return
-            took = (now - r['t0']).nanoseconds * 1e-9
-            msg = (f'Xoay xong sau {took:.1f} s, còn lệch {math.degrees(err):+.1f}° '
-                   f'({r["tries"]} lần xoay bù: {", ".join(r["log"])})')
-            if abs(err) >= self.rot_done:
-                self.get_logger().error(msg + f' - CHƯA ĐẠT < {math.degrees(self.rot_done):.1f}°')
-                self.stop_rotation()
-                self.abort_route(f'sai so goc con {math.degrees(abs(err)):.1f}° '
-                                 f'>= {math.degrees(self.rot_done):.1f}°')
-                return
-            self.get_logger().info(msg)
-            finish = r['finish']
-            self.stop_rotation()
-            if finish:
-                self.send_next_waypoint()      # het doan -> bao da toi noi
-            else:
-                self.send_follow_path()
+        if abs(speed) < 0.04:
+            if r['still_since'] is None:
+                r['still_since'] = now
+        else:
+            r['still_since'] = None
+        settled = (r['still_since'] is not None and
+                   (now-r['still_since']).nanoseconds * 1e-9 >= self.rot_settle)
+        if not settled:
+            if (now-r['stopped_at']).nanoseconds * 1e-9 > 2.5:
+                self.rotation_failed('xe chua dung on dinh sau xoay - khong xoay lai')
+            return
+        if abs(err) >= self.rot_done:
+            self.rotation_failed(
+                f'xoay mot luot con lech {math.degrees(err):+.2f}° '
+                f'>= {math.degrees(self.rot_done):.1f}° - khong xoay bu')
+            return
+        self.get_logger().info(
+            f'Xoay mot luot xong sau {elapsed:.1f} s, con lech '
+            f'{math.degrees(err):+.2f}°, khong xoay bu '
+            f'(omega max {math.degrees(r["wpeak"]):.0f}°/s)')
+        finish = r['finish']
+        self.stop_rotation()
+        if finish:
+            self.send_next_waypoint()
+        else:
+            self.send_follow_path()
 
     def abort_route(self, reason):
         """Dừng hẳn lộ trình và trả quyền điều khiển về cho người dùng.

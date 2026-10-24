@@ -48,6 +48,15 @@ class TurnCostTests(unittest.TestCase):
         path = p.plan(p.agv1, (2, 4), (0, 1))
         self.assertEqual(path, [(2, 4), (2, 3), (2, 2), (2, 1), (1, 1), (0, 1)])
 
+    def test_explicit_heading_is_counted_before_choosing_the_goal_path(self):
+        import math
+        p=Planner();r=p.agv1
+        r.x,r.y=p.board.xy(0,2);r.yaw=-math.pi/2
+        r.goal=(3,3);r.goal_heading=0.
+        path=p.plan(r,(0,2),(3,3))
+        self.assertEqual(len(path),5)  # same shortest grid distance
+        self.assertEqual(path[-2:],[(3,2),(3,3)])  # arrive East
+
     def test_blocked_edge_still_forces_detour(self):
         p = Planner()
         p.static_edges.add(edge_key((2, 4), (2, 3)))

@@ -66,6 +66,7 @@
 #include <esp_timer.h>   // esp_timer_get_time() - dong ho us 64 bit, lam timestamp
 
 #include <micro_ros_arduino.h>
+#include <uxr/client/config.h>  // MTU thuc te cua thu vien dang lien ket
 #include <rcl/rcl.h>
 #include <rcl/error_handling.h>
 #include <rclc/rclc.h>
@@ -356,13 +357,14 @@ float maxAccelRPMPerSec = 320.0f;    // ramp, chong giat va sut ap
 //   Message >  MTU -> bat buoc RELIABLE + phan manh -> tut xuong ~3 Hz, RViz giat
 //   512  = ban precompiled goc              -> toi da ~107 bin
 //   1472 = sau khi chay rebuild_microros_mtu.sh -> toi da ~348 bin
-#define MICROROS_MTU        1472
+// Doc MTU cua thu vien; khong khai bao 1472 neu thu vien van la 512.
+#define MICROROS_MTU        UXR_CONFIG_CUSTOM_TRANSPORT_MTU
 #define SCAN_BINS           320      // 1.125 do/tia
 #define PUBLISH_INTENSITIES 0
 
 #define EST_MSG_BYTES (80 + 4 * SCAN_BINS * (1 + PUBLISH_INTENSITIES))
 #if EST_MSG_BYTES > MICROROS_MTU
-  #error "LaserScan vuot 1 datagram -> phai dung reliable va tut ~3 Hz. Giam SCAN_BINS hoac nang MICROROS_MTU."
+  #error "Thu vien micro-ROS MTU qua nho cho 320 tia. Chay python3 tools/rebuild_microros_mtu.py --install truoc khi nap."
 #endif
 
 #define RANGE_MIN_M 0.10f

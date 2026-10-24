@@ -22,13 +22,16 @@ import sys
 import time
 
 import rclpy
-from rclpy.executors import SingleThreadedExecutor
+from rclpy.executors import SingleThreadedExecutor, ExternalShutdownException
 from rclpy.utilities import remove_ros_args
 from action_msgs.msg import GoalStatus
 from nav2_msgs.action import FollowPath
 from std_msgs.msg import String
+from geometry_msgs.msg import Twist
 
 from grid_navigator import GridNavigator
+from goal_alignment import (ALIGN_STOP_RADIUS, MAX_TRAVEL, MAX_SPEED, MIN_SPEED,
+                            MAX_LATERAL, body_error, correction_plan, swept_costmap_clear)
 
 STATUS_PERIOD = 0.2     # s
 CMD_TIMEOUT = 1.0       # s khong co lenh tu traffic_manager (5 lan/s) -> dung xe
@@ -44,6 +47,8 @@ class FleetAgent(GridNavigator):
     SNAP_DIST = 0.015
     POSITION_TOL_M = 0.02
     MAX_POSITION_CORRECTIONS = 2
+    SMALL_CORRECTION_MAX_M = 0.08
+    CORRECTION_TIMEOUT_S = 6.0
 
     def __init__(self, name, use_sim_time=False, grid_file=None):
         # costmap_decay 1 s: o vat can KET tren local costmap mat sau ~1-2 s (xem
@@ -57,8 +62,18 @@ class FleetAgent(GridNavigator):
         self.upto = 0               # duoc phep di toi route[upto]
         self.sent_upto = 0          # da giao cho Nav2 toi route[sent_upto]
         self.final_done = False
+        self.free_heading_aligned = False
         self.position_corrections = 0
-        self.state = 'idle'         # idle | moving | waiting | done | blocked | failed | precision_failed
+        self.last_error = ''
+        self.correction_deadline = None
+        self.alignment = None
+        self.alignment_timer = None
+        self.alignment_costmap = None
+        self.alignment_costmap_t = -math.inf
+        self.odom_xy = None
+        self.odom_t = -math.inf
+        self.odom_v = 0.0
+        self.state = 'idle'          # idle | moving | waiting | done | blocked | failed | precision_failed
         self.dyn_blocked_nodes = set()
         self.dyn_blocked_edges = set()
         self.others = {}            # ten -> (x, y, t)
@@ -80,11 +95,17 @@ class FleetAgent(GridNavigator):
         pass
 
     def busy(self):
-        return self.active_segment is not None or self.rot is not None
+        return (self.active_segment is not None or self.rot is not None
+                or self.alignment is not None)
 
     def halt(self):
         """Dung xe ngay: huy FollowPath, dung xoay, bo cac doan con lai."""
         self._seq += 1
+        self.correction_deadline = None
+        self.alignment = None
+        if self.alignment_timer is not None:
+            self.destroy_timer(self.alignment_timer)
+            self.alignment_timer = None
         self.stop_rotation()
         if self.goal_handle is not None:
             try:
@@ -151,8 +172,11 @@ class FleetAgent(GridNavigator):
         self.route = nodes
         self.final_heading = final_heading
         self.final_done = False
+        self.free_heading_aligned = False
         self.position_corrections = 0
         self.replan_attempts = 0
+        if nodes:
+            self.last_error = ''
         if not nodes:
             self.state = 'idle'
             self.upto = self.sent_upto = 0
@@ -282,8 +306,31 @@ class FleetAgent(GridNavigator):
                 xb, yb = self.get_coordinates(rb, cb)
                 fh = math.atan2(yb - ya, xb - xa)
             rx, ry, yaw = self.get_robot_pose()
-            if rx is None or (fh is not None and yaw is None):
-                self.abort_route('khong do duoc vi tri/goc tai dich')
+            if not all(v is not None and math.isfinite(v) for v in (rx,ry,yaw)):
+                self.rotation_failed('khong do duoc vi tri/goc tai dich')
+                return
+            r, c = self.route[-1]
+            x, y = self.get_coordinates(r, c)
+            pos_err = math.hypot(rx - x, ry - y)
+            if pos_err > self.POSITION_TOL_M:
+                # Correct only the longitudinal component without a pivot.
+                # This also handles a goal at the current cell, behind us,
+                # and small position drift after the one final heading turn.
+                if (self.final_heading is None and not self.free_heading_aligned and
+                        pos_err <= self.SMALL_CORRECTION_MAX_M and
+                        abs(body_error((rx,ry,yaw),(x,y))[1]) > MAX_LATERAL):
+                    # No heading was requested (e.g. delivery). Choose the
+                    # closest forward/reverse approach axis once and KEEP it.
+                    # Never rotate to an arbitrary East heading afterwards.
+                    self.free_heading_aligned = True
+                    bearing = math.atan2(y-ry,x-rx)
+                    candidates = (bearing,self.normalize_angle(bearing+math.pi))
+                    chosen = min(candidates,key=lambda h:abs(self.normalize_angle(h-yaw)))
+                    self.final_heading = chosen
+                    self.final_done = True
+                    self.start_rotation(chosen,finish=True)
+                    return
+                self.start_position_alignment((x, y), (rx, ry, yaw))
                 return
             if not self.final_done:
                 self.final_done = True
@@ -293,33 +340,8 @@ class FleetAgent(GridNavigator):
                     self.start_rotation(fh, finish=True)
                     return
             if fh is not None and abs(self.normalize_angle(fh - yaw)) >= self.rot_done:
-                self.abort_route(f'sai so goc tai dich {abs(math.degrees(self.normalize_angle(fh - yaw))):.2f}° '
+                self.rotation_failed(f'sai so goc tai dich {abs(math.degrees(self.normalize_angle(fh - yaw))):.2f}° '
                                  f'>= {math.degrees(self.rot_done):.1f}°')
-                return
-            r, c = self.route[-1]
-            x, y = self.get_coordinates(r, c)
-            pos_err = math.hypot(rx - x, ry - y)
-            if pos_err > self.POSITION_TOL_M:
-                if self.position_corrections >= self.MAX_POSITION_CORRECTIONS:
-                    # A regular failure is rerouted by traffic_manager. That
-                    # would repeat the same tiny pivot indefinitely. Stop this
-                    # goal and require an explicit new command instead.
-                    self.halt()
-                    self.state = 'precision_failed'
-                    self.get_logger().error(
-                        f'[{self.name}] sai so vi tri tai dich {pos_err * 100:.1f} cm '
-                        f'> {self.POSITION_TOL_M * 100:.0f} cm sau '
-                        f'{self.position_corrections} lan chinh - dung de kiem tra dinh vi')
-                    return
-                self.position_corrections += 1
-                self.final_done = False
-                self.waypoints = [(rx, ry, x, y)]
-                self.state = 'moving'
-                self.get_logger().warn(f'[{self.name}] lech tam o {pos_err * 100:.1f} cm '
-                                       f'> {self.POSITION_TOL_M * 100:.0f} cm sau khi xoay; '
-                                       f'chinh vi tri lan {self.position_corrections}/'
-                                       f'{self.MAX_POSITION_CORRECTIONS}')
-                self.send_next_waypoint()
                 return
             if self.state != 'done':
                 heading_err = abs(math.degrees(self.normalize_angle(fh - yaw))) if fh is not None else None
@@ -330,8 +352,134 @@ class FleetAgent(GridNavigator):
             self.state = 'done'
             self.target_node = None
             return
+        if (len(self.waypoints) == 1 and self.route and
+                self.sent_upto == len(self.route)-1):
+            x, y = self.get_coordinates(*self.route[-1])
+            rx, ry, yaw = self.get_robot_pose()
+            _, _, ex, ey = self.waypoints[0]
+            if (rx is not None and yaw is not None and
+                    math.hypot(ex-x, ey-y) < 1e-3 and
+                    math.hypot(rx-x, ry-y) <= self.SMALL_CORRECTION_MAX_M):
+                self.waypoints = []
+                self.send_next_waypoint()
+                return
         self.state = 'moving'
         super().send_next_waypoint()
+
+    def cb_odom(self, msg):
+        super().cb_odom(msg)
+        self.odom_xy = (msg.pose.pose.position.x, msg.pose.pose.position.y)
+        self.odom_v = msg.twist.twist.linear.x
+        self.odom_t = time.monotonic()
+
+    def start_position_alignment(self, target, pose):
+        if self.position_corrections >= self.MAX_POSITION_CORRECTIONS:
+            self.rotation_failed('vi chinh vi tri da het luot - dung, khong lap xoay')
+            return
+        try:
+            along, across = correction_plan(pose, target)
+        except ValueError as e:
+            self.rotation_failed(f'sai so vi tri tai dich '
+                                 f'{math.hypot(pose[0]-target[0],pose[1]-target[1])*100:.1f} cm '
+                                 f'> 2 cm; {e}')
+            return
+        if self.rot is not None or self.goal_handle is not None:
+            self.rotation_failed('con lenh chuyen dong cu - khong vi chinh dong thoi')
+            return
+        self.position_corrections += 1
+        now = time.monotonic()
+        self.correction_deadline = now + self.CORRECTION_TIMEOUT_S
+        self.alignment = dict(target=target, yaw=pose[2], direction=math.copysign(1.,along),
+                              phase='drive', best=abs(along), progress_t=now,
+                              odom_last=self.odom_xy, travel=0., still_since=None)
+        self.active_segment = None
+        self.waypoints = []
+        self.current_path_points = [pose[:2], target]
+        self.state = 'moving'
+        self.get_logger().info(f'[{self.name}] can tam khong xoay: '
+                               f'{"tien" if along>0 else "lui"} {abs(along)*100:.1f} cm, '
+                               f'lech ngang {abs(across)*100:.1f} cm')
+        self.alignment_timer = self.create_timer(0.05, self.alignment_tick)
+
+    def alignment_tick(self):
+        a = self.alignment
+        if a is None:
+            return
+        now = time.monotonic()
+        fail = self.rotation_failed
+        if self.esp_estop or self.last_cmd_t is None or time.time()-self.last_cmd_t > CMD_TIMEOUT:
+            fail('vi chinh mat lenh dieu phoi/ESTOP - dung xe')
+            return
+        if now > self.correction_deadline:
+            fail('vi chinh vi tri qua 6 giay - dung, khong lap xoay')
+            return
+        if now-self.odom_t > .35 or now-self.gyro_t > .35:
+            fail('vi chinh mat odometry/IMU - dung xe')
+            return
+        pose = self.get_robot_pose()
+        if not all(v is not None and math.isfinite(v) for v in (*pose, self.odom_v, self.rot_w())):
+            fail('vi chinh khong co vi tri/toc do hop le')
+            return
+        if self.odom_xy is None or not all(math.isfinite(v) for v in self.odom_xy):
+            fail('vi chinh khong co odometry hop le')
+            return
+        if a['odom_last'] is not None:
+            a['travel'] += math.dist(self.odom_xy, a['odom_last'])
+        a['odom_last'] = self.odom_xy
+        if a['travel'] > MAX_TRAVEL:
+            fail('vi chinh vuot 10 cm - dung xe')
+            return
+        x, y, yaw = pose
+        heading_error = self.normalize_angle(a['yaw']-yaw)
+        if abs(heading_error) >= self.rot_done:
+            fail('vi chinh lech huong >= 2.5 do - dung, khong xoay bu')
+            return
+        along, across = body_error((x,y,a['yaw']),a['target'])
+        error = math.hypot(along,across)
+        if abs(across) > MAX_LATERAL and error > self.POSITION_TOL_M:
+            fail(f'vi chinh lech ngang {abs(across)*100:.1f} cm - khong the truot ngang')
+            return
+        # Include the whole straight correction and stopping margin. Positive
+        # and negative velocity use the same obstacle/unknown-space check.
+        end = (x+along*math.cos(a['yaw']),y+along*math.sin(a['yaw']))
+        if (now-self.alignment_costmap_t > .6 or self.alignment_costmap is None or
+                not swept_costmap_clear(self.alignment_costmap,(x,y),end,self.robot_radius+.015)):
+            fail('vi chinh: costmap cu/khong ro hoac vat can truoc-sau xe')
+            return
+        if a['phase'] == 'drive':
+            if error <= ALIGN_STOP_RADIUS or along*a['direction'] <= 0.:
+                a.update(phase='settle',still_since=None)
+                self.publish_w(0.)
+                return
+            if abs(along) < a['best']-.002:
+                a['best'],a['progress_t'] = abs(along),now
+            elif now-a['progress_t'] > 2.:
+                fail('vi chinh khong tien trien - dung, khong lap lai')
+                return
+            cmd = Twist()
+            cmd.linear.x = a['direction']*min(MAX_SPEED,max(MIN_SPEED,1.2*abs(along)))
+            cmd.angular.z = max(-.08,min(.08,2.*heading_error))
+            self.cmd_pub.publish(cmd)  # smoother -> collision_monitor -> ESP32
+            return
+        self.publish_w(0.)
+        if abs(self.odom_v)<.01 and abs(self.rot_w())<.04:
+            if a['still_since'] is None:
+                a['still_since'] = now
+        else:
+            a['still_since'] = None
+        if a['still_since'] is None or now-a['still_since']<.4:
+            return
+        if error > self.POSITION_TOL_M:
+            fail(f'sai so vi tri sau vi chinh {error*100:.1f} cm > 2 cm - dung')
+            return
+        self.get_logger().info(f'[{self.name}] can tam xong, sai so {error*100:.1f} cm, '
+                               f'quang duong odom {a["travel"]*100:.1f} cm, khong xoay them')
+        self.alignment = None
+        self.correction_deadline = None
+        self.current_path_points = []
+        self.destroy_timer(self.alignment_timer)
+        self.alignment_timer = None
+        self.send_next_waypoint()  # recheck radius AND final yaw, not just projection
 
     def send_follow_path(self):
         self._seq += 1
@@ -339,10 +487,19 @@ class FleetAgent(GridNavigator):
         x0, y0, x1, y1 = self.active_segment
         goal = FollowPath.Goal()
         goal.path = self.make_path(x0, y0, x1, y1)
-        goal.controller_id = 'FollowPath'
-        goal.goal_checker_id = 'general_goal_checker'
+        # Use the gentle approach also on the LAST original segment: center
+        # first, final yaw second. Earlier corners keep the normal controller.
+        final_segment = False
+        if self.route and not self.waypoints:
+            gx, gy = self.get_coordinates(*self.route[-1])
+            final_segment = math.hypot(x1-gx, y1-gy) < 1e-3
+        precision = self.position_corrections > 0 or final_segment
+        goal.controller_id = 'PrecisionFollowPath' if precision else 'FollowPath'
+        goal.goal_checker_id = 'precision_goal_checker' if precision else 'general_goal_checker'
         if hasattr(goal, 'progress_checker_id'):
-            goal.progress_checker_id = 'progress_checker'
+            goal.progress_checker_id = 'precision_progress_checker' if precision else 'progress_checker'
+        self.correction_deadline = (time.monotonic()+self.CORRECTION_TIMEOUT_S
+                                    if self.position_corrections else None)
         fut = self._action_client.send_goal_async(goal)
         fut.add_done_callback(lambda f, s=seq: self._on_goal_response(f, s))
 
@@ -362,9 +519,23 @@ class FleetAgent(GridNavigator):
             return              # goal cu bi thay the - Nav2 bao ABORTED, bo qua
         status = getattr(future.result(), 'status', None)
         self.goal_handle = None
+        self.correction_deadline = None
         if status == GoalStatus.STATUS_CANCELED:
             return
         if status is not None and status != GoalStatus.STATUS_SUCCEEDED:
+            if self.position_corrections:
+                # Don't restart a failed centimeter-long correction as a full
+                # navigation segment with another large heading change.
+                rx, ry, _ = self.get_robot_pose()
+                x, y = self.get_coordinates(*self.route[-1])
+                if rx is not None and math.hypot(rx-x, ry-y) <= self.POSITION_TOL_M:
+                    self.send_next_waypoint()  # recheck final heading and position
+                else:
+                    self.halt()
+                    self.state = 'precision_failed'
+                    self.last_error = 'vi chinh vi tri khong hoi tu - dung, khong lap xoay'
+                    self.get_logger().error(f'[{self.name}] {self.last_error}')
+                return
             self.replan_attempts += 1
             if self.replan_attempts > self.max_replan_attempts:
                 self.abort_route(f'Nav2 that bai {self.replan_attempts} lan lien tiep')
@@ -375,6 +546,15 @@ class FleetAgent(GridNavigator):
             return
         self.replan_attempts = 0
         self.send_next_waypoint()
+
+    def rotation_failed(self, reason):
+        # Generic 'failed' triggers traffic_manager's route retry. A heading
+        # failure must terminate the goal, otherwise a new route repeats the
+        # supposedly single turn indefinitely.
+        self.halt()
+        self.state = 'precision_failed'
+        self.last_error = reason
+        self.get_logger().error(f'[{self.name}] {reason}')
 
     def abort_route(self, reason):
         self.halt()
@@ -390,6 +570,8 @@ class FleetAgent(GridNavigator):
     def costmap_callback(self, msg):
         """Nhu GridNavigator nhung BO vat can quanh xe khac, va khong tu lap lai
         duong: chi dung xe + bao 'blocked' de traffic_manager lap lai."""
+        self.alignment_costmap = msg
+        self.alignment_costmap_t = time.monotonic()
         if not self.map_received:
             return
         obstacles = self.collect_obstacles(msg)
@@ -411,6 +593,9 @@ class FleetAgent(GridNavigator):
                 edges.add(self.edge_key(r, c, nr, nc))
         self.dyn_blocked_nodes, self.dyn_blocked_edges = nodes, edges
         if self.busy() and self.state != 'blocked' and self.is_path_blocked(obstacles):
+            if self.alignment is not None:
+                self.rotation_failed('vat can khi vi chinh - dung, khong tu lap lai')
+                return
             self.get_logger().warn(f'[{self.name}] vat can tren duong - dung xe, cho lap lai duong')
             self.halt()
             self.state = 'blocked'
@@ -418,6 +603,11 @@ class FleetAgent(GridNavigator):
     # ------------------------------------------------------------------
     def tick(self):
         now = time.time()
+        if self.correction_deadline is not None and time.monotonic() > self.correction_deadline:
+            self.halt()
+            self.state = 'precision_failed'
+            self.last_error = 'vi chinh vi tri qua 6 giay - dung, khong lap xoay'
+            self.get_logger().error(f'[{self.name}] {self.last_error}')
         if (self.last_cmd_t is not None and now - self.last_cmd_t > CMD_TIMEOUT
                 and not self.cmd_lost):
             self.cmd_lost = True
@@ -434,6 +624,7 @@ class FleetAgent(GridNavigator):
             'x': x, 'y': y, 'yaw': yaw,
             'state': 'estop' if self.esp_estop else self.state, 'route_id': self.route_id,
             'estop': self.esp_estop,
+            'error': self.last_error,
             'blocked_nodes': sorted(self.dyn_blocked_nodes),
             'blocked_edges': sorted([list(map(list, e)) for e in self.dyn_blocked_edges]),
         })
@@ -459,10 +650,11 @@ def main():
     ex.add_node(agent)
     try:
         ex.spin()
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
     finally:
-        agent.halt()
+        if rclpy.ok():
+            agent.halt()
         agent.destroy_node()
         if rclpy.ok():
             rclpy.shutdown()

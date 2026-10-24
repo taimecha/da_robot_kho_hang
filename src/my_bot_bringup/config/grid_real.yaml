@@ -30,24 +30,17 @@ robot_radius: 0.13
 node_clearance: 0.25
 edge_clearance: 0.20
 
-# Xoay tai cho o dau moi doan (grid_navigator tu lam, khong de Nav2 xoay).
-# Lenh toi banh tre ~0.3 s (do tren xe that): node du doan goc xe se troi them
-# (toc do quay x lag) va ra lenh dung som dung chung do.
+# Moi cho doi huong: mot luot xoay lien tuc, giam toc theo goc va gyro.
+# Khong xung bu, khong dao chieu, khong tu giao lai khi xoay khong dat.
 rotate:
-  start_deg: 10      # dau xe lech huong doan hon muc nay thi xoay truoc
-  stop_deg: 0.6      # sai so du doan khi ra lenh dung; chot lai bang goc do sau khi xe dung han
-  done_deg: 0.9      # moi bao da toi goal neu sai so goc thuc te < 0.9 do (< 1 do)
-  tries: 12          # gioi han xoay bu; vuot nguong van bao loi, khong bao da toi
-  max_speed: 1.3     # rad/s
-  min_speed: 0.7     # rad/s - cham hon thi banh ket o ma sat tinh
-  decel: 2.5         # rad/s2 - giam toc khi gan dich: v = sqrt(2*decel*goc)
-  lag: 0.3           # s - tre lenh -> banh. Van vuot goc: tang; dung som qua: giam
-  motor_tau: 0.12    # s - quan tinh dong co sau khi lenh toi
-  # Xe con quay them coast * w_do_duoc sau khi ra lenh 0 (do tren xe 2026-10-03,
-  # firmware Kf 3.0: 0.36 s). Dung thay cho lag/motor_tau (mo hinh theo lenh
-  # dung som ~20 do vi xe chi quay duoc 0.86 rad/s khi lenh 1.3). 0 = mo hinh cu.
-  coast: 0.36
-  # Xung vong ho cho goc nho, kiem tra lai goc sau khi xe dung han.
-  pulse_max_deg: 5   # xoay bu goc nho bang xung, tranh banh ket ma sat tinh
-  pulse_speed: 0.7   # rad/s, qua velocity_smoother + collision_monitor
-  pulse_dead: 0.35   # s dau xung bi tre/ma sat nuot, bo xoay tu hoc lai sau moi xung
+  start_deg: 10
+  stop_deg: 0.6       # goc dung muc tieu truoc khi doi xe dung han
+  done_deg: 2.5       # nguong chap nhan sau khi dung: <2.5 do
+  max_speed: 0.65     # rad/s, toc do xoay toi da; toc do chay thang giu nguyen
+  min_speed: 0.12     # PID banh moi da tu bu ma sat khoi dong
+  decel: 1.2         # rad/s2, gioi han tang toc va tinh toc do tiep can
+  gain: 1.8          # 1/s, toc do ti le voi goc con lai
+  brake_delay: 0.10  # s, du doan dung ngan bang toc do gyro hien tai
+  settle_s: 0.35     # dung yen lien tuc truoc khi xac nhan
+  stall_timeout_s: 2.0
+  timeout_s: 15.0    # khong dat -> dung bao loi, khong xoay bu
