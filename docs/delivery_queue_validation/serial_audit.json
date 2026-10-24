@@ -1,0 +1,47 @@
+{
+  "complete": true,
+  "failed": false,
+  "invariant_issues": [],
+  "mission_duration_s": 157.05,
+  "picked": {
+    "agv1": [
+      "agv1_box_1"
+    ],
+    "agv3": [
+      "agv3_box_1"
+    ],
+    "agv2": [
+      "agv2_box_1"
+    ]
+  },
+  "delivered": {
+    "agv1": [
+      "agv1_box_1"
+    ],
+    "agv2": [
+      "agv2_box_1"
+    ],
+    "agv3": [
+      "agv3_box_1"
+    ]
+  },
+  "delivery_mode": "serial",
+  "time_to_last_delivery_s": 134.351,
+  "handoffs": [],
+  "bay_turnaround": [
+    {
+      "slot": 2,
+      "previous": "agv1",
+      "next": "agv2",
+      "seconds": 39.8
+    },
+    {
+      "slot": 2,
+      "previous": "agv2",
+      "next": "agv3",
+      "seconds": 45.6
+    }
+  ],
+  "measurement_count": 3,
+  "feeder_advances": 0
+}

@@ -180,7 +180,8 @@ class SimCargo(Node):
         for b in self.boxes:
             c, s = math.cos(b['yaw']), math.sin(b['yaw'])
             hw, hd = b['w'] / 2, b['d'] / 2
-            centre = np.array([b['x'], b['y'], b['h'] / 2])
+            bottom = b.get('z', 0.0)
+            centre = np.array([b['x'], b['y'], bottom + b['h'] / 2])
 
             def corner(a, bb, z):
                 return (b['x'] + a * c - bb * s, b['y'] + a * s + bb * c, z)
@@ -188,15 +189,15 @@ class SimCargo(Node):
             sides = {'front': ((-hw, -hd), (hw, -hd)), 'back': ((hw, hd), (-hw, hd)),
                      'left': ((-hw, hd), (-hw, -hd)), 'right': ((hw, -hd), (hw, hd))}
             for name, ((a1, b1), (a2, b2)) in sides.items():
-                P = np.array([corner(a1, b1, 0), corner(a2, b2, 0),
-                              corner(a2, b2, b['h']), corner(a1, b1, b['h'])])
+                P = np.array([corner(a1, b1, bottom), corner(a2, b2, bottom),
+                              corner(a2, b2, bottom+b['h']), corner(a1, b1, bottom+b['h'])])
                 ctr = P.mean(0)
                 out = ctr - centre                       # phap tuyen huong ra ngoai
                 if np.dot(out, cam_w - ctr) > 0:         # camera o phia ngoai mat nay
                     drawn.append((ctr, 'front' if name == 'front' else 'side', P))
-            if cam_w[2] > b['h']:                        # camera cao hon hop: thay mat tren
-                P = np.array([corner(-hw, -hd, b['h']), corner(hw, -hd, b['h']),
-                              corner(hw, hd, b['h']), corner(-hw, hd, b['h'])])
+            if cam_w[2] > bottom+b['h']:              # camera cao hon hop: thay mat tren
+                P = np.array([corner(-hw, -hd, bottom+b['h']), corner(hw, -hd, bottom+b['h']),
+                              corner(hw, hd, bottom+b['h']), corner(-hw, hd, bottom+b['h'])])
                 drawn.append((P.mean(0), 'top', P))
         faces = []
         for ctr, kind, P in drawn:
@@ -210,6 +211,11 @@ class SimCargo(Node):
             col = np.clip(BOX_BGR * SHADE[kind], 0, 255)
             cv2.fillConvexPoly(img, np.round(uv * 16).astype(np.int32), tuple(float(v) for v in col),
                                cv2.LINE_AA, 4)
+            if getattr(self, 'carton_edges', False):
+                # Stylized physical seams/shadows, identical for all classes.
+                # No class colours, IDs or dimensions are written into the RGB.
+                cv2.polylines(img, [np.round(uv*16).astype(np.int32)], True,
+                              tuple(float(v*.67) for v in col), 1, cv2.LINE_AA, 4)
         img = cv2.remap(img, self.maps[0], self.maps[1], cv2.INTER_LINEAR)
         img = cv2.GaussianBlur(img, (3, 3), 0.7)
         img = np.clip(img + self.rng.normal(0, 3.0, img.shape), 0, 255).astype(np.uint8)

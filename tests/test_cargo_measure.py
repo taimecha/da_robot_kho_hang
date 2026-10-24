@@ -86,5 +86,23 @@ class ImageEvidenceTests(unittest.TestCase):
         cfg,img,scans,_=scene(height=.75)
         with self.assertRaises(ValueError):measure(img,scans,cfg)
 
+    def test_known_conveyor_height_is_not_added_to_package_height(self):
+        cfg,img,scans,_=scene()
+        # Same image geometry, with the entire rig and package raised 6 cm.
+        cfg['camera']['z']+=.06
+        cfg['lidar']['z']+=.06
+        cfg['support_z']=.06
+        cfg['require_front_rectangle']=True
+        result,_=measure(img,scans,cfg)
+        self.assertLess(abs(result['height']-.32),.012)
+        self.assertLess(abs(result['bottom_z']-.06),.012)
+
+    def test_fifo_mode_refuses_rear_silhouette_instead_of_measuring_it(self):
+        cfg,_,scans,_=scene(width=.12,height=.27)
+        _,rear_image,_,_=scene(width=.34,height=.47)
+        cfg['require_front_rectangle']=True
+        with self.assertRaisesRegex(ValueError,'kien dau hang doi'):
+            measure(rear_image,scans,cfg)
+
 
 if __name__=='__main__':unittest.main()

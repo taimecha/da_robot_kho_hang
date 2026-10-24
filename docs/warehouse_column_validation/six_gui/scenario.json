@@ -1,0 +1,26 @@
+{
+  "orders": {
+    "agv1": [
+      1,
+      4
+    ],
+    "agv2": [
+      1,
+      4
+    ],
+    "agv3": [
+      1,
+      4
+    ]
+  },
+  "delivery_mode": "staged",
+  "sync_rounds": false,
+  "delivery_flow": "flexible",
+  "height_boundaries_cm": [
+    22,
+    29,
+    36,
+    43,
+    50
+  ]
+}

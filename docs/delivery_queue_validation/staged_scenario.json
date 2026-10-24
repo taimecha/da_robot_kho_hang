@@ -1,0 +1,21 @@
+{
+  "orders": {
+    "agv1": [
+      2
+    ],
+    "agv2": [
+      2
+    ],
+    "agv3": [
+      2
+    ]
+  },
+  "delivery_mode": "staged",
+  "height_boundaries_cm": [
+    22,
+    29,
+    36,
+    43,
+    50
+  ]
+}

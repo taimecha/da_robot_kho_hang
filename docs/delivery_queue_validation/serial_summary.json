@@ -1,0 +1,62 @@
+{
+  "simulation": "kinematic robots + Nav2 + RGB/analytic LiDAR; no contact dynamics",
+  "complete": true,
+  "failed": false,
+  "elapsed_s": 165.068,
+  "delivery_mode": "serial",
+  "delivered": {
+    "agv1": [
+      "agv1_box_1"
+    ],
+    "agv2": [
+      "agv2_box_1"
+    ],
+    "agv3": [
+      "agv3_box_1"
+    ]
+  },
+  "min_robot_center_separation_m": 0.6,
+  "proximity_violations": 0,
+  "vision_measurements": [
+    {
+      "t_s": 26.269,
+      "event": "vision_locked",
+      "robot": "agv3",
+      "package": "agv3_box_1",
+      "width_m": 0.18780566963508688,
+      "height_m": 0.3446126831920685,
+      "kind": 2,
+      "camera_distance_m": 0.8985412972044952,
+      "truth_kind": 2,
+      "truth_width_m": 0.185,
+      "truth_height_m": 0.34
+    },
+    {
+      "t_s": 26.278,
+      "event": "vision_locked",
+      "robot": "agv1",
+      "package": "agv1_box_1",
+      "width_m": 0.1878282985781022,
+      "height_m": 0.344655307091589,
+      "kind": 2,
+      "camera_distance_m": 0.8986554317539438,
+      "truth_kind": 2,
+      "truth_width_m": 0.185,
+      "truth_height_m": 0.34
+    },
+    {
+      "t_s": 26.287,
+      "event": "vision_locked",
+      "robot": "agv2",
+      "package": "agv2_box_1",
+      "width_m": 0.1877111748122124,
+      "height_m": 0.34444027623334567,
+      "kind": 2,
+      "camera_distance_m": 0.8980944471381015,
+      "truth_kind": 2,
+      "truth_width_m": 0.185,
+      "truth_height_m": 0.34
+    }
+  ],
+  "events": 45
+}

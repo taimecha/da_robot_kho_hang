@@ -1,0 +1,243 @@
+[INFO] [1792836978.245121677] [traffic_manager]: Dieu phoi agv1, agv2, agv3 tren sa ban 5x5. Cho /map va trang thai xe...
+Nhan dich qua /fleet/goal; khong doc lenh cu trong terminal.
+[INFO] [1792836978.445160914] [traffic_manager]: Ban do: bo 0 o, 0 canh sat vat can
+[INFO] [1792836986.623990982] [traffic_manager]: [agv1] lo trinh #928369781: (2,1) -> (2,2) -> (2,3) -> (2,4)
+[INFO] [1792836986.624582181] [traffic_manager]: [agv2] lo trinh #928369782: (3,1) -> (3,2) -> (3,3) -> (3,4)
+[INFO] [1792836986.625115151] [traffic_manager]: [agv3] lo trinh #928369783: (4,1) -> (4,2) -> (4,3) -> (4,4)
+[INFO] [1792836996.818730328] [traffic_manager]: [agv1] TOI DICH (2,4), huong Đông
+[INFO] [1792836996.818997167] [traffic_manager]: [agv2] TOI DICH (3,4), huong Đông
+[INFO] [1792836996.819192560] [traffic_manager]: [agv3] TOI DICH (4,4), huong Đông
+[INFO] [1792837004.635647954] [traffic_manager]: [agv2] lo trinh #928369784: (3,4) -> (3,5)
+[INFO] [1792837004.649357085] [traffic_manager]: [agv1] lo trinh #928369785: (2,4) -> (2,5)
+[INFO] [1792837004.659097771] [traffic_manager]: [agv3] lo trinh #928369786: (4,4) -> (4,5)
+[INFO] [1792837009.417853205] [traffic_manager]: [agv1] TOI DICH (2,5), huong Đông
+[INFO] [1792837009.418088207] [traffic_manager]: [agv2] TOI DICH (3,5), huong Đông
+[INFO] [1792837009.418248722] [traffic_manager]: [agv3] TOI DICH (4,5), huong Đông
+[INFO] [1792837011.374630189] [traffic_manager]: [agv3] lo trinh #928369787: (4,5) -> (4,4) -> (4,3) -> (4,2) -> (4,1) -> (3,1) -> (2,1) -> (1,1)
+[INFO] [1792837011.425554394] [traffic_manager]: [agv1] lo trinh #928369788: (2,5) -> (2,4) -> (2,3) -> (2,2) -> (2,1) -> (1,1)
+[INFO] [1792837011.426323464] [traffic_manager]: [agv2] lo trinh #928369789: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (3,1) -> (2,1) -> (1,1)
+[INFO] [1792837035.818821470] [traffic_manager]: [agv1] TOI DICH (1,1), huong Nam
+[INFO] [1792837037.324604580] [traffic_manager]: [agv1] lo trinh #928369790: (1,1) -> (1,2) -> (1,3) -> (2,3) -> (2,4)
+[INFO] [1792837047.618105940] [traffic_manager]: [agv2] TOI DICH (1,1), huong Nam
+[INFO] [1792837049.074244811] [traffic_manager]: [agv2] lo trinh #928369791: (1,1) -> (1,2) -> (2,2) -> (3,2) -> (3,3) -> (3,4)
+[INFO] [1792837059.420076522] [traffic_manager]: [agv3] TOI DICH (1,1), huong Nam
+[INFO] [1792837060.825068700] [traffic_manager]: [agv3] lo trinh #928369792: (1,1) -> (2,1) -> (3,1) -> (4,1) -> (4,2) -> (4,3) -> (4,4)
+[INFO] [1792837061.418441974] [traffic_manager]: [agv1] TOI DICH (2,4), huong Đông
+[INFO] [1792837064.581561762] [traffic_manager]: [agv1] lo trinh #928369793: (2,4) -> (2,5)
+[INFO] [1792837069.219216247] [traffic_manager]: [agv1] TOI DICH (2,5), huong Đông
+[INFO] [1792837071.227637761] [traffic_manager]: [agv1] lo trinh #928369794: (2,5) -> (2,4) -> (1,4)
+[INFO] [1792837075.818384166] [traffic_manager]: [agv2] TOI DICH (3,4), huong Đông
+[INFO] [1792837079.281709608] [traffic_manager]: [agv2] lo trinh #928369795: (3,4) -> (3,5)
+[INFO] [1792837084.017885770] [traffic_manager]: [agv2] TOI DICH (3,5), huong Đông
+[WARN] [1792837086.025426268] [traffic_manager]: [agv2] chua co duong toi (1,4), thu lai sau 2 s (1/5)
+[INFO] [1792837087.617734836] [traffic_manager]: [agv1] TOI DICH (1,4), huong Nam
+[INFO] [1792837088.019463030] [traffic_manager]: [agv3] TOI DICH (4,4), huong Đông
+[INFO] [1792837088.218031563] [traffic_manager]: [agv2] lo trinh #928369796: (3,5) -> (3,4) -> (2,4) -> (1,4)
+[INFO] [1792837088.218278696] [traffic_manager]: [agv1] dang do o dich cua agv2 -> ne truoc
+[WARN] [1792837088.218517242] [traffic_manager]: [agv1] khong co o trong de ne
+[INFO] [1792837089.126985168] [traffic_manager]: [agv1] lo trinh #928369797: (1,4) -> (1,3) -> (2,3) -> (2,4)
+[INFO] [1792837090.981490105] [traffic_manager]: [agv3] lo trinh #928369798: (4,4) -> (4,5)
+[INFO] [1792837095.618052490] [traffic_manager]: [agv3] TOI DICH (4,5), huong Đông
+[INFO] [1792837097.574344378] [traffic_manager]: [agv3] lo trinh #928369799: (4,5) -> (4,4) -> (3,4) -> (2,4) -> (1,4)
+[INFO] [1792837103.218085469] [traffic_manager]: [agv1] cho o (2,4) (agv2 dang giu)
+[INFO] [1792837106.818482356] [traffic_manager]: [agv2] TOI DICH (1,4), huong Nam
+[INFO] [1792837108.274379531] [traffic_manager]: [agv2] lo trinh #928369800: (1,4) -> (1,5) -> (2,5) -> (3,5) -> (3,4)
+[INFO] [1792837112.218945682] [traffic_manager]: [agv1] TOI DICH (2,4), huong Đông
+[INFO] [1792837115.133309842] [traffic_manager]: [agv1] lo trinh #928369801: (2,4) -> (2,5)
+[INFO] [1792837115.418459424] [traffic_manager]: [agv1] cho o (2,5) (agv2 dang giu)
+[INFO] [1792837116.217982881] [traffic_manager]: [agv3] cho o (2,4) (agv1 dang giu)
+[WARN] [1792837119.417753811] [traffic_manager]: KET: agv3 - agv1 agv1 dung yen > 3 s. agv3 xa dich hon -> nhuong
+[INFO] [1792837119.418183476] [traffic_manager]: [agv3] NE DUONG #928369802: (3,4) -> (4,4)
+[INFO] [1792837125.017841600] [traffic_manager]: [agv2] cho o (3,4) (agv3 dang giu)
+[INFO] [1792837128.017730603] [traffic_manager]: [agv1] TOI DICH (2,5), huong Đông
+[INFO] [1792837128.618019782] [traffic_manager]: [agv3] da ne sang (4,4), cho xe kia qua
+[INFO] [1792837130.026368746] [traffic_manager]: [agv1] lo trinh #928369803: (2,5) -> (2,4) -> (2,3) -> (2,2) -> (1,2)
+[INFO] [1792837138.818302698] [traffic_manager]: [agv2] TOI DICH (3,4), huong Đông
+[INFO] [1792837142.083638483] [traffic_manager]: [agv2] lo trinh #928369804: (3,4) -> (3,5)
+[INFO] [1792837145.618339206] [traffic_manager]: [agv3] xe kia da qua, quay lai (1,4)
+[INFO] [1792837145.618638521] [traffic_manager]: [agv3] lo trinh #928369805: (4,4) -> (3,4) -> (2,4) -> (1,4)
+[INFO] [1792837146.617747466] [traffic_manager]: [agv2] TOI DICH (3,5), huong Đông
+[WARN] [1792837148.575165681] [traffic_manager]: [agv2] chua co duong toi (1,2), thu lai sau 2 s (1/5)
+[INFO] [1792837150.621469660] [traffic_manager]: [agv2] lo trinh #928369806: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (2,2) -> (1,2)
+[INFO] [1792837150.818493892] [traffic_manager]: [agv2] cho o (3,4) (agv3 dang giu)
+[INFO] [1792837151.617771331] [traffic_manager]: [agv1] TOI DICH (1,2), huong Nam
+[INFO] [1792837153.074753764] [traffic_manager]: [agv1] lo trinh #928369807: (1,2) -> (1,3) -> (2,3) -> (2,4)
+[INFO] [1792837153.418235775] [traffic_manager]: [agv1] cho o (2,4) (agv3 dang giu)
+[INFO] [1792837160.417814521] [traffic_manager]: [agv3] TOI DICH (1,4), huong Nam
+[INFO] [1792837161.827431500] [traffic_manager]: [agv3] lo trinh #928369808: (1,4) -> (2,4) -> (3,4) -> (4,4)
+[INFO] [1792837162.217789811] [traffic_manager]: [agv3] cho o (2,4) (agv1 dang giu)
+[INFO] [1792837174.417728591] [traffic_manager]: [agv1] TOI DICH (2,4), huong Đông
+[WARN] [1792837174.418040951] [traffic_manager]: KET: agv3 bi agv1 (dang do) chan > 3 s
+[INFO] [1792837174.418474485] [traffic_manager]: [agv3] di vong quanh agv1
+[INFO] [1792837174.418662282] [traffic_manager]: [agv3] lo trinh #928369809: (1,4) -> (1,3) -> (2,3) -> (3,3) -> (4,3) -> (4,4)
+[INFO] [1792837177.683192419] [traffic_manager]: [agv1] lo trinh #928369810: (2,4) -> (2,5)
+[INFO] [1792837179.618125725] [traffic_manager]: [agv2] TOI DICH (1,2), huong Nam
+[INFO] [1792837181.075461532] [traffic_manager]: [agv2] lo trinh #928369811: (1,2) -> (2,2) -> (3,2) -> (3,3) -> (3,4)
+[INFO] [1792837181.417871979] [traffic_manager]: [agv2] cho o (3,3) (agv3 dang giu)
+[INFO] [1792837182.417797489] [traffic_manager]: [agv1] TOI DICH (2,5), huong Đông
+[INFO] [1792837184.375521583] [traffic_manager]: [agv1] lo trinh #928369812: (2,5) -> (2,4) -> (2,3) -> (1,3)
+[INFO] [1792837184.617809864] [traffic_manager]: [agv1] cho o (2,3) (agv3 dang giu)
+[INFO] [1792837201.218955733] [traffic_manager]: [agv3] TOI DICH (4,4), huong Đông
+[INFO] [1792837202.817930370] [traffic_manager]: [agv2] TOI DICH (3,4), huong Đông
+[INFO] [1792837203.217737794] [traffic_manager]: [agv1] TOI DICH (1,3), huong Nam
+[INFO] [1792837204.673775532] [traffic_manager]: [agv1] lo trinh #928369813: (1,3) -> (2,3) -> (2,4)
+[INFO] [1792837205.381057179] [traffic_manager]: [agv3] lo trinh #928369814: (4,4) -> (4,5)
+[INFO] [1792837207.181725016] [traffic_manager]: [agv2] lo trinh #928369815: (3,4) -> (3,5)
+[INFO] [1792837210.018754563] [traffic_manager]: [agv3] TOI DICH (4,5), huong Đông
+[INFO] [1792837211.818259701] [traffic_manager]: [agv2] TOI DICH (3,5), huong Đông
+[INFO] [1792837211.928185621] [traffic_manager]: [agv3] lo trinh #928369816: (4,5) -> (4,4) -> (4,3) -> (3,3) -> (2,3) -> (1,3)
+[INFO] [1792837213.826886128] [traffic_manager]: [agv2] lo trinh #928369817: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (2,2) -> (1,2)
+[INFO] [1792837220.817762608] [traffic_manager]: [agv1] TOI DICH (2,4), huong Đông
+[INFO] [1792837223.617811401] [traffic_manager]: [agv3] cho o (3,3) (agv2 dang giu)
+[INFO] [1792837224.132617034] [traffic_manager]: [agv1] lo trinh #928369818: (2,4) -> (2,5)
+[INFO] [1792837228.819061529] [traffic_manager]: [agv1] TOI DICH (2,5), huong Đông
+[INFO] [1792837230.825549494] [traffic_manager]: [agv1] lo trinh #928369819: (2,5) -> (2,4) -> (2,3) -> (2,2) -> (2,1) -> (1,1)
+[INFO] [1792837231.218067223] [traffic_manager]: [agv1] cho o (2,3) (agv3 dang giu)
+[INFO] [1792837238.017851966] [traffic_manager]: [agv2] TOI DICH (1,2), huong Nam
+[INFO] [1792837239.525124864] [traffic_manager]: [agv2] lo trinh #928369820: (1,2) -> (2,2) -> (3,2) -> (3,3) -> (3,4)
+[INFO] [1792837239.819136112] [traffic_manager]: [agv3] TOI DICH (1,3), huong Nam
+[INFO] [1792837239.819725223] [traffic_manager]: [agv2] cho o (2,2) (agv1 dang giu)
+[INFO] [1792837241.227189426] [traffic_manager]: [agv3] lo trinh #928369821: (1,3) -> (2,3) -> (3,3) -> (4,3) -> (4,4)
+[INFO] [1792837241.618632171] [traffic_manager]: [agv3] cho o (2,3) (agv1 dang giu)
+[INFO] [1792837255.219398803] [traffic_manager]: [agv1] TOI DICH (1,1), huong Nam
+[INFO] [1792837256.673916141] [traffic_manager]: [agv1] lo trinh #928369822: (1,1) -> (1,2) -> (1,3) -> (2,3) -> (2,4)
+[INFO] [1792837265.217980874] [traffic_manager]: [agv3] TOI DICH (4,4), huong Đông
+[INFO] [1792837267.817781531] [traffic_manager]: [agv2] TOI DICH (3,4), huong Đông
+[INFO] [1792837268.131810297] [traffic_manager]: [agv3] lo trinh #928369823: (4,4) -> (4,5)
+[INFO] [1792837271.184402002] [traffic_manager]: [agv2] lo trinh #928369824: (3,4) -> (3,5)
+[INFO] [1792837272.820472186] [traffic_manager]: [agv3] TOI DICH (4,5), huong Đông
+[INFO] [1792837274.779905568] [traffic_manager]: [agv3] lo trinh #928369825: (4,5) -> (4,4) -> (4,3) -> (3,3) -> (2,3) -> (1,3)
+[INFO] [1792837275.818286477] [traffic_manager]: [agv2] TOI DICH (3,5), huong Đông
+[INFO] [1792837277.776342660] [traffic_manager]: [agv2] lo trinh #928369826: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (2,2) -> (1,2)
+[INFO] [1792837280.818236327] [traffic_manager]: [agv1] TOI DICH (2,4), huong Đông
+[INFO] [1792837284.033173421] [traffic_manager]: [agv1] lo trinh #928369827: (2,4) -> (2,5)
+[INFO] [1792837286.418325727] [traffic_manager]: [agv3] cho o (3,3) (agv2 dang giu)
+[INFO] [1792837288.818759248] [traffic_manager]: [agv1] TOI DICH (2,5), huong Đông
+[INFO] [1792837290.774966323] [traffic_manager]: [agv1] lo trinh #928369828: (2,5) -> (3,5) -> (4,5) -> (4,4) -> (4,3) -> (4,2) -> (3,2) -> (2,2) -> (1,2)
+[INFO] [1792837301.818080824] [traffic_manager]: [agv2] TOI DICH (1,2), huong Nam
+[INFO] [1792837303.273931079] [traffic_manager]: [agv2] lo trinh #928369829: (1,2) -> (1,1) -> (2,1) -> (3,1) -> (3,2) -> (3,3) -> (3,4)
+[INFO] [1792837303.619755409] [traffic_manager]: [agv3] TOI DICH (1,3), huong Nam
+[INFO] [1792837305.024300272] [traffic_manager]: [agv3] lo trinh #928369830: (1,3) -> (1,4) -> (2,4) -> (3,4) -> (4,4)
+[INFO] [1792837320.217772702] [traffic_manager]: [agv2] cho o (3,2) (agv1 dang giu)
+[INFO] [1792837325.818678131] [traffic_manager]: [agv1] TOI DICH (1,2), huong Nam
+[INFO] [1792837327.274337011] [traffic_manager]: [agv1] lo trinh #928369831: (1,2) -> (2,2) -> (2,3) -> (2,4)
+[INFO] [1792837328.417894992] [traffic_manager]: [agv3] TOI DICH (4,4), huong Đông
+[INFO] [1792837331.684874551] [traffic_manager]: [agv3] lo trinh #928369832: (4,4) -> (4,5)
+[INFO] [1792837334.017850852] [traffic_manager]: [agv2] TOI DICH (3,4), huong Đông
+[INFO] [1792837336.217922484] [traffic_manager]: [agv3] TOI DICH (4,5), huong Đông
+[INFO] [1792837337.132037987] [traffic_manager]: [agv2] lo trinh #928369833: (3,4) -> (3,5)
+[INFO] [1792837338.125947947] [traffic_manager]: [agv3] lo trinh #928369834: (4,5) -> (4,4) -> (4,3) -> (4,2) -> (3,2) -> (2,2) -> (1,2)
+[INFO] [1792837341.817721697] [traffic_manager]: [agv2] TOI DICH (3,5), huong Đông
+[WARN] [1792837343.776445135] [traffic_manager]: [agv2] chua co duong toi (1,3), thu lai sau 2 s (1/5)
+[INFO] [1792837345.818476163] [traffic_manager]: [agv2] lo trinh #928369835: (3,5) -> (3,4) -> (3,3) -> (2,3) -> (1,3)
+[INFO] [1792837346.017842928] [traffic_manager]: [agv1] TOI DICH (2,4), huong Đông
+[INFO] [1792837349.432391933] [traffic_manager]: [agv1] lo trinh #928369836: (2,4) -> (2,5)
+[INFO] [1792837354.218482153] [traffic_manager]: [agv1] TOI DICH (2,5), huong Đông
+[INFO] [1792837356.225733677] [traffic_manager]: [agv1] lo trinh #928369837: (2,5) -> (2,4) -> (1,4)
+[INFO] [1792837365.218762153] [traffic_manager]: [agv3] TOI DICH (1,2), huong Nam
+[INFO] [1792837366.626000706] [traffic_manager]: [agv3] lo trinh #928369838: (1,2) -> (2,2) -> (3,2) -> (4,2) -> (4,3) -> (4,4)
+[INFO] [1792837367.218180676] [traffic_manager]: [agv2] TOI DICH (1,3), huong Nam
+[INFO] [1792837368.724573485] [traffic_manager]: [agv2] lo trinh #928369839: (1,3) -> (2,3) -> (3,3) -> (3,4)
+[INFO] [1792837372.617760096] [traffic_manager]: [agv1] TOI DICH (1,4), huong Nam
+[INFO] [1792837374.073978041] [traffic_manager]: [agv1] lo trinh #928369840: (1,4) -> (2,4)
+[INFO] [1792837386.617826297] [traffic_manager]: [agv1] TOI DICH (2,4), huong Đông
+[INFO] [1792837387.418051978] [traffic_manager]: [agv2] TOI DICH (3,4), huong Đông
+[INFO] [1792837391.217889484] [traffic_manager]: [agv3] TOI DICH (4,4), huong Đông
+[INFO] [1792837391.981067224] [traffic_manager]: [agv1] lo trinh #928369841: (2,4) -> (2,5)
+[INFO] [1792837393.082550099] [traffic_manager]: [agv2] lo trinh #928369842: (3,4) -> (3,5)
+[INFO] [1792837395.539958422] [traffic_manager]: [agv3] lo trinh #928369843: (4,4) -> (4,5)
+[INFO] [1792837396.617981555] [traffic_manager]: [agv1] TOI DICH (2,5), huong Đông
+[INFO] [1792837397.818090638] [traffic_manager]: [agv2] TOI DICH (3,5), huong Đông
+[INFO] [1792837398.626483696] [traffic_manager]: [agv1] lo trinh #928369844: (2,5) -> (2,4) -> (2,3) -> (1,3)
+[INFO] [1792837399.830652854] [traffic_manager]: [agv2] lo trinh #928369845: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (3,1) -> (2,1) -> (1,1)
+[INFO] [1792837400.217803426] [traffic_manager]: [agv3] TOI DICH (4,5), huong Đông
+[INFO] [1792837402.176854447] [traffic_manager]: [agv3] lo trinh #928369846: (4,5) -> (4,4) -> (3,4) -> (2,4) -> (1,4)
+[INFO] [1792837402.417824354] [traffic_manager]: [agv3] cho o (3,4) (agv2 dang giu)
+[INFO] [1792837417.617765756] [traffic_manager]: [agv1] TOI DICH (1,3), huong Nam
+[INFO] [1792837419.077091468] [traffic_manager]: [agv1] lo trinh #928369847: (1,3) -> (2,3) -> (2,4)
+[INFO] [1792837419.418175282] [traffic_manager]: [agv1] cho o (2,4) (agv3 dang giu)
+[INFO] [1792837423.817784697] [traffic_manager]: [agv3] TOI DICH (1,4), huong Nam
+[INFO] [1792837425.224864494] [traffic_manager]: [agv3] lo trinh #928369848: (1,4) -> (2,4) -> (3,4) -> (4,4)
+[INFO] [1792837425.618150546] [traffic_manager]: [agv3] cho o (2,4) (agv1 dang giu)
+[INFO] [1792837426.818929289] [traffic_manager]: [agv2] TOI DICH (1,1), huong Nam
+[INFO] [1792837428.274326497] [traffic_manager]: [agv2] lo trinh #928369849: (1,1) -> (2,1) -> (3,1) -> (3,2) -> (3,3) -> (3,4)
+[INFO] [1792837435.217780101] [traffic_manager]: [agv1] TOI DICH (2,4), huong Đông
+[WARN] [1792837435.218068451] [traffic_manager]: KET: agv3 bi agv1 (dang do) chan > 3 s
+[INFO] [1792837435.218466350] [traffic_manager]: [agv3] di vong quanh agv1
+[INFO] [1792837435.218622831] [traffic_manager]: [agv3] lo trinh #928369850: (1,4) -> (1,3) -> (2,3) -> (3,3) -> (4,3) -> (4,4)
+[INFO] [1792837438.681515737] [traffic_manager]: [agv1] lo trinh #928369851: (2,4) -> (2,5)
+[INFO] [1792837443.418722496] [traffic_manager]: [agv1] TOI DICH (2,5), huong Đông
+[INFO] [1792837445.377058599] [traffic_manager]: [agv1] lo trinh #928369852: (2,5) -> (2,4) -> (1,4)
+[INFO] [1792837449.417827944] [traffic_manager]: [agv3] cho o (3,3) (agv2 dang giu)
+[INFO] [1792837452.617764716] [traffic_manager]: [agv2] TOI DICH (3,4), huong Đông
+[INFO] [1792837455.733154056] [traffic_manager]: [agv2] lo trinh #928369853: (3,4) -> (3,5)
+[INFO] [1792837460.418045196] [traffic_manager]: [agv2] TOI DICH (3,5), huong Đông
+[INFO] [1792837461.417753249] [traffic_manager]: [agv1] TOI DICH (1,4), huong Nam
+[INFO] [1792837462.376426953] [traffic_manager]: [agv2] lo trinh #928369854: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (3,1) -> (2,1) -> (1,1)
+[INFO] [1792837462.874564585] [traffic_manager]: [agv1] lo trinh #928369855: (1,4) -> (2,4)
+[INFO] [1792837464.617831223] [traffic_manager]: [agv3] TOI DICH (4,4), huong Đông
+[INFO] [1792837467.880933091] [traffic_manager]: [agv3] lo trinh #928369856: (4,4) -> (4,5)
+[INFO] [1792837472.617769432] [traffic_manager]: [agv3] TOI DICH (4,5), huong Đông
+[INFO] [1792837474.575438795] [traffic_manager]: [agv3] lo trinh #928369857: (4,5) -> (4,4) -> (4,3) -> (4,2) -> (3,2) -> (2,2) -> (1,2)
+[INFO] [1792837475.417799602] [traffic_manager]: [agv1] TOI DICH (2,4), huong Đông
+[INFO] [1792837478.582951954] [traffic_manager]: [agv1] lo trinh #928369858: (2,4) -> (2,5)
+[INFO] [1792837483.017765116] [traffic_manager]: [agv1] TOI DICH (2,5), huong Đông
+[WARN] [1792837485.025996089] [traffic_manager]: [agv1] chua co duong toi (1,1), thu lai sau 2 s (1/5)
+[WARN] [1792837487.218472763] [traffic_manager]: [agv1] chua co duong toi (1,1), thu lai sau 2 s (2/5)
+[INFO] [1792837489.418207025] [traffic_manager]: [agv1] lo trinh #928369859: (2,5) -> (3,5) -> (3,4) -> (3,3) -> (3,2) -> (3,1) -> (2,1) -> (1,1)
+[INFO] [1792837489.418452191] [traffic_manager]: [agv2] TOI DICH (1,1), huong Nam
+[INFO] [1792837490.926567703] [traffic_manager]: [agv2] lo trinh #928369860: (1,1) -> (1,2) -> (1,3) -> (1,4) -> (2,4) -> (3,4)
+[INFO] [1792837498.418362051] [traffic_manager]: [agv3] cho o (1,2) (agv2 dang giu)
+[INFO] [1792837503.818763541] [traffic_manager]: [agv3] TOI DICH (1,2), huong Nam
+[INFO] [1792837505.225883770] [traffic_manager]: [agv3] lo trinh #928369861: (1,2) -> (2,2) -> (3,2) -> (4,2) -> (4,3) -> (4,4)
+[INFO] [1792837505.618266795] [traffic_manager]: [agv3] cho o (3,2) (agv1 dang giu)
+[INFO] [1792837516.817812020] [traffic_manager]: [agv2] TOI DICH (3,4), huong Đông
+[INFO] [1792837519.886870227] [traffic_manager]: [agv2] lo trinh #928369862: (3,4) -> (3,5)
+[INFO] [1792837521.617741032] [traffic_manager]: [agv1] TOI DICH (1,1), huong Nam
+[INFO] [1792837523.075235532] [traffic_manager]: [agv1] lo trinh #928369863: (1,1) -> (2,1) -> (3,1) -> (4,1) -> (5,1)
+[INFO] [1792837524.418161551] [traffic_manager]: [agv2] TOI DICH (3,5), huong Đông
+[INFO] [1792837526.376575757] [traffic_manager]: [agv2] lo trinh #928369864: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (2,2) -> (1,2)
+[INFO] [1792837529.818542184] [traffic_manager]: [agv3] TOI DICH (4,4), huong Đông
+[INFO] [1792837532.933322514] [traffic_manager]: [agv3] lo trinh #928369865: (4,4) -> (4,5)
+[INFO] [1792837537.618090878] [traffic_manager]: [agv3] TOI DICH (4,5), huong Đông
+[WARN] [1792837539.576866443] [traffic_manager]: [agv3] chua co duong toi (1,3), thu lai sau 2 s (1/5)
+[INFO] [1792837541.618035435] [traffic_manager]: [agv3] lo trinh #928369866: (4,5) -> (4,4) -> (4,3) -> (3,3) -> (2,3) -> (1,3)
+[INFO] [1792837543.817683964] [traffic_manager]: [agv1] TOI DICH (5,1), huong Đông
+[INFO] [1792837550.617800607] [traffic_manager]: [agv2] TOI DICH (1,2), huong Nam
+[INFO] [1792837552.125852264] [traffic_manager]: [agv2] lo trinh #928369867: (1,2) -> (2,2) -> (3,2) -> (3,3) -> (3,4)
+[INFO] [1792837552.417874652] [traffic_manager]: [agv2] cho o (3,3) (agv3 dang giu)
+[INFO] [1792837566.017762051] [traffic_manager]: [agv3] TOI DICH (1,3), huong Nam
+[INFO] [1792837567.425484695] [traffic_manager]: [agv3] lo trinh #928369868: (1,3) -> (2,3) -> (3,3) -> (4,3) -> (4,4)
+[INFO] [1792837567.817798044] [traffic_manager]: [agv3] cho o (3,3) (agv2 dang giu)
+[INFO] [1792837573.617874466] [traffic_manager]: [agv2] TOI DICH (3,4), huong Đông
+[INFO] [1792837576.982257588] [traffic_manager]: [agv2] lo trinh #928369869: (3,4) -> (3,5)
+[INFO] [1792837581.617698250] [traffic_manager]: [agv2] TOI DICH (3,5), huong Đông
+[INFO] [1792837583.578587084] [traffic_manager]: [agv2] lo trinh #928369870: (3,5) -> (3,4) -> (3,3) -> (2,3) -> (1,3)
+[INFO] [1792837589.217838180] [traffic_manager]: [agv3] TOI DICH (4,4), huong Đông
+[INFO] [1792837592.432530377] [traffic_manager]: [agv3] lo trinh #928369871: (4,4) -> (4,5)
+[INFO] [1792837597.218184845] [traffic_manager]: [agv3] TOI DICH (4,5), huong Đông
+[INFO] [1792837599.178665902] [traffic_manager]: [agv3] lo trinh #928369872: (4,5) -> (4,4) -> (4,3) -> (4,2) -> (4,1) -> (3,1) -> (2,1) -> (1,1)
+[INFO] [1792837605.018813053] [traffic_manager]: [agv2] TOI DICH (1,3), huong Nam
+[INFO] [1792837606.526185599] [traffic_manager]: [agv2] lo trinh #928369873: (1,3) -> (1,2) -> (2,2) -> (3,2) -> (4,2) -> (5,2)
+[INFO] [1792837629.018264253] [traffic_manager]: [agv3] TOI DICH (1,1), huong Nam
+[INFO] [1792837630.427845196] [traffic_manager]: [agv3] lo trinh #928369874: (1,1) -> (2,1) -> (3,1) -> (4,1) -> (4,2) -> (4,3) -> (4,4)
+[INFO] [1792837632.418181186] [traffic_manager]: [agv2] TOI DICH (5,2), huong Đông
+[INFO] [1792837657.617907311] [traffic_manager]: [agv3] TOI DICH (4,4), huong Đông
+[INFO] [1792837660.833084200] [traffic_manager]: [agv3] lo trinh #928369875: (4,4) -> (4,5)
+[INFO] [1792837665.617811375] [traffic_manager]: [agv3] TOI DICH (4,5), huong Đông
+[INFO] [1792837667.525837799] [traffic_manager]: [agv3] lo trinh #928369876: (4,5) -> (4,4) -> (4,3) -> (3,3) -> (2,3) -> (1,3)
+[INFO] [1792837692.017756887] [traffic_manager]: [agv3] TOI DICH (1,3), huong Nam
+[INFO] [1792837693.424885909] [traffic_manager]: [agv3] lo trinh #928369877: (1,3) -> (2,3) -> (3,3) -> (4,3) -> (5,3)
+[INFO] [1792837714.217743852] [traffic_manager]: [agv3] TOI DICH (5,3), huong Đông
+Traceback (most recent call last):
+  File "/home/tai/Robot_kho_clone/traffic_manager.py", line 1065, in <module>
+    main()
+  File "/home/tai/Robot_kho_clone/traffic_manager.py", line 1060, in main
+    node.destroy_node()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py", line 1956, in destroy_node
+    self.destroy_publisher(self._publishers[0])
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py", line 1836, in destroy_publisher
+    publisher.destroy()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/publisher.py", line 105, in destroy
+    self.__publisher.destroy_when_not_in_use()
+KeyboardInterrupt

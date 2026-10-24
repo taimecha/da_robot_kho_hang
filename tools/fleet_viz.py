@@ -20,6 +20,9 @@ from rclpy.qos import (DurabilityPolicy, HistoryPolicy, QoSProfile, ReliabilityP
 from rclpy.utilities import remove_ros_args
 from sensor_msgs.msg import LaserScan
 from tf2_msgs.msg import TFMessage
+from nav_msgs.msg import OccupancyGrid, Path
+from geometry_msgs.msg import PolygonStamped
+from map_msgs.msg import OccupancyGridUpdate
 
 SHARED = ('map',)
 STATIC_QOS = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL,
@@ -27,21 +30,33 @@ STATIC_QOS = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL,
 
 
 class FleetViz(Node):
-    def __init__(self, cars):
+    def __init__(self, cars, nav=False):
         super().__init__('fleet_viz')
         self.tf_pub = self.create_publisher(TFMessage, '/tf', 100)
         self.static_pub = self.create_publisher(TFMessage, '/tf_static', STATIC_QOS)
         self.static = {}                    # (car, child) -> TransformStamped da doi ten
         self.scan_pubs = {}
+        self.nav_pubs = {}
         for car in cars:
             self.create_subscription(TFMessage, f'/{car}/tf',
                                      lambda m, c=car: self.cb_tf(c, m), 100)
             self.create_subscription(TFMessage, f'/{car}/tf_static',
                                      lambda m, c=car: self.cb_static(c, m), STATIC_QOS)
             self.scan_pubs[car] = self.create_publisher(LaserScan, f'/fleet_viz/{car}/scan',
-                                                        qos_profile_sensor_data)
+                                                        5 if nav else qos_profile_sensor_data)
             self.create_subscription(LaserScan, f'/{car}/scan',
                                      lambda m, c=car: self.cb_scan(c, m), qos_profile_sensor_data)
+            if nav:
+                topics=[('received_global_plan',Path,10),('local_plan',Path,10)]
+                for costmap in ('local_costmap','global_costmap'):
+                    topics.extend([(costmap+'/costmap',OccupancyGrid,STATIC_QOS),
+                                   (costmap+'/costmap_updates',OccupancyGridUpdate,10),
+                                   (costmap+'/published_footprint',PolygonStamped,10)])
+                for topic,kind,qos in topics:
+                    key=(car,topic)
+                    self.nav_pubs[key]=self.create_publisher(kind,f'/fleet_viz/{car}/{topic}',qos)
+                    self.create_subscription(kind,f'/{car}/{topic}',
+                        lambda m,c=car,t=topic:self.cb_nav(c,t,m),qos)
         self.get_logger().info(f'Gop TF {", ".join(cars)} -> /tf (frame agvN/...), '
                                f'scan -> /fleet_viz/agvN/scan')
 
@@ -68,11 +83,19 @@ class FleetViz(Node):
         msg.header.frame_id = self.rename(car, msg.header.frame_id)
         self.scan_pubs[car].publish(msg)
 
+    def cb_nav(self, car, topic, msg):
+        msg.header.frame_id=self.rename(car,msg.header.frame_id)
+        if isinstance(msg,Path):
+            for pose in msg.poses:pose.header.frame_id=self.rename(car,pose.header.frame_id)
+        self.nav_pubs[(car,topic)].publish(msg)
+
 
 def main():
     rclpy.init(args=sys.argv)
-    cars = remove_ros_args(sys.argv)[1:] or ['agv1', 'agv2']
-    node = FleetViz(cars)
+    args = remove_ros_args(sys.argv)[1:]
+    nav='--nav' in args
+    cars=[a for a in args if a!='--nav'] or ['agv1','agv2']
+    node = FleetViz(cars,nav=nav)
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:

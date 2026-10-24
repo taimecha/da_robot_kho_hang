@@ -1,0 +1,40 @@
+center_col: 3
+center_row: 3
+center_x: 0.0
+center_y: 0.0
+cols: 5
+delivery_flow: flexible
+edge_clearance: 0.2
+goal_approaches:
+- - - 1
+    - 1
+  - - 2
+    - 1
+- - - 1
+    - 2
+  - - 2
+    - 2
+- - - 1
+    - 3
+  - - 2
+    - 3
+- - - 1
+    - 4
+  - - 2
+    - 4
+node_clearance: 0.25
+robot_radius: 0.13
+rotate:
+  brake_delay: 0.05
+  decel: 3.0
+  done_deg: 2.5
+  gain: 2.2
+  max_speed: 1.0
+  min_speed: 0.04
+  settle_s: 0.25
+  stall_timeout_s: 2.0
+  start_deg: 10
+  stop_deg: 0.6
+  timeout_s: 18.0
+rows: 5
+spacing: 0.6

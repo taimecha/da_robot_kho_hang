@@ -98,15 +98,21 @@ class Robot:
         self.pending = False            # co dich nhung chua co vi tri xe
         self.mark = (None, None, None)  # vi tri lan cuoi thay xe nhuc nhich
         self.last_move_t = 0.0
+        self.transition_res = set()     # old permissions, held until new command ACK
+        self.deferred_goal = None      # new workflow intent while clearing a blocked cell
+        self.route_changed_at = 0.
 
 
 class TrafficManager(Node):
-    def __init__(self, names, grid_file=None, avoid=True):
+    def __init__(self, names, grid_file=None, avoid=True, service_topic=None, queue_topic=None):
         super().__init__('traffic_manager')
         self.board = Board.load(grid_file or config_path(True))
         self.robots = {n: Robot(n, i) for i, n in enumerate(names)}
         self.order = list(names)
         self.avoid = avoid
+        self.recovery = None
+        self.service_holds = {}
+        self.delivery_queues = {}
         self.occ_r = self.board.spacing / 2 + self.board.robot_radius
         self.static_nodes, self.static_edges = set(), set()
         self.map_ok = False
@@ -119,6 +125,8 @@ class TrafficManager(Node):
         self.marker_pub = self.create_publisher(MarkerArray, '/fleet/markers', 10)
         self.create_subscription(String, '/fleet/status', self.cb_status, 50)
         self.create_subscription(String, '/fleet/goal', self.cb_goal, 10)
+        if service_topic:self.create_subscription(String,service_topic,self.cb_service_holds,10)
+        if queue_topic:self.create_subscription(String,queue_topic,self.cb_delivery_queues,10)
         qos = QoSProfile(depth=1, durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
                          reliability=QoSReliabilityPolicy.RELIABLE)
         self.create_subscription(OccupancyGrid, '/map', self.cb_map, qos)
@@ -129,6 +137,42 @@ class TrafficManager(Node):
             f"{'' if avoid else ' (TAT tranh duong xe kia)'}. Cho /map va trang thai xe...")
 
     # ------------------------------------------------------------------ tien ich
+    def cb_service_holds(self,msg):
+        try:data=json.loads(msg.data)
+        except ValueError:return
+        now=time.time()
+        self.service_holds={n:min(now+3,float(until)) for n,until in data.items()
+                            if n in self.robots and isinstance(until,(int,float))}
+
+    def in_service(self,rb):
+        if getattr(self,'service_holds',{}).get(rb.name,0)>time.time():return True
+        # A vehicle intentionally held in a delivery column is a legitimate
+        # queue, not a parked obstruction to push into another column.
+        return bool(rb.route and rb.mode=='go' and rb.upto<len(rb.route)-1 and
+                    not TrafficManager.column_allows(self,rb,rb.route[rb.upto+1]))
+
+    def cb_delivery_queues(self,msg):
+        try:
+            data=json.loads(msg.data);validated={}
+            for n,d in data.items():
+                if n not in self.robots:continue
+                slot,entry,gate=int(d['slot']),int(d['entry_row']),int(d['gate_row'])
+                if not (1<=slot<=4 and 2<=entry<=self.board.rows and 1<=gate<=self.board.rows+1):
+                    return
+                validated[n]=dict(slot=slot,entry_row=entry,gate_row=gate,until=time.time()+3.)
+        except (ValueError,TypeError,KeyError,AttributeError):return
+        self.delivery_queues=validated
+
+    def column_queue(self,rb):
+        d=getattr(self,'delivery_queues',{}).get(rb.name)
+        return d if d and rb.goal==(0,d['slot']-1) else None
+
+    def column_allows(self,rb,node):
+        d=TrafficManager.column_queue(self,rb)
+        if not d or rb.mode!='go':return True
+        gate=d['gate_row'] if d['until']>time.time() else self.board.rows+1
+        return node[1]!=d['slot']-1 or node[0]+1>=gate
+
     def log(self, text, level='info'):
         # rclpy cam mot cho goi log doi muc giua cac lan -> moi muc mot cho goi
         lg = self.get_logger()
@@ -201,6 +245,14 @@ class TrafficManager(Node):
         if goal in bn:
             return None
         soft_nodes, opp_edges, soft_goals = set(), set(), set()
+        costs=getattr(self.board,'cfg',{}).get('route_time_costs')
+        edge_cost=self.board.spacing/costs['linear_speed_mps'] if costs else 1.
+        turn_start=costs['turn_start_s'] if costs else TURN_START_COST
+        quarter_turn=costs['quarter_turn_s'] if costs else TURN_COST
+        soft_cost=costs['route_node_wait_s'] if costs else SOFT_NODE
+        goal_wait=costs['goal_wait_s'] if costs else SOFT_GOAL
+        opposite_wait=costs['opposite_wait_s'] if costs else SOFT_OPP
+        occupied_nodes=set()
         if self.avoid:
             for o in self.others(me):
                 rem = self.remaining(o)
@@ -209,6 +261,8 @@ class TrafficManager(Node):
                     opp_edges.add((b, a))           # minh di b->a = nguoc chieu xe kia
                 if o.goal is not None:
                     soft_goals.add(o.goal)
+                if costs and o.x is not None:
+                    occupied_nodes|=TrafficManager.occupied(self,o)
         d0 = self.heading_dir(me.yaw) if me.x is not None and self.dist(me, start) < 0.2 else None
         best = {(start, d0): 0.0}
         prev = {}
@@ -216,6 +270,8 @@ class TrafficManager(Node):
         seq = 0
         desired = (self.heading_dir(me.goal_heading)
                    if me.goal == goal and me.goal_heading is not None else None)
+        column=TrafficManager.column_queue(self,me) if goal==me.goal else None
+        queue_cols={d['slot']-1 for n,d in getattr(self,'delivery_queues',{}).items() if n!=me.name}
         goal_key, goal_cost, goal_turn = None, float('inf'), float('inf')
         while heap:
             cost, _, n, d = heapq.heappop(heap)
@@ -229,7 +285,7 @@ class TrafficManager(Node):
                 # AT the goal, even when an equally short aligned route exists.
                 turn = 0.0
                 if desired is not None and d is not None and d != desired:
-                    turn = TURN_START_COST + TURN_COST * (2 if desired == (-d[0],-d[1]) else 1)
+                    turn = turn_start + quarter_turn * (2 if desired == (-d[0],-d[1]) else 1)
                 total = cost+turn
                 if (total < goal_cost-1e-9 or
                         (abs(total-goal_cost)<1e-9 and turn < goal_turn)):
@@ -238,16 +294,32 @@ class TrafficManager(Node):
             for nb in self.board.neighbours(*n):
                 if nb in bn or edge_key(n, nb) in be:
                     continue
+                # Enter behind the existing queue, then follow the same
+                # column all the way to the bay. Gate changes only extend
+                # permissions on this route; they never replace its goal.
+                if column:
+                    c=column['slot']-1;entry=column['entry_row']-1
+                    if n[1]!=c and nb[1]==c and nb[0]!=entry:continue
+                    if n[1]==c and (nb[1]!=c or nb[0]>=n[0]):continue
+                # Exclude only a conflicting incoming column. With no follower
+                # behind this car, returning through its own column is allowed;
+                # west/east departures are both available on flexible grids.
+                if n[0]==0 and nb==(1,n[1]) and n[1] in queue_cols:continue
+                entry=getattr(self.board,'goal_approaches',{}).get(goal)
+                if nb==goal and entry is not None and n!=entry:
+                    continue
                 nd = (nb[0] - n[0], nb[1] - n[1])
-                c = cost + 1.0
+                c = cost + edge_cost
                 if d is not None and nd != d:
-                    c += TURN_START_COST + TURN_COST * (2 if nd == (-d[0], -d[1]) else 1)
+                    c += turn_start + quarter_turn * (2 if nd == (-d[0], -d[1]) else 1)
                 if nb in soft_nodes:
-                    c += SOFT_NODE
+                    c += soft_cost
                 if nb in soft_goals and nb != goal:
-                    c += SOFT_GOAL
+                    c += goal_wait
                 if (n, nb) in opp_edges:
-                    c += SOFT_OPP
+                    c += opposite_wait
+                if nb in occupied_nodes:
+                    c += costs['occupied_wait_s']
                 key = (nb, nd)
                 if c < best.get(key, float('inf')) - 1e-9:
                     best[key] = c
@@ -264,6 +336,9 @@ class TrafficManager(Node):
 
 
     def assign_route(self, rb, nodes, final_heading, mode):
+        rb.route_changed_at=time.time()
+        rb.transition_res |= set(getattr(self,'res',{}).get(rb.name,set()))
+        if rb.route:rb.transition_res |= set(rb.route[rb.progress:rb.upto+1])
         rb.route = list(nodes)
         rb.route_id = self.next_route_id
         self.next_route_id += 1
@@ -272,16 +347,21 @@ class TrafficManager(Node):
         rb.final_heading = final_heading
         rb.mode = mode
         rb.wait_since = None
+        rb.pending = False
         what = {'go': 'lo trinh', 'yield': 'NE DUONG'}.get(mode, mode)
         self.log(f'[{rb.name}] {what} #{rb.route_id}: {self.route_str(nodes)}')
 
     def clear_route(self, rb, reason=None):
+        rb.route_changed_at=time.time()
+        rb.transition_res |= set(getattr(self,'res',{}).get(rb.name,set()))
+        if rb.route:rb.transition_res |= set(rb.route[rb.progress:rb.upto+1])
         rb.route = None
         rb.route_id = self.next_route_id      # id moi -> agent dung xe
         self.next_route_id += 1
         rb.mode = 'idle'
         rb.resume = None
         rb.wait_since = None
+        rb.deferred_goal = None
         if reason:
             self.log(f'[{rb.name}] dung: {reason}', 'warn')
 
@@ -363,6 +443,10 @@ class TrafficManager(Node):
             if o.resume:
                 busy.add(o.resume[0])
             if goal in busy:
+                own=getattr(self,'delivery_queues',{}).get(rb.name)
+                other=getattr(self,'delivery_queues',{}).get(o.name)
+                if own and other and own['slot']==other['slot'] and goal==(0,own['slot']-1):
+                    continue
                 return f'ô {self.lbl(goal)} là đích của {o.name}'
         return None
 
@@ -371,8 +455,9 @@ class TrafficManager(Node):
         if not line:
             return
         if line.split()[0] in ('s', 'S', 'stop'):
+            self.recovery=None
             for rb in self.robots.values():
-                rb.goal = None
+                rb.goal = None;rb.pending=False;rb.deferred_goal=None
                 self.clear_route(rb, 'lenh dung tat ca')
             return
         # "pair 1 3 5 d ; 2 3 1 t": giao CUNG LUC cho moi xe - mot dich sai thi
@@ -396,6 +481,21 @@ class TrafficManager(Node):
             self.set_goal(rb, goal, heading)
 
     def set_goal(self, rb, goal, heading):
+        if (rb.goal==goal and rb.goal_heading==heading and
+                ((rb.mode=='go' and rb.route and rb.route[-1]==goal) or rb.pending)):
+            return
+        if rb.mode in ('yield','yield_wait'):
+            # A workflow may update the destination while the robot yields.
+            # Keep the escape maneuver; use the new intent after it clears.
+            rb.goal,rb.goal_heading=goal,heading
+            rb.resume=(goal,heading)
+            return
+        recovery=getattr(self,'recovery',None)
+        if recovery and rb.name in recovery['robots'] and time.time()<recovery['until']:
+            _,origin=recovery['robots'][rb.name]
+            if rb.x is not None and math.dist((rb.x,rb.y),origin)<=self.occ_r+.02:
+                rb.deferred_goal=(goal,heading)
+                return
         rb.goal, rb.goal_heading = goal, heading
         rb.resume = None
         rb.fail_count = 0
@@ -416,6 +516,11 @@ class TrafficManager(Node):
         if path is None:
             path = self.plan(rb, start, rb.goal)     # vong khong duoc: di, toi do go ket
         if path is None:
+            # A new goal may arrive just before the preceding route's done
+            # status is consumed. Never leave that old route active while
+            # retrying: on_route_done() would erase the NEW pending goal.
+            if rb.route is not None:
+                self.clear_route(rb)
             # Vat can dong (vd costmap vua bat, chua loc xe kia) co the chan
             # thoang qua: thu lai nhu on_trouble roi moi bo.
             rb.fail_count += 1
@@ -442,6 +547,11 @@ class TrafficManager(Node):
     # ------------------------------------------------------------------ vong chinh
     def tick(self):
         now = time.time()
+        if not self.recovery_active(now):
+            for rb in self.robots.values():
+                if rb.deferred_goal is not None:
+                    goal,heading=rb.deferred_goal;rb.deferred_goal=None
+                    self.set_goal(rb,goal,heading)
         for rb in self.robots.values():
             if rb.t and now - rb.t > STALE_S and not rb.stale:
                 rb.stale = True
@@ -473,6 +583,8 @@ class TrafficManager(Node):
         self.res = {}
         for n, rb in self.robots.items():
             s = set(self.occ[n])
+            if rb.ack == rb.route_id:rb.transition_res.clear()
+            s |= rb.transition_res
             if rb.route:
                 s |= set(rb.route[rb.progress:rb.upto + 1])
             self.res[n] = s
@@ -485,19 +597,29 @@ class TrafficManager(Node):
             want = min(rb.progress + LOOKAHEAD, len(rb.route) - 1)
             while rb.upto < want:
                 nxt = rb.route[rb.upto + 1]
+                if not TrafficManager.column_allows(self,rb,nxt):break
                 if self.owner(nxt, rb) is not None:
                     break
                 rb.upto += 1
                 self.res[rb.name].add(nxt)
 
         # 4. Cho / ket
+        recovering=self.recovery_active(now)
         for rb in movers:
             if rb.route is None or rb.upto >= len(rb.route) - 1 or rb.state != 'waiting':
                 rb.wait_since = None
                 continue
+            if not TrafficManager.column_allows(self,rb,rb.route[rb.upto+1]):
+                rb.wait_since=None
+                continue
             blk = self.owner(rb.route[rb.upto + 1], rb)
             if blk is None:
                 rb.wait_since = None
+                continue
+            if self.in_service(blk):
+                rb.wait_since=None
+                continue
+            if not blk.stale and (blk.ack!=blk.route_id or now-blk.route_changed_at<1.):
                 continue
             if rb.wait_since is None:
                 rb.wait_since = now
@@ -508,9 +630,18 @@ class TrafficManager(Node):
             # dung yen han > WAIT_S.
             stuck = (self.parked(blk) or blk.stale or self.waits_for(blk, rb)
                      or now - blk.last_move_t > WAIT_S)
-            if stuck and now - rb.wait_since > WAIT_S:
+            if stuck and now - rb.wait_since > WAIT_S and not recovering:
                 rb.wait_since = None
+                previous={n:r.route_id for n,r in self.robots.items()}
+                origins={n:(r.x,r.y) for n,r in self.robots.items()}
                 self.resolve(rb, blk)
+                changed={n:(r.route_id,origins[n]) for n,r in self.robots.items()
+                         if previous[n]!=r.route_id}
+                if changed:
+                    self.recovery=dict(robots=changed,until=now+12.)
+                    # One coherent recovery per fleet, not contradictory
+                    # pairwise replans in the same tick while a pivot starts.
+                    break
 
         # 5. Xe da ne: quay lai khi xe kia di qua
         for rb in self.robots.values():
@@ -521,9 +652,22 @@ class TrafficManager(Node):
         for n, rb in self.robots.items():
             msg = String()
             msg.data = json.dumps({'route_id': rb.route_id, 'nodes': rb.route or [],
-                                   'upto': rb.upto, 'final_heading': rb.final_heading})
+                                   'upto': rb.upto, 'final_heading': rb.final_heading,'mode':rb.mode})
             self.cmd_pubs[n].publish(msg)
         self.publish_markers()
+
+    def recovery_active(self,now):
+        recovery=getattr(self,'recovery',None)
+        if not recovery:return False
+        if now>=recovery['until']:
+            self.recovery=None
+            return False
+        for name,(route_id,origin) in recovery['robots'].items():
+            rb=self.robots[name]
+            if rb.ack!=route_id or rb.x is None or math.dist((rb.x,rb.y),origin)<=self.occ_r+.02:
+                return True
+        self.recovery=None
+        return False
 
     def owner(self, node, me):
         for n, s in self.res.items():
@@ -586,12 +730,18 @@ class TrafficManager(Node):
         self.assign_route(rb, path, heading, mode)
 
     def resolve(self, rb, blk):
+        if self.in_service(blk):
+            # Measuring/loading/unloading is a legitimate stop. Do not move
+            # the serviced robot or discard the waiting robot's route.
+            return
         if self.parked(blk) or blk.stale:
             what = 'mat lien lac' if blk.stale else 'dang do'
             self.log(f'KET: {rb.name} bi {blk.name} ({what}) chan > {WAIT_S:.0f} s', 'warn')
             # Tranh moi o xe kia dang GIU (ca o phia truoc da cap): xe mat lien
             # lac van co the dang chay not doan Nav2 da nhan.
-            path = self.plan(rb, self.node_of(rb), rb.route[-1], hard=self.res[blk.name])
+            hard=set(self.res[blk.name])
+            for other in self.others(rb):hard |= self.occupied(other) | other.transition_res
+            path = self.plan(rb, self.node_of(rb), rb.route[-1], hard=hard)
             if path is not None:
                 self.log(f'[{rb.name}] di vong quanh {blk.name}')
                 self.assign_route(rb, path, rb.final_heading, rb.mode)
@@ -613,6 +763,7 @@ class TrafficManager(Node):
     def yield_to(self, y, x):
         """y nhuong x: lap duong vong tranh x, khong duoc thi ne sang o trong."""
         forbid = set(self.occ[x.name]) | set(self.remaining(x))
+        for other in self.others(y):forbid |= self.occupied(other) | other.transition_res
         if y.route:
             path = self.plan(y, self.node_of(y), y.route[-1], hard=forbid)
             if path is not None:
@@ -623,7 +774,9 @@ class TrafficManager(Node):
 
     def side_step(self, y, x):
         """y ne sang o trong gan nhat khong nam tren duong con lai cua x."""
+        if self.in_service(y):return False
         forbid = set(self.occ[x.name]) | set(self.remaining(x))
+        for other in self.others(y):forbid |= set(self.res.get(other.name,set())) | self.occupied(other)
         if x.route:
             forbid.add(x.route[-1])
         bn, be = self.blocked_sets()
@@ -652,6 +805,8 @@ class TrafficManager(Node):
         if y.resume is None:
             if y.route:
                 y.resume = (y.route[-1], y.final_heading)
+            elif y.goal is not None:
+                y.resume = (y.goal,y.goal_heading)
             elif x.goal != start and (not x.route or x.route[-1] != start):
                 y.resume = (start, y.yaw)   # xe dang do: ne xong quay ve cho cu
             # cho cu chinh la dich xe kia -> o lai cho ne, khong quay ve
@@ -668,10 +823,15 @@ class TrafficManager(Node):
                 hard |= self.occupied(o)
         path = self.plan(rb, self.node_of(rb), target, hard=hard)
         if path is None:
+            # Restore the route under normal reservation control so a parked
+            # blocker can be asked to yield. Waiting forever off-route cannot
+            # initiate the fleet's deadlock resolver.
+            path=self.plan(rb,self.node_of(rb),target)
+        if path is None:
             return
-        for o in self.others(rb):
-            if not self.parked(o) and set(path) & (set(self.remaining(o)) | self.occ[o.name]):
-                return          # xe kia chua qua
+        if len(path)>1:
+            blocker=self.owner(path[1],rb)
+            if blocker and (not self.parked(blocker) or self.in_service(blocker)):return
         rb.resume = None
         if rb.goal is None:
             rb.goal = target
@@ -883,8 +1043,10 @@ def main():
     rclpy.init(args=sys.argv)
     argv = remove_ros_args(sys.argv)[1:]
     grid_file = argv[argv.index('--grid') + 1] if '--grid' in argv else None
-    names = [a for a in argv if not a.startswith('--') and a != grid_file] or ['agv1', 'agv2']
-    node = TrafficManager(names, grid_file, avoid='--no-avoid' not in argv)
+    service_topic=argv[argv.index('--service-holds-topic')+1] if '--service-holds-topic' in argv else None
+    queue_topic=argv[argv.index('--delivery-queues-topic')+1] if '--delivery-queues-topic' in argv else None
+    names = [a for a in argv if not a.startswith('--') and a not in (grid_file,service_topic,queue_topic)] or ['agv1', 'agv2']
+    node = TrafficManager(names, grid_file, avoid='--no-avoid' not in argv,service_topic=service_topic,queue_topic=queue_topic)
     if '--no-stdin' not in argv:
         loop = interactive_loop if sys.stdin.isatty() else stdin_loop
         threading.Thread(target=loop, args=(node,), daemon=True).start()

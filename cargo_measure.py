@@ -394,13 +394,24 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
         raise ValueError('mat hang ngoai khung anh')
     # Hat giong o NUA do cao tia LiDAR: hop dung tren san va LiDAR cham no, nen chac
     # chan phu tu san toi tia -> diem giua do nam tren mat truoc ke ca hop thap.
-    _, v_seed = cam.project(np.r_[face['mid'], 0.5 * zl])
-    _,floor_ref=cam.project(np.r_[face['mid'],0.])
+    support_z = float(cfg.get('support_z', 0.0))  # known floor / conveyor deck
+    _, v_seed = cam.project(np.r_[face['mid'], 0.5 * (zl + support_z)])
+    _,floor_ref=cam.project(np.r_[face['mid'],support_z])
     rectangle=front_rectangle_hint(und,uL,uR,v_seed,floor_ref)
+    if cfg.get('require_front_rectangle', False) and rectangle is None:
+        raise ValueError('chua tach chac mat truoc kien dau hang doi; khong do gop kien phia sau')
     if cfg.get('segment', 'grabcut') == 'grabcut':
         mask = grabcut_mask(und, uL, uR, v_seed, rectangle=rectangle)
     else:
         mask = segment(und) > 0
+    if cfg.get('require_front_rectangle', False):
+        # Similar-coloured rear carton can be learned as foreground inside the
+        # normal 4px GrabCut margin. In FIFO mode the independently observed
+        # closed front-face rectangle is also a hard association boundary.
+        x,y,rw,rh=rectangle
+        allowed=np.zeros(mask.shape,bool)
+        allowed[y:y+rh,x:x+rw]=True
+        mask &= allowed
     col = mask[:, ui]
     vs = int(round(v_seed))
     if not col[min(max(vs, 0), H - 1)]:
@@ -495,13 +506,13 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     width = float(np.linalg.norm(PL[:2] - PR[:2]))
     height_source='visible_edges'
     if cam.has_pitch:
-        vb_floor = float(cam.project(np.r_[(PL[:2] + PR[:2]) / 2, 0.0])[1])
+        vb_floor = float(cam.project(np.r_[(PL[:2] + PR[:2]) / 2, support_z])[1])
         bottom=visible_bottom_edge(gray,ua,ub,vb,vb_floor)
         if bottom is not None:
             bottom_point=cam.ray_plane(um,bottom,n,d)
         else:
             bottom_point=None
-        if bottom_point is not None and abs(bottom_point[2])<=.03:
+        if bottom_point is not None and abs(bottom_point[2]-support_z)<=.03:
             # When BOTH physical edges are visible, use their difference. This
             # cancels a common camera-height/floor offset instead of treating
             # the old ground calibration as an exact observed box bottom.
@@ -509,7 +520,7 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
             height=float(PT[2]-PB[2])
             touch_v=touch_top or vb>=H-1
         else:
-            height=float(PT[2])
+            height=float(PT[2]-support_z)
             height_source='ground_plane'
             touch_v=touch_top or vb_floor>=H-1
     else:
@@ -518,7 +529,7 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
         # rong/cao hon khung hinh: so do bi cat, khong duoc phan loai
         raise ValueError('hang cham mep anh (rong/cao qua khung hinh) - khong do duoc; '
                          'dat hang xa hon (place.gap) hoac hang nho hon')
-    if abs(PB[2]) > 0.015:
+    if abs(PB[2]-support_z) > 0.015:
         warn.append(f'mep duoi anh o z={PB[2] * 100:+.1f} cm' + (' (khong dung - cao tinh tu mep tren toi san)'
                     if cam.has_pitch else ' (khong tren san? bong do? - chua co camera.pitch)'))
     if abs(width - face['width']) > 0.03:

@@ -1,4 +1,13 @@
-# Active Context (cập nhật 2026-10-16)
+# Active Context (cập nhật 2026-10-24)
+
+## Mô phỏng đội xe mới nhất
+
+- `docs/warehouse_route_audit_20261024/`: lượt `demo30` mới với ba Nav2,
+  không mở Gazebo/GUI; giao 30/30 kiện, 0 lỗi audit, khoảng cách tâm nhỏ nhất
+  0,589657 m, kiện cuối 715,751 s, toàn bộ đỗ xong 736,402 s.
+- 164 test đạt; bài kiểm tra mới duyệt 9.600 trường hợp đường ngắn và số lần
+  đổi hướng trên lưới trống. Khi tranh chấp ô, xe có thể đi vòng để tránh chờ.
+- Đây là mô phỏng động học và cảm biến tổng hợp; không gửi lệnh xe thật.
 
 ## Hiện tại
 - Workspace đang chạy: `/home/tai/Robot_kho_clone`; remote đẩy khi người dùng yêu cầu là

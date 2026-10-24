@@ -1,0 +1,187 @@
+{
+  "simulation": "kinematic robots + Nav2 + RGB/analytic LiDAR; no contact dynamics",
+  "complete": true,
+  "failed": false,
+  "elapsed_s": 301.40559392600017,
+  "delivered": {
+    "agv1": [
+      "agv1_box_1",
+      "agv1_box_2",
+      "agv1_box_3",
+      "agv1_box_4"
+    ],
+    "agv2": [
+      "agv2_box_1",
+      "agv2_box_2",
+      "agv2_box_3",
+      "agv2_box_4"
+    ],
+    "agv3": [
+      "agv3_box_1",
+      "agv3_box_2",
+      "agv3_box_3",
+      "agv3_box_4"
+    ]
+  },
+  "min_robot_center_separation_m": 0.591371183734476,
+  "proximity_violations": 0,
+  "vision_measurements": [
+    {
+      "t_s": 27.159,
+      "event": "vision_locked",
+      "robot": "agv1",
+      "package": "agv1_box_1",
+      "width_m": 0.1226713341252956,
+      "height_m": 0.27564801686039075,
+      "kind": 1,
+      "camera_distance_m": 0.8995985950520298,
+      "truth_kind": 1,
+      "truth_width_m": 0.12,
+      "truth_height_m": 0.27
+    },
+    {
+      "t_s": 27.171,
+      "event": "vision_locked",
+      "robot": "agv2",
+      "package": "agv2_box_1",
+      "width_m": 0.1806057952146301,
+      "height_m": 0.3393198261581076,
+      "kind": 2,
+      "camera_distance_m": 0.8990146861732475,
+      "truth_kind": 2,
+      "truth_width_m": 0.185,
+      "truth_height_m": 0.34
+    },
+    {
+      "t_s": 27.181,
+      "event": "vision_locked",
+      "robot": "agv3",
+      "package": "agv3_box_1",
+      "width_m": 0.12034268474076437,
+      "height_m": 0.27532416454656233,
+      "kind": 1,
+      "camera_distance_m": 0.8985363407705517,
+      "truth_kind": 1,
+      "truth_width_m": 0.12,
+      "truth_height_m": 0.27
+    },
+    {
+      "t_s": 84.855,
+      "event": "vision_locked",
+      "robot": "agv2",
+      "package": "agv2_box_2",
+      "width_m": 0.3042471691905674,
+      "height_m": 0.47367810903007346,
+      "kind": 4,
+      "camera_distance_m": 0.8978019739880374,
+      "truth_kind": 4,
+      "truth_width_m": 0.3,
+      "truth_height_m": 0.47
+    },
+    {
+      "t_s": 95.105,
+      "event": "vision_locked",
+      "robot": "agv3",
+      "package": "agv3_box_2",
+      "width_m": 0.2437596915608514,
+      "height_m": 0.40504897286619757,
+      "kind": 3,
+      "camera_distance_m": 0.8991347640287437,
+      "truth_kind": 3,
+      "truth_width_m": 0.24,
+      "truth_height_m": 0.4
+    },
+    {
+      "t_s": 131.055,
+      "event": "vision_locked",
+      "robot": "agv2",
+      "package": "agv2_box_3",
+      "width_m": 0.12353821624646426,
+      "height_m": 0.2763230803818157,
+      "kind": 1,
+      "camera_distance_m": 0.8899692391147784,
+      "truth_kind": 1,
+      "truth_width_m": 0.12,
+      "truth_height_m": 0.27
+    },
+    {
+      "t_s": 139.408,
+      "event": "vision_locked",
+      "robot": "agv1",
+      "package": "agv1_box_2",
+      "width_m": 0.30453932967882297,
+      "height_m": 0.4737681437230112,
+      "kind": 4,
+      "camera_distance_m": 0.8986634587983261,
+      "truth_kind": 4,
+      "truth_width_m": 0.3,
+      "truth_height_m": 0.47
+    },
+    {
+      "t_s": 160.112,
+      "event": "vision_locked",
+      "robot": "agv3",
+      "package": "agv3_box_3",
+      "width_m": 0.30363625039357733,
+      "height_m": 0.47386564832937894,
+      "kind": 4,
+      "camera_distance_m": 0.8981643515608582,
+      "truth_kind": 4,
+      "truth_width_m": 0.3,
+      "truth_height_m": 0.47
+    },
+    {
+      "t_s": 189.506,
+      "event": "vision_locked",
+      "robot": "agv1",
+      "package": "agv1_box_3",
+      "width_m": 0.18927951562095907,
+      "height_m": 0.3449493861804075,
+      "kind": 2,
+      "camera_distance_m": 0.8899630914251846,
+      "truth_kind": 2,
+      "truth_width_m": 0.185,
+      "truth_height_m": 0.34
+    },
+    {
+      "t_s": 198.006,
+      "event": "vision_locked",
+      "robot": "agv2",
+      "package": "agv2_box_4",
+      "width_m": 0.2438742318475219,
+      "height_m": 0.40463413426168815,
+      "kind": 3,
+      "camera_distance_m": 0.8982143232622215,
+      "truth_kind": 3,
+      "truth_width_m": 0.24,
+      "truth_height_m": 0.4
+    },
+    {
+      "t_s": 235.308,
+      "event": "vision_locked",
+      "robot": "agv3",
+      "package": "agv3_box_4",
+      "width_m": 0.18926498406726827,
+      "height_m": 0.34493643183843636,
+      "kind": 2,
+      "camera_distance_m": 0.8899637213732611,
+      "truth_kind": 2,
+      "truth_width_m": 0.185,
+      "truth_height_m": 0.34
+    },
+    {
+      "t_s": 252.16,
+      "event": "vision_locked",
+      "robot": "agv1",
+      "package": "agv1_box_4",
+      "width_m": 0.2445989014429196,
+      "height_m": 0.4052305870666073,
+      "kind": 3,
+      "camera_distance_m": 0.8995379119225226,
+      "truth_kind": 3,
+      "truth_width_m": 0.24,
+      "truth_height_m": 0.4
+    }
+  ],
+  "events": 162
+}

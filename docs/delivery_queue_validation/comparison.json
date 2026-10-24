@@ -1,0 +1,53 @@
+{
+  "scope": "one pair of kinematic runs; not physical performance or a statistical estimate",
+  "workload": {
+    "agv1": [
+      2
+    ],
+    "agv2": [
+      2
+    ],
+    "agv3": [
+      2
+    ]
+  },
+  "serial_log": "/home/tai/agv_logs/delivery_serial_t2_20261024",
+  "staged_log": "/home/tai/agv_logs/delivery_staged_t2_20261024_v3",
+  "serial_time_to_last_delivery_s": 134.351,
+  "staged_time_to_last_delivery_s": 76.7,
+  "last_delivery_reduction_percent": 42.91,
+  "serial_turnaround_s": [
+    39.8,
+    45.6
+  ],
+  "staged_turnaround_s": [
+    12.05,
+    12.15
+  ],
+  "staged_handoffs": [
+    {
+      "slot": 2,
+      "previous": "agv1",
+      "next": "agv3",
+      "delay_s": 0.001,
+      "waiting_at_release": true,
+      "ready_to_admit_delay_s": 0.001
+    },
+    {
+      "slot": 2,
+      "previous": "agv3",
+      "next": "agv2",
+      "delay_s": 0.05,
+      "waiting_at_release": true,
+      "ready_to_admit_delay_s": 0.05
+    }
+  ],
+  "minimum_center_separation_m": [
+    0.6,
+    0.5918319598241488
+  ],
+  "proximity_violations": [
+    0,
+    0
+  ]
+}

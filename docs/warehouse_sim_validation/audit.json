@@ -1,0 +1,48 @@
+{
+  "complete": true,
+  "failed": false,
+  "invariant_issues": [],
+  "mission_duration_s": 293.402,
+  "picked": {
+    "agv3": [
+      "agv3_box_1",
+      "agv3_box_2",
+      "agv3_box_3",
+      "agv3_box_4"
+    ],
+    "agv1": [
+      "agv1_box_1",
+      "agv1_box_2",
+      "agv1_box_3",
+      "agv1_box_4"
+    ],
+    "agv2": [
+      "agv2_box_1",
+      "agv2_box_2",
+      "agv2_box_3",
+      "agv2_box_4"
+    ]
+  },
+  "delivered": {
+    "agv2": [
+      "agv2_box_1",
+      "agv2_box_2",
+      "agv2_box_3",
+      "agv2_box_4"
+    ],
+    "agv3": [
+      "agv3_box_1",
+      "agv3_box_2",
+      "agv3_box_3",
+      "agv3_box_4"
+    ],
+    "agv1": [
+      "agv1_box_1",
+      "agv1_box_2",
+      "agv1_box_3",
+      "agv1_box_4"
+    ]
+  },
+  "measurement_count": 12,
+  "feeder_advances": 9
+}

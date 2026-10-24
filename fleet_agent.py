@@ -158,6 +158,7 @@ class FleetAgent(GridNavigator):
             return                  # dang ESTOP: khong chay, traffic_manager da thay 'estop'
 
         nodes = [tuple(n) for n in d.get('nodes', [])]
+        self.manager_mode=d.get('mode')
         if d.get('route_id') != self.route_id or self.cmd_lost:
             self.cmd_lost = False
             self.start_route(d.get('route_id'), nodes, d.get('upto', 0),
@@ -623,6 +624,8 @@ class FleetAgent(GridNavigator):
             'name': self.name, 't': now,
             'x': x, 'y': y, 'yaw': yaw,
             'state': 'estop' if self.esp_estop else self.state, 'route_id': self.route_id,
+            'route_goal': self.route[-1] if self.route else None,
+            'route_mode':getattr(self,'manager_mode',None),
             'estop': self.esp_estop,
             'error': self.last_error,
             'blocked_nodes': sorted(self.dyn_blocked_nodes),

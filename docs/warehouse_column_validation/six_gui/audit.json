@@ -1,0 +1,104 @@
+{
+  "complete": true,
+  "failed": false,
+  "invariant_issues": [],
+  "mission_duration_s": 211.651,
+  "picked": {
+    "agv1": [
+      "agv1_box_1",
+      "agv1_box_2"
+    ],
+    "agv3": [
+      "agv3_box_1",
+      "agv3_box_2"
+    ],
+    "agv2": [
+      "agv2_box_1",
+      "agv2_box_2"
+    ]
+  },
+  "delivered": {
+    "agv1": [
+      "agv1_box_1",
+      "agv1_box_2"
+    ],
+    "agv2": [
+      "agv2_box_1",
+      "agv2_box_2"
+    ],
+    "agv3": [
+      "agv3_box_1",
+      "agv3_box_2"
+    ]
+  },
+  "synchronized_round_coverage": null,
+  "delivery_mode": "staged",
+  "time_to_last_delivery_s": 166.802,
+  "handoffs": [
+    {
+      "slot": 1,
+      "previous": "agv1",
+      "next": "agv2",
+      "delay_s": 0.001,
+      "waiting_at_release": true,
+      "ready_to_admit_delay_s": 0.001
+    },
+    {
+      "slot": 1,
+      "previous": "agv2",
+      "next": "agv3",
+      "delay_s": 0.003,
+      "waiting_at_release": true,
+      "ready_to_admit_delay_s": 0.003
+    },
+    {
+      "slot": 4,
+      "previous": "agv1",
+      "next": "agv2",
+      "delay_s": 0.002,
+      "waiting_at_release": true,
+      "ready_to_admit_delay_s": 0.002
+    },
+    {
+      "slot": 4,
+      "previous": "agv2",
+      "next": "agv3",
+      "delay_s": 0.001,
+      "waiting_at_release": true,
+      "ready_to_admit_delay_s": 0.001
+    }
+  ],
+  "bay_turnaround": [
+    {
+      "slot": 1,
+      "previous": "agv1",
+      "next": "agv2",
+      "seconds": 11.149
+    },
+    {
+      "slot": 1,
+      "previous": "agv2",
+      "next": "agv3",
+      "seconds": 14.055
+    },
+    {
+      "slot": 4,
+      "previous": "agv1",
+      "next": "agv2",
+      "seconds": 23.599
+    },
+    {
+      "slot": 4,
+      "previous": "agv2",
+      "next": "agv3",
+      "seconds": 21.85
+    }
+  ],
+  "measurement_count": 6,
+  "feeder_advances": 3,
+  "outbound_cleared_count": 6,
+  "synchronized_rounds": false,
+  "approach_stop_goal_count": 0,
+  "column_queues": true,
+  "column_join_count": 6
+}

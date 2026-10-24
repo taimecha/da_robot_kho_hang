@@ -1,0 +1,685 @@
+{"t_s": 0.014, "event": "scene_ready", "queues": {"agv1": [1, 4, 2, 3, 1, 2, 4, 3, 4, 1], "agv2": [1, 4, 2, 2, 2, 3, 1, 1, 2, 3], "agv3": [1, 4, 3, 3, 2, 4, 2, 3, 1, 3]}, "delivery_mode": "staged", "sync_rounds": false, "delivery_flow": "flexible", "column_queues": true}
+{"t_s": 1.215, "event": "telemetry_ready"}
+{"t_s": 8.015, "event": "mission_started"}
+{"t_s": 8.015, "event": "goal_sent", "robot": "agv1", "phase": "observe", "row": 2, "col": 4, "heading": "d"}
+{"t_s": 8.015, "event": "goal_sent", "robot": "agv2", "phase": "observe", "row": 3, "col": 4, "heading": "d"}
+{"t_s": 8.015, "event": "goal_sent", "robot": "agv3", "phase": "observe", "row": 4, "col": 4, "heading": "d"}
+{"t_s": 18.015, "event": "goal_reached", "robot": "agv1", "phase": "observe", "row": 2, "col": 4}
+{"t_s": 18.015, "event": "goal_reached", "robot": "agv2", "phase": "observe", "row": 3, "col": 4}
+{"t_s": 18.015, "event": "goal_reached", "robot": "agv3", "phase": "observe", "row": 4, "col": 4}
+{"t_s": 26.416, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_1", "width_m": 0.12252019969085245, "height_m": 0.275304491300322, "kind": 1, "camera_distance_m": 0.8984710987718355, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+{"t_s": 26.423, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+{"t_s": 26.424, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_1", "width_m": 0.12255363143734539, "height_m": 0.2731925001419596, "kind": 1, "camera_distance_m": 0.8987274423406431, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+{"t_s": 26.432, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+{"t_s": 26.433, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_1", "width_m": 0.12345361652797053, "height_m": 0.27494511110782327, "kind": 1, "camera_distance_m": 0.8972963793146242, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+{"t_s": 26.44, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+{"t_s": 26.465, "event": "delivery_intent", "robot": "agv1", "slot": 1}
+{"t_s": 26.465, "event": "delivery_intent", "robot": "agv2", "slot": 1}
+{"t_s": 26.466, "event": "delivery_intent", "robot": "agv3", "slot": 1}
+{"t_s": 26.466, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 2}
+{"t_s": 26.466, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 3}
+{"t_s": 26.467, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 4}
+{"t_s": 31.015, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+{"t_s": 31.015, "event": "load_started", "robot": "agv1", "package": "agv1_box_1"}
+{"t_s": 31.016, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+{"t_s": 31.016, "event": "load_started", "robot": "agv2", "package": "agv2_box_1"}
+{"t_s": 31.016, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+{"t_s": 31.016, "event": "load_started", "robot": "agv3", "package": "agv3_box_1"}
+{"t_s": 33.015, "event": "loaded", "robot": "agv1", "front": "agv1_box_2", "distance_from_pickup_m": 0.008148351867351078}
+{"t_s": 33.015, "event": "loaded", "robot": "agv2", "front": "agv2_box_2", "distance_from_pickup_m": 0.008556619975738311}
+{"t_s": 33.015, "event": "loaded", "robot": "agv3", "front": "agv3_box_2", "distance_from_pickup_m": 0.005996506078616903}
+{"t_s": 33.016, "event": "delivery_queued", "robot": "agv1", "slot": 1, "rank": 1, "registration": "column_departure"}
+{"t_s": 33.016, "event": "delivery_queued", "robot": "agv2", "slot": 1, "rank": 2, "registration": "column_departure"}
+{"t_s": 33.016, "event": "delivery_queued", "robot": "agv3", "slot": 1, "rank": 3, "registration": "column_departure"}
+{"t_s": 33.017, "event": "delivery_admitted", "robot": "agv1", "slot": 1, "wait_s": 6.549952553999901}
+{"t_s": 33.017, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 1}
+{"t_s": 33.017, "event": "column_join", "robot": "agv1", "slot": 1, "entry_row": 2}
+{"t_s": 33.017, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+{"t_s": 33.018, "event": "column_join", "robot": "agv2", "slot": 1, "entry_row": 3}
+{"t_s": 33.018, "event": "goal_sent", "robot": "agv2", "phase": "convoy", "row": 1, "col": 1, "heading": "n"}
+{"t_s": 33.018, "event": "column_join", "robot": "agv3", "slot": 1, "entry_row": 4}
+{"t_s": 33.018, "event": "goal_sent", "robot": "agv3", "phase": "convoy", "row": 1, "col": 1, "heading": "n"}
+{"t_s": 40.115, "event": "feed_started", "robot": "agv1", "front": "agv1_box_2", "distance_from_pickup_m": 0.42134793599144715}
+{"t_s": 40.116, "event": "feed_started", "robot": "agv2", "front": "agv2_box_2", "distance_from_pickup_m": 0.4227563236655345}
+{"t_s": 40.116, "event": "feed_started", "robot": "agv3", "front": "agv3_box_2", "distance_from_pickup_m": 0.4225957291748314}
+{"t_s": 42.665, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_2", "distance_from_pickup_m": 0.9801479277386514}
+{"t_s": 42.665, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_2", "distance_from_pickup_m": 0.9815563183289306}
+{"t_s": 42.665, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_2", "distance_from_pickup_m": 0.9813957166989153}
+{"t_s": 55.315, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 2}
+{"t_s": 57.215, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1}
+{"t_s": 57.215, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_1", "slot": 1}
+{"t_s": 57.216, "event": "unload_started", "robot": "agv1", "package": "agv1_box_1"}
+{"t_s": 58.715, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_1", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+{"t_s": 58.715, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+{"t_s": 60.965, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 3}
+{"t_s": 63.815, "event": "outbound_cleared", "package": "agv1_box_1"}
+{"t_s": 64.515, "event": "bay_released", "robot": "agv1", "slot": 1, "distance_m": 0.45700930114956934}
+{"t_s": 64.516, "event": "delivery_admitted", "robot": "agv2", "slot": 1, "wait_s": 38.05005474599966}
+{"t_s": 64.516, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 1}
+{"t_s": 67.015, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 2}
+{"t_s": 69.015, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 1}
+{"t_s": 69.015, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_1", "slot": 1}
+{"t_s": 69.015, "event": "unload_started", "robot": "agv2", "package": "agv2_box_1"}
+{"t_s": 70.565, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_1", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+{"t_s": 70.565, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+{"t_s": 75.665, "event": "outbound_cleared", "package": "agv2_box_1"}
+{"t_s": 76.365, "event": "bay_released", "robot": "agv2", "slot": 1, "distance_m": 0.45190619386604014}
+{"t_s": 76.365, "event": "delivery_admitted", "robot": "agv3", "slot": 1, "wait_s": 49.90003210299983}
+{"t_s": 76.366, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 1}
+{"t_s": 80.615, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 1}
+{"t_s": 80.615, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_1", "slot": 1}
+{"t_s": 80.615, "event": "unload_started", "robot": "agv3", "package": "agv3_box_1"}
+{"t_s": 82.165, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_1", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+{"t_s": 82.165, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+{"t_s": 83.015, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+{"t_s": 86.665, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_2", "width_m": 0.30567257221788574, "height_m": 0.47419947183131655, "kind": 4, "camera_distance_m": 0.8988016817573234, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+{"t_s": 86.673, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+{"t_s": 86.715, "event": "delivery_intent", "robot": "agv1", "slot": 4}
+{"t_s": 86.716, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 2, "gate_row": 2}
+{"t_s": 87.265, "event": "outbound_cleared", "package": "agv3_box_1"}
+{"t_s": 89.415, "event": "bay_released", "robot": "agv3", "slot": 1, "distance_m": 0.4583958485773922}
+{"t_s": 91.215, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+{"t_s": 91.215, "event": "load_started", "robot": "agv1", "package": "agv1_box_2"}
+{"t_s": 93.215, "event": "loaded", "robot": "agv1", "front": "agv1_box_3", "distance_from_pickup_m": 0.008752909519952516}
+{"t_s": 93.215, "event": "delivery_queued", "robot": "agv1", "slot": 4, "rank": 1, "registration": "column_departure"}
+{"t_s": 93.216, "event": "delivery_admitted", "robot": "agv1", "slot": 4, "wait_s": 6.499857174000226}
+{"t_s": 93.216, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 2, "gate_row": 1}
+{"t_s": 93.216, "event": "column_join", "robot": "agv1", "slot": 4, "entry_row": 2}
+{"t_s": 93.216, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4, "heading": "n"}
+{"t_s": 97.415, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+{"t_s": 100.265, "event": "feed_started", "robot": "agv1", "front": "agv1_box_3", "distance_from_pickup_m": 0.42442288404805933}
+{"t_s": 100.915, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_2", "width_m": 0.30456140196868015, "height_m": 0.474167328435071, "kind": 4, "camera_distance_m": 0.898729222845447, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+{"t_s": 100.923, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+{"t_s": 100.965, "event": "delivery_intent", "robot": "agv2", "slot": 4}
+{"t_s": 100.968, "event": "delivery_queued", "robot": "agv2", "slot": 4, "rank": 1, "registration": "tail_append"}
+{"t_s": 100.969, "event": "column_permission", "robot": "agv2", "slot": 4, "entry_row": 3, "gate_row": 3}
+{"t_s": 102.765, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_3", "distance_from_pickup_m": 0.5907574635550795}
+{"t_s": 105.615, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+{"t_s": 105.615, "event": "load_started", "robot": "agv2", "package": "agv2_box_2"}
+{"t_s": 107.165, "event": "column_permission", "robot": "agv2", "slot": 4, "entry_row": 3, "gate_row": 2}
+{"t_s": 107.615, "event": "loaded", "robot": "agv2", "front": "agv2_box_3", "distance_from_pickup_m": 0.008834712036939495}
+{"t_s": 107.616, "event": "column_join", "robot": "agv2", "slot": 4, "entry_row": 3}
+{"t_s": 107.616, "event": "goal_sent", "robot": "agv2", "phase": "convoy", "row": 1, "col": 4, "heading": "n"}
+{"t_s": 109.015, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+{"t_s": 109.215, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4}
+{"t_s": 109.215, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_2", "slot": 4}
+{"t_s": 109.216, "event": "unload_started", "robot": "agv1", "package": "agv1_box_2"}
+{"t_s": 110.715, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_2", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+{"t_s": 110.715, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+{"t_s": 112.415, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_2", "width_m": 0.3043453710286818, "height_m": 0.473830892910299, "kind": 4, "camera_distance_m": 0.8980913570343585, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+{"t_s": 112.423, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+{"t_s": 112.465, "event": "delivery_intent", "robot": "agv3", "slot": 4}
+{"t_s": 112.465, "event": "delivery_queued", "robot": "agv3", "slot": 4, "rank": 2, "registration": "tail_append"}
+{"t_s": 112.466, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 4}
+{"t_s": 116.065, "event": "outbound_cleared", "package": "agv1_box_2"}
+{"t_s": 116.565, "event": "bay_released", "robot": "agv1", "slot": 4, "distance_m": 0.45203458944049657}
+{"t_s": 116.566, "event": "delivery_admitted", "robot": "agv2", "slot": 4, "wait_s": 15.600130471999819}
+{"t_s": 116.567, "event": "column_permission", "robot": "agv2", "slot": 4, "entry_row": 3, "gate_row": 1}
+{"t_s": 116.665, "event": "feed_started", "robot": "agv2", "front": "agv2_box_3", "distance_from_pickup_m": 0.42569210350026143}
+{"t_s": 116.815, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+{"t_s": 116.815, "event": "load_started", "robot": "agv3", "package": "agv3_box_2"}
+{"t_s": 118.815, "event": "loaded", "robot": "agv3", "front": "agv3_box_3", "distance_from_pickup_m": 0.008444716721806673}
+{"t_s": 118.815, "event": "column_join", "robot": "agv3", "slot": 4, "entry_row": 4}
+{"t_s": 118.816, "event": "goal_sent", "robot": "agv3", "phase": "convoy", "row": 1, "col": 4, "heading": "n"}
+{"t_s": 119.167, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_3", "distance_from_pickup_m": 0.5915819968602037}
+{"t_s": 123.615, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 3}
+{"t_s": 125.965, "event": "feed_started", "robot": "agv3", "front": "agv3_box_3", "distance_from_pickup_m": 0.4201407928886493}
+{"t_s": 126.315, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 2}
+{"t_s": 128.416, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 4}
+{"t_s": 128.417, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_2", "slot": 4}
+{"t_s": 128.418, "event": "unload_started", "robot": "agv2", "package": "agv2_box_2"}
+{"t_s": 128.515, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_3", "distance_from_pickup_m": 0.5933139956969901}
+{"t_s": 129.965, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_2", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+{"t_s": 129.965, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+{"t_s": 133.815, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+{"t_s": 135.315, "event": "outbound_cleared", "package": "agv2_box_2"}
+{"t_s": 135.715, "event": "bay_released", "robot": "agv2", "slot": 4, "distance_m": 0.4541587177505827}
+{"t_s": 135.716, "event": "delivery_admitted", "robot": "agv3", "slot": 4, "wait_s": 23.249977688999934}
+{"t_s": 135.716, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 1}
+{"t_s": 136.916, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_3", "width_m": 0.18803134576206532, "height_m": 0.3450299390228501, "kind": 2, "camera_distance_m": 0.8996368348873627, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+{"t_s": 136.926, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+{"t_s": 136.965, "event": "delivery_intent", "robot": "agv1", "slot": 2}
+{"t_s": 136.965, "event": "column_permission", "robot": "agv1", "slot": 2, "entry_row": 2, "gate_row": 2}
+{"t_s": 149.815, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+{"t_s": 149.816, "event": "load_started", "robot": "agv1", "package": "agv1_box_3"}
+{"t_s": 151.865, "event": "loaded", "robot": "agv1", "front": "agv1_box_4", "distance_from_pickup_m": 0.009149415859800591}
+{"t_s": 151.865, "event": "delivery_queued", "robot": "agv1", "slot": 2, "rank": 1, "registration": "column_departure"}
+{"t_s": 151.866, "event": "delivery_admitted", "robot": "agv1", "slot": 2, "wait_s": 14.900003710999954}
+{"t_s": 151.866, "event": "column_permission", "robot": "agv1", "slot": 2, "entry_row": 2, "gate_row": 1}
+{"t_s": 151.867, "event": "column_join", "robot": "agv1", "slot": 2, "entry_row": 2}
+{"t_s": 151.867, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+{"t_s": 158.915, "event": "feed_started", "robot": "agv1", "front": "agv1_box_4", "distance_from_pickup_m": 0.4213489761459663}
+{"t_s": 160.615, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+{"t_s": 161.465, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_4", "distance_from_pickup_m": 0.9801489671685957}
+{"t_s": 163.665, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_3", "width_m": 0.19276511062660168, "height_m": 0.3433418782270797, "kind": 2, "camera_distance_m": 0.8812742190564234, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+{"t_s": 163.674, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+{"t_s": 163.715, "event": "delivery_intent", "robot": "agv2", "slot": 2}
+{"t_s": 163.715, "event": "delivery_queued", "robot": "agv2", "slot": 2, "rank": 1, "registration": "tail_append"}
+{"t_s": 163.715, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 3}
+{"t_s": 168.215, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+{"t_s": 168.215, "event": "load_started", "robot": "agv2", "package": "agv2_box_3"}
+{"t_s": 170.215, "event": "loaded", "robot": "agv2", "front": "agv2_box_4", "distance_from_pickup_m": 0.008254714150885736}
+{"t_s": 170.215, "event": "column_join", "robot": "agv2", "slot": 2, "entry_row": 3}
+{"t_s": 170.216, "event": "goal_sent", "robot": "agv2", "phase": "convoy", "row": 1, "col": 2, "heading": "n"}
+{"t_s": 171.365, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 2}
+{"t_s": 173.415, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 2}
+{"t_s": 173.415, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_3", "slot": 2}
+{"t_s": 173.415, "event": "unload_started", "robot": "agv1", "package": "agv1_box_3"}
+{"t_s": 174.965, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_3", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+{"t_s": 174.965, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+{"t_s": 180.165, "event": "outbound_cleared", "package": "agv1_box_3"}
+{"t_s": 180.765, "event": "bay_released", "robot": "agv1", "slot": 2, "distance_m": 0.45221906257159483}
+{"t_s": 180.766, "event": "delivery_admitted", "robot": "agv2", "slot": 2, "wait_s": 17.050016810000216}
+{"t_s": 180.766, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 1}
+{"t_s": 181.615, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 4}
+{"t_s": 181.615, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_2", "slot": 4}
+{"t_s": 181.616, "event": "unload_started", "robot": "agv3", "package": "agv3_box_2"}
+{"t_s": 183.115, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_2", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+{"t_s": 183.116, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+{"t_s": 183.815, "event": "feed_started", "robot": "agv2", "front": "agv2_box_4", "distance_from_pickup_m": 0.42045373396115243}
+{"t_s": 186.315, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_4", "distance_from_pickup_m": 0.9704537159280138}
+{"t_s": 188.465, "event": "outbound_cleared", "package": "agv3_box_2"}
+{"t_s": 196.415, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+{"t_s": 199.715, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_4", "width_m": 0.24322388149010504, "height_m": 0.40476863245885186, "kind": 3, "camera_distance_m": 0.8985207623178482, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+{"t_s": 199.724, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+{"t_s": 199.765, "event": "delivery_intent", "robot": "agv1", "slot": 3}
+{"t_s": 199.766, "event": "column_permission", "robot": "agv1", "slot": 3, "entry_row": 2, "gate_row": 2}
+{"t_s": 201.015, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2}
+{"t_s": 201.015, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_3", "slot": 2}
+{"t_s": 201.015, "event": "unload_started", "robot": "agv2", "package": "agv2_box_3"}
+{"t_s": 202.565, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_3", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+{"t_s": 202.565, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+{"t_s": 204.415, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+{"t_s": 204.415, "event": "load_started", "robot": "agv1", "package": "agv1_box_4"}
+{"t_s": 206.465, "event": "loaded", "robot": "agv1", "front": "agv1_box_5", "distance_from_pickup_m": 0.008741255949435759}
+{"t_s": 206.465, "event": "delivery_queued", "robot": "agv1", "slot": 3, "rank": 1, "registration": "column_departure"}
+{"t_s": 206.465, "event": "delivery_admitted", "robot": "agv1", "slot": 3, "wait_s": 6.699942596000255}
+{"t_s": 206.466, "event": "column_permission", "robot": "agv1", "slot": 3, "entry_row": 2, "gate_row": 1}
+{"t_s": 206.466, "event": "column_join", "robot": "agv1", "slot": 3, "entry_row": 2}
+{"t_s": 206.466, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+{"t_s": 207.766, "event": "outbound_cleared", "package": "agv2_box_3"}
+{"t_s": 209.665, "event": "bay_released", "robot": "agv3", "slot": 4, "distance_m": 0.45032369607124667}
+{"t_s": 209.765, "event": "bay_released", "robot": "agv2", "slot": 2, "distance_m": 0.45457136280341504}
+{"t_s": 219.515, "event": "feed_started", "robot": "agv1", "front": "agv1_box_5", "distance_from_pickup_m": 0.4321404270938068}
+{"t_s": 220.215, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+{"t_s": 222.015, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_5", "distance_from_pickup_m": 0.98189843869936}
+{"t_s": 223.565, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_3", "width_m": 0.24380276584372326, "height_m": 0.4045242048133796, "kind": 3, "camera_distance_m": 0.8899356149939676, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+{"t_s": 223.576, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+{"t_s": 223.617, "event": "delivery_intent", "robot": "agv3", "slot": 3}
+{"t_s": 223.617, "event": "delivery_queued", "robot": "agv3", "slot": 3, "rank": 1, "registration": "tail_append"}
+{"t_s": 223.618, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 3}
+{"t_s": 224.015, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+{"t_s": 227.515, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_4", "width_m": 0.18790178910863736, "height_m": 0.3447893165725479, "kind": 2, "camera_distance_m": 0.8990025570099313, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+{"t_s": 227.523, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+{"t_s": 227.565, "event": "delivery_intent", "robot": "agv2", "slot": 2}
+{"t_s": 227.565, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 2}
+{"t_s": 228.015, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+{"t_s": 228.015, "event": "load_started", "robot": "agv3", "package": "agv3_box_3"}
+{"t_s": 229.165, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 2}
+{"t_s": 230.015, "event": "loaded", "robot": "agv3", "front": "agv3_box_4", "distance_from_pickup_m": 0.008075613198426314}
+{"t_s": 230.015, "event": "column_join", "robot": "agv3", "slot": 3, "entry_row": 4}
+{"t_s": 230.016, "event": "goal_sent", "robot": "agv3", "phase": "convoy", "row": 1, "col": 3, "heading": "n"}
+{"t_s": 231.215, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 3}
+{"t_s": 231.215, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_4", "slot": 3}
+{"t_s": 231.215, "event": "unload_started", "robot": "agv1", "package": "agv1_box_4"}
+{"t_s": 232.215, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+{"t_s": 232.215, "event": "load_started", "robot": "agv2", "package": "agv2_box_4"}
+{"t_s": 232.715, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_4", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+{"t_s": 232.715, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+{"t_s": 234.215, "event": "loaded", "robot": "agv2", "front": "agv2_box_5", "distance_from_pickup_m": 0.00859416337703305}
+{"t_s": 234.215, "event": "delivery_queued", "robot": "agv2", "slot": 2, "rank": 1, "registration": "column_departure"}
+{"t_s": 234.216, "event": "delivery_admitted", "robot": "agv2", "slot": 2, "wait_s": 6.650071283000216}
+{"t_s": 234.216, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 1}
+{"t_s": 234.216, "event": "column_join", "robot": "agv2", "slot": 2, "entry_row": 3}
+{"t_s": 234.216, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+{"t_s": 237.965, "event": "outbound_cleared", "package": "agv1_box_4"}
+{"t_s": 238.565, "event": "bay_released", "robot": "agv1", "slot": 3, "distance_m": 0.4509385308785882}
+{"t_s": 238.565, "event": "delivery_admitted", "robot": "agv3", "slot": 3, "wait_s": 14.947998158000246}
+{"t_s": 238.565, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 1}
+{"t_s": 239.015, "event": "feed_started", "robot": "agv3", "front": "agv3_box_4", "distance_from_pickup_m": 0.4236745820749584}
+{"t_s": 241.215, "event": "feed_started", "robot": "agv2", "front": "agv2_box_5", "distance_from_pickup_m": 0.42179326587921134}
+{"t_s": 241.515, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_4", "distance_from_pickup_m": 0.9736647410555155}
+{"t_s": 243.715, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_5", "distance_from_pickup_m": 0.9717932502137971}
+{"t_s": 250.615, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+{"t_s": 254.015, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_5", "width_m": 0.12280474518880188, "height_m": 0.2748582542487409, "kind": 1, "camera_distance_m": 0.8899221388708245, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+{"t_s": 254.023, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+{"t_s": 254.066, "event": "delivery_intent", "robot": "agv1", "slot": 1}
+{"t_s": 254.067, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 2}
+{"t_s": 258.415, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2}
+{"t_s": 258.416, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_4", "slot": 2}
+{"t_s": 258.416, "event": "unload_started", "robot": "agv2", "package": "agv2_box_4"}
+{"t_s": 258.615, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+{"t_s": 258.615, "event": "load_started", "robot": "agv1", "package": "agv1_box_5"}
+{"t_s": 259.966, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_4", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+{"t_s": 259.967, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+{"t_s": 260.015, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3}
+{"t_s": 260.015, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_3", "slot": 3}
+{"t_s": 260.016, "event": "unload_started", "robot": "agv3", "package": "agv3_box_3"}
+{"t_s": 260.615, "event": "loaded", "robot": "agv1", "front": "agv1_box_6", "distance_from_pickup_m": 0.009027528161861247}
+{"t_s": 260.616, "event": "delivery_queued", "robot": "agv1", "slot": 1, "rank": 1, "registration": "column_departure"}
+{"t_s": 260.616, "event": "delivery_admitted", "robot": "agv1", "slot": 1, "wait_s": 6.549671904000206}
+{"t_s": 260.617, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 1}
+{"t_s": 260.617, "event": "column_join", "robot": "agv1", "slot": 1, "entry_row": 2}
+{"t_s": 260.618, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+{"t_s": 261.515, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_3", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+{"t_s": 261.515, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+{"t_s": 265.165, "event": "outbound_cleared", "package": "agv2_box_4"}
+{"t_s": 266.765, "event": "outbound_cleared", "package": "agv3_box_3"}
+{"t_s": 267.165, "event": "bay_released", "robot": "agv2", "slot": 2, "distance_m": 0.4531142966721559}
+{"t_s": 267.615, "event": "feed_started", "robot": "agv1", "front": "agv1_box_6", "distance_from_pickup_m": 0.4222265011391681}
+{"t_s": 270.115, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_6", "distance_from_pickup_m": 0.9722264856526573}
+{"t_s": 280.465, "event": "bay_released", "robot": "agv3", "slot": 3, "distance_m": 0.4536209462894244}
+{"t_s": 281.415, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+{"t_s": 284.615, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_5", "width_m": 0.1881124509258884, "height_m": 0.3451749265522531, "kind": 2, "camera_distance_m": 0.9000054308685911, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+{"t_s": 284.623, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+{"t_s": 284.665, "event": "delivery_intent", "robot": "agv2", "slot": 2}
+{"t_s": 284.665, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 2}
+{"t_s": 284.815, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1}
+{"t_s": 284.815, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_5", "slot": 1}
+{"t_s": 284.816, "event": "unload_started", "robot": "agv1", "package": "agv1_box_5"}
+{"t_s": 286.315, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_5", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+{"t_s": 286.316, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+{"t_s": 289.215, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+{"t_s": 289.215, "event": "load_started", "robot": "agv2", "package": "agv2_box_5"}
+{"t_s": 291.265, "event": "loaded", "robot": "agv2", "front": "agv2_box_6", "distance_from_pickup_m": 0.008838096816481346}
+{"t_s": 291.266, "event": "delivery_queued", "robot": "agv2", "slot": 2, "rank": 1, "registration": "column_departure"}
+{"t_s": 291.266, "event": "delivery_admitted", "robot": "agv2", "slot": 2, "wait_s": 6.600079022000045}
+{"t_s": 291.266, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 1}
+{"t_s": 291.267, "event": "column_join", "robot": "agv2", "slot": 2, "entry_row": 3}
+{"t_s": 291.267, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+{"t_s": 291.415, "event": "outbound_cleared", "package": "agv1_box_5"}
+{"t_s": 293.665, "event": "bay_released", "robot": "agv1", "slot": 1, "distance_m": 0.4543224945051901}
+{"t_s": 294.615, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+{"t_s": 297.766, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_4", "width_m": 0.2437172165762532, "height_m": 0.4049843909102928, "kind": 3, "camera_distance_m": 0.8990006619725219, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+{"t_s": 297.775, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+{"t_s": 297.815, "event": "delivery_intent", "robot": "agv3", "slot": 3}
+{"t_s": 297.816, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 2}
+{"t_s": 298.315, "event": "feed_started", "robot": "agv2", "front": "agv2_box_6", "distance_from_pickup_m": 0.42303736632709277}
+{"t_s": 300.815, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_6", "distance_from_pickup_m": 0.9730373541965123}
+{"t_s": 302.415, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+{"t_s": 302.416, "event": "load_started", "robot": "agv3", "package": "agv3_box_4"}
+{"t_s": 304.465, "event": "loaded", "robot": "agv3", "front": "agv3_box_5", "distance_from_pickup_m": 0.007577391122471381}
+{"t_s": 304.465, "event": "delivery_queued", "robot": "agv3", "slot": 3, "rank": 1, "registration": "column_departure"}
+{"t_s": 304.466, "event": "delivery_admitted", "robot": "agv3", "slot": 3, "wait_s": 6.649741643999732}
+{"t_s": 304.466, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 1}
+{"t_s": 304.466, "event": "column_join", "robot": "agv3", "slot": 3, "entry_row": 4}
+{"t_s": 304.467, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+{"t_s": 308.015, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+{"t_s": 311.266, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_6", "width_m": 0.18058986410258032, "height_m": 0.3403821490198163, "kind": 2, "camera_distance_m": 0.8989236112141432, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+{"t_s": 311.276, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+{"t_s": 311.315, "event": "delivery_intent", "robot": "agv1", "slot": 2}
+{"t_s": 311.315, "event": "delivery_queued", "robot": "agv1", "slot": 2, "rank": 1, "registration": "tail_append"}
+{"t_s": 311.316, "event": "column_permission", "robot": "agv1", "slot": 2, "entry_row": 3, "gate_row": 3}
+{"t_s": 313.515, "event": "column_permission", "robot": "agv1", "slot": 2, "entry_row": 2, "gate_row": 2}
+{"t_s": 315.415, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2}
+{"t_s": 315.415, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_5", "slot": 2}
+{"t_s": 315.415, "event": "unload_started", "robot": "agv2", "package": "agv2_box_5"}
+{"t_s": 315.715, "event": "feed_started", "robot": "agv3", "front": "agv3_box_5", "distance_from_pickup_m": 0.4241767064064194}
+{"t_s": 315.815, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+{"t_s": 315.815, "event": "load_started", "robot": "agv1", "package": "agv1_box_6"}
+{"t_s": 316.965, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_5", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+{"t_s": 316.965, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+{"t_s": 317.865, "event": "loaded", "robot": "agv1", "front": "agv1_box_7", "distance_from_pickup_m": 0.008617481573333061}
+{"t_s": 317.866, "event": "column_join", "robot": "agv1", "slot": 2, "entry_row": 2}
+{"t_s": 317.867, "event": "goal_sent", "robot": "agv1", "phase": "convoy", "row": 1, "col": 2, "heading": "n"}
+{"t_s": 318.265, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_5", "distance_from_pickup_m": 0.9829767001050377}
+{"t_s": 322.165, "event": "outbound_cleared", "package": "agv2_box_5"}
+{"t_s": 322.715, "event": "bay_released", "robot": "agv2", "slot": 2, "distance_m": 0.4570690881573302}
+{"t_s": 322.765, "event": "delivery_admitted", "robot": "agv1", "slot": 2, "wait_s": 11.45005561700009}
+{"t_s": 322.765, "event": "column_permission", "robot": "agv1", "slot": 2, "entry_row": 2, "gate_row": 1}
+{"t_s": 324.915, "event": "feed_started", "robot": "agv1", "front": "agv1_box_7", "distance_from_pickup_m": 0.4330166460586047}
+{"t_s": 327.465, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_7", "distance_from_pickup_m": 0.991816634186479}
+{"t_s": 337.615, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3}
+{"t_s": 337.615, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_4", "slot": 3}
+{"t_s": 337.616, "event": "unload_started", "robot": "agv3", "package": "agv3_box_4"}
+{"t_s": 339.115, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_4", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+{"t_s": 339.116, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+{"t_s": 339.215, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 2}
+{"t_s": 339.215, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_6", "slot": 2}
+{"t_s": 339.216, "event": "unload_started", "robot": "agv1", "package": "agv1_box_6"}
+{"t_s": 340.715, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_6", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+{"t_s": 340.715, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+{"t_s": 341.215, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+{"t_s": 344.365, "event": "outbound_cleared", "package": "agv3_box_4"}
+{"t_s": 344.465, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_6", "width_m": 0.245661509831515, "height_m": 0.40460179302734983, "kind": 3, "camera_distance_m": 0.8900856174252461, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+{"t_s": 344.473, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+{"t_s": 344.515, "event": "delivery_intent", "robot": "agv2", "slot": 3}
+{"t_s": 344.515, "event": "delivery_queued", "robot": "agv2", "slot": 3, "rank": 1, "registration": "tail_append"}
+{"t_s": 344.516, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 2}
+{"t_s": 345.065, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 3}
+{"t_s": 345.915, "event": "outbound_cleared", "package": "agv1_box_6"}
+{"t_s": 346.415, "event": "bay_released", "robot": "agv3", "slot": 3, "distance_m": 0.455381490665694}
+{"t_s": 346.416, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 2}
+{"t_s": 348.015, "event": "bay_released", "robot": "agv1", "slot": 2, "distance_m": 0.4509036220470452}
+{"t_s": 349.015, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+{"t_s": 349.015, "event": "load_started", "robot": "agv2", "package": "agv2_box_6"}
+{"t_s": 351.015, "event": "loaded", "robot": "agv2", "front": "agv2_box_7", "distance_from_pickup_m": 0.0075702340276237795}
+{"t_s": 351.015, "event": "delivery_admitted", "robot": "agv2", "slot": 3, "wait_s": 6.499884173000282}
+{"t_s": 351.016, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 1}
+{"t_s": 351.016, "event": "column_join", "robot": "agv2", "slot": 3, "entry_row": 3}
+{"t_s": 351.016, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+{"t_s": 359.415, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+{"t_s": 360.015, "event": "feed_started", "robot": "agv2", "front": "agv2_box_7", "distance_from_pickup_m": 0.42076918772921146}
+{"t_s": 360.615, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+{"t_s": 362.515, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_7", "distance_from_pickup_m": 0.9707691733250263}
+{"t_s": 364.465, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_7", "width_m": 0.3043024682537704, "height_m": 0.47433201474805076, "kind": 4, "camera_distance_m": 0.8990408370550499, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+{"t_s": 364.473, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+{"t_s": 364.516, "event": "delivery_intent", "robot": "agv1", "slot": 4}
+{"t_s": 364.517, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 2, "gate_row": 2}
+{"t_s": 365.716, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_5", "width_m": 0.18393984696996774, "height_m": 0.33874475011236316, "kind": 2, "camera_distance_m": 0.8975016543834993, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+{"t_s": 365.724, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+{"t_s": 365.765, "event": "delivery_intent", "robot": "agv3", "slot": 2}
+{"t_s": 365.765, "event": "column_permission", "robot": "agv3", "slot": 2, "entry_row": 4, "gate_row": 2}
+{"t_s": 369.016, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+{"t_s": 369.017, "event": "load_started", "robot": "agv1", "package": "agv1_box_7"}
+{"t_s": 370.215, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+{"t_s": 370.215, "event": "load_started", "robot": "agv3", "package": "agv3_box_5"}
+{"t_s": 371.065, "event": "loaded", "robot": "agv1", "front": "agv1_box_8", "distance_from_pickup_m": 0.008855175212529851}
+{"t_s": 371.065, "event": "delivery_queued", "robot": "agv1", "slot": 4, "rank": 1, "registration": "column_departure"}
+{"t_s": 371.065, "event": "delivery_admitted", "robot": "agv1", "slot": 4, "wait_s": 6.548912881999968}
+{"t_s": 371.066, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 2, "gate_row": 1}
+{"t_s": 371.066, "event": "column_join", "robot": "agv1", "slot": 4, "entry_row": 2}
+{"t_s": 371.066, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4, "heading": "n"}
+{"t_s": 372.265, "event": "loaded", "robot": "agv3", "front": "agv3_box_6", "distance_from_pickup_m": 0.008313512464330573}
+{"t_s": 372.265, "event": "delivery_queued", "robot": "agv3", "slot": 2, "rank": 1, "registration": "column_departure"}
+{"t_s": 372.265, "event": "delivery_admitted", "robot": "agv3", "slot": 2, "wait_s": 6.500015161999727}
+{"t_s": 372.266, "event": "column_permission", "robot": "agv3", "slot": 2, "entry_row": 4, "gate_row": 1}
+{"t_s": 372.266, "event": "column_join", "robot": "agv3", "slot": 2, "entry_row": 4}
+{"t_s": 372.266, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+{"t_s": 374.415, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 3}
+{"t_s": 374.415, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_6", "slot": 3}
+{"t_s": 374.416, "event": "unload_started", "robot": "agv2", "package": "agv2_box_6"}
+{"t_s": 375.915, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_6", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+{"t_s": 375.915, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+{"t_s": 378.065, "event": "feed_started", "robot": "agv1", "front": "agv1_box_8", "distance_from_pickup_m": 0.4253952954651612}
+{"t_s": 379.315, "event": "feed_started", "robot": "agv3", "front": "agv3_box_6", "distance_from_pickup_m": 0.4243126119769006}
+{"t_s": 380.565, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_8", "distance_from_pickup_m": 0.5906988092246184}
+{"t_s": 381.165, "event": "outbound_cleared", "package": "agv2_box_6"}
+{"t_s": 381.865, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_6", "distance_from_pickup_m": 0.983112599852456}
+{"t_s": 383.166, "event": "bay_released", "robot": "agv2", "slot": 3, "distance_m": 0.4541092843559021}
+{"t_s": 387.015, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4}
+{"t_s": 387.015, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_7", "slot": 4}
+{"t_s": 387.016, "event": "unload_started", "robot": "agv1", "package": "agv1_box_7"}
+{"t_s": 388.565, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_7", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+{"t_s": 388.566, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+{"t_s": 393.915, "event": "outbound_cleared", "package": "agv1_box_7"}
+{"t_s": 394.815, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+{"t_s": 395.765, "event": "bay_released", "robot": "agv1", "slot": 4, "distance_m": 0.45180498323366974}
+{"t_s": 398.265, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_7", "width_m": 0.12397192874152249, "height_m": 0.27346629332125494, "kind": 1, "camera_distance_m": 0.8984230585819623, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+{"t_s": 398.277, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+{"t_s": 398.315, "event": "delivery_intent", "robot": "agv2", "slot": 1}
+{"t_s": 398.315, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 2}
+{"t_s": 399.015, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 2}
+{"t_s": 399.016, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_5", "slot": 2}
+{"t_s": 399.016, "event": "unload_started", "robot": "agv3", "package": "agv3_box_5"}
+{"t_s": 400.565, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_5", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+{"t_s": 400.565, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+{"t_s": 401.015, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+{"t_s": 402.815, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+{"t_s": 402.815, "event": "load_started", "robot": "agv2", "package": "agv2_box_7"}
+{"t_s": 404.216, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_8", "width_m": 0.24383758884894952, "height_m": 0.4045781492430528, "kind": 3, "camera_distance_m": 0.8900459030708486, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+{"t_s": 404.224, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+{"t_s": 404.265, "event": "delivery_intent", "robot": "agv1", "slot": 3}
+{"t_s": 404.265, "event": "column_permission", "robot": "agv1", "slot": 3, "entry_row": 2, "gate_row": 2}
+{"t_s": 404.865, "event": "loaded", "robot": "agv2", "front": "agv2_box_8", "distance_from_pickup_m": 0.009086830104730685}
+{"t_s": 404.865, "event": "delivery_queued", "robot": "agv2", "slot": 1, "rank": 1, "registration": "column_departure"}
+{"t_s": 404.865, "event": "delivery_admitted", "robot": "agv2", "slot": 1, "wait_s": 6.5499863720001485}
+{"t_s": 404.866, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 1}
+{"t_s": 404.866, "event": "column_join", "robot": "agv2", "slot": 1, "entry_row": 3}
+{"t_s": 404.866, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+{"t_s": 405.765, "event": "outbound_cleared", "package": "agv3_box_5"}
+{"t_s": 407.865, "event": "bay_released", "robot": "agv3", "slot": 2, "distance_m": 0.45383303091415694}
+{"t_s": 408.815, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+{"t_s": 408.815, "event": "load_started", "robot": "agv1", "package": "agv1_box_8"}
+{"t_s": 410.815, "event": "loaded", "robot": "agv1", "front": "agv1_box_9", "distance_from_pickup_m": 0.00927170979787781}
+{"t_s": 410.816, "event": "delivery_queued", "robot": "agv1", "slot": 3, "rank": 1, "registration": "column_departure"}
+{"t_s": 410.817, "event": "delivery_admitted", "robot": "agv1", "slot": 3, "wait_s": 6.5504145699997025}
+{"t_s": 410.817, "event": "column_permission", "robot": "agv1", "slot": 3, "entry_row": 2, "gate_row": 1}
+{"t_s": 410.818, "event": "column_join", "robot": "agv1", "slot": 3, "entry_row": 2}
+{"t_s": 410.818, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+{"t_s": 411.815, "event": "feed_started", "robot": "agv2", "front": "agv2_box_8", "distance_from_pickup_m": 0.42228593146882615}
+{"t_s": 414.315, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_8", "distance_from_pickup_m": 0.9722859129809533}
+{"t_s": 417.815, "event": "feed_started", "robot": "agv1", "front": "agv1_box_9", "distance_from_pickup_m": 0.4234707332012214}
+{"t_s": 420.365, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_9", "distance_from_pickup_m": 0.9822707183837066}
+{"t_s": 424.815, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+{"t_s": 427.817, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_6", "width_m": 0.3041456678009582, "height_m": 0.4746556684025188, "kind": 4, "camera_distance_m": 0.8996546476486882, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+{"t_s": 427.825, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+{"t_s": 427.866, "event": "delivery_intent", "robot": "agv3", "slot": 4}
+{"t_s": 427.867, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 2}
+{"t_s": 429.615, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 3}
+{"t_s": 429.615, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_8", "slot": 3}
+{"t_s": 429.615, "event": "unload_started", "robot": "agv1", "package": "agv1_box_8"}
+{"t_s": 431.115, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_8", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+{"t_s": 431.115, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+{"t_s": 431.815, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 1}
+{"t_s": 431.816, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_7", "slot": 1}
+{"t_s": 431.816, "event": "unload_started", "robot": "agv2", "package": "agv2_box_7"}
+{"t_s": 432.215, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+{"t_s": 432.216, "event": "load_started", "robot": "agv3", "package": "agv3_box_6"}
+{"t_s": 433.315, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_7", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+{"t_s": 433.316, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+{"t_s": 434.215, "event": "loaded", "robot": "agv3", "front": "agv3_box_7", "distance_from_pickup_m": 0.00811737025278649}
+{"t_s": 434.215, "event": "delivery_queued", "robot": "agv3", "slot": 4, "rank": 1, "registration": "column_departure"}
+{"t_s": 434.216, "event": "delivery_admitted", "robot": "agv3", "slot": 4, "wait_s": 6.349767261000125}
+{"t_s": 434.216, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 1}
+{"t_s": 434.216, "event": "column_join", "robot": "agv3", "slot": 4, "entry_row": 4}
+{"t_s": 434.217, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 4, "heading": "n"}
+{"t_s": 436.365, "event": "outbound_cleared", "package": "agv1_box_8"}
+{"t_s": 438.415, "event": "outbound_cleared", "package": "agv2_box_7"}
+{"t_s": 438.416, "event": "bay_released", "robot": "agv1", "slot": 3, "distance_m": 0.45069614865858376}
+{"t_s": 440.665, "event": "bay_released", "robot": "agv2", "slot": 1, "distance_m": 0.4530843640685752}
+{"t_s": 441.315, "event": "feed_started", "robot": "agv3", "front": "agv3_box_7", "distance_from_pickup_m": 0.4296872938277254}
+{"t_s": 443.815, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_7", "distance_from_pickup_m": 0.5970135155945194}
+{"t_s": 447.215, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+{"t_s": 450.465, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_9", "width_m": 0.3043705651256924, "height_m": 0.4738781951591897, "kind": 4, "camera_distance_m": 0.8981962184426685, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+{"t_s": 450.473, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+{"t_s": 450.515, "event": "delivery_intent", "robot": "agv1", "slot": 4}
+{"t_s": 450.516, "event": "delivery_queued", "robot": "agv1", "slot": 4, "rank": 1, "registration": "tail_append"}
+{"t_s": 450.516, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 4, "gate_row": 4}
+{"t_s": 455.015, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+{"t_s": 455.015, "event": "load_started", "robot": "agv1", "package": "agv1_box_9"}
+{"t_s": 455.566, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 3, "gate_row": 3}
+{"t_s": 457.015, "event": "loaded", "robot": "agv1", "front": "agv1_box_10", "distance_from_pickup_m": 0.008797548003019745}
+{"t_s": 457.017, "event": "column_join", "robot": "agv1", "slot": 4, "entry_row": 3}
+{"t_s": 457.018, "event": "goal_sent", "robot": "agv1", "phase": "convoy", "row": 1, "col": 4, "heading": "n"}
+{"t_s": 458.315, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 3, "gate_row": 2}
+{"t_s": 460.015, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+{"t_s": 460.215, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 4}
+{"t_s": 460.216, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_6", "slot": 4}
+{"t_s": 460.216, "event": "unload_started", "robot": "agv3", "package": "agv3_box_6"}
+{"t_s": 461.765, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_6", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+{"t_s": 461.766, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+{"t_s": 462.965, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_8", "width_m": 0.12595414670460076, "height_m": 0.27381093940781015, "kind": 1, "camera_distance_m": 0.8995517979185266, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+{"t_s": 462.972, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+{"t_s": 463.015, "event": "delivery_intent", "robot": "agv2", "slot": 1}
+{"t_s": 463.015, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 2}
+{"t_s": 467.115, "event": "outbound_cleared", "package": "agv3_box_6"}
+{"t_s": 467.565, "event": "bay_released", "robot": "agv3", "slot": 4, "distance_m": 0.45383334752737464}
+{"t_s": 467.615, "event": "delivery_admitted", "robot": "agv1", "slot": 4, "wait_s": 17.099910474999888}
+{"t_s": 467.615, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 3, "gate_row": 1}
+{"t_s": 467.616, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+{"t_s": 467.616, "event": "load_started", "robot": "agv2", "package": "agv2_box_8"}
+{"t_s": 469.615, "event": "loaded", "robot": "agv2", "front": "agv2_box_9", "distance_from_pickup_m": 0.009141191452122888}
+{"t_s": 469.615, "event": "delivery_queued", "robot": "agv2", "slot": 1, "rank": 1, "registration": "column_departure"}
+{"t_s": 469.616, "event": "delivery_admitted", "robot": "agv2", "slot": 1, "wait_s": 6.600008371000058}
+{"t_s": 469.616, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 1}
+{"t_s": 469.616, "event": "column_join", "robot": "agv2", "slot": 1, "entry_row": 3}
+{"t_s": 469.617, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+{"t_s": 476.665, "event": "feed_started", "robot": "agv2", "front": "agv2_box_9", "distance_from_pickup_m": 0.4256507193749494}
+{"t_s": 479.165, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_9", "distance_from_pickup_m": 0.591642368944974}
+{"t_s": 482.415, "event": "feed_started", "robot": "agv1", "front": "agv1_box_10", "distance_from_pickup_m": 0.42847651755706534}
+{"t_s": 484.915, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_10", "distance_from_pickup_m": 0.5917910658726842}
+{"t_s": 488.415, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+{"t_s": 491.315, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_7", "width_m": 0.18991218605384877, "height_m": 0.3451301024871568, "kind": 2, "camera_distance_m": 0.8998976557673732, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+{"t_s": 491.322, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+{"t_s": 491.365, "event": "delivery_intent", "robot": "agv3", "slot": 2}
+{"t_s": 491.365, "event": "column_permission", "robot": "agv3", "slot": 2, "entry_row": 4, "gate_row": 2}
+{"t_s": 496.015, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+{"t_s": 496.015, "event": "load_started", "robot": "agv3", "package": "agv3_box_7"}
+{"t_s": 498.015, "event": "loaded", "robot": "agv3", "front": "agv3_box_8", "distance_from_pickup_m": 0.0058050066005057525}
+{"t_s": 498.016, "event": "delivery_queued", "robot": "agv3", "slot": 2, "rank": 1, "registration": "column_departure"}
+{"t_s": 498.016, "event": "delivery_admitted", "robot": "agv3", "slot": 2, "wait_s": 6.65029043200002}
+{"t_s": 498.017, "event": "column_permission", "robot": "agv3", "slot": 2, "entry_row": 4, "gate_row": 1}
+{"t_s": 498.017, "event": "column_join", "robot": "agv3", "slot": 2, "entry_row": 4}
+{"t_s": 498.017, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+{"t_s": 499.215, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 1}
+{"t_s": 499.215, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_8", "slot": 1}
+{"t_s": 499.216, "event": "unload_started", "robot": "agv2", "package": "agv2_box_8"}
+{"t_s": 500.715, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_8", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+{"t_s": 500.715, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+{"t_s": 501.016, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4}
+{"t_s": 501.017, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_9", "slot": 4}
+{"t_s": 501.017, "event": "unload_started", "robot": "agv1", "package": "agv1_box_9"}
+{"t_s": 502.565, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_9", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+{"t_s": 502.565, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+{"t_s": 505.065, "event": "feed_started", "robot": "agv3", "front": "agv3_box_8", "distance_from_pickup_m": 0.4200042125302256}
+{"t_s": 505.815, "event": "outbound_cleared", "package": "agv2_box_8"}
+{"t_s": 507.615, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_8", "distance_from_pickup_m": 0.9832041975538094}
+{"t_s": 507.915, "event": "outbound_cleared", "package": "agv1_box_9"}
+{"t_s": 507.965, "event": "bay_released", "robot": "agv2", "slot": 1, "distance_m": 0.4533603691835508}
+{"t_s": 509.765, "event": "bay_released", "robot": "agv1", "slot": 4, "distance_m": 0.4528390805275126}
+{"t_s": 514.815, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+{"t_s": 517.765, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_10", "width_m": 0.12462711059740154, "height_m": 0.2745247092744811, "kind": 1, "camera_distance_m": 0.8899834004896027, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+{"t_s": 517.773, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+{"t_s": 517.815, "event": "delivery_intent", "robot": "agv1", "slot": 1}
+{"t_s": 517.815, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 2}
+{"t_s": 522.415, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+{"t_s": 522.416, "event": "load_started", "robot": "agv1", "package": "agv1_box_10"}
+{"t_s": 524.415, "event": "loaded", "robot": "agv1", "front": null, "distance_from_pickup_m": 0.009205875347643508}
+{"t_s": 524.415, "event": "delivery_queued", "robot": "agv1", "slot": 1, "rank": 1, "registration": "column_departure"}
+{"t_s": 524.416, "event": "delivery_admitted", "robot": "agv1", "slot": 1, "wait_s": 6.600018867000017}
+{"t_s": 524.416, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 1}
+{"t_s": 524.416, "event": "column_join", "robot": "agv1", "slot": 1, "entry_row": 2}
+{"t_s": 524.417, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+{"t_s": 525.015, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+{"t_s": 528.465, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_9", "width_m": 0.18780592589376408, "height_m": 0.34461429554891787, "kind": 2, "camera_distance_m": 0.8985486102355885, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+{"t_s": 528.474, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+{"t_s": 528.517, "event": "delivery_intent", "robot": "agv2", "slot": 2}
+{"t_s": 528.518, "event": "delivery_queued", "robot": "agv2", "slot": 2, "rank": 1, "registration": "tail_append"}
+{"t_s": 528.519, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 4, "gate_row": 4}
+{"t_s": 528.615, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 3}
+{"t_s": 531.365, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 2}
+{"t_s": 531.415, "event": "empty", "robot": "agv1", "front": null, "distance_from_pickup_m": 0.4224048211045935}
+{"t_s": 533.015, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+{"t_s": 533.016, "event": "load_started", "robot": "agv2", "package": "agv2_box_9"}
+{"t_s": 533.215, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 2}
+{"t_s": 533.216, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_7", "slot": 2}
+{"t_s": 533.216, "event": "unload_started", "robot": "agv3", "package": "agv3_box_7"}
+{"t_s": 534.765, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_7", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+{"t_s": 534.766, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+{"t_s": 535.065, "event": "loaded", "robot": "agv2", "front": "agv2_box_10", "distance_from_pickup_m": 0.0085274689060985}
+{"t_s": 535.065, "event": "column_join", "robot": "agv2", "slot": 2, "entry_row": 3}
+{"t_s": 535.066, "event": "goal_sent", "robot": "agv2", "phase": "convoy", "row": 1, "col": 2, "heading": "n"}
+{"t_s": 539.964, "event": "outbound_cleared", "package": "agv3_box_7"}
+{"t_s": 540.565, "event": "bay_released", "robot": "agv3", "slot": 2, "distance_m": 0.454435522447955}
+{"t_s": 540.616, "event": "delivery_admitted", "robot": "agv2", "slot": 2, "wait_s": 12.099852806999934}
+{"t_s": 540.617, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 1}
+{"t_s": 542.065, "event": "feed_started", "robot": "agv2", "front": "agv2_box_10", "distance_from_pickup_m": 0.42072664381475017}
+{"t_s": 544.565, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_10", "distance_from_pickup_m": 0.9707266286777604}
+{"t_s": 548.615, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1}
+{"t_s": 548.615, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_10", "slot": 1}
+{"t_s": 548.616, "event": "unload_started", "robot": "agv1", "package": "agv1_box_10"}
+{"t_s": 550.115, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_10", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+{"t_s": 550.115, "event": "goal_sent", "robot": "agv1", "phase": "parking", "row": 5, "col": 1, "heading": "d"}
+{"t_s": 555.215, "event": "outbound_cleared", "package": "agv1_box_10"}
+{"t_s": 557.365, "event": "bay_released", "robot": "agv1", "slot": 1, "distance_m": 0.4522248627144544}
+{"t_s": 559.215, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2}
+{"t_s": 559.215, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_9", "slot": 2}
+{"t_s": 559.216, "event": "unload_started", "robot": "agv2", "package": "agv2_box_9"}
+{"t_s": 560.715, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_9", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+{"t_s": 560.716, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+{"t_s": 561.815, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+{"t_s": 564.867, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_8", "width_m": 0.24252122583205687, "height_m": 0.4048128980563444, "kind": 3, "camera_distance_m": 0.8986181949856137, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+{"t_s": 564.874, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+{"t_s": 564.915, "event": "delivery_intent", "robot": "agv3", "slot": 3}
+{"t_s": 564.916, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 2}
+{"t_s": 565.916, "event": "outbound_cleared", "package": "agv2_box_9"}
+{"t_s": 567.965, "event": "bay_released", "robot": "agv2", "slot": 2, "distance_m": 0.4528828770513299}
+{"t_s": 569.415, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+{"t_s": 569.415, "event": "load_started", "robot": "agv3", "package": "agv3_box_8"}
+{"t_s": 570.615, "event": "goal_reached", "robot": "agv1", "phase": "parking", "row": 5, "col": 1}
+{"t_s": 571.416, "event": "loaded", "robot": "agv3", "front": "agv3_box_9", "distance_from_pickup_m": 0.007591312166183482}
+{"t_s": 571.417, "event": "delivery_queued", "robot": "agv3", "slot": 3, "rank": 1, "registration": "column_departure"}
+{"t_s": 571.417, "event": "delivery_admitted", "robot": "agv3", "slot": 3, "wait_s": 6.500748562999888}
+{"t_s": 571.417, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 1}
+{"t_s": 571.418, "event": "column_join", "robot": "agv3", "slot": 3, "entry_row": 4}
+{"t_s": 571.418, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+{"t_s": 578.515, "event": "feed_started", "robot": "agv3", "front": "agv3_box_9", "distance_from_pickup_m": 0.42319043661972605}
+{"t_s": 581.065, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_9", "distance_from_pickup_m": 0.9819402453576666}
+{"t_s": 582.417, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+{"t_s": 585.665, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_10", "width_m": 0.24271474211713598, "height_m": 0.4051325292635082, "kind": 3, "camera_distance_m": 0.8993204217789417, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+{"t_s": 585.673, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+{"t_s": 585.717, "event": "delivery_intent", "robot": "agv2", "slot": 3}
+{"t_s": 585.718, "event": "delivery_queued", "robot": "agv2", "slot": 3, "rank": 1, "registration": "tail_append"}
+{"t_s": 585.719, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 5, "gate_row": 5}
+{"t_s": 588.215, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 4, "gate_row": 4}
+{"t_s": 590.215, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+{"t_s": 590.215, "event": "load_started", "robot": "agv2", "package": "agv2_box_10"}
+{"t_s": 590.915, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 3}
+{"t_s": 592.215, "event": "loaded", "robot": "agv2", "front": null, "distance_from_pickup_m": 0.008562120469475172}
+{"t_s": 592.215, "event": "column_join", "robot": "agv2", "slot": 3, "entry_row": 3}
+{"t_s": 592.216, "event": "goal_sent", "robot": "agv2", "phase": "convoy", "row": 1, "col": 3, "heading": "n"}
+{"t_s": 593.665, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 2}
+{"t_s": 595.617, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3}
+{"t_s": 595.618, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_8", "slot": 3}
+{"t_s": 595.618, "event": "unload_started", "robot": "agv3", "package": "agv3_box_8"}
+{"t_s": 597.165, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_8", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+{"t_s": 597.166, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+{"t_s": 602.415, "event": "outbound_cleared", "package": "agv3_box_8"}
+{"t_s": 602.966, "event": "bay_released", "robot": "agv3", "slot": 3, "distance_m": 0.45509628832262083}
+{"t_s": 603.015, "event": "delivery_admitted", "robot": "agv2", "slot": 3, "wait_s": 17.299052871000185}
+{"t_s": 603.016, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 1}
+{"t_s": 603.415, "event": "empty", "robot": "agv2", "front": null, "distance_from_pickup_m": 0.4217612911327223}
+{"t_s": 617.815, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 3}
+{"t_s": 617.815, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_10", "slot": 3}
+{"t_s": 617.816, "event": "unload_started", "robot": "agv2", "package": "agv2_box_10"}
+{"t_s": 619.315, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_10", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+{"t_s": 619.316, "event": "goal_sent", "robot": "agv2", "phase": "parking", "row": 5, "col": 2, "heading": "d"}
+{"t_s": 620.216, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+{"t_s": 622.965, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_9", "width_m": 0.12388941053825549, "height_m": 0.2723287085909475, "kind": 1, "camera_distance_m": 0.8899034332431306, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+{"t_s": 622.972, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+{"t_s": 623.015, "event": "delivery_intent", "robot": "agv3", "slot": 1}
+{"t_s": 623.016, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 2}
+{"t_s": 624.565, "event": "outbound_cleared", "package": "agv2_box_10"}
+{"t_s": 625.165, "event": "bay_released", "robot": "agv2", "slot": 3, "distance_m": 0.45070825709912427}
+{"t_s": 627.415, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+{"t_s": 627.415, "event": "load_started", "robot": "agv3", "package": "agv3_box_9"}
+{"t_s": 629.415, "event": "loaded", "robot": "agv3", "front": "agv3_box_10", "distance_from_pickup_m": 0.008275167637152121}
+{"t_s": 629.416, "event": "delivery_queued", "robot": "agv3", "slot": 1, "rank": 1, "registration": "column_departure"}
+{"t_s": 629.416, "event": "delivery_admitted", "robot": "agv3", "slot": 1, "wait_s": 6.400224324999726}
+{"t_s": 629.416, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 1}
+{"t_s": 629.417, "event": "column_join", "robot": "agv3", "slot": 1, "entry_row": 4}
+{"t_s": 629.417, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+{"t_s": 636.515, "event": "feed_started", "robot": "agv3", "front": "agv3_box_10", "distance_from_pickup_m": 0.42387430149152167}
+{"t_s": 639.065, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_10", "distance_from_pickup_m": 0.982621756087866}
+{"t_s": 645.415, "event": "goal_reached", "robot": "agv2", "phase": "parking", "row": 5, "col": 2}
+{"t_s": 659.615, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 1}
+{"t_s": 659.616, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_9", "slot": 1}
+{"t_s": 659.617, "event": "unload_started", "robot": "agv3", "package": "agv3_box_9"}
+{"t_s": 661.165, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_9", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+{"t_s": 661.166, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+{"t_s": 666.265, "event": "outbound_cleared", "package": "agv3_box_9"}
+{"t_s": 668.465, "event": "bay_released", "robot": "agv3", "slot": 1, "distance_m": 0.4550865739720692}
+{"t_s": 688.017, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+{"t_s": 691.365, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_10", "width_m": 0.2438166294667879, "height_m": 0.4045382629259642, "kind": 3, "camera_distance_m": 0.8980009549302581, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+{"t_s": 691.372, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+{"t_s": 691.416, "event": "delivery_intent", "robot": "agv3", "slot": 3}
+{"t_s": 691.417, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 2}
+{"t_s": 696.015, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+{"t_s": 696.015, "event": "load_started", "robot": "agv3", "package": "agv3_box_10"}
+{"t_s": 698.015, "event": "loaded", "robot": "agv3", "front": null, "distance_from_pickup_m": 0.006231210886410659}
+{"t_s": 698.016, "event": "delivery_queued", "robot": "agv3", "slot": 3, "rank": 1, "registration": "column_departure"}
+{"t_s": 698.017, "event": "delivery_admitted", "robot": "agv3", "slot": 3, "wait_s": 6.599507858999914}
+{"t_s": 698.018, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 1}
+{"t_s": 698.018, "event": "column_join", "robot": "agv3", "slot": 3, "entry_row": 4}
+{"t_s": 698.019, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+{"t_s": 705.115, "event": "empty", "robot": "agv3", "front": null, "distance_from_pickup_m": 0.4208303550510622}
+{"t_s": 722.215, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3}
+{"t_s": 722.216, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_10", "slot": 3}
+{"t_s": 722.216, "event": "unload_started", "robot": "agv3", "package": "agv3_box_10"}
+{"t_s": 723.766, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_10", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+{"t_s": 723.767, "event": "goal_sent", "robot": "agv3", "phase": "parking", "row": 5, "col": 3, "heading": "d"}
+{"t_s": 729.015, "event": "outbound_cleared", "package": "agv3_box_10"}
+{"t_s": 731.115, "event": "bay_released", "robot": "agv3", "slot": 3, "distance_m": 0.45710857101019087}
+{"t_s": 744.416, "event": "goal_reached", "robot": "agv3", "phase": "parking", "row": 5, "col": 3}
+{"t_s": 744.417, "event": "mission_complete", "deliveries": 30}

@@ -1,5 +1,16 @@
 # Progress
 
+## 2026-10-24 — rà soát điều phối ba xe
+
+- Chạy mới `demo30` với ba Nav2, xe động học giả, camera/LiDAR tổng hợp và hàng
+  chờ cột: 30/30 kiện, 0 lỗi audit, khoảng cách tâm nhỏ nhất 0,589657 m;
+  kiện cuối 715,751 s, cả ba đỗ xong 736,402 s.
+- Kiểm tra độc lập 9.600 trường hợp lưới trống: đường ngắn nhất và ít lần đổi
+  hướng nhất trong các đường ngắn. Toàn bộ 164 test đạt. Báo cáo và log ở
+  `docs/warehouse_route_audit_20261024/`.
+- `tools/warehouse_report.py` ghi thêm quãng đường và tổng góc xoay odometry.
+  Chưa khẳng định tối ưu toàn cục khi xe tranh chấp, hoặc kết quả xe thật.
+
 ## Đã xong (mới nhất trước)
 | Ngày | Việc | Commit |
 |---|---|---|

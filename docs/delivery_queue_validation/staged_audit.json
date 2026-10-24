@@ -1,0 +1,64 @@
+{
+  "complete": true,
+  "failed": false,
+  "invariant_issues": [],
+  "mission_duration_s": 129.55,
+  "picked": {
+    "agv1": [
+      "agv1_box_1"
+    ],
+    "agv3": [
+      "agv3_box_1"
+    ],
+    "agv2": [
+      "agv2_box_1"
+    ]
+  },
+  "delivered": {
+    "agv1": [
+      "agv1_box_1"
+    ],
+    "agv3": [
+      "agv3_box_1"
+    ],
+    "agv2": [
+      "agv2_box_1"
+    ]
+  },
+  "delivery_mode": "staged",
+  "time_to_last_delivery_s": 76.7,
+  "handoffs": [
+    {
+      "slot": 2,
+      "previous": "agv1",
+      "next": "agv3",
+      "delay_s": 0.001,
+      "waiting_at_release": true,
+      "ready_to_admit_delay_s": 0.001
+    },
+    {
+      "slot": 2,
+      "previous": "agv3",
+      "next": "agv2",
+      "delay_s": 0.05,
+      "waiting_at_release": true,
+      "ready_to_admit_delay_s": 0.05
+    }
+  ],
+  "bay_turnaround": [
+    {
+      "slot": 2,
+      "previous": "agv1",
+      "next": "agv3",
+      "seconds": 12.05
+    },
+    {
+      "slot": 2,
+      "previous": "agv3",
+      "next": "agv2",
+      "seconds": 12.15
+    }
+  ],
+  "measurement_count": 3,
+  "feeder_advances": 0
+}

@@ -1,0 +1,33 @@
+{
+  "source_run": "/home/tai/agv_logs/warehouse_flexible30_20261024_v1",
+  "t_s": 49.873,
+  "vehicles": {
+    "agv2": {
+      "t_s": "49.873",
+      "robot": "agv2",
+      "x_m": "-1.1928099011665894",
+      "y_m": "2.1611668622645365e-08",
+      "yaw_rad": "-3.1415896470468123",
+      "phase": "convoy",
+      "payload": "agv2_box_1"
+    },
+    "agv1": {
+      "t_s": "49.873",
+      "robot": "agv1",
+      "x_m": "-1.1888804921406262",
+      "y_m": "-0.5999999756904253",
+      "yaw_rad": "-3.1415904674583732",
+      "phase": "deliver",
+      "payload": "agv1_box_1"
+    },
+    "agv3": {
+      "t_s": "49.873",
+      "robot": "agv3",
+      "x_m": "-1.1917667446147244",
+      "y_m": "0.6000000388320091",
+      "yaw_rad": "-3.1415879379301592",
+      "phase": "convoy",
+      "payload": "agv3_box_1"
+    }
+  }
+}

@@ -1,7 +1,9 @@
 import unittest
+import math
+from functools import lru_cache
 
 from grid_board import Board, edge_key
-from traffic_manager import Robot, TrafficManager
+from traffic_manager import DIRS, Robot, TrafficManager
 
 
 class Planner:
@@ -35,6 +37,72 @@ class Planner:
 
 
 class TurnCostTests(unittest.TestCase):
+    def test_empty_grid_routes_are_shortest_and_use_fewest_pivots(self):
+        p=Planner()
+        p.avoid=False
+        p.board.cfg['route_time_costs']=dict(
+            linear_speed_mps=.22,turn_start_s=1.8,quarter_turn_s=1.6,
+            route_node_wait_s=.4,occupied_wait_s=3.,goal_wait_s=3.,opposite_wait_s=6.)
+        p.static_nodes.clear()
+
+        @lru_cache(None)
+        def shortest_paths(start,goal):
+            if start==goal:return ((start,),)
+            paths=[]
+            for axis in (0,1):
+                if start[axis]!=goal[axis]:
+                    nxt=list(start)
+                    nxt[axis]+=1 if goal[axis]>start[axis] else -1
+                    paths.extend((start,)+tail for tail in shortest_paths(tuple(nxt),goal))
+            return tuple(paths)
+
+        def pivots(path,heading,final):
+            directions=[DIRS[heading]]
+            directions.extend((b[0]-a[0],b[1]-a[1]) for a,b in zip(path,path[1:]))
+            directions.append(DIRS[final])
+            return sum(a!=b for a,b in zip(directions,directions[1:]))
+
+        robot=p.agv1
+        for start in p.board.nodes():
+            robot.x,robot.y=p.board.xy(*start)
+            for goal in p.board.nodes():
+                if start==goal:continue
+                robot.goal=goal
+                options=shortest_paths(start,goal)
+                for heading in range(4):
+                    robot.yaw=heading*math.pi/2
+                    for final in range(4):
+                        robot.goal_heading=final*math.pi/2
+                        path=p.plan(robot,start,goal)
+                        self.assertEqual(len(path)-1,len(options[0])-1)
+                        self.assertEqual(pivots(path,heading,final),
+                                         min(pivots(candidate,heading,final) for candidate in options))
+
+    def test_new_goal_survives_failed_planning_at_end_of_previous_route(self):
+        from types import SimpleNamespace
+        from unittest.mock import Mock
+        p=SimpleNamespace(next_route_id=100, others=lambda rb:[],
+                          node_of=lambda rb:(0,1), plan=Mock(return_value=None),
+                          lbl=str, log=Mock())
+        p.clear_route=lambda rb:TrafficManager.clear_route(p,rb)
+        p.assign_route=lambda *args:TrafficManager.assign_route(p,*args)
+        p.route_str=str
+        rb=Robot('agv1',0)
+        rb.route=[(0,0),(0,1)];rb.route_id=99;rb.mode='go'
+        rb.goal=(4,0);rb.goal_heading=0.
+        self.assertFalse(TrafficManager.route_to_goal(p,rb))
+        self.assertEqual(rb.goal,(4,0))
+        self.assertTrue(rb.pending)
+        self.assertIsNone(rb.route)  # stale done cannot erase the pending goal
+        self.assertEqual(rb.mode,'idle')
+        self.assertEqual(rb.route_id,100)
+        p.plan.return_value=[(0,1),(1,1),(2,1),(3,1),(4,1),(4,0)]
+        rb.pending=False  # the actual retry loop consumes this flag
+        self.assertTrue(TrafficManager.route_to_goal(p,rb))
+        self.assertEqual(rb.route[-1],(4,0))
+        self.assertEqual(rb.goal,(4,0))
+        self.assertEqual(rb.mode,'go')
+
     def test_delivery_uses_two_turns_when_other_robot_is_parked(self):
         p = Planner()
         path = p.plan(p.agv1, (2, 4), (0, 1), hard={(3, 4)})

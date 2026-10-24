@@ -52,6 +52,26 @@ class Board:
         # thuong lech vai do so voi truc x/y ban do.
         self.yaw = math.radians(float(cfg.get('yaw_deg', 0.0)))
         self._cos, self._sin = math.cos(self.yaw), math.sin(self.yaw)
+        # Optional directed traffic rules, expressed with public 1-based nodes.
+        # Empty by default: existing real-robot grids remain bidirectional.
+        self.forbidden_directions = set()
+        for a, b in cfg.get('forbidden_directions', []):
+            a, b = tuple(int(v)-1 for v in a), tuple(int(v)-1 for v in b)
+            if (len(a)!=2 or len(b)!=2 or
+                    not all(0<=r<self.rows and 0<=c<self.cols for r,c in (a,b)) or
+                    abs(a[0]-b[0])+abs(a[1]-b[1])!=1):
+                raise ValueError(f'{path}: invalid directed edge {a} -> {b}')
+            self.forbidden_directions.add((a,b))
+        # Only the final edge into a service goal is constrained; transit
+        # through the same node remains available to return trips.
+        self.goal_approaches = {}
+        for goal, entry in cfg.get('goal_approaches', []):
+            goal,entry=tuple(int(v)-1 for v in goal),tuple(int(v)-1 for v in entry)
+            if (len(goal)!=2 or len(entry)!=2 or
+                    not all(0<=r<self.rows and 0<=c<self.cols for r,c in (goal,entry)) or
+                    abs(goal[0]-entry[0])+abs(goal[1]-entry[1])!=1):
+                raise ValueError(f'{path}: invalid goal approach {entry} -> {goal}')
+            self.goal_approaches[goal]=entry
 
     @classmethod
     def load(cls, path):
@@ -98,7 +118,8 @@ class Board:
         for dr, dc in ((0, 1), (1, 0), (0, -1), (-1, 0)):
             nr, nc = r + dr, c + dc
             if 0 <= nr < self.rows and 0 <= nc < self.cols:
-                yield nr, nc
+                if ((r,c),(nr,nc)) not in self.forbidden_directions:
+                    yield nr, nc
 
     @staticmethod
     def label(r, c):

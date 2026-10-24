@@ -120,8 +120,8 @@ def box_visual(name, x, y, z, sx, sy, sz, rgb, yaw=0.0):
             f'<material><ambient>{rgb} 1</ambient><diffuse>{rgb} 1</diffuse></material></visual>')
 
 
-def cyl_visual(name, x, y, z, r, l, rgb):
-    return (f'<visual name="{name}"><pose>{x:.4f} {y:.4f} {z:.4f} 0 0 0</pose>'
+def cyl_visual(name, x, y, z, r, l, rgb, roll=0.0):
+    return (f'<visual name="{name}"><pose>{x:.4f} {y:.4f} {z:.4f} {roll:.6f} 0 0</pose>'
             f'<geometry><cylinder><radius>{r}</radius><length>{l}</length></cylinder></geometry>'
             f'<material><ambient>{rgb} 1</ambient><diffuse>{rgb} 1</diffuse></material></visual>')
 
@@ -132,8 +132,11 @@ def robot_model(name, rgb):
     v = [cyl_visual('than', 0, 0, 0.045, 0.0907, 0.040, rgb),
          cyl_visual('lidar', 0, 0, 0.080, 0.030, 0.030, '0.1 0.1 0.1'),
          box_visual('mui', 0.060, 0, 0.067, 0.050, 0.020, 0.004, '1 1 1'),
-         box_visual('banh_trai', -0.014, 0.100, 0.032, 0.0645, 0.026, 0.0645, '0.1 0.1 0.1'),
-         box_visual('banh_phai', -0.014, -0.100, 0.032, 0.0645, 0.026, 0.0645, '0.1 0.1 0.1')]
+         # Cylinder axis is z by default; rotate it onto the wheel axle (y).
+         cyl_visual('banh_trai', -0.014, 0.100, 0.03225, 0.03225, 0.026,
+                    '0.1 0.1 0.1', roll=math.pi/2),
+         cyl_visual('banh_phai', -0.014, -0.100, 0.03225, 0.03225, 0.026,
+                    '0.1 0.1 0.1', roll=math.pi/2)]
     return (f'<model name="{name}"><pose>0 0 -5 0 0 0</pose><link name="link">'
             f'<gravity>false</gravity><inertial><mass>1</mass></inertial>'
             + ''.join(v) + '</link></model>')

@@ -1,0 +1,74 @@
+{
+  "complete": true,
+  "failed": false,
+  "invariant_issues": [],
+  "mission_duration_s": 186.052,
+  "picked": {
+    "agv1": [
+      "agv1_box_1",
+      "agv1_box_2"
+    ],
+    "agv3": [
+      "agv3_box_1",
+      "agv3_box_2"
+    ],
+    "agv2": [
+      "agv2_box_1",
+      "agv2_box_2"
+    ]
+  },
+  "delivered": {
+    "agv1": [
+      "agv1_box_1",
+      "agv1_box_2"
+    ],
+    "agv2": [
+      "agv2_box_1",
+      "agv2_box_2"
+    ],
+    "agv3": [
+      "agv3_box_1",
+      "agv3_box_2"
+    ]
+  },
+  "synchronized_round_coverage": null,
+  "delivery_mode": "staged",
+  "time_to_last_delivery_s": 144.002,
+  "handoffs": [
+    {
+      "slot": 1,
+      "previous": "agv1",
+      "next": "agv2",
+      "delay_s": 38.804,
+      "waiting_at_release": false,
+      "ready_to_admit_delay_s": 0.001
+    },
+    {
+      "slot": 2,
+      "previous": "agv2",
+      "next": "agv3",
+      "delay_s": 42.002,
+      "waiting_at_release": false,
+      "ready_to_admit_delay_s": 0.002
+    }
+  ],
+  "bay_turnaround": [
+    {
+      "slot": 1,
+      "previous": "agv1",
+      "next": "agv2",
+      "seconds": 81.302
+    },
+    {
+      "slot": 2,
+      "previous": "agv2",
+      "next": "agv3",
+      "seconds": 80.653
+    }
+  ],
+  "measurement_count": 6,
+  "feeder_advances": 3,
+  "outbound_cleared_count": 6,
+  "synchronized_rounds": false,
+  "approach_stop_goal_count": 0
+}
