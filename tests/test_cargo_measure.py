@@ -8,7 +8,7 @@ from cargo_measure import (Camera, front_rectangle_hint, grabcut_mask,
                            visible_bottom_edge, measure)
 
 
-def scene(width=.185,height=.32,offset=0.,angle=0.):
+def scene(width=.185,height=.32,offset=0.,angle=0.,rays=640):
     cfg={'camera':dict(width=320,height=240,fx=300.,fy=300.,cx=160.,cy=120.,
                       dist=[0.]*5,x=.1,y=0.,z=.235,yaw=0.,pitch=0.),
          'lidar':dict(x=.014,z=.19,half_fov_deg=35,max_range=1.2,scans=10)}
@@ -21,9 +21,9 @@ def scene(width=.185,height=.32,offset=0.,angle=0.):
     img=np.full((240,320,3),210,np.uint8)
     img[199:]=(160,165,170)
     cv2.fillConvexPoly(img,np.round(corners).astype(np.int32),(65,105,145))
-    amin=-math.pi;inc=2*math.pi/640
+    amin=-math.pi;inc=2*math.pi/rays
     ranges=[]
-    for a in amin+np.arange(640)*inc:
+    for a in amin+np.arange(rays)*inc:
         direction=np.array([math.cos(a),math.sin(a)])
         den=float(n@direction)
         r=(d-n[0]*.014)/den if abs(den)>1e-8 else -1.
@@ -73,6 +73,14 @@ class ImageEvidenceTests(unittest.TestCase):
                 self.assertLess(abs(result['width']-.185),.012)
                 self.assertLess(abs(result['height']-.32),.012)
                 self.assertEqual(result['height_source'],'visible_edges')
+
+    def test_sparse_320_ray_scan_accounts_for_unseen_box_edges(self):
+        cfg,img,scans,_=scene(width=.15,rays=320)
+        result,_=measure(img,scans,cfg)
+        self.assertLess(result['lidar_width_raw'],.15)
+        self.assertLess(abs(result['lidar_width']-.15),
+                        abs(result['lidar_width_raw']-.15))
+        self.assertLess(abs(result['width']-result['lidar_width']),.03)
 
     def test_common_camera_height_offset_cancels_when_both_edges_are_visible(self):
         cfg,img,scans,_=scene()

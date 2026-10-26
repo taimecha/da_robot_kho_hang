@@ -1,0 +1,24 @@
+[INFO] [1793006701.265615569] [agv1.fleet_agent]: Sa bàn 5x5, ô 0.60 m, (hàng 3, cột 3) = (-0.545, +0.035), xoay +0.0° - /home/tai/Robot_kho_clone/data/sim_trial_01_20261026/fleet/grid_fleet.yaml. Đang chờ bản đồ...
+[INFO] [1793006701.267080255] [agv1.fleet_agent]: [agv1] cho lenh tu traffic_manager tren /fleet/agv1/cmd
+[WARN] [1793006703.977609881] [agv1.fleet_agent]: Bỏ điểm (hàng 1, cột 5): cách vật cản trên bản đồ 14 cm < 25 cm
+[INFO] [1793006703.977890172] [agv1.fleet_agent]: Đã đối chiếu sa bàn với bản đồ: 24/25 điểm, bỏ 2 cạnh sát vật cản.
+[INFO] [1793006921.689041604] [agv1.fleet_agent]: [agv1] lo trinh #930068380: (5,2) -> (5,3) -> (4,3) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793006921.888497998] [agv1.fleet_agent]: Đoạn thẳng (-1.15, +1.23) -> (-0.55, +1.23), 0.60 m, tới (hàng 5, cột 3)
+[INFO] [1793006926.775579177] [agv1.fleet_agent]: Đoạn thẳng (-0.55, +1.23) -> (-0.55, +0.04), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793006926.776118819] [agv1.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793006930.927330990] [agv1.fleet_agent]: Xoay mot luot xong sau 4.2 s, con lech +0.36°, khong xoay bu (omega max 37°/s)
+[INFO] [1793006939.826854979] [agv1.fleet_agent]: Đoạn thẳng (-0.55, +0.04) -> (+0.05, +0.04), 0.60 m, tới (hàng 3, cột 4)
+[INFO] [1793006939.827297567] [agv1.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793006943.881304221] [agv1.fleet_agent]: Xoay mot luot xong sau 4.1 s, con lech -0.01°, khong xoay bu (omega max 37°/s)
+[INFO] [1793006949.570032994] [agv1.fleet_agent]: [agv1] da toi (3,4), sai so vi tri 1.1 cm, sai so goc 0.06°
+[INFO] [1793006958.091814733] [agv1.fleet_agent]: [agv1] lo trinh #930068382: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793006958.289129257] [agv1.fleet_agent]: Đoạn thẳng (+0.05, +0.04) -> (+0.65, +0.04), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793006964.177516184] [agv1.fleet_agent]: [agv1] da toi (3,5), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793006966.892415006] [agv1.fleet_agent]: [agv1] lo trinh #930068384: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (2,2) -> (1,2), duoc di toi o 0
+[INFO] [1793006967.088617408] [agv1.fleet_agent]: Đoạn thẳng (+0.65, +0.04) -> (-0.55, +0.04), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793006967.088996988] [agv1.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793006973.540521734] [agv1.fleet_agent]: Xoay mot luot xong sau 6.5 s, con lech +0.03°, khong xoay bu (omega max 37°/s)
+[INFO] [1793006986.424080992] [agv1.fleet_agent]: Đoạn thẳng (-1.15, +0.04) -> (-1.15, -1.17), 1.20 m, tới (hàng 1, cột 2)
+[INFO] [1793006986.424434891] [agv1.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793006990.477926464] [agv1.fleet_agent]: Xoay mot luot xong sau 4.1 s, con lech -0.00°, khong xoay bu (omega max 37°/s)
+[INFO] [1793007000.217081168] [agv1.fleet_agent]: [agv1] da toi (1,2), sai so vi tri 1.1 cm, sai so goc 0.00°

@@ -223,7 +223,7 @@ def cmd_up(a):
     cars = a.cars.split(',')
     meta = {'cars': cars, 'emulate': a.emulate, 'domain': domain(), 'tm': not a.no_tm,
             'start': time.strftime('%Y-%m-%d %H:%M:%S'),
-            'agv1': os.environ.get('AGV1', '3 1 0'), 'agv2': os.environ.get('AGV2', '3 5 180')}
+            'agv1': os.environ.get('AGV1', '2 3 0'), 'agv2': os.environ.get('AGV2', '3 3 0')}
     json.dump(meta, open(os.path.join(run, 'meta.json'), 'w'), indent=1)
     # Phan dieu phoi chay NEN (cho xe bat nguon co the lau) - lenh nay tra ve ngay
     pid = spawn(f'python3 {os.path.realpath(__file__)} _bringup {run}', os.path.join(run, 'bringup.log'))
@@ -284,6 +284,9 @@ def _bringup(run):
         rc = subprocess.call(['bash', '-c', ROS_SETUP + f'{WS}/tools/fleet_real.sh up'],
                              stdout=f, stderr=subprocess.STDOUT, env=dict(os.environ, **env))
     log(f'fleet_real.sh xong (ma {rc}):\n' + tail(os.path.join(run, 'fleet_up.log'), 20))
+    if rc != 0:
+        log('Khong bat traffic_manager: chua du dieu kien dinh vi/an toan de giao nhiem vu.')
+        return rc
     if meta['tm']:
         # Khong tty: traffic_manager doc lenh tu stdin + /fleet/goal. stdin la
         # 'tail -f /dev/null' de khong bao gio het (het stdin = no tu thoat).
@@ -550,6 +553,8 @@ def _write_car(xe):
     for folder, name in ((os.path.join(WS, 'firmware', f'xe{xe}'), f'xe{xe}.ino'),
                          (os.path.join(IDE_ROOT, f'Xe_{xe}'), f'Xe_{xe}.ino')):
         ide = folder.startswith(IDE_ROOT)
+        if ide and not os.path.isdir(IDE_ROOT):
+            continue  # Linux native: Arduino IDE tren o Windows khong duoc mount.
         os.makedirs(folder, exist_ok=True)
         dst = os.path.join(folder, name)
         if ide and os.path.exists(dst):
@@ -557,6 +562,8 @@ def _write_car(xe):
             os.makedirs(os.path.dirname(bak), exist_ok=True)
             shutil.copy(dst, bak)
         open(dst, 'w', newline='\r\n' if ide else '\n').write(text)
+        shutil.copy(os.path.join(WS, 'firmware/esp32_agv_base/ydlidar_x2_intensity.h'),
+                    os.path.join(folder, 'ydlidar_x2_intensity.h'))
         wc = os.path.join(folder, 'wifi_config.h')      # khong vao git (.gitignore)
         if not os.path.exists(wc):
             shutil.copy(_wifi_cfg(), wc)
@@ -578,7 +585,10 @@ def cmd_fw(a):
         for x in (1, 2):
             for dst in _write_car(x):
                 print(f'XE {x}: {dst}')
-        print(r'Nap: Arduino IDE mo Xe_1\Xe_1.ino cho xe 1, Xe_2\Xe_2.ino cho xe 2 (giu BOOT).')
+        if os.path.isdir(IDE_ROOT):
+            print(r'Nap: Arduino IDE mo Xe_1\Xe_1.ino cho xe 1, Xe_2\Xe_2.ino cho xe 2 (giu BOOT).')
+        else:
+            print('Da sinh firmware trong repo; dung arduino-cli de bien dich va nap.')
         return
     if a.action == 'build' and xe is None:
         sys.exit('fw build can so xe: tools/agvctl fw build 1')

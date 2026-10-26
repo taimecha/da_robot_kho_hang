@@ -1,0 +1,55 @@
+# Sa ban 5x5 cho XE THAT tren ban do real_room_map. Doc boi grid_navigator.py --real.
+#
+# Danh so tu 1 (giong anh docs/sa_ban_5x5_preview.png):
+#   hang 1 = duoi cung (y nho nhat) -> hang 5 = tren cung
+#   cot  1 = ben trai  (x nho nhat) -> cot  5 = ben phai
+#
+# Sa ban CO DINH tren ban do: diem (hang 3, cot 3) luon o (center_x, center_y)
+# du xe dang dung o dau. Doi tam sang vi tri xe hien tai:
+#     python3 tools/set_grid_center.py
+# Ve lai anh xem truoc:
+#     python3 tools/preview_grid.py
+
+rows: 5
+cols: 5
+spacing: 0.6            # m, canh moi o vuong
+
+# Diem (center_row, center_col) nam o (center_x, center_y) tren ban do.
+# Lay tu vi tri xe ngay 2026-10-03 (khop anh quet voi ban do, 72% tia trung tuong).
+center_row: 3
+center_col: 3
+center_x: -0.545
+center_y: 0.035
+
+# Xe that: than tron duong kinh 18 cm, banh nho ra -> ban kinh bao 0.13 m
+# (giong robot_radius trong navigation.yaml).
+robot_radius: 0.13
+# Mot DIEM bi bo neu cach tuong / vat can / vung chua biet tren ban do
+# gan hon node_clearance; mot CANH bi bo neu ca doan noi gan hon edge_clearance.
+# Cung dung cho vat can moi xuat hien tren local costmap luc xe chay.
+node_clearance: 0.25
+edge_clearance: 0.20
+
+# Vao o quan sat / lay hang tu phia Tay de xe da quay huong Dong truoc khi
+# cham tam o. Xoay 180 do ngay tai o do tung lam lech tam xe 4.3 cm (AGV2),
+# khien buoc do hang dung o nguong sai so 2 cm.
+goal_approaches:
+  - [[3, 4], [3, 3]]  # AGV1: quan sat
+  - [[4, 4], [4, 3]]  # AGV2: quan sat
+  - [[3, 5], [3, 4]]  # AGV1: lay hang
+  - [[4, 5], [4, 4]]  # AGV2: lay hang
+
+# Moi cho doi huong: mot luot xoay lien tuc, giam toc theo goc va gyro.
+# Khong xung bu, khong dao chieu, khong tu giao lai khi xoay khong dat.
+rotate:
+  start_deg: 10
+  stop_deg: 0.6
+  done_deg: 2.5       # nguong chap nhan sau khi dung: <2.5 do
+  max_speed: 0.65     # rad/s, toc do xoay toi da; toc do chay thang giu nguyen
+  min_speed: 0.12     # PID banh moi da tu bu ma sat khoi dong
+  decel: 1.2         # rad/s2, gioi han tang toc va tinh toc do tiep can
+  gain: 1.8          # 1/s, toc do ti le voi goc con lai
+  brake_delay: 0.10  # s, du doan dung ngan bang toc do gyro hien tai
+  settle_s: 0.35     # dung yen lien tuc truoc khi xac nhan
+  stall_timeout_s: 2.0
+  timeout_s: 15.0    # khong dat -> dung bao loi, khong xoay bu

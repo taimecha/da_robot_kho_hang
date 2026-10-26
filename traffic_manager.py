@@ -24,6 +24,8 @@ Quy tac:
       - xe kia dang chay / dang xoay: cho tiep; dung yen han > 3 s thi go nhu tren.
  6. Xe mat trang thai > 1 s: giu nguyen o no chiem (xe khac khong vao), bao
     loi. Xe bao vat can / Nav2 that bai: lap lai duong tu cho no dung.
+ 7. Khi xe dừng ở ô, xét lại đường vòng nếu đường ngắn hơn đã thông. Giữ
+    chỗ cũ tới khi agent xác nhận tuyến mới.
 
     python3 traffic_manager.py agv1 agv2 [--grid FILE] [--no-avoid]
 Chay trong terminal: hoi lan luot xe 1 roi xe 2 (hang, cot, huong tai dich -
@@ -68,6 +70,8 @@ SOFT_GOAL = 3.0
 SOFT_OPP = 6.0
 RETRY_S = 2.0
 MAX_FAIL = 5
+SHORTCUT_GAIN_S = 1.0       # khong huy lo trinh de tiet kiem chi vai phan giay
+SHORTCUT_COOLDOWN_S = 1.5   # cho agent nhan/thi hanh lo trinh moi
 COLORS = [(0.15, 0.45, 0.95), (0.95, 0.5, 0.1), (0.2, 0.75, 0.3), (0.8, 0.2, 0.7)]
 DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]       # Dong, Bac, Tay, Nam (theo truc sa ban)
 
@@ -101,10 +105,13 @@ class Robot:
         self.transition_res = set()     # old permissions, held until new command ACK
         self.deferred_goal = None      # new workflow intent while clearing a blocked cell
         self.route_changed_at = 0.
+        self.route_busy = True
+        self.linear_speed = self.angular_speed = None
 
 
 class TrafficManager(Node):
-    def __init__(self, names, grid_file=None, avoid=True, service_topic=None, queue_topic=None):
+    def __init__(self, names, grid_file=None, avoid=True, service_topic=None,
+                 queue_topic=None):
         super().__init__('traffic_manager')
         self.board = Board.load(grid_file or config_path(True))
         self.robots = {n: Robot(n, i) for i, n in enumerate(names)}
@@ -172,6 +179,18 @@ class TrafficManager(Node):
         if not d or rb.mode!='go':return True
         gate=d['gate_row'] if d['until']>time.time() else self.board.rows+1
         return node[1]!=d['slot']-1 or node[0]+1>=gate
+
+    def bay_exit_before_arrival(self, me, start, goal):
+        """An occupied bay may exit into its empty approach before the next delivery."""
+        if (start[0]!=0 or goal!=(1,start[1]) or me.goal!=goal or
+                self.dist(me,start)>.045):
+            return False
+        approach=goal
+        if any(approach in TrafficManager.occupied(self,o)
+               for o in self.robots.values() if o is not me):
+            return False
+        return all(approach not in held for name,held in getattr(self,'res',{}).items()
+                   if name!=me.name)
 
     def log(self, text, level='info'):
         # rclpy cam mot cho goi log doi muc giua cac lan -> moi muc mot cho goi
@@ -271,7 +290,9 @@ class TrafficManager(Node):
         desired = (self.heading_dir(me.goal_heading)
                    if me.goal == goal and me.goal_heading is not None else None)
         column=TrafficManager.column_queue(self,me) if goal==me.goal else None
-        queue_cols={d['slot']-1 for n,d in getattr(self,'delivery_queues',{}).items() if n!=me.name}
+        queue_cols={entry['slot']-1 for name,entry in
+                    getattr(self,'delivery_queues',{}).items()
+                    if name!=me.name and entry['until']>time.time()}
         goal_key, goal_cost, goal_turn = None, float('inf'), float('inf')
         while heap:
             cost, _, n, d = heapq.heappop(heap)
@@ -294,9 +315,9 @@ class TrafficManager(Node):
             for nb in self.board.neighbours(*n):
                 if nb in bn or edge_key(n, nb) in be:
                     continue
-                # Enter behind the existing queue, then follow the same
-                # column all the way to the bay. Gate changes only extend
-                # permissions on this route; they never replace its goal.
+                # Approach the assigned column at the nearby entry row, then
+                # follow it to the bay. A closed gate holds the car outside
+                # that row; opening it extends permissions on the same route.
                 if column:
                     c=column['slot']-1;entry=column['entry_row']-1
                     if n[1]!=c and nb[1]==c and nb[0]!=entry:continue
@@ -304,7 +325,9 @@ class TrafficManager(Node):
                 # Exclude only a conflicting incoming column. With no follower
                 # behind this car, returning through its own column is allowed;
                 # west/east departures are both available on flexible grids.
-                if n[0]==0 and nb==(1,n[1]) and n[1] in queue_cols:continue
+                if n[0]==0 and nb==(1,n[1]) and n[1] in queue_cols:
+                    if n!=start or not TrafficManager.bay_exit_before_arrival(self,me,n,nb):
+                        continue
                 entry=getattr(self.board,'goal_approaches',{}).get(goal)
                 if nb==goal and entry is not None and n!=entry:
                     continue
@@ -333,6 +356,72 @@ class TrafficManager(Node):
             goal_key = prev[goal_key]
             path.append(goal_key[0])
         return path[::-1]
+
+    def route_motion_time(self, rb, path):
+        """Estimated travel/turn time, using the same motion weights as plan()."""
+        costs=getattr(self.board,'cfg',{}).get('route_time_costs')
+        edge=self.board.spacing/costs['linear_speed_mps'] if costs else 1.
+        start_turn=costs['turn_start_s'] if costs else TURN_START_COST
+        quarter=costs['quarter_turn_s'] if costs else TURN_COST
+        direction=self.heading_dir(rb.yaw) if self.dist(rb,path[0])<.2 else None
+        total=0.
+        for a,b in zip(path,path[1:]):
+            next_direction=(b[0]-a[0],b[1]-a[1])
+            total+=edge
+            if direction is not None and direction!=next_direction:
+                total+=start_turn+quarter*(2 if next_direction==(-direction[0],-direction[1]) else 1)
+            direction=next_direction
+        desired=self.heading_dir(rb.final_heading) if rb.final_heading is not None else None
+        if desired is not None and direction is not None and desired!=direction:
+            total+=start_turn+quarter*(2 if desired==(-direction[0],-direction[1]) else 1)
+        return total
+
+    def route_expected_time(self, rb, path):
+        """Motion time plus the same traffic penalties used by plan()."""
+        total=TrafficManager.route_motion_time(self,rb,path)
+        if not self.avoid:return total
+        costs=getattr(self.board,'cfg',{}).get('route_time_costs')
+        soft_nodes,opp_edges,soft_goals,occupied_nodes=set(),set(),set(),set()
+        for other in self.others(rb):
+            remaining=self.remaining(other)
+            soft_nodes.update(remaining)
+            opp_edges.update((b,a) for a,b in zip(remaining,remaining[1:]))
+            if other.goal is not None:soft_goals.add(other.goal)
+            if costs and other.x is not None:
+                occupied_nodes.update(TrafficManager.occupied(self,other))
+        for a,b in zip(path,path[1:]):
+            if b in soft_nodes:total+=costs['route_node_wait_s'] if costs else SOFT_NODE
+            if b in soft_goals and b!=path[-1]:total+=costs['goal_wait_s'] if costs else SOFT_GOAL
+            if (a,b) in opp_edges:total+=costs['opposite_wait_s'] if costs else SOFT_OPP
+            if b in occupied_nodes:total+=costs['occupied_wait_s']
+        return total
+
+    def shorten_clear_route(self, rb, now):
+        """Replace a detour only while stopped at a grid node and safe to cancel it."""
+        if (not rb.route or rb.mode!='go' or rb.goal!=rb.route[-1] or rb.stale or
+                rb.ack!=rb.route_id or now-rb.route_changed_at<SHORTCUT_COOLDOWN_S or
+                TrafficManager.column_queue(self,rb) or self.in_service(rb)):
+            return False
+        stationary=(rb.state=='waiting' or
+                    (not rb.route_busy and rb.linear_speed is not None and
+                     rb.angular_speed is not None and
+                     abs(rb.linear_speed)<.01 and abs(rb.angular_speed)<.04))
+        if not stationary:return False
+        start=self.node_of(rb)
+        if start!=rb.route[rb.progress] or self.dist(rb,start)>.045:return False
+        current=rb.route[rb.progress:]
+        if len(current)<3:return False
+        hard=set().union(*(nodes for name,nodes in self.res.items() if name!=rb.name))
+        candidate=self.plan(rb,start,rb.goal,hard=hard)
+        if not candidate or candidate==current:return False
+        old_time=TrafficManager.route_expected_time(self,rb,current)
+        new_time=TrafficManager.route_expected_time(self,rb,candidate)
+        if old_time-new_time<SHORTCUT_GAIN_S:return False
+        self.log(f'[{rb.name}] duong da thong: rut ngan tu {self.route_str(current)} '
+                 f'thanh {self.route_str(candidate)} '
+                 f'(uoc tinh giam {old_time-new_time:.1f} s)')
+        self.assign_route(rb,candidate,rb.final_heading,'go')
+        return True
 
 
     def assign_route(self, rb, nodes, final_heading, mode):
@@ -404,6 +493,9 @@ class TrafficManager(Node):
             self.log(f'[{rb.name}] da go ESTOP ({rb.estop}) - nhap dich moi cho xe nay')
             rb.estop = None
         rb.ack = d.get('route_id')
+        rb.route_busy=bool(d.get('route_busy',True))
+        rb.linear_speed=d.get('linear_speed_mps')
+        rb.angular_speed=d.get('angular_speed_radps')
         rb.dyn_nodes = {tuple(n) for n in d.get('blocked_nodes', [])}
         rb.dyn_edges = {edge_key(tuple(a), tuple(b)) for a, b in d.get('blocked_edges', [])}
         if rb.stale:
@@ -589,6 +681,12 @@ class TrafficManager(Node):
                 s |= set(rb.route[rb.progress:rb.upto + 1])
             self.res[n] = s
 
+        # An earlier detour can outlive the traffic that caused it. Replan at
+        # a stopped node; old permissions remain held until the new route ACK.
+        if not self.recovery_active(now):
+            for rb in self.robots.values():
+                TrafficManager.shorten_clear_route(self,rb,now)
+
         # 3. Cap them o, xe gan dich truoc
         movers = [rb for rb in self.robots.values()
                   if rb.route and rb.ack == rb.route_id and not rb.stale
@@ -598,6 +696,14 @@ class TrafficManager(Node):
             while rb.upto < want:
                 nxt = rb.route[rb.upto + 1]
                 if not TrafficManager.column_allows(self,rb,nxt):break
+                # Keep the approach free for a car still parked in the bay.
+                # Its departure may be straight down this edge. The arriving
+                # car can wait one cell earlier until the bay is vacated.
+                if (len(rb.route)>=2 and nxt==rb.route[-2] and
+                        rb.route[-1][0]==0 and
+                        any(o is not rb and rb.route[-1] in self.occ[o.name]
+                            for o in self.robots.values())):
+                    break
                 if self.owner(nxt, rb) is not None:
                     break
                 rb.upto += 1
@@ -853,7 +959,8 @@ class TrafficManager(Node):
         cua so RViz chi doc duoc mot cay)."""
         arr = MarkerArray()
         stamp = self.get_clock().now().to_msg()
-        # Luoi: canh xanh nhat, diem xanh; diem / canh bi chan mau do
+        # Luoi: canh xanh nhat, diem xanh; diem / canh bi chan mau do.
+        # Moi giao diem co nhan (hang,cot), danh so tu 1 nhu lenh /fleet/goal.
         bn, be = self.blocked_sets()
         edges = self._mk('grid_edges', 0, Marker.LINE_LIST, stamp)
         edges.scale.x = 0.015
@@ -868,11 +975,23 @@ class TrafficManager(Node):
                 tgt.points.append(Point(x=float(x), y=float(y), z=0.005))
         nodes = self._mk('grid_nodes', 0, Marker.SPHERE_LIST, stamp)
         nodes.scale.x = nodes.scale.y = nodes.scale.z = 0.06
-        for nd in self.board.nodes():
+        yaw = self.board.yaw
+        for r, c in self.board.nodes():
+            nd = r, c
             x, y = self.xy(nd)
             nodes.points.append(Point(x=float(x), y=float(y), z=0.01))
             nodes.colors.append(ColorRGBA(r=0.9, g=0.2, b=0.2, a=1.0) if nd in bn
                                 else ColorRGBA(r=0.15, g=0.4, b=0.85, a=1.0))
+            label = self._mk('grid_labels', r * self.board.cols + c,
+                             Marker.TEXT_VIEW_FACING, stamp)
+            # Lech sang phai va xuong theo truc luoi, de nhan khong che tam o/than xe.
+            label.pose.position.x = float(x + 0.16 * math.cos(yaw) + 0.13 * math.sin(yaw))
+            label.pose.position.y = float(y + 0.16 * math.sin(yaw) - 0.13 * math.cos(yaw))
+            label.pose.position.z = 0.09
+            label.scale.z = 0.10
+            label.color = ColorRGBA(r=1.0, g=0.95, b=0.25, a=0.95)
+            label.text = f'({r + 1},{c + 1})'
+            arr.markers.append(label)
         arr.markers += [edges, nodes]
         if bad_e.points:
             arr.markers.append(bad_e)
@@ -1046,7 +1165,8 @@ def main():
     service_topic=argv[argv.index('--service-holds-topic')+1] if '--service-holds-topic' in argv else None
     queue_topic=argv[argv.index('--delivery-queues-topic')+1] if '--delivery-queues-topic' in argv else None
     names = [a for a in argv if not a.startswith('--') and a not in (grid_file,service_topic,queue_topic)] or ['agv1', 'agv2']
-    node = TrafficManager(names, grid_file, avoid='--no-avoid' not in argv,service_topic=service_topic,queue_topic=queue_topic)
+    node = TrafficManager(names, grid_file, avoid='--no-avoid' not in argv,
+                          service_topic=service_topic,queue_topic=queue_topic)
     if '--no-stdin' not in argv:
         loop = interactive_loop if sys.stdin.isatty() else stdin_loop
         threading.Thread(target=loop, args=(node,), daemon=True).start()

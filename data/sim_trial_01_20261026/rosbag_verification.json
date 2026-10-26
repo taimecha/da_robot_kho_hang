@@ -1,0 +1,164 @@
+{
+  "result": "PASS",
+  "comparison": "All per-topic serialized payloads, receive timestamps, order, types and message counts exactly match the uncompressed recording.",
+  "total_messages": 61095,
+  "topics": {
+    "/agv2/camera/image_raw": {
+      "type": "sensor_msgs/msg/Image",
+      "serialization_format": "cdr",
+      "message_count": 445,
+      "first_timestamp_ns": 1793006841555524132,
+      "last_timestamp_ns": 1793007063550207095,
+      "payload_timestamp_sha256": "1f8ea8e4e6e429496939f601a1c625f022880a40f4e6ab86408a3c71f1e4f1aa"
+    },
+    "/fleet/status": {
+      "type": "std_msgs/msg/String",
+      "serialization_format": "cdr",
+      "message_count": 2249,
+      "first_timestamp_ns": 1793006837867245810,
+      "last_timestamp_ns": 1793007063668495321,
+      "payload_timestamp_sha256": "4bb534c584db5c865184a15b23e1f9dce6f63d7214ee1952802d2ac76d67ee92"
+    },
+    "/agv2/cmd_vel": {
+      "type": "geometry_msgs/msg/Twist",
+      "serialization_format": "cdr",
+      "message_count": 1762,
+      "first_timestamp_ns": 1793006922175357948,
+      "last_timestamp_ns": 1793007016235940238,
+      "payload_timestamp_sha256": "946999999aaceaf5b46a9b776fc25a5a2112bf8e7ddbfaec88795382fe473787"
+    },
+    "/agv1/cmd_vel": {
+      "type": "geometry_msgs/msg/Twist",
+      "serialization_format": "cdr",
+      "message_count": 1403,
+      "first_timestamp_ns": 1793006838752962254,
+      "last_timestamp_ns": 1793007001213242246,
+      "payload_timestamp_sha256": "bb692169de92831da5fbe63def70ef4d1365678814040fd1e28fbc4fed716425"
+    },
+    "/agv1/camera/image_raw": {
+      "type": "sensor_msgs/msg/Image",
+      "serialization_format": "cdr",
+      "message_count": 445,
+      "first_timestamp_ns": 1793006841519483577,
+      "last_timestamp_ns": 1793007063521728543,
+      "payload_timestamp_sha256": "2fb69b72d57817b8fb51d9d4477a909fed70c845356f44a44831756579f38729"
+    },
+    "/agv1/odom": {
+      "type": "nav_msgs/msg/Odometry",
+      "serialization_format": "cdr",
+      "message_count": 11267,
+      "first_timestamp_ns": 1793006838508216512,
+      "last_timestamp_ns": 1793007063829198604,
+      "payload_timestamp_sha256": "6c83c25db2d248016c6a43dcb3b87e54f209201402f66c0443bfa918c03edd4b"
+    },
+    "/fleet/markers": {
+      "type": "visualization_msgs/msg/MarkerArray",
+      "serialization_format": "cdr",
+      "message_count": 3365,
+      "first_timestamp_ns": 1793006838294265861,
+      "last_timestamp_ns": 1793007063789672930,
+      "payload_timestamp_sha256": "5c9686237916795517e38239d2fdcad4ea6abf9a2b168e8aed925bdee311dd77"
+    },
+    "/fleet/cargo_result": {
+      "type": "std_msgs/msg/String",
+      "serialization_format": "cdr",
+      "message_count": 4,
+      "first_timestamp_ns": 1793006966700217957,
+      "last_timestamp_ns": 1793007015262368283,
+      "payload_timestamp_sha256": "f771c12c2a732be1f834708fc327fa2432c613f4f22b4c576aa3c975c322ed97"
+    },
+    "/fleet/cargo_event": {
+      "type": "std_msgs/msg/String",
+      "serialization_format": "cdr",
+      "message_count": 14,
+      "first_timestamp_ns": 1793006921673666164,
+      "last_timestamp_ns": 1793007017361734893,
+      "payload_timestamp_sha256": "7ec759938c2b639fbc6873846b04e3a82c6365cf557106f73696908186704346"
+    },
+    "/agv2/imu/data": {
+      "type": "sensor_msgs/msg/Imu",
+      "serialization_format": "cdr",
+      "message_count": 11267,
+      "first_timestamp_ns": 1793006838506734787,
+      "last_timestamp_ns": 1793007063827467677,
+      "payload_timestamp_sha256": "c6114250f04936e8137897144d36811fe0ee41915355c4bed7563d05f0d2f51a"
+    },
+    "/sim/boxes": {
+      "type": "std_msgs/msg/String",
+      "serialization_format": "cdr",
+      "message_count": 2237,
+      "first_timestamp_ns": 1793006841385708781,
+      "last_timestamp_ns": 1793007063787122478,
+      "payload_timestamp_sha256": "6a0be82636b88b8f7569501fd4d083b2e8ab0cd96d805952015ef1d2bc918462"
+    },
+    "/fleet/goal": {
+      "type": "std_msgs/msg/String",
+      "serialization_format": "cdr",
+      "message_count": 6,
+      "first_timestamp_ns": 1793006921672945416,
+      "last_timestamp_ns": 1793006973696028479,
+      "payload_timestamp_sha256": "7f42c113a02f5c85c03ae4aa66fa80d6bc620a4214edd49da697c321ddf206c3"
+    },
+    "/agv2/odom": {
+      "type": "nav_msgs/msg/Odometry",
+      "serialization_format": "cdr",
+      "message_count": 11267,
+      "first_timestamp_ns": 1793006838506577463,
+      "last_timestamp_ns": 1793007063827414263,
+      "payload_timestamp_sha256": "ed19a46d35d7887dc25c5888117ca4ffa2f63d23e108ab60a7f5e9af0e97a0f0"
+    },
+    "/agv1/imu/data": {
+      "type": "sensor_msgs/msg/Imu",
+      "serialization_format": "cdr",
+      "message_count": 11267,
+      "first_timestamp_ns": 1793006838508308260,
+      "last_timestamp_ns": 1793007063829259217,
+      "payload_timestamp_sha256": "dde91238a74709d11fbaedbcde0b4e6e7e360b07f595e6163812e60d19136586"
+    },
+    "/agv2/scan": {
+      "type": "sensor_msgs/msg/LaserScan",
+      "serialization_format": "cdr",
+      "message_count": 2049,
+      "first_timestamp_ns": 1793006838551985090,
+      "last_timestamp_ns": 1793007063833383298,
+      "payload_timestamp_sha256": "26f6141fd779dfe68c7ef4721c95f5409509ad8bc1d77f1abe4226477f82f49f"
+    },
+    "/agv1/scan": {
+      "type": "sensor_msgs/msg/LaserScan",
+      "serialization_format": "cdr",
+      "message_count": 2048,
+      "first_timestamp_ns": 1793006838562335939,
+      "last_timestamp_ns": 1793007063736500550,
+      "payload_timestamp_sha256": "23e5ba9f73d853e9b3ccb06d1e5ede81dd53335d07d2c26a951cf9ba81124017"
+    }
+  },
+  "storage_preset_profile": "zstd_fast",
+  "storage_files": {
+    "rosbag_0.mcap": 47433655,
+    "rosbag_1.mcap": 47408393,
+    "rosbag_2.mcap": 47443593,
+    "rosbag_3.mcap": 47361098,
+    "rosbag_4.mcap": 29587196
+  },
+  "original_storage_file_sha256": {
+    "rosbag_16.mcap": "b451c6564b4ad508a92e1618a8995467050839511014818faf29680822c1eae1",
+    "rosbag_12.mcap": "0b311c745c2c0d5518ad99492c1e152093d751e60ec53787833320132eabd7a5",
+    "rosbag_10.mcap": "e0d1f8095a054111efc83e36c615089aae01654e663b038b03da98bd352f5056",
+    "rosbag_18.mcap": "3cbf85d4a03286b3f0ae28396ae7e50d05d7290036af189033d5d3ca1b83a4bf",
+    "rosbag_0.mcap": "8ff3f8ebe2ba9cff0e6a822445229c19c66181f3d5d5416fbfd8809077c44d21",
+    "rosbag_6.mcap": "8cbd42325369f4f2c9209d141834ccac1e0b063c5be8a0f84a8fd91e1d0a0952",
+    "rosbag_13.mcap": "946a7474b123bbec2c0242814f13f4f3ac32ae98913756ada589346f383e7a8a",
+    "rosbag_3.mcap": "187d10cda7c011ab7cedbf7ead557b5a6f659ec203bd535ee9bda305a37053fc",
+    "rosbag_2.mcap": "c66b7564915b392239017807a3ccd93f0ecb46243a07afc60ec5141f4e434bd2",
+    "rosbag_9.mcap": "0e65620529bb19e24da495f910c35ede1a22c42b49d1e9f69044d76c643712e1",
+    "rosbag_14.mcap": "8e8de529f68ed212f8d5779da59dd9da9c6abe38c49011b8647ea0d165fd6751",
+    "rosbag_8.mcap": "862e0e79a21565907075d34192275470b64c7ab65a68ed15cf5b033c5c9038ac",
+    "rosbag_7.mcap": "7637a19dc07ab776c8e172919988550109c295c5c584571711d5fe5c81098b0a",
+    "rosbag_1.mcap": "e8e3ee55f55af5c15d164dfe61ff91f07f0619260d258b3e0d8c0237b182469f",
+    "rosbag_5.mcap": "995e22ed7af0ce4f47fc5b59fcc8b0b158cd8c052cb4f385f8e6191400abe493",
+    "rosbag_4.mcap": "9b994e88804750df8bcfb75eda1473efcd3ec6d57d1f5c80c7653af92b5b1fb0",
+    "rosbag_17.mcap": "497b2a3973c25264fecb466031e4d123e7732e7f3df3cb1a98278e99c8acdc77",
+    "rosbag_15.mcap": "bd86812aa599ca384620732d8c8138f960caa7d5f11b0a233a6738bc25db99ff",
+    "rosbag_11.mcap": "ef9e2f30dd81dd28737c60e91dee6597ab58e1ece43426b243a9d0266b593c19"
+  }
+}

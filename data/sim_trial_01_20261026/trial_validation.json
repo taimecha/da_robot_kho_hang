@@ -1,0 +1,32 @@
+{
+  "agv1": {
+    "event_sequence_complete": true,
+    "events": [
+      "started",
+      "observation_arrived",
+      "measured",
+      "pickup_arrived",
+      "loaded_confirmed",
+      "delivery_arrived",
+      "unloaded_confirmed"
+    ]
+  },
+  "agv2": {
+    "event_sequence_complete": true,
+    "events": [
+      "started",
+      "observation_arrived",
+      "measured",
+      "pickup_arrived",
+      "loaded_confirmed",
+      "delivery_arrived",
+      "unloaded_confirmed"
+    ]
+  },
+  "grid_labels": 25,
+  "both_boxes_delivered": true,
+  "milestone_screenshots": 15,
+  "all_png_images": 60,
+  "bag_message_count": 61095,
+  "bag_topics": 16
+}

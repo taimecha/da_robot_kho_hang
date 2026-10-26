@@ -22,6 +22,7 @@ cv2.setNumThreads(1)
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
+from geometry_msgs.msg import PoseWithCovarianceStamped
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Image, LaserScan
 from std_msgs.msg import String
@@ -31,11 +32,13 @@ from cargo_measure import measure
 from grid_navigator import parse_heading
 from delivery_queue import DeliveryQueue, bay_exit_clear, column_controls
 from warehouse_queue import (Lane, COLORS, camera_config, classify_height, renderer,
-                             parse_orders, conveyor_geometry, DeliveryOutfeed, TRAY_Z, DECK_Z)
+                             parse_orders, conveyor_geometry, DeliveryOutfeed, TRAY_Z, DECK_Z,
+                             FRONT_GAP)
 from warehouse_world import GazeboMirror
 from warehouse_telemetry import TelemetryGuard
 
 STATES = dict(waiting='CHO BAT DAU', observe='TOI O QUAN SAT', measure='DO KIEN DAU HANG',
+              inspection_yield='NHUONG LOI QUAN SAT', inspection_wait='DO LOI CAMERA THONG',
               pickup='TOI O LAY HANG', loading='BAN DAY DANG XEP HANG',
               wait_bay='CHO O GIAO HANG', deliver='DANG GIAO HANG',
               staging='TOI VUNG XEP HANG', queued='XEP HANG CHO GIAO',
@@ -58,6 +61,14 @@ class Warehouse(Node):
         self.lanes={n:Lane(n,i+2,self.board.xy(i+1,4),orders[n]) for i,n in enumerate(COLORS)}
         self.phase={n:'waiting' for n in self.lanes}
         self.pose={}; self.vel={}; self.status={}; self.scans={n:deque(maxlen=5) for n in self.lanes}
+        self.pose_history={n:deque(maxlen=100) for n in self.lanes}
+        self.localization_errors={n:[] for n in self.lanes}
+        self.localization_file=None
+        if self.board.cfg.get('lidar_map'):
+            self.localization_file=open(self.out/'localization.csv','w',newline='',buffering=1)
+            self.localization_writer=csv.writer(self.localization_file)
+            self.localization_writer.writerow(('robot','t_s','amcl_x_m','amcl_y_m',
+                                               'reference_x_m','reference_y_m','position_error_m'))
         self.scan_t={}; self.pose_t={}; self.status_t={}
         self.images={}; self.annotations={}; self.errors={}; self.samples={n:[] for n in self.lanes}
         self.locked={}; self.delivered={n:[] for n in self.lanes}; self.bays={}
@@ -79,6 +90,7 @@ class Warehouse(Node):
         self.min_separation=float('inf'); self.close_pairs=set(); self.completed_events=[]
         self.outfeed=DeliveryOutfeed(self.board)
         self.last_success={}
+        self.inspection_blocked_since={};self.inspection_blocker={};self.inspection_wait_since={}
         self.unload_start={}
         self.all_events=[]; self.dropped=self.outfeed.items; self.last_ui=0.; self.last_pose_send=0.
         self.event_file=open(self.out/'events.jsonl','w',buffering=1)
@@ -96,6 +108,9 @@ class Warehouse(Node):
         for n in self.lanes:
             self.create_subscription(Odometry,f'/{n}/odom',lambda m,n=n:self.on_pose(n,m),1)
             self.create_subscription(LaserScan,f'/{n}/scan',lambda m,n=n:self.on_scan(n,m),qos_profile_sensor_data)
+            if self.localization_file:
+                self.create_subscription(PoseWithCovarianceStamped,f'/{n}/amcl_pose',
+                                         lambda m,n=n:self.on_amcl(n,m),10)
         if not args.headless:
             cv2.namedWindow('Warehouse - 3 AGV / RGB + LiDAR / SPACE: start / Q: stop',cv2.WINDOW_NORMAL)
             cv2.resizeWindow('Warehouse - 3 AGV / RGB + LiDAR / SPACE: start / Q: stop',1200,640)
@@ -117,6 +132,18 @@ class Warehouse(Node):
         source=m.header.stamp.sec+m.header.stamp.nanosec*1e-9
         age=max(0.,self.get_clock().now().nanoseconds*1e-9-source) if source else 0.
         self.pose_t[n]=time.monotonic()-age
+        self.pose_history[n].append((source,p.x,p.y))
+
+    def on_amcl(self,n,m):
+        history=self.pose_history[n]
+        if not history:return
+        stamp=m.header.stamp.sec+m.header.stamp.nanosec*1e-9
+        reference=min(history,key=lambda p:abs(p[0]-stamp))
+        if abs(reference[0]-stamp)>.3:return
+        x,y=m.pose.pose.position.x,m.pose.pose.position.y
+        error=math.hypot(x-reference[1],y-reference[2])
+        self.localization_errors[n].append(error)
+        self.localization_writer.writerow((n,round(stamp,3),x,y,reference[1],reference[2],error))
 
     def on_scan(self,n,m):
         self.scans[n].append((m.angle_min,m.angle_increment,list(m.ranges)))
@@ -174,14 +201,29 @@ class Warehouse(Node):
                 self.goal_pub.publish(String(data=pending['command']));self.last_goal_send[n]=time.monotonic()
             return False
         x,y=self.board.xy(row-1,col-1)
-        p=self.pose[n]
+        # In the LiDAR/AMCL mode, the controller and dispatcher use the
+        # estimated map pose. Ground-truth odometry remains an audit signal;
+        # requiring it to pass the controller's 2 cm test would deadlock a
+        # robot that has already reported a successful precision stop.
+        if self.board.cfg.get('lidar_map'):
+            if d.get('x') is None or d.get('y') is None or d.get('yaw') is None:return False
+            p=(d['x'],d['y'],d['yaw'])
+        else:p=self.pose[n]
         heading=parse_heading(h,self.board.yaw)[1] if h else p[2]
         error=math.atan2(math.sin(p[2]-heading),math.cos(p[2]-heading))
-        okay=(d.get('state')=='done' and math.hypot(p[0]-x,p[1]-y)<=.021 and
-              abs(error)<math.radians(2.5))
+        tolerance=float(self.board.cfg.get('position_tolerance_m',.02))+.001
+        # The agent checked final heading before reporting done. A second
+        # comparison against a later AMCL sample can reject a valid stop on
+        # the 2.5-degree boundary and leave the scene waiting forever.
+        heading_ok=(self.board.cfg.get('lidar_map') or abs(error)<math.radians(2.5))
+        okay=(d.get('state')=='done' and math.hypot(p[0]-x,p[1]-y)<=tolerance and
+              heading_ok)
         if okay:
             del self.pending_goals[n]
-            self.event('goal_reached',robot=n,phase=self.phase[n],row=row,col=col)
+            extra={}
+            if self.board.cfg.get('lidar_map'):
+                extra['physical_error_m']=math.hypot(self.pose[n][0]-x,self.pose[n][1]-y)
+            self.event('goal_reached',robot=n,phase=self.phase[n],row=row,col=col,**extra)
         return okay
 
     def fail(self,n,reason):
@@ -242,6 +284,7 @@ class Warehouse(Node):
                     m.encoding='bgr8';m.step=m.width*3;m.data=img.tobytes()
                     self.image_pubs[n].publish(m)
                 if (self.phase[n]!='measure' or self.telemetry.paused or
+                        self.observation_blocker(n) or
                         self.future_epoch!=self.frame_epoch):continue
                 if error:self.errors[n]=error;self.samples[n]=[]
                 if result:
@@ -273,6 +316,7 @@ class Warehouse(Node):
                 v,w=self.vel.get(n,(1,1))
                 eligible=(not self.telemetry.paused and self.phase[n]=='measure' and abs(v)<.005 and abs(w)<.015 and
                           len(self.scans[n])>=5 and now-self.scan_t.get(n,0)<.5 and
+                          not self.observation_blocker(n) and
                           self.lanes[n].stage=='ready')
                 jobs.append((n,p,copy.deepcopy(boxes),list(self.scans[n]),eligible))
             self.future_epoch=self.frame_epoch
@@ -343,6 +387,31 @@ class Warehouse(Node):
                 if not same_column:nodes.add(self.active_goals[n][:2])
         nodes.update(node for n,node in self.delivery.staging.items() if n!=me)
         return nodes
+
+    def observation_blocker(self,n,station=None):
+        """Find a robot between an observation station and its front package.
+
+        Use the agents' estimated map poses, as the real workflow would; the
+        physical odometry pose is reserved for simulation audits.
+        """
+        if not self.board.cfg.get('lidar_map') or not self.lanes[n].front:return None
+        p=station or self.status.get(n,{})
+        if isinstance(p,dict):
+            if p.get('x') is None or p.get('y') is None:return None
+            p=(p['x'],p['y'])
+        fx,fy=self.lanes[n].pickup
+        fx+=FRONT_GAP*math.cos(self.board.yaw)
+        fy+=FRONT_GAP*math.sin(self.board.yaw)
+        ex,ey=math.cos(self.board.yaw),math.sin(self.board.yaw)
+        front_along=(fx-p[0])*ex+(fy-p[1])*ey
+        if front_along<.4:return None
+        for other,d in self.status.items():
+            if other==n or d.get('x') is None or d.get('y') is None:continue
+            dx,dy=d['x']-p[0],d['y']-p[1]
+            along=dx*ex+dy*ey
+            lateral=abs(-dx*ey+dy*ex)
+            if .15<along<front_along-.1 and lateral<.23:return other
+        return None
 
     def dispatch_delivery(self,n,now):
         if getattr(self,'column_queues',False):
@@ -483,8 +552,32 @@ class Warehouse(Node):
                 if l.front:
                     self.begin_measure(n,now)
                 else:self.phase[n]='finished'
-            elif ph=='measure' and now>self.deadlines[n]:
-                self.fail(n,'could not isolate/measure front package: '+self.errors.get(n,''));return
+            elif ph=='measure':
+                blocker=self.observation_blocker(n)
+                if blocker:
+                    if n not in self.inspection_blocked_since:
+                        self.inspection_blocked_since[n]=now
+                        self.event('inspection_occluded',robot=n,blocker=blocker)
+                    elif now-self.inspection_blocked_since[n]>2:
+                        self.inspection_blocker[n]=blocker
+                        self.samples[n]=[];self.frame_epoch+=1
+                        yield_row=l.row+1 if l.row<self.board.rows else l.row-1
+                        self.go(n,'inspection_yield',yield_row,4)
+                        self.event('inspection_yield',robot=n,blocker=blocker,row=yield_row,col=4)
+                        self.inspection_blocked_since.pop(n,None)
+                else:self.inspection_blocked_since.pop(n,None)
+                if self.phase[n]=='measure' and now>self.deadlines[n]:
+                    self.fail(n,'could not isolate/measure front package: '+self.errors.get(n,''));return
+            elif ph=='inspection_yield' and self.reached(n):
+                self.phase[n]='inspection_wait';self.inspection_wait_since[n]=now
+            elif ph=='inspection_wait':
+                station=self.board.xy(l.row-1,3)
+                if not self.observation_blocker(n,station):
+                    self.event('inspection_clear',robot=n,blocker=self.inspection_blocker.pop(n,None))
+                    self.inspection_wait_since.pop(n,None)
+                    self.go(n,'observe',l.row,4,'d')
+                elif now-self.inspection_wait_since[n]>90:
+                    self.fail(n,'observation blocked for more than 90 s');return
             elif ph=='pickup' and self.reached(n):
                 l.load(now);self.phase[n]='loading';self.event('load_started',robot=n,package=l.payload['id'])
             elif ph in ('wait_bay','staging','queued','convoy') and self.args.delivery_mode=='staged':
@@ -533,7 +626,7 @@ class Warehouse(Node):
                     else:self.go(n,'returning',l.row,4,'d')
                 else:
                     parking=(5,list(self.lanes).index(n)+1) if self.args.sync_rounds else (l.row,1)
-                    self.go(n,'parking',*parking,'d')
+                    self.go(n,'parking',*parking,'' if self.board.cfg.get('lidar_map') else 'd')
             elif ph=='round_return' and self.reached(n):
                 self.phase[n]='round_waiting'
             elif ph=='parking' and self.reached(n):
@@ -564,7 +657,8 @@ class Warehouse(Node):
         if l.front:
             if self.args.sync_rounds:self.go(n,'round_return',5,list(self.lanes).index(n)+1,'d')
             else:self.go(n,'returning',l.row,4,'d')
-        else:self.go(n,'parking',5,list(self.lanes).index(n)+1,'d')
+        else:self.go(n,'parking',5,list(self.lanes).index(n)+1,
+                     '' if self.board.cfg.get('lidar_map') else 'd')
 
     def publish_service_holds(self):
         holds={}
@@ -587,6 +681,11 @@ class Warehouse(Node):
                     delivered=self.delivered,min_robot_center_separation_m=self.min_separation,
                     proximity_violations=len(self.close_pairs),
                     vision_measurements=locks,events=len(self.all_events))
+        if self.localization_file:
+            report['localization']={n:dict(samples=len(values),
+                median_error_m=float(np.median(values)) if values else None,
+                max_error_m=max(values) if values else None)
+                for n,values in self.localization_errors.items()}
         (self.out/'summary.json').write_text(json.dumps(report,indent=2))
 
     def dashboard(self):
@@ -687,6 +786,7 @@ def main():
         node.report()
         if node.mirror_worker:node.mirror_worker.shutdown(wait=False,cancel_futures=True)
         node.worker.shutdown(wait=True);node.event_file.close();node.pose_file.close()
+        if node.localization_file:node.localization_file.close()
         cv2.destroyAllWindows();node.destroy_node();rclpy.try_shutdown()
 
 

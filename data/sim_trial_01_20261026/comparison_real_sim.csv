@@ -1,0 +1,5 @@
+﻿environment,car,box_id,width_true_cm,height_true_cm,width_measured_cm,height_measured_cm,width_error_cm,height_error_cm,T_to_observe_s,T_measure_s,T_wait_load_s,T_delivery_s,T_total_s
+sim,agv1,2,18.5,32.0,18.7742,32.4647,0.2742,0.4647,27.999,7.769,2.106,33.575,78.603
+real,agv1,2,18.5,32.0,19.646,31.652,1.146,-0.348,37.821,3.256,13.164,40.236,102.209
+sim,agv2,1,12.1,24.0,12.3376,24.4088,0.2376,0.4088,38.66,4.455,2.033,41.566,93.46
+real,agv2,1,12.1,24.0,12.256,23.899,0.156,-0.101,50.347,2.889,2.267,51.533,113.744

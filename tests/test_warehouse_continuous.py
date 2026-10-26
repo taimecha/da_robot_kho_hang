@@ -105,13 +105,51 @@ class ContinuousTests(unittest.TestCase):
     def test_each_robot_returns_to_its_own_observation_without_a_group_barrier(self):
         w=SimpleNamespace(lanes={n:SimpleNamespace(row=i+2,front={'id':'next'})
                           for i,n in enumerate(('agv1','agv2','agv3'))},
-                          args=SimpleNamespace(sync_rounds=False),go=Mock())
+                          args=SimpleNamespace(sync_rounds=False),go=Mock(),
+                          board=SimpleNamespace(cfg={}))
         for n in w.lanes:Warehouse.return_after_delivery(w,n)
         self.assertEqual([c.args for c in w.go.call_args_list],[
             ('agv1','returning',2,4,'d'),('agv2','returning',3,4,'d'),('agv3','returning',4,4,'d')])
         w.lanes['agv2'].front=None;w.go.reset_mock()
         Warehouse.return_after_delivery(w,'agv2')
         w.go.assert_called_once_with('agv2','parking',5,2,'d')
+
+    def test_mapped_observation_detects_robot_in_front_of_package(self):
+        b=board(lidar_map=True)
+        station=b.xy(3,3)
+        lane=Lane('agv3',4,b.xy(3,4),[1])
+        w=SimpleNamespace(board=b,lanes={'agv3':lane},status={
+            'agv3':dict(x=station[0],y=station[1]),
+            'agv2':dict(x=lane.pickup[0],y=lane.pickup[1])})
+        self.assertEqual(Warehouse.observation_blocker(w,'agv3'),'agv2')
+        w.status['agv2']['y']+=b.spacing
+        self.assertIsNone(Warehouse.observation_blocker(w,'agv3'))
+
+    def test_occluded_measurement_yields_station_without_changing_dispatcher(self):
+        b=board(lidar_map=True)
+        lane=Lane('agv3',4,b.xy(3,4),[1])
+        w=SimpleNamespace(started=True,failed=False,done=False,
+            telemetry=TelemetryGuard(),column_queues=False,
+            args=SimpleNamespace(sync_rounds=False,delivery_mode='serial'),
+            phase={'agv3':'measure'},lanes={'agv3':lane},board=b,
+            pose={'agv3':(*b.xy(3,3),0.)},pending_goals={},deadlines={'agv3':55.},
+            inspection_blocked_since={},inspection_blocker={},inspection_wait_since={},
+            samples={'agv3':[object()]},frame_epoch=0,
+            observation_blocker=Mock(return_value='agv2'),event=Mock(),go=Mock())
+        Warehouse.mission(w,10.)
+        self.assertEqual(w.inspection_blocked_since['agv3'],10.)
+        Warehouse.mission(w,12.1)
+        w.go.assert_called_once_with('agv3','inspection_yield',5,4)
+        self.assertEqual(w.inspection_blocker['agv3'],'agv2')
+        self.assertEqual(w.samples['agv3'],[])
+        w.phase['agv3']='inspection_yield';w.reached=Mock(return_value=True)
+        Warehouse.mission(w,13.)
+        self.assertEqual(w.phase['agv3'],'inspection_wait')
+        Warehouse.mission(w,14.)
+        self.assertEqual(w.go.call_count,1)
+        w.observation_blocker.return_value=None
+        Warehouse.mission(w,15.)
+        w.go.assert_called_with('agv3','observe',4,4,'d')
 
     def test_loaded_robot_becomes_ready_even_while_other_robots_are_loading(self):
         lane=Lane('agv1',2,(1.2,-.6),[1,4]);lane.load(0)

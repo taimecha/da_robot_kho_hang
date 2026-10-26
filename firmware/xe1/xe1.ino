@@ -60,7 +60,7 @@
 #include <utility/imumaths.h>
 
 #include <ESP32Encoder.h>
-#include <LDS_YDLIDAR_X2_X2L.h>
+#include "ydlidar_x2_intensity.h"
 #include <stdlib.h>          // qsort, cho resample_scan() ben duoi
 
 #include <esp_timer.h>   // esp_timer_get_time() - dong ho us 64 bit, lam timestamp
@@ -439,7 +439,11 @@ static char tf_base_buf[24]     = BASE_FRAME;
 
 // --- LiDAR ---
 HardwareSerial LidarSerial(2);
-LDS_YDLIDAR_X2_X2L lidar;
+#if XE == 1
+LDS_YDLIDAR_X2_Intensity lidar;
+#else
+LDS_YDLIDAR_X2_X2L lidar;  // Chua do giao thuc UART xe 2; giu bo giai ma cu.
+#endif
 
 static float scan_ranges[SCAN_BINS];
 static float scan_intens[SCAN_BINS];
@@ -843,7 +847,7 @@ void lidar_scan_point_callback(float angle_deg, float distance_mm, float quality
     points_last_scan = points_in_scan;
     points_in_scan = 0;
   }
-  (void)quality;   // X2 khong co cuong do that (xem LDS_YDLIDAR_X4.cpp)
+  (void)quality;   // Chua xuat cuong do trong LaserScan (PUBLISH_INTENSITIES=0).
 
   float d_m = distance_mm * (0.001f * LIDAR_RANGE_SCALE);
   if (d_m < RANGE_MIN_M || d_m > RANGE_MAX_M) return;

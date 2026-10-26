@@ -1,0 +1,3 @@
+environment,run_id,car,cycle,status,deliver_col,T_to_observe_s,T_measure_s,T_to_pickup_s,T_wait_load_s,T_pickup_s,T_delivery_s,T_total_s,T_to_unload_confirmed_s
+sim,20261026T162717-12874-27eed460,agv1,1,delivered,2,27.999,7.769,7.154,2.106,45.028,33.575,78.603,80.669
+sim,20261026T162717-12874-27eed460,agv2,1,delivered,1,38.66,4.455,6.745,2.033,51.893,41.566,93.46,95.559

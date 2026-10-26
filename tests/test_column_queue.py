@@ -57,6 +57,28 @@ class ColumnControlsTests(unittest.TestCase):
         self.poses['b']=(*self.b.xy(1,0),-math.pi/2)
         self.assertEqual(self.controls()['c']['gate_row'],3)
 
+    def test_gate_does_not_force_follower_to_enter_at_a_distant_row(self):
+        q=DeliveryQueue()
+        for n in ('leader','follower'):q.enqueue(n,1,0)
+        q.admit('leader')
+        poses={'leader':(*self.b.xy(2,0),-math.pi/2),
+               'follower':(*self.b.xy(1,4),math.pi)}
+        controls=column_controls(q,self.b,poses,{'leader':3},{'leader'})
+        self.assertEqual(controls['follower']['gate_row'],4)
+        self.assertEqual(controls['follower']['entry_row'],2)
+
+    def test_third_car_waits_outside_nearby_row_instead_of_touring_perimeter(self):
+        q=DeliveryQueue()
+        for n in ('owner','second','third'):q.enqueue(n,2,0)
+        q.admit('owner')
+        poses={'owner':(*self.b.xy(0,1),-math.pi/2),
+               'second':(*self.b.xy(3,1),-math.pi/2),
+               'third':(*self.b.xy(2,4),math.pi)}
+        controls=column_controls(q,self.b,poses,{'owner':3,'second':4},
+                                 {'owner','second'})
+        self.assertEqual(controls['third']['gate_row'],5)
+        self.assertEqual(controls['third']['entry_row'],3)
+
     def test_releasing_bay_opens_next_route_without_a_staging_goal(self):
         self.q.admit('a');self.poses['a']=(*self.b.xy(0,0),-math.pi/2);self.controls()
         self.q.release('a');self.q.admit('b')
@@ -79,6 +101,15 @@ class ColumnControlsTests(unittest.TestCase):
 
 
 class ColumnPlannerTests(unittest.TestCase):
+    def test_nearby_entry_keeps_short_route_while_gate_is_closed(self):
+        p,r=planner();r.x,r.y=p.board.xy(2,4);r.goal=(0,1)
+        p.delivery_queues[r.name]=dict(slot=2,entry_row=3,gate_row=5,
+                                       until=time.time()+3)
+        path=p.plan(r,(2,4),r.goal)
+        self.assertEqual(path,[(2,4),(2,3),(2,2),(2,1),(1,1),(0,1)])
+        self.assertFalse(TrafficManager.column_allows(p,r,(2,1)))
+        self.assertTrue(TrafficManager.column_allows(p,r,(2,2)))
+
     def test_route_joins_at_assigned_row_then_only_follows_that_column(self):
         p,r=planner()
         p.delivery_queues[r.name]=dict(slot=1,entry_row=4,gate_row=4,until=time.time()+3)

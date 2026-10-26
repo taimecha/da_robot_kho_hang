@@ -17,6 +17,7 @@ from grid_board import Board
 from warehouse_queue import Lane, COLORS, parse_orders, DEMO_15, DEMO_30, conveyor_geometry
 from warehouse_world import build_world
 from warehouse_rviz import prepare_rviz, rviz_environment
+from warehouse_landmarks import LANDMARKS
 LOCK=Path('/tmp/warehouse_queue_sim_owner.json')
 
 
@@ -32,7 +33,8 @@ def owner():
     except (FileNotFoundError,ValueError,KeyError):return None
 
 
-def prepare(out,items,orders=None,delivery_mode='staged',sync_rounds=False,delivery_flow='flexible'):
+def prepare(out,items,orders=None,delivery_mode='staged',sync_rounds=False,
+            delivery_flow='flexible',lidar_map=False):
     out.mkdir(parents=True,exist_ok=True)
     grid=yaml.safe_load((WS/'src/my_bot_bringup/config/grid_real.yaml').read_text())
     grid.update(center_x=0.,center_y=0.)
@@ -40,10 +42,19 @@ def prepare(out,items,orders=None,delivery_mode='staged',sync_rounds=False,deliv
                           brake_delay=.05,settle_s=.25,timeout_s=18.)
     grid['delivery_flow']=delivery_flow
     grid['column_queues']=delivery_mode=='staged'
+    if lidar_map:
+        grid['lidar_map']=True
+        # AMCL's observed localization excursions approach 3 cm. The
+        # simulation accepts a 3 cm map-frame stop and audits the physical
+        # pickup/delivery error separately; the real robot keeps 2 cm.
+        grid['position_tolerance_m']=.03
     # Estimated motion/congestion costs in seconds, only for the simulator.
     # These are planning weights, not experimental performance results.
     grid['route_time_costs']=dict(linear_speed_mps=.22,turn_start_s=1.8,quarter_turn_s=1.6,
         route_node_wait_s=.4,occupied_wait_s=3.,goal_wait_s=3.,opposite_wait_s=6.)
+    # Scan returns from another simulated robot can remain on a local costmap
+    # after that robot moves. Its recent poses are already tracked by /fleet/status.
+    grid['robot_echo_history_s']=3.0
     if delivery_mode=='staged':
         grid['goal_approaches']=[[[1,c],[2,c]] for c in range(1,5)]
     if delivery_mode=='staged' and delivery_flow=='east':
@@ -60,6 +71,11 @@ def prepare(out,items,orders=None,delivery_mode='staged',sync_rounds=False,deliv
     origin_y=min(-2.5,-1.2-2.1)
     height=math.ceil((2.5-origin_y)/.05)
     pixels=np.full((height,width),254,np.uint8);pixels[:2]=0;pixels[-2:]=0;pixels[:,:2]=0;pixels[:,-2:]=0
+    if lidar_map:
+        for x,y,sx,sy in LANDMARKS:
+            left=max(0,int((x-sx/2+2.5)/.05));right_edge=min(width,int((x+sx/2+2.5)/.05)+1)
+            low=max(0,int((y-sy/2-origin_y)/.05));high=min(height,int((y+sy/2-origin_y)/.05)+1)
+            pixels[height-high:height-low,left:right_edge]=0
     (out/'map.pgm').write_bytes(f'P5\n{width} {height}\n255\n'.encode()+pixels.tobytes())
     (out/'map.yaml').write_text(yaml.safe_dump(dict(image='map.pgm',resolution=.05,
         origin=[-2.5,origin_y,0.],negate=0,occupied_thresh=.65,free_thresh=.196,mode='trinary')))
@@ -105,6 +121,8 @@ def main():
     ap.add_argument('--scenario',choices=('mixed','demo15','demo30'),default='mixed')
     ap.add_argument('--sync-rounds',action='store_true')
     ap.add_argument('--delivery-flow',choices=('flexible','east'),default='flexible')
+    ap.add_argument('--lidar-map',action='store_true',
+                    help='Build /map from virtual LiDAR with slam_toolbox, then localize with AMCL')
     ap.add_argument('--exit-on-complete',action='store_true')
     a=ap.parse_args(); current=owner()
     if a.action=='down':
@@ -137,7 +155,15 @@ def main():
         ap.error('--sync-rounds requires equal package counts on all three lanes')
     if a.sync_rounds and a.delivery_mode!='staged':
         ap.error('synchronized rounds require --delivery-mode staged')
-    board=prepare(out,a.items,orders,a.delivery_mode,a.sync_rounds,a.delivery_flow)
+    board=prepare(out,a.items,orders,a.delivery_mode,a.sync_rounds,a.delivery_flow,a.lidar_map)
+    if a.lidar_map:
+        # The geometric room is sensor truth only. Nav2 never receives this
+        # file; its map will be saved from slam_toolbox's /map topic.
+        (out/'map.pgm').rename(out/'truth_map.pgm')
+        truth=yaml.safe_load((out/'map.yaml').read_text())
+        truth['image']='truth_map.pgm'
+        (out/'truth_map.yaml').write_text(yaml.safe_dump(truth))
+        (out/'map.yaml').unlink()
     LOCK.write_text(json.dumps(dict(pid=os.getpid(),start=identity(os.getpid()),out=str(out))))
     children=[];logs=[];owned={}
     def remember_descendants():
@@ -161,6 +187,15 @@ def main():
         log=open(out/(name+'.log'),'w');logs.append(log)
         p=subprocess.Popen(cmd,cwd=WS,env=env,start_new_session=True,stdout=log,stderr=subprocess.STDOUT)
         children.append((name,p));owned[p.pid]=identity(p.pid);return p
+    def stop_child(name,p):
+        try:os.killpg(p.pid,signal.SIGINT)
+        except ProcessLookupError:pass
+        try:p.wait(timeout=8)
+        except subprocess.TimeoutExpired:
+            try:os.killpg(p.pid,signal.SIGKILL)
+            except ProcessLookupError:pass
+            p.wait()
+        children.remove((name,p))
     def wait_nav(p):
         path=out/'nav_fleet.log'
         active=set()
@@ -179,26 +214,98 @@ def main():
                 raise RuntimeError(f'Nav2 launch did not spawn nodes; see {path}')
             time.sleep(1)
         raise RuntimeError(f'Nav2 did not activate ({sorted(active)} active); see {path}')
+    def wait_one_nav(name,p):
+        path=out/f'nav_{name}.log'
+        for second in range(90):
+            remember_descendants()
+            if p.poll() is not None:return False
+            output=path.read_text()
+            if 'Managed nodes are active' in output:return True
+            if 'Failed to bring up all requested nodes' in output:return False
+            if second>=10 and 'failed to send response to' in output:
+                # The component load client has timed out. Recreate this
+                # Nav2 container instead of waiting on a dead launch.
+                return False
+            time.sleep(1)
+        return False
     def on_signal(sig,frame):raise KeyboardInterrupt
     signal.signal(signal.SIGINT,on_signal);signal.signal(signal.SIGTERM,on_signal)
     result=0
     try:
         print('Logs and evidence:',out,flush=True)
+        if a.lidar_map:
+            from warehouse_grid_from_map import place_grid
+            x,y=board.xy(1,0)
+            sensor_env=dict(os.environ,FAKE_MAP=str(out/'truth_map.yaml'),
+                            FAKE_DELAY='.02',FAKE_TAU='.06',FAKE_DEAD_V='0',
+                            FAKE_DEAD_W='0',FAKE_LIDAR_Z='.19',FAKE_RAYS='720',
+                            FAKE_LIDAR_NOISE='0.001')
+            mapper_robot=spawn('mapping_robot',[
+                sys.executable,str(WS/'tools/fleet_fake_robot.py'),str(x),str(y),'0',
+                '--no-map-tf'],sensor_env)
+            slam=yaml.safe_load((WS/'src/my_bot_bringup/config/slam_async.yaml').read_text())
+            slam['slam_toolbox']['ros__parameters']['use_sim_time']=False
+            (out/'slam.yaml').write_text(yaml.safe_dump(slam))
+            slam_process=spawn('slam',['ros2','launch','slam_toolbox','online_async_launch.py',
+                                       f'slam_params_file:={out}/slam.yaml','use_sim_time:=false'])
+            mapping=spawn('mapping',[sys.executable,str(WS/'tools/warehouse_lidar_mapping.py'),
+                                      '--out',str(out)])
+            while mapping.poll() is None:
+                remember_descendants()
+                if mapper_robot.poll() is not None or slam_process.poll() is not None:
+                    raise RuntimeError('LiDAR mapping stopped early; see mapping_robot.log and slam.log')
+                time.sleep(1)
+            if mapping.returncode:
+                raise RuntimeError('LiDAR mapping failed; see '+str(out/'mapping.log'))
+            stop_child('mapping',mapping)
+            stop_child('slam',slam_process)
+            stop_child('mapping_robot',mapper_robot)
+            board,alignment=place_grid(out/'map.yaml',out/'grid.yaml')
+            lanes={n:Lane(n,i+2,board.xy(i+1,4),orders[n]) for i,n in enumerate(COLORS)}
+            build_world(board,lanes,out/'warehouse.sdf')
+            prepare_rviz(out,WS/'tools/fleet.rviz')
+            print('LiDAR map saved; grid aligned to observed walls:',alignment,flush=True)
         spawn('map',['ros2','run','nav2_map_server','map_server','--ros-args','-p',f'yaml_filename:={out}/map.yaml'])
         spawn('map_lifecycle',['ros2','run','nav2_lifecycle_manager','lifecycle_manager','--ros-args',
                                '-r','__node:=warehouse_map_lifecycle','-p',"node_names:=['map_server']",'-p','autostart:=true'])
-        env=dict(os.environ,FAKE_MAP=str(out/'map.yaml'),FAKE_DELAY='.02',FAKE_TAU='.06',
+        env=dict(os.environ,FAKE_MAP=str(out/('truth_map.yaml' if a.lidar_map else 'map.yaml')),
+                 FAKE_DELAY='.02',FAKE_TAU='.06',
                  FAKE_DEAD_V='0',FAKE_DEAD_W='0',FAKE_LIDAR_Z='.19',FAKE_RAYS='720',FAKE_LIDAR_NOISE='0.001')
         for i,n in enumerate(COLORS):
             x,y=board.xy(i+1,0)
             others=','.join(f'/{o}/odom' for o in COLORS if o!=n)
-            spawn('fake_'+n,[sys.executable,str(WS/'tools/fleet_fake_robot.py'),str(x),str(y),'0',
-                '--other',others,'--ros-args','-r',f'__ns:=/{n}','-r',f'/tf:=/{n}/tf',
-                '-r',f'/tf_static:=/{n}/tf_static'],env)
-        print('Activating three Nav2 containers through one launch process...',flush=True)
-        p=spawn('nav_fleet',['ros2','launch',str(WS/'tools/warehouse_nav.launch.py'),
-                             f'config_dir:={out}'])
-        wait_nav(p)
+            cmd=[sys.executable,str(WS/'tools/fleet_fake_robot.py'),str(x),str(y),'0',
+                '--other',others]
+            if a.lidar_map:cmd.append('--no-map-tf')
+            cmd+=['--ros-args','-r',f'__ns:=/{n}','-r',f'/tf:=/{n}/tf',
+                  '-r',f'/tf_static:=/{n}/tf_static']
+            spawn('fake_'+n,cmd,env)
+        if a.lidar_map:
+            amcl=spawn('amcl',['ros2','launch',str(WS/'tools/warehouse_amcl.launch.py'),
+                               f'config_dir:={out}'])
+            for _ in range(90):
+                remember_descendants()
+                if amcl.poll() is not None:raise RuntimeError('AMCL exited; see '+str(out/'amcl.log'))
+                if (out/'amcl.log').read_text().count('Managed nodes are active')>=3:break
+                time.sleep(1)
+            else:raise RuntimeError('Three AMCL instances did not activate; see '+str(out/'amcl.log'))
+        print('Activating three Nav2 containers...',flush=True)
+        if a.lidar_map:
+            # AMCL adds three DDS participants. Starting one container at a
+            # time avoids concurrent component-load service timeouts.
+            for n in COLORS:
+                for attempt in range(4):
+                    p=spawn('nav_'+n,['ros2','launch',str(WS/'tools/fleet_nav.launch.py'),
+                                     f'namespace:={n}',f'params_file:={out}/navigation_{n}.yaml'])
+                    if wait_one_nav(n,p):
+                        print(f'Nav2 {n}: active',flush=True)
+                        break
+                    stop_child('nav_'+n,p)
+                else:raise RuntimeError(f'Nav2 {n} did not activate; see {out}/nav_{n}.log')
+        else:
+            p=spawn('nav_fleet',['ros2','launch',str(WS/'tools/warehouse_nav.launch.py'),
+                                 f'config_dir:={out}'])
+            wait_nav(p)
         for n in COLORS:
             spawn('agent_'+n,[sys.executable,str(WS/'fleet_agent.py'),n,'--grid',str(out/'grid.yaml'),
                  '--ros-args','-r',f'__ns:=/{n}','-r',f'/tf:=/{n}/tf','-r',f'/tf_static:=/{n}/tf_static'])

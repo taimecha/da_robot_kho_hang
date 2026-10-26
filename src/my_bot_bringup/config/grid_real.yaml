@@ -30,6 +30,15 @@ robot_radius: 0.13
 node_clearance: 0.25
 edge_clearance: 0.20
 
+# Vao o quan sat / lay hang tu phia Tay de xe da quay huong Dong truoc khi
+# cham tam o. Xoay 180 do ngay tai o do tung lam lech tam xe 4.3 cm (AGV2),
+# khien buoc do hang dung o nguong sai so 2 cm.
+goal_approaches:
+  - [[3, 4], [3, 3]]  # AGV1: quan sat
+  - [[4, 4], [4, 3]]  # AGV2: quan sat
+  - [[3, 5], [3, 4]]  # AGV1: lay hang
+  - [[4, 5], [4, 4]]  # AGV2: lay hang
+
 # Moi cho doi huong: mot luot xoay lien tuc, giam toc theo goc va gyro.
 # Khong xung bu, khong dao chieu, khong tu giao lai khi xoay khong dat.
 rotate:

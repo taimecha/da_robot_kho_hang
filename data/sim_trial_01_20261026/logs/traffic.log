@@ -1,0 +1,15 @@
+[INFO] [1793006838.111878789] [traffic_manager]: Dieu phoi agv1, agv2 tren sa ban 5x5. Cho /map va trang thai xe...
+Nhan dich qua /fleet/goal; khong doc lenh cu trong terminal.
+[INFO] [1793006838.509954821] [traffic_manager]: Ban do: bo 1 o, 2 canh sat vat can
+[INFO] [1793006921.675655727] [traffic_manager]: [agv1] lo trinh #930068380: (5,2) -> (5,3) -> (4,3) -> (3,3) -> (3,4)
+[INFO] [1793006921.804549767] [traffic_manager]: [agv2] lo trinh #930068381: (2,3) -> (2,2) -> (3,2) -> (4,2) -> (4,3) -> (4,4)
+[INFO] [1793006949.687755464] [traffic_manager]: [agv1] TOI DICH (3,4), huong Đông
+[INFO] [1793006957.894171654] [traffic_manager]: [agv1] lo trinh #930068382: (3,4) -> (3,5)
+[INFO] [1793006960.488787655] [traffic_manager]: [agv2] TOI DICH (4,4), huong Đông
+[INFO] [1793006964.287758607] [traffic_manager]: [agv1] TOI DICH (3,5), huong Đông
+[INFO] [1793006965.463667240] [traffic_manager]: [agv2] lo trinh #930068383: (4,4) -> (4,5)
+[INFO] [1793006966.701529138] [traffic_manager]: [agv1] lo trinh #930068384: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (2,2) -> (1,2)
+[INFO] [1793006971.688721812] [traffic_manager]: [agv2] TOI DICH (4,5), huong Đông
+[INFO] [1793006973.697030528] [traffic_manager]: [agv2] lo trinh #930068385: (4,5) -> (4,4) -> (4,3) -> (4,2) -> (4,1) -> (3,1) -> (2,1) -> (1,1)
+[INFO] [1793007000.287787439] [traffic_manager]: [agv1] TOI DICH (1,2)
+[INFO] [1793007015.287784174] [traffic_manager]: [agv2] TOI DICH (1,1)

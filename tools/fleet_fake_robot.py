@@ -56,10 +56,11 @@ NOISE = float(os.environ.get('FAKE_LIDAR_NOISE', '0'))
 
 
 class FakeRobot(Node):
-    def __init__(self, x, y, yaw, others, esp32=False):
+    def __init__(self, x, y, yaw, others, esp32=False, map_tf=True):
         super().__init__('fake_robot')
         self.x, self.y, self.th = x, y, yaw
         self.esp32 = esp32
+        self.map_tf = map_tf
         self.pl = self.pr = 0.0             # goc banh tich luy (rad), nhu encoder
         self.th0 = yaw - 0.7                # BNO055: huong tuyet doi lech tuy y
         self.v = self.w = 0.0
@@ -95,8 +96,10 @@ class FakeRobot(Node):
         b.header.stamp, b.header.frame_id, b.child_frame_id = now, 'base_footprint', 'lidar_link'
         b.transform.translation.z = LIDAR_Z
         b.transform.rotation.w = 1.0
-        if not esp32:                       # esp32: AMCL + URDF lo hai TF nay
-            st.sendTransform([a, b])
+        if not esp32:
+            # SLAM/AMCL owns map->odom in localized simulations. The virtual
+            # drivetrain continues to own odom->base_footprint.
+            st.sendTransform([a, b] if map_tf else [b])
         self.create_timer(DT, self.step)
         self.create_timer(0.11, self.scan)
 
@@ -292,9 +295,10 @@ def main():
         others = argv[i + 1].split(',')
         argv = argv[:i] + argv[i + 2:]
     esp32 = '--esp32' in argv
-    argv = [a for a in argv if a != '--esp32']
+    map_tf = '--no-map-tf' not in argv
+    argv = [a for a in argv if a not in ('--esp32', '--no-map-tf')]
     x, y, yaw = float(argv[0]), float(argv[1]), math.radians(float(argv[2]))
-    node = FakeRobot(x, y, yaw, others, esp32)
+    node = FakeRobot(x, y, yaw, others, esp32, map_tf)
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:

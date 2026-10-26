@@ -1,4 +1,5 @@
 """Jitter, controlled recovery, frozen task timers, and lasting data loss."""
+import math
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -15,6 +16,21 @@ def ages(odom=.02,status=.2):
 
 
 class GuardTests(unittest.TestCase):
+    def test_mapped_run_accepts_amcl_precision_stop_and_audits_physical_error(self):
+        from grid_board import Board
+        board=Board(dict(rows=5,cols=5,spacing=.6,center_row=3,center_col=3,
+                         center_x=0.,center_y=0.,robot_radius=.13,
+                         node_clearance=.25,edge_clearance=.2,lidar_map=True))
+        x,y=board.xy(1,3)
+        w=SimpleNamespace(board=board,pending_goals={'agv1':dict(ack=True,old_route=1)},
+            status={'agv1':dict(route_goal=[1,3],route_id=2,route_mode='go',state='done',
+                                x=x-.01,y=y,yaw=math.radians(2.7))},
+            active_goals={'agv1':(2,4,'d')},pose={'agv1':(x-.022,y,0.)},
+            phase={'agv1':'observe'},event=Mock())
+        self.assertTrue(Warehouse.reached(w,'agv1'))
+        self.assertNotIn('agv1',w.pending_goals)
+        self.assertAlmostEqual(w.event.call_args.kwargs['physical_error_m'],.022)
+
     def test_original_101_second_gap_only_warns_then_recovers(self):
         g=TelemetryGuard()
         self.assertEqual(g.step(10,ages(1.01,1.13)),'warning')
@@ -79,7 +95,7 @@ class GuardTests(unittest.TestCase):
         from nav_msgs.msg import Odometry
         msg=Odometry();msg.pose.pose.orientation.w=1.
         msg.header.stamp.sec=100
-        w=SimpleNamespace(pose={},vel={},pose_t={},
+        w=SimpleNamespace(pose={},vel={},pose_t={},pose_history={'agv2':[]},
                           get_clock=lambda:SimpleNamespace(now=lambda:SimpleNamespace(nanoseconds=103_000_000_000)))
         with patch('warehouse_scene.time.monotonic',return_value=10):
             Warehouse.on_pose(w,'agv2',msg)

@@ -9,11 +9,12 @@ from collections import deque
 from unittest.mock import patch
 import numpy as np
 import time
+import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from cargo_live_view import LiveView, SAMPLE_COUNT, TARGETS, average_results, deliveries_complete, gate_result, height_slot, pickup_arg, safe_height_slot, stable_result_reason, supervised_height_slot  # noqa: E402
-from cargo_live_view import observation_cell, display_frame
+from cargo_live_view import observation_cell, display_frame, unfinished_observation
 import cargo_measure as cm
 from grid_board import Board, config_path  # noqa: E402
 
@@ -30,6 +31,22 @@ class LiveViewGateTest(unittest.TestCase):
 
     def test_valid_box_at_goal(self):
         self.assertIsNone(self.check())
+
+    def test_resume_observation_uses_only_unfinished_cycle(self):
+        with tempfile.TemporaryDirectory() as folder:
+            log = Path(folder) / 'events.jsonl'
+            events = [
+                dict(car='agv2', event='started', run_id='old', cycle=1),
+                dict(car='agv2', event='observation_arrived', run_id='old', cycle=1),
+                dict(car='agv1', event='started', run_id='current', cycle=1),
+                dict(car='agv2', event='started', run_id='current', cycle=1),
+            ]
+            log.write_text(''.join(json.dumps(e)+'\n' for e in events))
+            self.assertEqual(unfinished_observation(log, 'agv2')['run_id'], 'current')
+            events.append(dict(car='agv2', event='observation_arrived',
+                               run_id='current', cycle=1))
+            log.write_text(''.join(json.dumps(e)+'\n' for e in events))
+            self.assertIsNone(unfinished_observation(log, 'agv2'))
 
     def test_camera_accepts_new_heading_tolerance_and_rejects_boundary(self):
         self.status['yaw']=math.radians(2.4)
@@ -277,7 +294,8 @@ class CargoCycleTest(unittest.TestCase):
             board=board, targets={'agv1': (3,5), 'agv2': (4,5)},
             observations={'agv1': (3,4), 'agv2': (4,4)},
             pick_yaw=board.yaw, pick_heading='d', drop_row=1,
-            sorting=cfg['height_sort'], goal_pub=Publisher(), result_pub=Publisher(), cars={})
+            sorting=cfg['height_sort'], goal_pub=Publisher(), result_pub=Publisher(),
+            event_pub=Publisher(), event_log_path=None, run_id='test-run', cars={})
         for car in self.node.targets:
             self.node.cars[car] = dict(
                 phase='ready', status=None, status_at=self.now, cycle=0,
@@ -335,6 +353,12 @@ class CargoCycleTest(unittest.TestCase):
         self.assertTrue(n.record_delivery('agv1',time.monotonic()))
         self.assertFalse(n.record_delivery('agv1',time.monotonic()))
         self.assertEqual(s['phase'],'delivered')
+        self.assertTrue(n.action('agv1')[0])
+        self.assertEqual(s['phase'], 'unloaded')
+        events = [json.loads(message)['event'] for message in n.event_pub.messages]
+        self.assertEqual(events[:7], ['started', 'observation_arrived', 'measured',
+                                      'pickup_arrived', 'loaded_confirmed',
+                                      'delivery_arrived', 'unloaded_confirmed'])
         self.assertTrue(n.action('agv1')[0])
         self.assertIsNone(s['accepted'])
         self.assertIsNone(s['slot'])
@@ -450,6 +474,8 @@ class CargoCycleTest(unittest.TestCase):
         self.assertIsNone(event['height_m'])
         self.assertIsNone(event['width_m'])
         self.assertTrue(n.action('agv1')[0])
+        self.assertEqual(s['phase'], 'unloaded')
+        self.assertTrue(n.action('agv1')[0])
         self.assertFalse(s['resuming_delivery'])
 
     def test_delivery_success_rejects_wrong_heading_and_excess_position_error(self):
@@ -493,6 +519,8 @@ class CargoCycleTest(unittest.TestCase):
         self.pose('agv2',(1,2),23)
         self.assertTrue(n.record_delivery('agv2',time.monotonic()))
         self.assertTrue(n.action('agv2')[0])
+        self.assertEqual(s['phase'], 'unloaded')
+        self.assertTrue(n.action('agv2')[0])
         self.assertEqual(n.goal_pub.messages[-1],'agv2 4 4 d')
 
     def test_precision_failure_displays_position_error_and_blocks_loading(self):
@@ -504,6 +532,41 @@ class CargoCycleTest(unittest.TestCase):
         self.assertIn('Position error 2.8 cm',s['reason'])
         self.assertFalse(n.confirm('agv1')[0])
         self.assertEqual(n.goal_pub.messages,['agv1 3 4 d'])
+
+    def test_agv2_retry_uses_west_staging_cell_before_measuring(self):
+        from cargo_live_view import navigation_error
+        n=self.node; s=n.cars['agv2']
+        self.assertTrue(n.action('agv2')[0])
+        self.assertEqual(n.goal_pub.messages, ['agv2 4 4 d'])
+        self.pose('agv2', (4,4), 21, state='idle')
+        s['status']['x'] += .030
+        s['status']['y'] += .031
+        navigation_error(s, '[agv2] sai so vi tri tai dich 4.3 cm > 2 cm')
+
+        self.assertTrue(n.action('agv2')[0])
+        self.assertEqual(s['phase'], 'to_stage')
+        self.assertEqual(n.goal_pub.messages[-1], 'agv2 4 3')
+        self.assertIsNone(s['accepted'])
+        self.pose('agv2', (4,3), 21)
+        n.advance('agv2', time.monotonic())  # route cu chua xac nhan chang moi
+        self.assertEqual(n.goal_pub.messages[-1], 'agv2 4 3')
+        self.pose('agv2', (4,3), 22)
+        s['status']['x'] += .03
+        n.advance('agv2', time.monotonic())  # o dung truoc van phai den noi
+        self.assertEqual(n.goal_pub.messages[-1], 'agv2 4 3')
+        self.pose('agv2', (4,3), 22)
+        n.advance('agv2', time.monotonic())
+        self.assertEqual(s['phase'], 'to_observe')
+        self.assertEqual(n.goal_pub.messages[-1], 'agv2 4 4 d')
+        self.pose('agv2', (4,4), 23)
+        n.advance('agv2', time.monotonic())
+        self.assertEqual(s['phase'], 'measuring')
+        self.assertEqual(n.goal_pub.messages,
+                         ['agv2 4 4 d', 'agv2 4 3', 'agv2 4 4 d'])
+        events = [json.loads(m)['event'] for m in n.event_pub.messages]
+        self.assertEqual(events,
+                         ['started', 'recovery_stage_sent', 'recovery_stage_arrived',
+                          'recovery_reapproach_sent', 'observation_arrived'])
 
     def test_original_precision_log_is_not_hidden_by_generic_stop_log(self):
         n=self.node; s=n.cars['agv1'];n.action('agv1')

@@ -1,0 +1,19 @@
+[INFO] [1793004201.455756131] [map_server]: 
+	map_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1793004201.455818355] [map_server]: Creating
+[INFO] [1793004201.626858659] [map_server]: Configuring
+[INFO] [1793004201.626919657] [map_io]: Loading yaml file: /home/tai/Robot_kho_clone/src/my_bot_bringup/config/real_room_map.yaml
+[INFO] [1793004201.627564527] [map_io]: resolution: 0.05
+[INFO] [1793004201.627572236] [map_io]: origin[0]: -4.763
+[INFO] [1793004201.627577712] [map_io]: origin[1]: -2.581
+[INFO] [1793004201.627579875] [map_io]: origin[2]: 0
+[INFO] [1793004201.627582094] [map_io]: free_thresh: 0.196
+[INFO] [1793004201.627584139] [map_io]: occupied_thresh: 0.65
+[INFO] [1793004201.627587245] [map_io]: mode: trinary
+[INFO] [1793004201.627589713] [map_io]: negate: 0
+[INFO] [1793004201.628619139] [map_io]: Loading image_file: /home/tai/Robot_kho_clone/src/my_bot_bringup/config/real_room_map.pgm
+[INFO] [1793004201.629447473] [map_io]: Read map /home/tai/Robot_kho_clone/src/my_bot_bringup/config/real_room_map.pgm: 159 X 165 map @ 0.05 m/cell
+[INFO] [1793004201.636311554] [map_server]: Activating
+[INFO] [1793004201.636415732] [map_server]: Creating bond (map_server) to lifecycle manager.

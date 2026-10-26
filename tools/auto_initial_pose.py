@@ -19,6 +19,8 @@ KHI NAO NO TU CHOI
   2D Pose Estimate. Doan sai la AMCL bam sai cho ngay tu dau."""
 import argparse
 import math
+import os
+import sys
 import threading
 import time
 
@@ -36,6 +38,9 @@ from sensor_msgs.msg import LaserScan
 from scipy.ndimage import distance_transform_edt
 import tf2_ros
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
+
 TRUNC = 0.30          # m - tia xa tuong hon the nay deu bi cham nhu nhau
 HIT = 0.10            # m - tia cach tuong duoi muc nay coi la "trung tuong"
 MIN_HIT = 0.60        # it hon 60% tia trung tuong -> khong tin
@@ -48,7 +53,7 @@ def yaw_of(q):
 
 class Loc(Node):
     def __init__(self, ns=''):
-        # ns (vd 'agv2'): xe trong che do 2 xe - topic /agv2/scan, /agv2/initialpose,
+        # ns (vd 'agv2'): xe trong che do 2 xe - topic /agv2/scan_filtered, /agv2/initialpose,
         # cay TF rieng /agv2/tf. Ban do /map dung chung.
         remap = ['--ros-args', '-r', f'/tf:=/{ns}/tf', '-r', f'/tf_static:=/{ns}/tf_static'] if ns else None
         super().__init__('auto_initial_pose', cli_args=remap)
@@ -57,15 +62,19 @@ class Loc(Node):
         tf2_ros.TransformListener(self.buf, self)
         self.grid = None
         self.scan = None
+        self.amcl_pose = None
         self.create_subscription(
             OccupancyGrid, '/map', lambda m: setattr(self, 'grid', m),
             QoSProfile(reliability=QoSReliabilityPolicy.RELIABLE,
                        durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
                        history=QoSHistoryPolicy.KEEP_LAST, depth=1))
         self.create_subscription(
-            LaserScan, f'{pre}/scan', lambda m: setattr(self, 'scan', m),
+            LaserScan, f'{pre}/scan_filtered', lambda m: setattr(self, 'scan', m),
             QoSProfile(reliability=QoSReliabilityPolicy.BEST_EFFORT,
                        history=QoSHistoryPolicy.KEEP_LAST, depth=2))
+        self.create_subscription(
+            PoseWithCovarianceStamped, f'{pre}/amcl_pose',
+            lambda m: setattr(self, 'amcl_pose', (time.monotonic(), m)), 10)
         self.pub = self.create_publisher(PoseWithCovarianceStamped, f'{pre}/initialpose', 1)
 
 
@@ -74,7 +83,13 @@ def main():
     ap.add_argument('--dry-run', action='store_true',
                     help='chi in ket qua, khong gui cho AMCL')
     ap.add_argument('--ns', default='', help='agv1 | agv2 khi chay 2 xe (tools/fleet_real.sh)')
+    ap.add_argument('--hint-cell', metavar='ROW,COL',
+                    help='o xe da duoc nguoi van hanh xac nhan; chi tim quanh o nay')
+    ap.add_argument('--hint-heading', choices=('d', 'b', 't', 'n'),
+                    help='huong xe da xac nhan: d=Dong, b=Bac, t=Tay, n=Nam')
     a = ap.parse_args()
+    if bool(a.hint_cell) != bool(a.hint_heading):
+        ap.error('--hint-cell va --hint-heading phai di cung nhau')
 
     rclpy.init()
     n = Loc(a.ns)
@@ -87,10 +102,10 @@ def main():
         time.sleep(0.2)
     if n.grid is None:
         print('Khong nhan duoc /map. localization.launch.py co dang chay khong?')
-        rclpy.shutdown(); return
+        rclpy.shutdown(); return 2
     if n.scan is None:
-        print('Khong nhan duoc /scan.')
-        rclpy.shutdown(); return
+        print(f'Khong nhan duoc {f"/{a.ns}" if a.ns else ""}/scan_filtered.')
+        rclpy.shutdown(); return 2
 
     g, s = n.grid, n.scan
     w, h, res = g.info.width, g.info.height, g.info.resolution
@@ -108,7 +123,7 @@ def main():
     except Exception as e:
         print(f'Khong tra duoc TF base_footprint -> {s.header.frame_id}: '
               f'{type(e).__name__}. bringup_real.launch.py co dang chay khong?')
-        rclpy.shutdown(); return
+        rclpy.shutdown(); return 2
 
     r = np.array(s.ranges, dtype=np.float64)
     ang = s.angle_min + np.arange(len(r)) * s.angle_increment
@@ -116,7 +131,7 @@ def main():
     r, ang = r[ok], ang[ok]
     if len(r) < 50:
         print(f'Anh quet chi co {len(r)} tia hop le - qua it de tim.')
-        rclpy.shutdown(); return
+        rclpy.shutdown(); return 2
 
     def cost(px, py):
         ix = np.floor((px - ox) / res).astype(np.int64)
@@ -131,23 +146,73 @@ def main():
     keep = (fy % 2 == 0) & (fx % 2 == 0)              # buoc 10 cm
     cx = ox + (fx[keep] + 0.5) * res
     cy = oy + (fy[keep] + 0.5) * res
+    hint = None
+    angles = np.radians(np.arange(0.0, 360.0, 2.0))
+    if a.hint_cell:
+        from grid_board import Board, config_path
+        board = Board.load(config_path(True))
+        try:
+            row, col = (int(v) for v in a.hint_cell.split(','))
+        except (ValueError, TypeError):
+            ap.error('--hint-cell can dang ROW,COL, vd 5,2')
+        if not (1 <= row <= board.rows and 1 <= col <= board.cols):
+            ap.error('--hint-cell nam ngoai sa ban')
+        hx, hy = board.xy(row - 1, col - 1)
+        hth = board.yaw + {'d': 0, 'b': math.pi / 2,
+                           't': math.pi, 'n': -math.pi / 2}[a.hint_heading]
+        hlx = hx + lx * math.cos(hth) - ly * math.sin(hth)
+        hly = hy + lx * math.sin(hth) + ly * math.cos(hth)
+        local = np.hypot(cx - hlx, cy - hly) <= 0.45
+        cx, cy = cx[local], cy[local]
+        angles = hth + lth + np.radians(np.arange(-24.0, 24.1, 2.0))
+        hint = (hx, hy, hth)
+        print(f'Chi tim quanh o ({row},{col}) huong {a.hint_heading}: '
+              f'{len(cx)} vi tri, {len(angles)} goc; van kiem tra do khop LiDAR.')
+    if len(cx) == 0:
+        print('Ban do khong co o trong de tu dinh vi quanh vi tri da xac nhan.')
+        n.destroy_node()
+        rclpy.shutdown()
+        return 2
     sub = np.linspace(0, len(r) - 1, min(len(r), 120)).astype(int)
     rs, angs = r[sub], ang[sub]
     coarse = []
-    for th in np.radians(np.arange(0.0, 360.0, 2.0)):
+    for th in angles:
         px, py = rs * np.cos(angs + th), rs * np.sin(angs + th)
         for i in range(0, len(cx), 4000):
             c = cost(cx[i:i+4000, None] + px[None, :],
                      cy[i:i+4000, None] + py[None, :]).mean(axis=1)
-            for k in np.argsort(c)[:3]:
+            # Lay ca cac cuc tieu o cho khac; nhieu diem sat nhau quanh mot
+            # o se che mat nghiem thu hai neu chi lay 3 gia tri nho nhat.
+            for _ in range(min(3, len(c))):
+                k = int(np.argmin(c))
+                if not np.isfinite(c[k]):
+                    break
                 coarse.append((c[k], cx[i + k], cy[i + k], th))
+                near = ((cx[i:i+len(c)] - cx[i + k]) ** 2 +
+                        (cy[i:i+len(c)] - cy[i + k]) ** 2 < 0.5 ** 2)
+                c[near] = np.inf
     coarse.sort(key=lambda b: b[0])
+
+    seeds = []
+    for candidate in coarse:
+        _, x, y, th = candidate
+        if all(math.hypot(x - sx, y - sy) > 0.5 or
+               abs(math.remainder(th - sth, 2 * math.pi)) > math.radians(30)
+               for _, sx, sy, sth in seeds):
+            seeds.append(candidate)
+            if len(seeds) == 12:
+                break
+    if not seeds:
+        print('Khong tim duoc ung vien vi tri tu anh quet.')
+        n.destroy_node()
+        rclpy.shutdown()
+        return 2
 
     offs = np.arange(-0.1, 0.1001, 0.01)
     DX, DY = np.meshgrid(offs, offs, indexing='ij')
     DX, DY = DX.ravel(), DY.ravel()
     fine = []
-    for _, bx, by, bth in coarse[:12]:
+    for _, bx, by, bth in seeds:
         best = (1e9, bx, by, bth)
         for dth in np.radians(np.arange(-2.0, 2.001, 0.25)):
             px, py = r * np.cos(ang + bth + dth), r * np.sin(ang + bth + dth)
@@ -187,11 +252,17 @@ def main():
               f'{math.degrees(math.remainder(th2, 2*math.pi)):+.1f} do, '
               f'{hit2*100:.0f}% tia trung tuong')
 
+    hint_ok = (hint is None or
+               (math.hypot(bx - hint[0], by - hint[1]) <= 0.20 and
+                abs(math.remainder(bth - hint[2], 2 * math.pi)) <= math.radians(15)))
+    success = False
     if hit1 < MIN_HIT:
         print(f'\nKHONG GUI: chi {hit1*100:.0f}% tia trung tuong (can >= '
               f'{MIN_HIT*100:.0f}%). Phong da doi nhieu so voi luc ve ban do, '
               'hoac xe dang o ngoai vung da ve. Dung "2D Pose Estimate".')
-    elif hit1 - hit2 < MIN_MARGIN:
+    elif not hint_ok:
+        print('\nKHONG GUI: ket qua LiDAR cach xa o/huong da xac nhan.')
+    elif hint is None and hit1 - hit2 < MIN_MARGIN:
         print(f'\nKHONG GUI: hai cho khac nhau deu khop gan bang nhau - phong '
               'gan doi xung, doan la co the sai. Dung "2D Pose Estimate", hoac '
               'dua xe toi cho it doi xung hon (gan do dac) roi chay lai.')
@@ -200,7 +271,8 @@ def main():
     else:
         m = PoseWithCovarianceStamped()
         m.header.frame_id = g.header.frame_id or 'map'
-        m.header.stamp = s.header.stamp
+        # Viec tim kiem co the mat vai giay; tem scan cu se vuot qua bo dem TF.
+        m.header.stamp = n.get_clock().now().to_msg()
         m.pose.pose.position.x = bx
         m.pose.pose.position.y = by
         m.pose.pose.orientation.z = math.sin(bth / 2)
@@ -215,13 +287,27 @@ def main():
         if n.pub.get_subscription_count() == 0:
             print('\nKhong thay AMCL dang nghe /initialpose.')
         else:
+            sent_at = time.monotonic()
             n.pub.publish(m)
-            time.sleep(0.5)
-            print('\nDa gui vi tri ban dau cho AMCL.')
+            end = time.monotonic() + 8
+            while time.monotonic() < end:
+                received = n.amcl_pose
+                if received is not None and received[0] > sent_at:
+                    pose = received[1].pose.pose
+                    if (math.hypot(pose.position.x - bx, pose.position.y - by) < 0.15
+                            and abs(math.remainder(yaw_of(pose.orientation) - bth,
+                                                   2 * math.pi)) < math.radians(15)):
+                        success = True
+                        break
+                time.sleep(0.1)
+            print('\nAMCL da nhan va xac nhan vi tri.' if success else
+                  '\nAMCL chua xac nhan vi tri trong 8 s; khong cho xe chay.')
 
     n.destroy_node()
     rclpy.shutdown()
+    return 0 if success or (a.dry_run and hit1 >= MIN_HIT and hint_ok and
+                            (hint is not None or hit1-hit2 >= MIN_MARGIN)) else 2
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

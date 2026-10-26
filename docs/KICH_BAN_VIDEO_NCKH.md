@@ -259,7 +259,8 @@ Bấm **BAT DAU** dưới ảnh mỗi xe. Không gửi thêm đích riêng ở t
 Quay đủ chuỗi: xe 1 tới ô quan sát (3,4), xe 2 tới (4,4), cùng hướng Đông;
 chốt 5 ảnh và phân loại; tự tiến tới (3,5)/(4,5); chờ người đặt hàng lên xe
 và bấm **DA NHAN HANG**; đi giao; báo **DA GIAO HANG THANH CONG**.
-Sau khi dỡ hàng, bấm **DA DO HANG - QUAY LAI LAY TIEP**. Đặt món khác loại
+Sau khi dỡ hàng, bấm **DA DO HANG (XAC NHAN)** để ghi mốc dỡ, rồi bấm
+**QUAY LAI LAY TIEP** khi muốn bắt đầu lượt mới. Đặt món khác loại
 ở lượt tiếp và quay cảnh cùng một xe giao tới ô tương ứng loại mới.
 Mỗi xe chỉ chở một món một lúc; mỗi ô giao vẫn dành riêng một loại.
 Giao diện giữ mở cho tới khi bấm Q. Chi tiết điều kiện đo và bố trí mới:

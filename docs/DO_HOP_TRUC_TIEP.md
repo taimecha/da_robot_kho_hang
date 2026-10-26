@@ -7,17 +7,16 @@ Hàng 1 ở dưới cùng, cột 1 ở bên trái
 trên RViz. Bật nguồn hai xe và hai ESP32-CAM; giữ xe đứng yên khoảng 2 giây
 sau lúc bật nguồn.
 
-Mở các terminal riêng trong VS Code. Ở terminal 1, ví dụ dưới dùng xe 1 ở
-(3,5), xe 2 ở (4,5), cùng quay Đông. Nếu đã bế xe sang
-chỗ khác, thay `AGV1`, `AGV2` bằng **hàng cột góc hướng** thực tế trước khi chạy.
-Chờ `Da bat` rồi mới chạy dòng định vị. Chỉ giao đích khi **cả hai** xe có dòng
-`da gui cho AMCL`, và vị trí hai xe trên RViz khớp vị trí thực:
+Mở các terminal riêng trong VS Code. Theo kịch bản đo, đặt xe 1 ở (2,3), xe 2
+ở (3,3), cùng quay Đông. Khi bật hệ, giữ xe đứng yên để nó tự định vị bằng
+LiDAR và bản đồ. Chỉ giao đích sau khi terminal 1 báo định vị thành công cho
+**cả hai** xe, hiện `Da bat`, và vị trí trên RViz khớp vị trí thực:
 
 ```bash
 cd /home/tai/Robot_kho_clone
 source tools/setup_real_env.bash
-AGV1="3 5 0" AGV2="4 5 0" tools/fleet_real.sh up
-python3 tools/fleet_localize.py
+export ROS_DOMAIN_ID=0
+AUTO_LOCALIZE=1 tools/fleet_real.sh up
 ```
 
 Terminal 2, giữ bộ điều phối chạy; chỉ nhận đích qua `/fleet/goal`:
@@ -25,6 +24,7 @@ Terminal 2, giữ bộ điều phối chạy; chỉ nhận đích qua `/fleet/go
 ```bash
 cd /home/tai/Robot_kho_clone
 source tools/setup_real_env.bash
+export ROS_DOMAIN_ID=0
 python3 traffic_manager.py agv1 agv2 --no-stdin
 ```
 
@@ -33,6 +33,7 @@ Terminal 3, mở RViz:
 ```bash
 cd /home/tai/Robot_kho_clone
 source tools/setup_real_env.bash
+export ROS_DOMAIN_ID=0
 rviz2 -d tools/fleet.rviz
 ```
 
@@ -41,6 +42,7 @@ Terminal 4, mở ảnh và số đo hai camera:
 ```bash
 cd /home/tai/Robot_kho_clone
 source tools/setup_real_env.bash
+export ROS_DOMAIN_ID=0
 python3 tools/cargo_live_view.py --agv1-pickup 3,5 --agv2-pickup 4,5
 ```
 
@@ -55,8 +57,9 @@ Giao diện không tự gửi đích lúc mở. Bấm **BAT DAU** dưới ảnh 
    Xe chỉ đi giao sau xác nhận này; không thay món khác giữa lúc đo và xác nhận.
 4. Tới ô giao, giao diện hiện **DA GIAO HANG THANH CONG** và phát sự kiện
    `delivered` trên `/fleet/cargo_result`. Giao diện **giữ mở**.
-5. Dỡ hàng, đặt món tiếp theo tại khu lấy, rồi bấm **DA DO HANG - QUAY LAI LAY TIEP**.
-   Xe quay về ô quan sát; số đo và loại cũ được xóa để đo lại món mới.
+5. Dỡ hàng rồi bấm **DA DO HANG (XAC NHAN)** để ghi mốc dỡ; xe vẫn đứng yên.
+   Đặt món tiếp theo tại khu lấy rồi bấm **QUAY LAI LAY TIEP**. Xe quay về ô
+   quan sát; số đo và loại cũ được xóa để đo lại món mới.
 
 Ảnh camera cập nhật trực tiếp ở mọi bước, kể cả khi xe đang chạy, chờ lấy
 hàng và đã giao xong. Chỉ các số đo được chốt sau 5 ảnh; khung viền nhận diện
@@ -65,7 +68,8 @@ không được giữ đè lên ảnh mới. Nếu mất ảnh quá 2 giây, gia
 Mỗi xe chở **một món mỗi chuyến**, có thể chở mọi loại ở các chuyến khác nhau.
 Ô giao giữ cố định một loại theo bảng chiều cao bên dưới, không phụ thuộc xe nào giao.
 Hai xe cùng loại phải chờ ô giao trống: xe trước dỡ hàng và rời ô rồi xe sau mới xác nhận giao.
-Nút quay lại đồng thời là xác nhận người giám sát **đã dỡ món trước**.
+Nút xác nhận dỡ và nút quay lại là hai bước riêng; quay lại chỉ khả dụng sau khi
+người giám sát đã xác nhận **dỡ món trước**.
 
 Nếu đổi lại chỗ hai hộp và xe, đặt đúng ô lấy hàng cho từng xe:
 

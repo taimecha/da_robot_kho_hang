@@ -1,0 +1,378 @@
+amcl:
+  ros__parameters:
+    base_frame_id: "base_footprint"
+    odom_frame_id: "odom"
+    global_frame_id: "map"
+    robot_model_type: "nav2_amcl::DifferentialMotionModel"
+    max_particles: 2000
+    min_particles: 500
+
+    # Mo hinh nhieu odometry. Mac dinh Nav2 la 0.2 cho ca bon, tuc gia dinh
+    # odometry sai toi 20%. Xe nay DA DO:
+    #   goc     ~1%  (tools/check_lidar_angle.py, doi chieu anh quet qua 683 do:
+    #                 quaternion -1.01, gyro -0.99)
+    #   quang duong ~2% sau hieu chinh (ba lan chay 2.00 m: 1.967/1.953/1.978)
+    # Gia dinh qua long lam dam hat tan rong va vi tri uoc luong rung. 0.1 van
+    # chua bien 5-10 lan sai so do duoc, phong banh truot tren gach bong.
+    #   alpha1: nhieu GOC do QUAY    alpha2: nhieu GOC do TINH TIEN
+    #   alpha3: nhieu TINH TIEN do TINH TIEN   alpha4: nhieu TINH TIEN do QUAY
+    alpha1: 0.1
+    alpha2: 0.1
+    alpha3: 0.1
+    alpha4: 0.1
+
+    # AMCL chi chay mot buoc loc sau khi xe di bay nhieu. Mac dinh 0.25 m / 0.2
+    # rad - o 0.25 m/s la mot giay moi sua mot lan, qua thua cho phong 6x5 m va
+    # xe 18 cm.
+    update_min_d: 0.1
+    update_min_a: 0.1
+    # (Da thu 0.05/0.05 bang phat lai bag: 3/3 lan AMCL lech 6-11 cm luc xe
+    # vua quay vua dung roi giu nguyen do lech - cap nhat nhieu hon cung la
+    # cap nhat nhieu hon tren anh quet bi nhoe vi xe dang quay.)
+
+    # Mo hinh cam bien. Mac dinh Nav2 (sigma_hit 0.2, z_hit 0.5, z_rand 0.5,
+    # 60 tia) gia dinh LiDAR sai toi 20 cm va mot nua so tia la rac -> do
+    # khop rat "phang", AMCL khong keo vi tri ve kip khi odometry sai.
+    # LiDAR nay o dung cho thi trung vi chi lech tuong 2.4 cm (88% tia trung
+    # tuong), nen siet lai. Do bang cach phat lai cung mot bag 185 s xe chay
+    # (tools/eval_bag_localization.py), sai vi tri luc xe chay:
+    #   mac dinh          trung vi 4.2  p90 8.5  max 14.6 cm
+    #   cac gia tri duoi  trung vi 3.6  p90 6.1  max 10.4 cm
+    sigma_hit: 0.08
+    z_hit: 0.9
+    z_rand: 0.1
+    max_beams: 120
+    laser_likelihood_max_dist: 1.0
+
+    # AMCL dan map->odom voi tem thoi gian = luc quet + transform_tolerance.
+    # Tra TF tai luc t thi dung ban sua cua anh quet t - tolerance: mac dinh
+    # 1.0 s nghia la RViz hien ban sua tre 1 giay. 0.5 van phu duoc lo hong
+    # Wi-Fi ~1 s ma khong lam TF het han giua chung.
+    transform_tolerance: 0.5
+
+    # Mac dinh cho luong khoi dong cu (vi du Gazebo). fleet_real_robot.launch.py
+    # ghi de set_initial_pose=false va bo initial_pose khi AUTO_LOCALIZE=1;
+    # tools/auto_initial_pose.py se tim vi tri tu LiDAR + /map roi gui cho AMCL.
+    set_initial_pose: true
+    initial_pose:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      yaw: 0.0
+
+bt_navigator:
+  ros__parameters:
+    global_frame: map
+    robot_base_frame: base_footprint
+    odom_topic: /agv1/odom
+    navigators: ["navigate_to_pose", "navigate_through_poses"]
+
+controller_server:
+  ros__parameters:
+    controller_frequency: 20.0
+    progress_checker_plugins: ["progress_checker", "precision_progress_checker"]
+    goal_checker_plugins: ["general_goal_checker", "precision_goal_checker"]
+    controller_plugins: ["FollowPath", "PrecisionFollowPath"]
+
+    # Xe phai di duoc 0.15 m trong 15 s. Truoc day 0.5 m / 10 s: o sa ban 60 cm
+    # mot doan ngan + mot lan xoay tai cho la du bi bao "Failed to make progress".
+    progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.15
+      movement_time_allowance: 15.0
+
+    # Tien do cho doan cuoi/vi chinh, khong doi di 15 cm khi dich chi 3 cm.
+    precision_progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.003
+      movement_time_allowance: 4.0
+
+    # O sa ban 60 cm: yeu cau sai so dich <= 3 cm (2026-10-03). Dat 2 cm de
+    # con du tru: 3 cm thi xe that dung o 2.6-2.9 cm (sat nguong), 2 cm thi
+    # 0.4-1.6 cm.
+    # Goc KHONG kiem o day: ep 3 do thi RPP tu xoay voi toc do khong doi o dich
+    # va vuot goc. grid_navigator tu chinh huong <= 3 do (done_deg).
+    general_goal_checker:
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.02
+      # FollowPath chi lo doan thang; fleet_agent tu xoay va xac nhan goc tai dich < 2.5 do.
+      yaw_goal_tolerance: 0.35
+      stateful: true
+
+    # Can tam o truoc khi xoay huong cuoi; khong co bam nguong 5 mm qua chat.
+    # de con du tru cho dich chuyen sau lan xoay ve huong lay/giao hang.
+    # Nguong xac nhan cuoi cua fleet_agent van la <=2 cm va <2.5 do.
+    precision_goal_checker:
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.012
+      yaw_goal_tolerance: 0.35
+      stateful: false
+
+    # REGULATED PURE PURSUIT - bam DUNG duong duoc giao.
+    # grid_navigator.py giao tung doan thang nam tren canh sa ban (khong qua
+    # planner A*). RPP: dau doan, neu dau xe lech > rotate_to_heading_min_angle
+    # thi XOAY TAI CHO cho thang hang, roi chay thang bam duong voi lookahead
+    # ngan -> xe di tren canh, khong cat qua o.
+    # Truoc day MPPI: thu 2000 quy dao moi chu ky, tren may nay chi chay duoc
+    # 7-8 Hz thay vi 20 Hz (log: "Control loop missed its desired rate") va tu
+    # chon duong cong cat qua o.
+    # Xoay tai cho o dau moi doan do grid_navigator.py tu lam (giam toc + bu
+    # tre 0.3 s). Da thu RotationShimController: ban Jazzy xoay voi toc do
+    # KHONG DOI roi cat dot ngot -> xe ao tre 0.3 s vuot 30-40 do moi lan.
+    # RPP chi con xoay du phong khi lech > 20 do (rotate_to_heading_min_angle).
+    FollowPath: &grid_follow_path
+      plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
+      # Dong co 60 RPM, banh 0.0328 m -> tran ly thuyet ~0.20 m/s. Giu nguyen
+      # toc do dat 0.15 m/s de khong doi van toc chay thuong ngay. Theo phep do
+      # tren xe that (2026-10-03, pin da dung ca ngay): lenh 0.25 m/s thi CA HAI
+      # banh ket o 5.35 rad/s = 0.175 m/s (PWM 255) -> khong con du de mot banh
+      # nhanh hon -> xe KHONG re duoc de chinh huong. 0.15 m/s (4.6 rad/s) chua
+      # cho de lai cho viec re.
+      desired_linear_vel: 0.15
+      lookahead_dist: 0.20
+      min_lookahead_dist: 0.15
+      max_lookahead_dist: 0.30
+      lookahead_time: 1.0
+      use_velocity_scaled_lookahead_dist: false
+      # Xoay tai cho o dau moi doan (goc cua sa ban 90 do, quay dau 180 do)
+      use_rotate_to_heading: true
+      rotate_to_heading_min_angle: 0.35        # rad ~ 20 do (du phong)
+      # 1.0 rad/s = 29 v/p moi banh -> PWM ~82, khong thang noi ma sat tinh khi
+      # xoay tai cho (do tren xe: banh dung yen 1-2 s, banh lui khong quay).
+      rotate_to_heading_angular_vel: 1.3       # rad/s
+      # RPP chi cho lenh quay tang max_angular_accel * 0.05 s moi chu ky, tinh
+      # tu toc do quay DO DUOC. 3.0 -> lenh dau 0.15 rad/s, duoi vung chet dong
+      # co -> xe khong quay -> do duoc van 0 -> lenh ket mai o 0.15 -> "Failed
+      # to make progress" (da thay tren xe that va xe ao). 20 -> lenh dau 1.0;
+      # tang toc em giao cho velocity_smoother (tinh tu lenh truoc, khong ket).
+      max_angular_accel: 20.0
+      # Toc do toi thieu khi gan diem den: duoi muc nay dong co co the khong
+      # nhuc nhich (vung chet PWM) va xe dung truoc dich
+      min_approach_linear_velocity: 0.08
+      approach_velocity_scaling_dist: 0.25
+      # Khong tu giam toc theo do cong / gan vat can: duong la doan thang, va
+      # sat tuong la chuyen binh thuong tren sa ban
+      use_regulated_linear_velocity_scaling: false
+      use_cost_regulated_linear_velocity_scaling: false
+      regulated_linear_scaling_min_radius: 0.9
+      regulated_linear_scaling_min_speed: 0.10
+      # Dung neu sap va trong 1 s doc theo duong -> grid_navigator tim duong khac
+      use_collision_detection: true
+      max_allowed_time_to_collision_up_to_carrot: 1.0
+      allow_reversing: false
+      use_fixed_curvature_lookahead: false
+
+      curvature_lookahead_dist: 0.6
+      interpolate_curvature_after_goal: false
+      max_robot_pose_search_dist: 10.0
+      transform_tolerance: 0.5
+      stateful: true
+
+    # Giu toc do chay 0.15 m/s, chi giam dan o 20 cm cuoi. Khi vi chinh
+    # vai cm, chay 0.025-0.04 m/s thay vi toi thieu 0.08 m/s.
+    PrecisionFollowPath:
+      <<: *grid_follow_path
+      min_approach_linear_velocity: 0.025
+      approach_velocity_scaling_dist: 0.20
+      use_rotate_to_heading: false
+
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      global_frame: map
+      robot_base_frame: base_footprint
+      update_frequency: 5.0
+      # grid_navigator / fleet_agent doc /local_costmap/costmap (ban DAY DU) de
+      # biet nut/canh nao bi chan. Mac dinh Nav2 chi phat ban day du khi khung
+      # cuon dich chuyen; xe DUNG YEN thi chi phat costmap_updates -> vat can
+      # da di khoi van bi tinh la chan mai. Luon phat day du, 5 Hz (6x6 m o 5 cm
+      # = 14400 o, nhe).
+      publish_frequency: 5.0
+      always_send_full_costmap: True
+      rolling_window: true
+      width: 6
+      height: 6
+      resolution: 0.05
+      # Diem xa tam nhat la goc ngoai banh sau (banh nho ra ngoai than xe):
+      #   sqrt(0.046^2 + 0.113^2) = 0.122 m  -> lay 0.13 cho co bien.
+      # Truoc day la 0.6, khop voi URDF cu mo ta mot chiec xe duong kinh 1 m.
+      robot_radius: 0.13
+      # LiDAR 2D -> ObstacleLayer (VoxelLayer chi them tang z, khong dung den).
+      plugins: ["obstacle_layer", "inflation_layer"]
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        cost_scaling_factor: 3.0
+        # robot_radius 0.13 + khoang an toan. Giu 0.75 cho xe 0.13 thi ca
+        # phong 10x10 deu thanh vung cam va Nav2 khong tim duoc duong nao.
+        inflation_radius: 0.25
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: True
+        observation_sources: scan
+        scan:
+          topic: /agv1/scan_filtered
+          max_obstacle_height: 2.0
+          clearing: True
+          marking: True
+          data_type: "LaserScan"
+          # Vat can "phai" sau ~1 s khong thay (xem grid_navigator COSTMAP_DECAY):
+          # moi chu ky costmap danh dau lai TAT CA anh quet trong 1 s qua, con
+          # grid_navigator xoa lop vat can moi 1 s. Vi sao can: o danh dau boi mot
+          # diem nhieu ma sau do KHONG tia nao di qua (sau vat that, huong LiDAR
+          # khong phan hoi = 0, hay nam giua hai tia 1.13 do o xa > 1.5 m) thi
+          # raytrace khong bao gio xoa -> nam mai tren RViz (do 2026-10-10: 15-20
+          # o/xe). X2 hay roi diem (~15%/vong) nen giu 1 s anh quet de vat that
+          # khong chop tat.
+          observation_persistence: 1.0
+          # Do 2026-10-10 (2 xe that): mac dinh raytrace_max_range 3.0 m -> tia cham
+          # vat xa hon 3 m KHONG xoa duoc o nao tren duong di, vet vat can (nguoi di
+          # qua, luc AMCL sai) nam mai trong RViz. 10 m: moi tia deu xoa toi mep
+          # costmap. Danh dau van chi trong 2.5 m.
+          raytrace_max_range: 10.0
+          raytrace_min_range: 0.0
+          obstacle_max_range: 2.5
+          obstacle_min_range: 0.0
+
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      global_frame: map
+      robot_base_frame: base_footprint
+      update_frequency: 1.0
+      publish_frequency: 1.0
+      resolution: 0.05
+      # Diem xa tam nhat la goc ngoai banh sau (banh nho ra ngoai than xe):
+      #   sqrt(0.046^2 + 0.113^2) = 0.122 m  -> lay 0.13 cho co bien.
+      # Truoc day la 0.6, khop voi URDF cu mo ta mot chiec xe duong kinh 1 m.
+      robot_radius: 0.13
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
+      static_layer:
+        plugin: "nav2_costmap_2d::StaticLayer"
+        map_topic: /map
+        map_subscribe_transient_local: True
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: True
+        observation_sources: scan
+        scan:
+          topic: /agv1/scan_filtered
+          max_obstacle_height: 2.0
+          clearing: True
+          marking: True
+          data_type: "LaserScan"
+          # Do 2026-10-10 (2 xe that): mac dinh raytrace_max_range 3.0 m -> tia cham
+          # vat xa hon 3 m KHONG xoa duoc o nao tren duong di, vet vat can (nguoi di
+          # qua, luc AMCL sai) nam mai trong RViz. 10 m: moi tia deu xoa toi mep
+          # costmap. Danh dau van chi trong 2.5 m.
+          raytrace_max_range: 10.0
+          raytrace_min_range: 0.0
+          obstacle_max_range: 2.5
+          obstacle_min_range: 0.0
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        cost_scaling_factor: 3.0
+        # robot_radius 0.13 + khoang an toan. Giu 0.75 cho xe 0.13 thi ca
+        # phong 10x10 deu thanh vung cam va Nav2 khong tim duoc duong nao.
+        inflation_radius: 0.25
+
+planner_server:
+  ros__parameters:
+    expected_planner_frequency: 20.0
+    planner_plugins: ["GridBased"]
+    GridBased:
+      plugin: "nav2_navfn_planner::NavfnPlanner"
+      tolerance: 0.5
+      use_astar: true
+      allow_unknown: true
+
+behavior_server:
+  ros__parameters:
+    local_costmap_topic: local_costmap/costmap_raw
+    global_costmap_topic: global_costmap/costmap_raw
+    local_footprint_topic: local_costmap/published_footprint
+    global_footprint_topic: global_costmap/published_footprint
+    cycle_frequency: 10.0
+    behavior_plugins: ["spin", "backup", "drive_on_heading", "wait"]
+    spin:
+      plugin: "nav2_behaviors::Spin"
+    backup:
+      plugin: "nav2_behaviors::BackUp"
+    drive_on_heading:
+      plugin: "nav2_behaviors::DriveOnHeading"
+    wait:
+      plugin: "nav2_behaviors::Wait"
+    global_frame: map
+    robot_base_frame: base_footprint
+
+# Lam muot lenh tu controller truoc khi xuong xe. OPEN_LOOP: tang toc tinh tu
+# LENH truoc (khong phai toc do do) - nen khong bi ket o vung chet dong co nhu
+# gioi han gia toc cua RPP. Phanh goc nhanh hon tang toc de xe xoay tai cho
+# dung lai gon, khong vuot qua huong canh.
+velocity_smoother:
+  ros__parameters:
+    smoothing_frequency: 20.0
+    scale_velocities: false
+    feedback: "OPEN_LOOP"
+    max_velocity: [0.30, 0.0, 1.5]
+    min_velocity: [-0.30, 0.0, -1.5]
+    max_accel: [1.0, 0.0, 4.0]
+    max_decel: [-1.0, 0.0, -8.0]
+    deadband_velocity: [0.0, 0.0, 0.0]
+    velocity_timeout: 1.0
+
+collision_monitor:
+  ros__parameters:
+    base_frame_id: "base_footprint"
+    odom_frame_id: "odom"
+    cmd_vel_in_topic: "cmd_vel_smoothed"
+    cmd_vel_out_topic: "cmd_vel"
+    transform_tolerance: 0.2
+    # /scan im ~1.0-1.02 s moi khi Wi-Fi rot mot goi (ESP32 cho ACK cua
+    # /joint_states RELIABLE). 1.0 s thi lan nao cung dung xe ("invalid source").
+    # 1.5 s: o 0.25 m/s xe di toi da ~37 cm khong co anh quet moi.
+    source_timeout: 1.5
+    stop_pub_timeout: 2.0
+    polygons: ["FootprintApproach"]
+    FootprintApproach:
+      type: "polygon"
+      action_type: "approach"
+      footprint_topic: "/agv1/local_costmap/published_footprint"
+      time_before_collision: 1.2
+      simulation_time_step: 0.1
+      min_points: 6
+      visualize: False
+      enabled: True
+    observation_sources: ["scan"]
+    scan:
+      type: "scan"
+      topic: "/agv1/scan_filtered"
+      enabled: True
+docking_server:
+  ros__parameters:
+    controller_frequency: 50.0
+    initial_perception_timeout: 5.0
+    wait_charge_timeout: 5.0
+    dock_approach_timeout: 30.0
+    undock_linear_tolerance: 0.05
+    undock_angular_tolerance: 0.1
+    max_retries: 3
+    base_frame: "base_footprint"
+    fixed_frame: "odom"
+    dock_backwards: false
+    dock_prestaging_tolerance: 0.5
+    dock_plugins:
+      - 'simple_charging_dock'
+    simple_charging_dock:
+      plugin: 'opennav_docking::SimpleChargingDock'
+      docking_threshold: 0.05
+      staging_x_offset: -0.7
+      use_external_detection_pose: true
+      use_battery_status: false
+      use_stall_detection: false
+      external_detection_timeout: 1.0
+      external_detection_translation_x: -0.18
+      external_detection_translation_y: 0.0
+      external_detection_rotation_roll: -1.57
+      external_detection_rotation_pitch: -1.57
+      external_detection_rotation_yaw: 0.0
+      filter_coef: 0.1

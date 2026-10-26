@@ -1,0 +1,5 @@
+environment,run_id,car,cycle,status,deliver_col,T_to_observe_s,T_measure_s,T_to_pickup_s,T_wait_load_s,T_pickup_s,T_delivery_s,T_total_s,T_to_unload_confirmed_s
+real,20261026T154639-7060-82ae0e83,agv1,1,delivered,2,48.774,19.122,18.478,915.627,1002.0,44.974,1046.974,
+real,20261026T154639-7060-82ae0e83,agv2,1,delivered,1,977.603,2.873,7.327,11.923,999.726,52.076,1051.803,
+real,20261026T160851-9909-3e8e0793,agv1,1,delivered,2,37.821,3.256,7.731,13.164,61.972,40.236,102.209,114.691
+real,20261026T160851-9909-3e8e0793,agv2,1,delivered,1,50.347,2.889,6.708,2.267,62.211,51.533,113.744,115.287

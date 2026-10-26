@@ -1,0 +1,7 @@
+2026-10-26, AGV2 chu ky 1: khong do duoc hang tai o quan sat (4,4).
+Nguon: fleet/agent_agv2.log, cargo_events.jsonl, anh giao dien nguoi van hanh cung cap.
+AGV2 di (2,3)->(2,4)->(2,5)->(3,5)->(4,5)->(4,4), vao o (4,4) tu phia Dong va xoay 180 do tai dich ve huong Dong.
+Sau xoay, fleet_agent bao sai so vi tri 4.3 cm > 2 cm, lech ngang 3.1 cm; khong the can tam bang tien/lui thang. Giao dien chuyen sang LOI DIEU HUONG, chua ghi su kien observation_arrived/measured cho AGV2.
+Khong tinh AGV2 la mot lan do thanh cong. Khong ha nguong sai so 2 cm de hop thuc hoa ket qua.
+Sua cau hinh grid_real.yaml de nhung lan khoi dong tiep theo vao o quan sat/lay hang tu phia Tay, da huong Dong truoc khi den tam o.
+Phien dang chay can xu ly rieng vi traffic_manager va giao dien da nap cau hinh cu: dua AGV2 ve (4,3), sau khi dung an THU LAI de vao (4,4) tu phia Tay.

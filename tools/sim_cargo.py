@@ -78,6 +78,7 @@ class SimCargo(Node):
         self.maps = self.distort_maps()
         self.poses = {}
         self.boxes = []
+        self.marker_count = 0
         self.img_pubs = {}
         for c in cars:
             self.img_pubs[c] = self.create_publisher(Image, f'/{c}/camera/image_raw', 2)
@@ -86,9 +87,32 @@ class SimCargo(Node):
         self.box_pub = self.create_publisher(String, '/sim/boxes', 10)
         self.mk_pub = self.create_publisher(MarkerArray, '/fleet/markers', 10)
         self.create_subscription(String, '/sim/cargo_set', lambda m: self.set_goods(m.data), 10)
+        self.create_subscription(String, '/fleet/cargo_event', self.cargo_event, 20)
         self.set_goods(goods)
         self.create_timer(0.5, self.render_all)
-        self.create_timer(1.0, self.publish_boxes)
+        self.create_timer(0.1, self.publish_boxes)
+
+    def cargo_event(self, msg):
+        try:
+            event = json.loads(msg.data)
+        except ValueError:
+            return
+        car = event.get('car')
+        if car not in self.poses:
+            return
+        if event.get('event') == 'loaded_confirmed':
+            box = next((b for b in self.boxes if b['row'] == event.get('pickup_row')
+                        and not b.get('owner') and not b.get('delivered')), None)
+            if box is not None:
+                box.update(owner=car, z=0.14)
+        elif event.get('event') == 'unloaded_confirmed':
+            box = next((b for b in self.boxes if b.get('owner') == car), None)
+            if box is not None:
+                x, y = self.board.xy(int(event['deliver_row'])-1, int(event['deliver_col'])-1)
+                box.update(x=x+0.32*math.sin(self.board.yaw),
+                           y=y-0.32*math.cos(self.board.yaw),
+                           owner=None, z=0.0, delivered=True)
+        self.publish_boxes()
 
     # ------------------------------------------------------------------ hang
     def set_goods(self, text):
@@ -116,25 +140,32 @@ class SimCargo(Node):
         self.publish_boxes()
 
     def publish_boxes(self):
+        for box in self.boxes:
+            if box.get('owner') in self.poses:
+                x, y, yaw = self.poses[box['owner']]
+                box.update(x=x, y=y, yaw=yaw-math.pi/2)
         self.box_pub.publish(String(data=json.dumps(self.boxes)))
         ma = MarkerArray()
-        clear = Marker()
-        clear.ns, clear.action = 'cargo', Marker.DELETEALL
-        ma.markers.append(clear)
+        for i in range(len(self.boxes), self.marker_count):
+            for marker_id in (i, 100+i):
+                old = Marker()
+                old.ns, old.id, old.action = 'cargo', marker_id, Marker.DELETE
+                ma.markers.append(old)
+        self.marker_count = len(self.boxes)
         for i, b in enumerate(self.boxes):
             m = Marker()
             m.header.frame_id, m.ns, m.id, m.type = 'map', 'cargo', i, Marker.CUBE
-            m.pose.position.x, m.pose.position.y, m.pose.position.z = b['x'], b['y'], b['h'] / 2
+            m.pose.position.x, m.pose.position.y, m.pose.position.z = b['x'], b['y'], b.get('z',0.0)+b['h'] / 2
             m.pose.orientation.z, m.pose.orientation.w = math.sin(b['yaw'] / 2), math.cos(b['yaw'] / 2)
             m.scale.x, m.scale.y, m.scale.z = b['w'], b['d'], b['h']
             m.color = ColorRGBA(r=0.72, g=0.49, b=0.27, a=0.9)
             ma.markers.append(m)
             t = Marker()
             t.header.frame_id, t.ns, t.id, t.type = 'map', 'cargo', 100 + i, Marker.TEXT_VIEW_FACING
-            t.pose.position.x, t.pose.position.y, t.pose.position.z = b['x'], b['y'], b['h'] + 0.08
+            t.pose.position.x, t.pose.position.y, t.pose.position.z = b['x'], b['y'], b.get('z',0.0)+b['h'] + 0.08
             t.scale.z = 0.07
             t.color = ColorRGBA(r=1.0, g=1.0, b=1.0, a=1.0)
-            t.text = f'{b["w"] * 100:.0f}x{b["h"] * 100:.0f} cm'
+            t.text = f'{b["w"] * 100:.1f}x{b["h"] * 100:.1f} cm'
             ma.markers.append(t)
         self.mk_pub.publish(ma)
 

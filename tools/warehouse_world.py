@@ -4,6 +4,7 @@ from pathlib import Path
 from warehouse_queue import COLORS, DECK_Z, conveyor_geometry
 from fleet_gazebo import box_visual, cyl_visual, robot_model
 from warehouse_factory import factory_visuals
+from warehouse_landmarks import LANDMARKS
 
 WORLD = 'warehouse_queue'
 
@@ -21,6 +22,9 @@ def build_world(board, lanes, path):
     bottom=min(-2.5,board.xy(0,0)[1]-2.1)
     fixed = [box_visual('floor', (right-3.3)/2, (bottom+2.5)/2, -.025,
                         right+3.3, 2.5-bottom, .05, '.83 .85 .87')]
+    if board.cfg.get('lidar_map'):
+        for i,(x,y,sx,sy) in enumerate(LANDMARKS):
+            fixed.append(box_visual(f'lidar_landmark_{i}',x,y,.35,sx,sy,.7,'.38 .47 .55'))
     for i, (a, b) in enumerate(board.edges()):
         x,y = board.xy(*a); xx,yy = board.xy(*b)
         fixed.append(box_visual(f'line_{i}', (x+xx)/2, (y+yy)/2, .002,

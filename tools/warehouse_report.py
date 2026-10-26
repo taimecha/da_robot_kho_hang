@@ -155,6 +155,33 @@ def report(folder):
         motion[n]=dict(distance_m=round(distance,3),
                        absolute_rotation_deg=round(math.degrees(rotation),1))
     audit['robot_motion']=motion
+    if board.cfg.get('lidar_map'):
+        mapping_file=folder/'mapping.json'
+        alignment_file=folder/'grid_alignment.json'
+        if not mapping_file.exists() or not alignment_file.exists():
+            issues.append('missing LiDAR mapping or grid alignment evidence')
+        else:
+            audit['mapping']=json.loads(mapping_file.read_text())
+            audit['grid_alignment']=json.loads(alignment_file.read_text())
+        localization={n:[] for n in ('agv1','agv2','agv3')}
+        if (folder/'localization.csv').exists():
+            for sample in csv.DictReader(open(folder/'localization.csv')):
+                localization[sample['robot']].append(float(sample['position_error_m']))
+        audit['localization']={n:dict(samples=len(values),
+            median_error_m=round(float(np.median(values)),4) if values else None,
+            p95_error_m=round(float(np.percentile(values,95)),4) if values else None,
+            max_error_m=round(max(values),4) if values else None)
+            for n,values in localization.items()}
+        if complete:
+            for n,values in localization.items():
+                if len(values)<10:issues.append(f'insufficient AMCL evidence: {n}')
+                elif np.percentile(values,95)>.1:issues.append(f'AMCL p95 error > 10 cm: {n}')
+        physical=[e['physical_error_m'] for e in events
+                  if e['event']=='goal_reached' and e.get('phase') in ('pickup','deliver')
+                  and 'physical_error_m' in e]
+        audit['max_physical_pickup_delivery_error_m']=max(physical,default=None)
+        if complete and physical and max(physical)>.05:
+            issues.append('physical pickup/delivery position error > 5 cm')
     audit['intermediate_exit_goal_count']=sum(e['event']=='goal_sent' and e.get('phase')=='exiting' for e in events)
     audit['planning_time_weights']=board.cfg.get('route_time_costs')
     exit_samples=[]

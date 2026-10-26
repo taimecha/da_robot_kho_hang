@@ -1,0 +1,2 @@
+start_agv1=5,2,East
+start_agv2=2,3,East

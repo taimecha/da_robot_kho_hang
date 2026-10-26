@@ -50,11 +50,9 @@ amcl:
     # Wi-Fi ~1 s ma khong lam TF het han giua chung.
     transform_tolerance: 0.5
 
-    # Vi tri ban dau AMCL tu dat khi khoi dong, khoi phai bam "2D Pose Estimate".
-    #   Gazebo : xe luon spawn o goc (gazebo.launch.py: x=y=yaw=0).
-    #   Xe that: goc ban do = cho xe dung LUC BAT slam_toolbox khi ve ban do.
-    #            Dat xe lai DUNG CHO VA DUNG HUONG do truoc khi chay. Khong duoc
-    #            thi dung "2D Pose Estimate" trong RViz.
+    # Mac dinh cho luong khoi dong cu (vi du Gazebo). fleet_real_robot.launch.py
+    # ghi de set_initial_pose=false va bo initial_pose khi AUTO_LOCALIZE=1;
+    # tools/auto_initial_pose.py se tim vi tri tu LiDAR + /map roi gui cho AMCL.
     set_initial_pose: true
     initial_pose:
       x: 0.0

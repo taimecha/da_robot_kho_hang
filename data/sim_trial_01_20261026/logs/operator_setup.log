@@ -1,0 +1,9 @@
+agv1 cycle 1: start
+agv2 cycle 1: start
+Traceback (most recent call last):
+  File "/home/tai/Robot_kho_clone/tools/drive_sim_cargo_gui.py", line 152, in <module>
+    
+  File "/home/tai/Robot_kho_clone/tools/drive_sim_cargo_gui.py", line 146, in main
+    print('Both cars completed all simulated cycles', flush=True)
+^^^^^^^^^^^^^^
+KeyboardInterrupt

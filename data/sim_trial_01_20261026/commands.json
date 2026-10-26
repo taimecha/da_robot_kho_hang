@@ -1,0 +1,65 @@
+{
+  "traffic": [
+    "python3",
+    "traffic_manager.py",
+    "agv1",
+    "agv2",
+    "--no-stdin"
+  ],
+  "goods": [
+    "python3",
+    "tools/sim_cargo.py",
+    "agv1",
+    "agv2",
+    "--goods",
+    "3:0.185:0.32:0.12,4:0.121:0.24:0.12"
+  ],
+  "trace": [
+    "python3",
+    "tools/record_fleet_trace.py",
+    "/home/tai/Robot_kho_clone/data/sim_trial_01_20261026/fleet_trace.jsonl"
+  ],
+  "bag": [
+    "ros2",
+    "bag",
+    "record",
+    "--max-bag-size",
+    "47185920",
+    "-o",
+    "/home/tai/Robot_kho_clone/data/sim_trial_01_20261026/rosbag",
+    "/fleet/status",
+    "/fleet/goal",
+    "/fleet/cargo_event",
+    "/fleet/cargo_result",
+    "/fleet/markers",
+    "/sim/boxes",
+    "/agv1/scan",
+    "/agv2/scan",
+    "/agv1/odom",
+    "/agv2/odom",
+    "/agv1/imu/data",
+    "/agv2/imu/data",
+    "/agv1/camera/image_raw",
+    "/agv2/camera/image_raw",
+    "/agv1/cmd_vel",
+    "/agv2/cmd_vel"
+  ],
+  "gui": [
+    "python3",
+    "tools/cargo_live_view.py",
+    "--sim",
+    "--agv1-pickup",
+    "3,5",
+    "--agv2-pickup",
+    "4,5",
+    "--save-dir",
+    "/home/tai/Robot_kho_clone/data/sim_trial_01_20261026/images/cameras",
+    "--event-log",
+    "/home/tai/Robot_kho_clone/data/sim_trial_01_20261026/cargo_events.jsonl"
+  ],
+  "rviz": [
+    "rviz2",
+    "-d",
+    "/home/tai/Robot_kho_clone/data/sim_trial_01_20261026/view.rviz"
+  ]
+}

@@ -1,0 +1,2 @@
+{"run_id": "20261026T115108-15654-3f70fa52", "car": "agv1", "cycle": 1, "event": "started", "t_monotonic": 5212.910660343, "t_unix": 1792990282.808011, "observation_row": 3, "observation_col": 4}
+{"run_id": "20261026T115108-15654-3f70fa52", "car": "agv2", "cycle": 1, "event": "started", "t_monotonic": 5213.016364109, "t_unix": 1792990282.9136522, "observation_row": 4, "observation_col": 4}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Rebuild ESP32 micro-ROS transport objects from the library's pinned sources.
 
-For micro_ros_arduino 2.0.7-iron: preserves all other archive members, generated
+For micro_ros_arduino 2.0.7-iron and 3.0.0-iron: preserves all other archive members, generated
 ROS message code and pool settings. Rebuilds ALL XRCE client and RMW objects
 together because increasing MTU changes shared structure sizes. Requires the
 ESP32 Arduino compiler already installed. Makes a backup before installation.
@@ -48,8 +48,9 @@ def main():
     if not 512 <= a.mtu <= 1472:
         ap.error('MTU must be between 512 and 1472')
     lib = a.library.resolve()
-    if 'version=2.0.7-iron' not in (lib/'library.properties').read_text():
-        ap.error('This rebuild is scoped to micro_ros_arduino 2.0.7-iron')
+    version = (lib/'library.properties').read_text()
+    if not any('version='+v in version for v in ('2.0.7-iron', '3.0.0-iron')):
+        ap.error('This rebuild is scoped to micro_ros_arduino 2.0.7-iron or 3.0.0-iron')
     cc = a.compiler
     if cc is None:
         candidates = sorted((Path.home()/'.arduino15/packages/esp32/tools').glob('**/bin/xtensa-esp32-elf-gcc'))
@@ -71,6 +72,7 @@ def main():
         repo = build/directory
         if not repo.exists():
             run(['git', 'clone', '--no-checkout', url, repo])
+            run(['git', '-C', repo, 'checkout', '--detach', commit])
         if run(['git', '-C', repo, 'status', '--porcelain']).strip():
             raise RuntimeError(f'Source tree has local changes: {repo}')
         run(['git', '-C', repo, 'checkout', '--detach', commit])

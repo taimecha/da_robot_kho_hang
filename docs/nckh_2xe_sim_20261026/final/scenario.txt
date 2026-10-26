@@ -1,0 +1,15 @@
+scenario=two_car_pickup_delivery
+start_agv1=2,3,East
+start_agv2=3,3,East
+pickup_agv1=3,5
+pickup_agv2=4,5
+box_agv1=15x32x12_cm
+box_agv2=17x40x12_cm
+ros_domain_id=87
+fake_lidar_noise_m=0.01
+fake_rays=320
+fake_delay_s=0.05
+fake_tau_s=0.12
+fake_dead_v_mps=0
+fake_dead_w_radps=0
+sim_rot_stop_deg=0.6

@@ -6,10 +6,10 @@
 #   ROS_DOMAIN_ID=87 python3 traffic_manager.py agv1 agv2
 #   tools/fleet_sim.sh down    # tat het
 #
-# Vi tri dau: agv1 o (hang 3, cot 1) quay Dong, agv2 o (hang 3, cot 5) quay Tay.
-# Doi bang bien moi truong: AGV1="3 1 0"  AGV2="3 5 180"  (hang cot huong_do).
+# Vi tri dau: agv1 o (hang 2, cot 3), agv2 o (hang 3, cot 3), deu quay Dong.
+# Doi bang bien moi truong: AGV1="2 3 0"  AGV2="3 3 0"  (hang cot huong_do).
 WS=$(cd "$(dirname "$0")/.." && pwd)
-L=/tmp/fleet_sim
+L=${LOGDIR:-/tmp/fleet_sim}
 CFG=$WS/src/my_bot_bringup/config
 source /opt/ros/jazzy/setup.bash
 source "$WS/install/setup.bash"
@@ -23,16 +23,24 @@ NAMES=(agv1 agv2)
 
 down() {
   if [ -f $L/pids ]; then
-    for p in $(cat $L/pids); do kill -INT -"$p" 2>/dev/null; done
+    local stopped=()
+    for p in $(cat "$L/pids"); do
+      # PID cu co the da duoc dung lai. Chi dung nhom tien trinh cua domain nay.
+      if [[ "$p" =~ ^[0-9]+$ ]] && [ -r "/proc/$p/environ" ] &&
+          tr '\0' '\n' < "/proc/$p/environ" | grep -Fxq "ROS_DOMAIN_ID=$ROS_DOMAIN_ID"; then
+        kill -INT -"$p" 2>/dev/null
+        stopped+=("$p")
+      fi
+    done
     sleep 4
-    for p in $(cat $L/pids); do kill -9 -"$p" 2>/dev/null; done
+    for p in "${stopped[@]}"; do
+      if [ -r "/proc/$p/environ" ] &&
+          tr '\0' '\n' < "/proc/$p/environ" | grep -Fxq "ROS_DOMAIN_ID=$ROS_DOMAIN_ID"; then
+        kill -9 -"$p" 2>/dev/null
+      fi
+    done
     rm -f $L/pids
   fi
-  # Ca tien trinh bat tay ngoai danh sach (vd bat lai mot agent): hai agent
-  # cung ten cung ra lenh cho mot Nav2 thi gianh goal cua nhau lien tuc.
-  pkill -9 -f "^python3 $WS/(fleet_agent|tools/fleet_fake_robot|tools/fleet_viz)\.py" 2>/dev/null
-  pkill -9 -f "^python3 (fleet_agent|tools/fleet_fake_robot)\.py" 2>/dev/null
-  pkill -9 -f "fleet_nav\.launch\.py" 2>/dev/null
 }
 
 if [ "${1:-}" = down ]; then
@@ -62,10 +70,11 @@ for n in "${NAMES[@]}"; do
       "$CFG/navigation.yaml" > $L/navigation_$n.yaml
 done
 
-# Sa ban giong xe that, nhung xoay tai cho theo mo hinh tre lenh (coast: 0):
-# coast 0.36 do tren xe that (banh yeu, omega tu gyro) - xe ao khong ma sat
-# thi vot goc +-13 do voi so do.
-sed -e 's/^\( *coast:\).*/\1 0/' "$CFG/grid_real.yaml" > $L/grid_fleet.yaml
+# Cho phep hieu chinh diem cat lenh xoay RIENG cua bo chap hanh ao khi co
+# FAKE_DELAY. Nguong hoan thanh done_deg van giu 2.5 do nhu xe that.
+SIM_ROT_STOP_DEG=${SIM_ROT_STOP_DEG:-0.6}
+sed -e "s/^\( *stop_deg:\).*/\1 $SIM_ROT_STOP_DEG/" \
+    "$CFG/grid_real.yaml" > $L/grid_fleet.yaml
 
 pose() {   # "hang cot huong_do" -> "x y huong_do"
   python3 - "$@" <<EOF
@@ -78,7 +87,7 @@ import math
 print(f"{x:.3f} {y:.3f} {h + math.degrees(b.yaw):.1f}")
 EOF
 }
-START=("${AGV1:-3 1 0}" "${AGV2:-3 5 180}")
+START=("${AGV1:-2 3 0}" "${AGV2:-3 3 0}")
 
 PIDS=()
 setsid ros2 run nav2_map_server map_server --ros-args \

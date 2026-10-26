@@ -1,0 +1,6 @@
+output_bags:
+- uri: data/sim_trial_01_20261026/rosbag
+  storage_id: mcap
+  storage_preset_profile: zstd_fast
+  all_topics: true
+  max_bagfile_size: 47185920

@@ -1,5 +1,11 @@
 # Robot_kho
 
+**Dành cho người sửa báo cáo:** [hướng dẫn cập nhật theo số liệu xe thật và mô phỏng mới](docs/HUONG_DAN_CAP_NHAT_BAO_CAO_2_XE_2026-10-26.md).
+
+Dữ liệu xe thật: [thử nghiệm hai xe ngày 26/10/2026](data/real_trial_03/README.md),
+gồm rosbag, nhật ký lấy/giao hàng, bảng CSV và log điều hướng.
+Mô phỏng hai xe theo cùng kích thước thùng: [kết quả, ảnh chụp và dữ liệu](data/sim_trial_01_20261026/README.md).
+
 Mô phỏng 3 xe với 3 hàng đợi FIFO riêng, camera–LiDAR phân loại kiện đầu dãy
 và cơ cấu cấp hàng 3D: [hướng dẫn chạy và phạm vi kiểm chứng](docs/MO_PHONG_3_XE_HANG_DOI.md).
 
@@ -37,3 +43,27 @@ bảo vệ khỏi xe quay về ngược chiều. Các trọng số là tham số
 không phải số liệu thực nghiệm hoặc chứng minh tối ưu toàn cục.
 
 [Hình và log kiểm chứng nối đuôi, đường về linh hoạt: 30/30 kiện](docs/warehouse_column_validation/README.md).
+
+## Quét bản đồ và tự định vị trong mô phỏng
+
+```bash
+./tools/warehouse_sim.sh up --scenario demo30 --lidar-map
+```
+
+Chế độ `--lidar-map` cho một xe ảo quét phòng bằng LiDAR, dùng `slam_toolbox`
+tạo `map.pgm`/`map.yaml`, đặt lưới 5×5 theo khoảng cách đã đo từ tường Tây và
+Nam, rồi chạy ba AMCL trên bản đồ vừa lưu. Sau khi hiện `Ready`, bấm Space để
+bắt đầu. Quy tắc hàng chờ và giữ chỗ vẫn áp dụng. Các file
+`mapping.json`, `grid_alignment.json`, `localization.csv` và báo cáo nằm trong
+thư mục log mà lệnh in ra.
+
+Bộ điều phối dùng chung cho xe thật và mô phỏng kiểm tra lại đường vòng khi xe
+dừng ở một ô. Nếu xe khác đã đi qua và tuyến mới thông, xe nhận tuyến ngắn hơn
+khi thời gian đi và xoay ước tính giảm ít nhất 1 giây; quyền giữ ô cũ chỉ được
+nhả sau khi xe xác nhận tuyến mới.
+
+LiDAR không nhìn thấy vạch sơn dưới sàn, nên phải biết khoảng cách từ tường
+đến hàng/cột đầu tiên để đặt lưới. Chế độ này vẫn dùng xe động học và odometry
+ảo gần lý tưởng; kết quả AMCL không thay thế phép thử định vị trên xe thật.
+Riêng mô phỏng AMCL nhận điểm dừng trong phạm vi 3 cm trên bản đồ và kiểm tra
+riêng sai số vị trí vật lý khi lấy/giao hàng; cấu hình xe thật vẫn giữ 2 cm.

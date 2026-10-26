@@ -58,8 +58,8 @@ python3 tools/cargo_live_view.py --robots agv2 --agv2-pickup 4,5
 
 Bấm BAT DAU: tới (4,4) → chốt 5 ảnh → tự tới (4,5).
 Đặt đúng món vừa đo lên xe, bấm DA NHAN HANG → giao tới ô phân loại.
-Sau thông báo thành công, dỡ hàng, chuẩn bị món tiếp ở khu lấy và bấm
-DA DO HANG - QUAY LAI LAY TIEP. Xe quay về (4,4), đo mới và phân loại lại.
+Sau thông báo thành công, dỡ hàng và bấm DA DO HANG (XAC NHAN) để ghi mốc.
+Chuẩn bị món tiếp ở khu lấy rồi bấm QUAY LAI LAY TIEP. Xe quay về (4,4), đo mới và phân loại lại.
 Góc chấp nhận hiện tại **<2,5°** (yêu cầu <3°), sai số vị trí **≤2 cm**.
 Giao diện giữ mở. R chỉ đo lại tại ô quan sát; S lưu ảnh; Q đóng giao diện.
 

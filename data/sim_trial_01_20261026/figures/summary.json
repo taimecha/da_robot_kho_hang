@@ -1,0 +1,51 @@
+{
+  "source_events": "data/sim_trial_01_20261026/cargo_events.jsonl",
+  "source_trace": "data/sim_trial_01_20261026/fleet_trace.jsonl",
+  "sampled_min_center_distance_m": 0.6,
+  "status_sample_counts": {
+    "agv1": 282,
+    "agv2": 273
+  },
+  "path_length_m": {
+    "agv1": 5.973,
+    "agv2": 7.776
+  },
+  "unique_route_ids": {
+    "agv1": 3,
+    "agv2": 3
+  },
+  "cycles": [
+    {
+      "environment": "sim",
+      "run_id": "20261026T162717-12874-27eed460",
+      "car": "agv1",
+      "cycle": 1,
+      "status": "delivered",
+      "deliver_col": 2,
+      "T_to_observe_s": 27.999,
+      "T_measure_s": 7.769,
+      "T_to_pickup_s": 7.154,
+      "T_wait_load_s": 2.106,
+      "T_pickup_s": 45.028,
+      "T_delivery_s": 33.575,
+      "T_total_s": 78.603,
+      "T_to_unload_confirmed_s": 80.669
+    },
+    {
+      "environment": "sim",
+      "run_id": "20261026T162717-12874-27eed460",
+      "car": "agv2",
+      "cycle": 1,
+      "status": "delivered",
+      "deliver_col": 1,
+      "T_to_observe_s": 38.66,
+      "T_measure_s": 4.455,
+      "T_to_pickup_s": 6.745,
+      "T_wait_load_s": 2.033,
+      "T_pickup_s": 51.893,
+      "T_delivery_s": 41.566,
+      "T_total_s": 93.46,
+      "T_to_unload_confirmed_s": 95.559
+    }
+  ]
+}

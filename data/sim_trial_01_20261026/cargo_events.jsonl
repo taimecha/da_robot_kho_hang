@@ -1,0 +1,14 @@
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv1", "cycle": 1, "event": "started", "t_monotonic": 2824.771704441, "t_unix": 1793006921.672935, "observation_row": 3, "observation_col": 4}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv2", "cycle": 1, "event": "started", "t_monotonic": 2824.901962752, "t_unix": 1793006921.8030288, "observation_row": 4, "observation_col": 4}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv1", "cycle": 1, "event": "observation_arrived", "t_monotonic": 2852.770399629, "t_unix": 1793006949.6712909, "row": 3, "col": 4}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv1", "cycle": 1, "event": "measured", "t_monotonic": 2860.539892743, "t_unix": 1793006957.8928382, "width_m": 0.1877421718696283, "height_m": 0.3246465071106061, "deliver_col": 2}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv2", "cycle": 1, "event": "observation_arrived", "t_monotonic": 2863.561860478, "t_unix": 1793006960.4625623, "row": 4, "col": 4}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv1", "cycle": 1, "event": "pickup_arrived", "t_monotonic": 2867.693510061, "t_unix": 1793006964.5941718, "row": 3, "col": 5}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv2", "cycle": 1, "event": "measured", "t_monotonic": 2868.016798661, "t_unix": 1793006965.4624438, "width_m": 0.12337557588195036, "height_m": 0.24408824571215698, "deliver_col": 1}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv1", "cycle": 1, "event": "loaded_confirmed", "t_monotonic": 2869.799519221, "t_unix": 1793006966.7001774, "pickup_row": 3, "pickup_col": 5, "deliver_row": 1, "deliver_col": 2}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv2", "cycle": 1, "event": "pickup_arrived", "t_monotonic": 2874.762017642, "t_unix": 1793006971.6627195, "row": 4, "col": 5}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv2", "cycle": 1, "event": "loaded_confirmed", "t_monotonic": 2876.795413203, "t_unix": 1793006973.6960478, "pickup_row": 4, "pickup_col": 5, "deliver_row": 1, "deliver_col": 1}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv1", "cycle": 1, "event": "delivery_arrived", "t_monotonic": 2903.374208664, "t_unix": 1793007000.2749925, "deliver_row": 1, "deliver_col": 2, "resumed_delivery": false}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv1", "cycle": 1, "event": "unloaded_confirmed", "t_monotonic": 2905.441048462, "t_unix": 1793007002.341685, "deliver_row": 1, "deliver_col": 2}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv2", "cycle": 1, "event": "delivery_arrived", "t_monotonic": 2918.361620394, "t_unix": 1793007015.2623649, "deliver_row": 1, "deliver_col": 1, "resumed_delivery": false}
+{"run_id": "20261026T162717-12874-27eed460", "car": "agv2", "cycle": 1, "event": "unloaded_confirmed", "t_monotonic": 2920.460795832, "t_unix": 1793007017.361435, "deliver_row": 1, "deliver_col": 1}

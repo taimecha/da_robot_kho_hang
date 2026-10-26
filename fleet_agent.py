@@ -20,6 +20,7 @@ import json
 import math
 import sys
 import time
+from collections import deque
 
 import rclpy
 from rclpy.executors import SingleThreadedExecutor, ExternalShutdownException
@@ -55,6 +56,7 @@ class FleetAgent(GridNavigator):
         # GridNavigator); dong INFO moi lan xoa da tat trong tools/fleet_nav.launch.py
         super().__init__(use_sim_time=use_sim_time, grid_file=grid_file,
                          node_name='fleet_agent', costmap_decay=1.0)
+        self.POSITION_TOL_M=float(self.board.cfg.get('position_tolerance_m',self.POSITION_TOL_M))
         self.name = name
         self.route_id = None
         self.route = []             # [(r, c)] chi so tu 0
@@ -77,6 +79,10 @@ class FleetAgent(GridNavigator):
         self.dyn_blocked_nodes = set()
         self.dyn_blocked_edges = set()
         self.others = {}            # ten -> (x, y, t)
+        # Simulation costmaps can retain a moving robot's old scan returns.
+        # A generated sim grid opts into filtering that short pose trail.
+        self.robot_echo_history_s = max(0., float(self.board.cfg.get('robot_echo_history_s', 0.)))
+        self.other_pose_history = {}
         self.last_cmd_t = None
         self.cmd_lost = False
         self.nav2_wait_since = None
@@ -125,7 +131,28 @@ class FleetAgent(GridNavigator):
         except ValueError:
             return
         if d.get('name') != self.name and d.get('x') is not None:
-            self.others[d['name']] = (d['x'], d['y'], time.time())
+            now=time.time();name=d['name'];x,y=d['x'],d['y']
+            self.others[name] = (x, y, now)
+            if self.robot_echo_history_s:
+                history=self.other_pose_history.setdefault(name,deque())
+                if not history or math.hypot(x-history[-1][0],y-history[-1][1])>.025:
+                    history.append((x,y,now))
+                while history and now-history[0][2]>self.robot_echo_history_s:
+                    history.popleft()
+
+    def remove_robot_obstacles(self, obstacles, now):
+        """Remove live robot bodies and their brief costmap trails."""
+        centers=[]
+        for name,(x,y,t) in self.others.items():
+            if now-t>=OTHER_STALE:continue
+            centers.append((x,y))
+            if self.robot_echo_history_s:
+                centers.extend((hx,hy) for hx,hy,ht in self.other_pose_history.get(name,())
+                               if now-ht<=self.robot_echo_history_s)
+        if not centers:return obstacles
+        lim=OTHER_ROBOT_R*OTHER_ROBOT_R
+        return [(ox,oy) for ox,oy in obstacles
+                if all((ox-x)**2+(oy-y)**2>lim for x,y in centers)]
 
     def cb_diag(self, msg):
         try:
@@ -577,11 +604,7 @@ class FleetAgent(GridNavigator):
             return
         obstacles = self.collect_obstacles(msg)
         now = time.time()
-        others = [(x, y) for x, y, t in self.others.values() if now - t < OTHER_STALE]
-        if others:
-            lim = OTHER_ROBOT_R * OTHER_ROBOT_R
-            obstacles = [(ox, oy) for ox, oy in obstacles
-                         if all((ox - x) ** 2 + (oy - y) ** 2 > lim for x, y in others)]
+        obstacles = self.remove_robot_obstacles(obstacles, now)
         nodes, edges = set(), set()
         for r, c in self.board.nodes():
             x, y = self.get_coordinates(r, c)
@@ -626,6 +649,9 @@ class FleetAgent(GridNavigator):
             'state': 'estop' if self.esp_estop else self.state, 'route_id': self.route_id,
             'route_goal': self.route[-1] if self.route else None,
             'route_mode':getattr(self,'manager_mode',None),
+            'route_busy':self.busy(),
+            'linear_speed_mps':self.odom_v,
+            'angular_speed_radps':self.rot_w(),
             'estop': self.esp_estop,
             'error': self.last_error,
             'blocked_nodes': sorted(self.dyn_blocked_nodes),

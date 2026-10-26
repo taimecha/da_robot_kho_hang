@@ -1,0 +1,7 @@
+agv1 cycle 1: start
+agv2 cycle 1: start
+agv1 cycle 1: load
+agv2 cycle 1: load
+agv1 cycle 1: unload
+agv2 cycle 1: unload
+Both cars completed all simulated cycles

@@ -1,0 +1,6 @@
+{"t_unix": 1793006921.7680686, "t_monotonic": 2824.867443763, "cycle": 1, "car": "agv1", "action": "start"}
+{"t_unix": 1793006921.8841856, "t_monotonic": 2824.98356721, "cycle": 1, "car": "agv2", "action": "start"}
+{"t_unix": 1793006966.78612, "t_monotonic": 2869.885490855, "cycle": 1, "car": "agv1", "action": "load"}
+{"t_unix": 1793006973.7870677, "t_monotonic": 2876.886438836, "cycle": 1, "car": "agv2", "action": "load"}
+{"t_unix": 1793007002.4270556, "t_monotonic": 2905.526426517, "cycle": 1, "car": "agv1", "action": "unload"}
+{"t_unix": 1793007017.4538226, "t_monotonic": 2920.553193704, "cycle": 1, "car": "agv2", "action": "unload"}

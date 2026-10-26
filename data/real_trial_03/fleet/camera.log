@@ -1,0 +1,211 @@
+[INFO] [1793004226.311515002] [esp32_cam_node]: [agv1] capture http://192.168.1.201/capture -> /agv1/camera/image_raw (3.0 Hz, xoay 0)
+[INFO] [1793004226.312105140] [esp32_cam_node]: [agv2] capture http://192.168.1.200/capture -> /agv2/camera/image_raw (3.0 Hz, xoay 0)
+[INFO] [1793004226.566355597] [esp32_cam_node]: [agv2] camera http://192.168.1.200/capture DA KET NOI
+[INFO] [1793004226.569781438] [esp32_cam_node]: [agv1] camera http://192.168.1.201/capture DA KET NOI
+[INFO] [1793004236.289341079] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 27 KB/s
+[INFO] [1793004246.289396154] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004256.289244995] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004266.289513196] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004276.289480486] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004286.289253167] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004296.289751054] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004306.289355064] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004316.289815988] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004326.289404841] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004336.289228984] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004346.289748795] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004356.289420296] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004366.289271664] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004376.289248419] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 37 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004386.289726929] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 37 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004396.289671256] [esp32_cam_node]: Camera: agv1 2.9 anh/s 320x240, 38 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004406.290395906] [esp32_cam_node]: Camera: agv1 3.1 anh/s 320x240, 41 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004416.291939651] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 39 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004426.291958657] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 35 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793004436.291022627] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 38 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793004446.290403268] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 35 KB/s
+[INFO] [1793004456.290262849] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 20 KB/s | agv2 3.0 anh/s 320x240, 34 KB/s
+[INFO] [1793004466.291226012] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 32 KB/s | agv2 3.0 anh/s 320x240, 33 KB/s
+[INFO] [1793004476.291083193] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 32 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004486.290537445] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 32 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004496.290669288] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 29 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004506.290870941] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 29 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004516.290343464] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004526.290966485] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004536.290673762] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 27 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004546.290980001] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 27 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004556.290524596] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004566.291112983] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004576.290834803] [esp32_cam_node]: Camera: agv1 2.9 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004586.290154149] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004596.292338420] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004606.291349901] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004616.291820552] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004626.291758583] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004636.290595421] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004646.290984122] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004656.290527892] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004666.290928268] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 2.7 anh/s 320x240, 33 KB/s
+[INFO] [1793004676.290733074] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004686.290601777] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 37 KB/s
+[INFO] [1793004696.290946526] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 36 KB/s
+[INFO] [1793004706.291572104] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 36 KB/s
+[INFO] [1793004716.290621474] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 36 KB/s
+[INFO] [1793004726.291260811] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 36 KB/s
+[INFO] [1793004736.290239775] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 36 KB/s
+[INFO] [1793004746.290274415] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 36 KB/s
+[INFO] [1793004756.290640293] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 35 KB/s
+[INFO] [1793004766.290572876] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 35 KB/s
+[INFO] [1793004776.290498462] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 35 KB/s
+[INFO] [1793004786.290177002] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 34 KB/s
+[INFO] [1793004796.290527893] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 34 KB/s
+[INFO] [1793004806.290618659] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 34 KB/s
+[INFO] [1793004816.290541538] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 34 KB/s
+[INFO] [1793004826.290686308] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 34 KB/s
+[INFO] [1793004836.290851861] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 33 KB/s
+[INFO] [1793004846.290440535] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 33 KB/s
+[INFO] [1793004856.290498793] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 33 KB/s
+[INFO] [1793004866.290499021] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 33 KB/s
+[INFO] [1793004876.290279609] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 32 KB/s
+[INFO] [1793004886.291133535] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 32 KB/s
+[INFO] [1793004896.290394692] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 32 KB/s
+[INFO] [1793004906.291812549] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 31 KB/s
+[INFO] [1793004916.290593776] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 31 KB/s
+[INFO] [1793004926.290475008] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 2.9 anh/s 320x240, 30 KB/s
+[INFO] [1793004936.290868847] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.1 anh/s 320x240, 32 KB/s
+[INFO] [1793004946.290564222] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 2.9 anh/s 320x240, 30 KB/s
+[INFO] [1793004956.290452945] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.1 anh/s 320x240, 32 KB/s
+[INFO] [1793004966.290815267] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793004976.291253364] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793004986.290028640] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 2.9 anh/s 320x240, 29 KB/s
+[INFO] [1793004996.290965020] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005006.290860389] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005016.290775939] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005026.290672371] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005036.291170301] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005046.290975275] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005056.291251185] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005066.290822320] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005076.290744213] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005086.290427922] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005096.290971893] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005106.291342878] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005116.290284137] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005126.290440571] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005136.290390972] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005146.290935450] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005156.291011917] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005166.290594324] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005176.290820268] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005186.290781630] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005196.291804917] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005206.290952349] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005216.290811007] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005226.290456254] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005236.290372758] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005246.290450685] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005256.292383999] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005266.290391542] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 29 KB/s
+[INFO] [1793005276.291020619] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 29 KB/s
+[INFO] [1793005286.290458945] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 29 KB/s
+[INFO] [1793005296.290560019] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005306.290617879] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005316.291128486] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005326.291563133] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005336.290574929] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005346.290343000] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005356.290435664] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005366.291403523] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 25 KB/s | agv2 3.0 anh/s 320x240, 27 KB/s
+[INFO] [1793005376.291052384] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 33 KB/s
+[INFO] [1793005386.290978466] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 29 KB/s
+[INFO] [1793005396.291384649] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 29 KB/s
+[INFO] [1793005406.291251816] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 30 KB/s
+[INFO] [1793005416.291260299] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 31 KB/s
+[INFO] [1793005426.291318133] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 28 KB/s
+[INFO] [1793005436.291658655] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 35 KB/s | agv2 3.0 anh/s 320x240, 33 KB/s
+[INFO] [1793005446.291577964] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 37 KB/s | agv2 3.0 anh/s 320x240, 33 KB/s
+[INFO] [1793005456.291082718] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 20 KB/s | agv2 3.0 anh/s 320x240, 26 KB/s
+[INFO] [1793005466.290880825] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 21 KB/s
+[INFO] [1793005476.291659693] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 19 KB/s
+[INFO] [1793005486.290526620] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005496.290141502] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005506.290119705] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005516.290138921] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005526.290259755] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005536.291500873] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005546.290497858] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005556.289779705] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005566.289276712] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005576.289311614] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005586.289358498] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 15 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005596.289245185] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 14 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005606.289637812] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005616.289523168] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005626.289911599] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005636.289620355] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005646.289920107] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005656.289469003] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005666.289837004] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005676.289417740] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005686.289554612] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005696.289320102] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005706.289384931] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005716.289908167] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005726.290329946] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005736.290606787] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005746.291485744] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005756.290396936] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005766.291550362] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 23 KB/s
+[INFO] [1793005776.290654141] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 21 KB/s | agv2 3.0 anh/s 320x240, 26 KB/s
+[INFO] [1793005786.290293448] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 23 KB/s
+[INFO] [1793005796.292179749] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 24 KB/s | agv2 3.0 anh/s 320x240, 24 KB/s
+[INFO] [1793005806.291148983] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 22 KB/s | agv2 3.0 anh/s 320x240, 24 KB/s
+[INFO] [1793005816.291069048] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 21 KB/s | agv2 3.0 anh/s 320x240, 24 KB/s
+[INFO] [1793005826.290857648] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 27 KB/s | agv2 3.0 anh/s 320x240, 25 KB/s
+[INFO] [1793005836.290227524] [esp32_cam_node]: Camera: agv1 2.9 anh/s 320x240, 33 KB/s | agv2 3.0 anh/s 320x240, 32 KB/s
+[INFO] [1793005846.291377214] [esp32_cam_node]: Camera: agv1 3.1 anh/s 320x240, 26 KB/s | agv2 3.0 anh/s 320x240, 29 KB/s
+[INFO] [1793005856.291520740] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 13 KB/s | agv2 3.0 anh/s 320x240, 20 KB/s
+[INFO] [1793005866.290429266] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005876.291080666] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005886.292433271] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005896.289273302] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005906.289401089] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005916.289414424] [esp32_cam_node]: Camera: agv1 2.9 anh/s 320x240, 11 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005926.289672342] [esp32_cam_node]: Camera: agv1 3.1 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005936.289323636] [esp32_cam_node]: Camera: agv1 3.0 anh/s 320x240, 12 KB/s | agv2 3.0 anh/s 320x240, 18 KB/s
+[INFO] [1793005946.290115558] [esp32_cam_node]: Camera: agv1 2.9 anh/s 320x240, 11 KB/s | agv2 2.8 anh/s 320x240, 17 KB/s
+[WARN] [1793005947.680137455] [esp32_cam_node]: [agv2] camera http://192.168.1.200/capture KHONG KET NOI (timed out) - thu lai moi 2 s
+[WARN] [1793005948.774073175] [esp32_cam_node]: [agv1] camera http://192.168.1.201/capture KHONG KET NOI (timed out) - thu lai moi 2 s
+[INFO] [1793005956.289357227] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793005961.032063243] [esp32_cam_node]: [agv1] camera http://192.168.1.201/capture DA KET NOI
+[INFO] [1793005966.289668558] [esp32_cam_node]: Camera: agv1 1.6 anh/s 320x240, 10 KB/s | agv2 MAT KET NOI
+[WARN] [1793005968.128042947] [esp32_cam_node]: [agv1] camera http://192.168.1.201/capture KHONG KET NOI (<urlopen error timed out>) - thu lai moi 2 s
+[INFO] [1793005972.956376464] [esp32_cam_node]: [agv2] camera http://192.168.1.200/capture DA KET NOI
+[INFO] [1793005976.289192650] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 1.1 anh/s 320x240, 8 KB/s
+[WARN] [1793005981.429047572] [esp32_cam_node]: [agv2] camera http://192.168.1.200/capture KHONG KET NOI (timed out) - thu lai moi 2 s
+[INFO] [1793005986.289425638] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793005996.289173949] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006006.289044405] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006016.289092645] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006026.289271647] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006036.289573524] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006046.289269695] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006056.289054665] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006066.288997066] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006076.289136010] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006086.289819368] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006096.289104526] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006106.290151170] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006116.289167633] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006126.290032550] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006136.289099526] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006146.289014419] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006156.289953707] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006166.289932403] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006176.289057861] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006186.289020799] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006196.290017763] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006206.289023686] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006216.289026117] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006226.289142325] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI
+[INFO] [1793006236.289227180] [esp32_cam_node]: Camera: agv1 MAT KET NOI | agv2 MAT KET NOI

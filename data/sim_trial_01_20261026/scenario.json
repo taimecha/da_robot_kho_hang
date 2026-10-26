@@ -1,0 +1,60 @@
+{
+  "environment": "simulation",
+  "date": "2026-10-26",
+  "ros_domain_id": 87,
+  "starts": {
+    "agv1": {
+      "cell": [
+        5,
+        2
+      ],
+      "heading": "East"
+    },
+    "agv2": {
+      "cell": [
+        2,
+        3
+      ],
+      "heading": "East"
+    }
+  },
+  "boxes": {
+    "agv1": {
+      "box_id": 2,
+      "pickup": [
+        3,
+        5
+      ],
+      "width_m": 0.185,
+      "height_m": 0.32,
+      "depth_m": 0.12,
+      "depth_assumed": true
+    },
+    "agv2": {
+      "box_id": 1,
+      "pickup": [
+        4,
+        5
+      ],
+      "width_m": 0.121,
+      "height_m": 0.24,
+      "depth_m": 0.12,
+      "depth_assumed": true
+    }
+  },
+  "fake_robot": {
+    "delay_s": 0.05,
+    "tau_s": 0.12,
+    "dead_v_mps": 0.012,
+    "dead_w_radps": 0.1,
+    "lidar_noise_std_m": 0.01,
+    "lidar_rays": 320,
+    "localization": "ideal map->odom, no AMCL"
+  },
+  "operator": {
+    "load_wait_s": 2,
+    "unload_wait_s": 2,
+    "cycles": 1
+  },
+  "source_real_trial": "data/real_trial_03"
+}

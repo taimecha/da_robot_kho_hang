@@ -8,11 +8,10 @@
 # Moi xe nap firmware voi #define XE 1 / XE 2 -> micro-ROS dat topic cua xe
 # vao /agv1/... va /agv2/... (node /agvN/esp32_agv_base_N), dung chung agent.
 #
-# Vi tri dat xe luc dau (AMCL bat dau tu day): mac dinh xe 1 o (hang 3, cot 1)
-# quay Dong, xe 2 o (hang 3, cot 5) quay Tay. Doi bang:
-#   AGV1="3 1 0" AGV2="3 5 180" tools/fleet_real.sh up      # hang cot huong_do
-# Sai vai cm / vai do thi AMCL tu sua khi xe chay; lech nhieu thi:
-#   python3 tools/auto_initial_pose.py --ns agv1
+# Mac dinh xe THAT tu dinh vi tu LiDAR + /map khi dung yen, khong can AGV1/AGV2.
+# Neu khong khop chac chan, script dung truoc khi khoi dong Nav2/fleet_agent.
+# AUTO_LOCALIZE=0 chi dung khi thu co chu y voi vi tri AMCL da biet:
+#   AUTO_LOCALIZE=0 AGV1="2 3 0" AGV2="3 3 0" tools/fleet_real.sh up
 # Hieu chinh RIENG tung xe (mac dinh = so do tren xe 1):
 #   WHEEL_R_agv2=0.0330 tools/fleet_real.sh up
 #   WHEEL_R_*: ban kinh lan banh (m, wheel_odometry).
@@ -65,6 +64,11 @@ fi
 if [ "${1:-}" != up ]; then
   sed -n '2,22p' "$0"; exit 1
 fi
+AUTO_LOCALIZE=${AUTO_LOCALIZE:-1}
+if [ "$AUTO_LOCALIZE" != 1 ] && [ "$AUTO_LOCALIZE" != 0 ]; then
+  echo "AUTO_LOCALIZE phai la 1 (tu dinh vi) hoac 0 (nhap vi tri thu cong)." >&2
+  exit 2
+fi
 down
 rm -rf $L; mkdir -p $L
 
@@ -103,7 +107,7 @@ x, y = b.xy(r - 1, c - 1)
 print(f"{x:.3f} {y:.3f} {math.radians(h) + b.yaw:.4f}")
 EOF
 }
-declare -A START=([agv1]="${AGV1:-3 1 0}" [agv2]="${AGV2:-3 5 180}")
+declare -A START=([agv1]="${AGV1:-2 3 0}" [agv2]="${AGV2:-3 3 0}")
 
 PIDS=()
 if [ "${AGENT:-1}" = 0 ]; then
@@ -133,14 +137,33 @@ for n in "${NAMES[@]}"; do
   fi
 done
 
-# Phan laptop cua tung xe: TF, odometry, AMCL
+# Phan laptop cua tung xe: TF, odometry, AMCL. Tu dinh vi khong nap vi tri doan san.
 for n in "${NAMES[@]}"; do
-  read -r X Y YAW <<< "$(pose ${START[$n]})"
-  echo "Xe $n dat tai (${START[$n]}) -> map ($X, $Y, $YAW rad)"
-  setsid ros2 launch $WS/tools/fleet_real_robot.launch.py ns:=$n x:=$X y:=$Y yaw:=$YAW \
-    wheel_radius:=${WHEEL_R[$n]} > $L/robot_$n.log 2>&1 & PIDS+=($!)
+  if [ "$AUTO_LOCALIZE" = 1 ]; then
+    echo "Xe $n: cho tu dinh vi tu LiDAR + ban do"
+    setsid ros2 launch $WS/tools/fleet_real_robot.launch.py ns:=$n auto_localize:=true \
+      wheel_radius:=${WHEEL_R[$n]} > $L/robot_$n.log 2>&1 & PIDS+=($!)
+  else
+    read -r X Y YAW <<< "$(pose ${START[$n]})"
+    echo "Xe $n dat tai (${START[$n]}) -> map ($X, $Y, $YAW rad)"
+    setsid ros2 launch $WS/tools/fleet_real_robot.launch.py ns:=$n x:=$X y:=$Y yaw:=$YAW \
+      wheel_radius:=${WHEEL_R[$n]} > $L/robot_$n.log 2>&1 & PIDS+=($!)
+  fi
 done
 echo "${PIDS[@]}" > $L/pids
+
+if [ "$AUTO_LOCALIZE" = 1 ]; then
+  for n in "${NAMES[@]}"; do
+    echo "Dang tu dinh vi $n (xe dung yen)..."
+    if ! python3 -u $WS/tools/auto_initial_pose.py --ns "$n" > "$L/localize_$n.log" 2>&1; then
+      cat "$L/localize_$n.log"
+      echo "KHONG XAC DINH DUOC VI TRI $n; khong bat Nav2 hoac giao nhiem vu."
+      down
+      exit 1
+    fi
+    cat "$L/localize_$n.log"
+  done
+fi
 
 # Nav2 tung xe MOT (bat song song hay mat tra loi lifecycle - xem fleet_sim.sh)
 for n in "${NAMES[@]}"; do

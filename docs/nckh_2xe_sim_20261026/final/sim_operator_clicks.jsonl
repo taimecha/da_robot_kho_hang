@@ -1,0 +1,12 @@
+{"t_unix": 1792991100.6428912, "t_monotonic": 6030.745720587, "cycle": 1, "car": "agv1", "action": "start"}
+{"t_unix": 1792991100.7850232, "t_monotonic": 6030.887853645, "cycle": 1, "car": "agv2", "action": "start"}
+{"t_unix": 1792991134.0017426, "t_monotonic": 6064.104571577, "cycle": 1, "car": "agv1", "action": "load"}
+{"t_unix": 1792991135.343984, "t_monotonic": 6065.44681268, "cycle": 1, "car": "agv2", "action": "load"}
+{"t_unix": 1792991169.5644612, "t_monotonic": 6099.66729009, "cycle": 1, "car": "agv1", "action": "unload"}
+{"t_unix": 1792991172.1105275, "t_monotonic": 6102.213356397, "cycle": 1, "car": "agv2", "action": "unload"}
+{"t_unix": 1792991174.2564056, "t_monotonic": 6104.359234152, "cycle": 2, "car": "agv1", "action": "return"}
+{"t_unix": 1792991174.3969893, "t_monotonic": 6104.499818917, "cycle": 2, "car": "agv2", "action": "return"}
+{"t_unix": 1792991235.3104072, "t_monotonic": 6165.41323595, "cycle": 2, "car": "agv2", "action": "load"}
+{"t_unix": 1792991235.6525257, "t_monotonic": 6165.755355434, "cycle": 2, "car": "agv1", "action": "load"}
+{"t_unix": 1792991286.3591688, "t_monotonic": 6216.461997584, "cycle": 2, "car": "agv1", "action": "unload"}
+{"t_unix": 1792991286.705141, "t_monotonic": 6216.807969649, "cycle": 2, "car": "agv2", "action": "unload"}

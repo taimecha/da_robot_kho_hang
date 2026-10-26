@@ -6,8 +6,8 @@
 
 Click BAT DAU to reach the observation cell (one step before pickup). Five
 valid frames lock the class and dispatch pickup. Only after arrival and manual
-loading confirmation is delivery dispatched. After unloading, click QUAY LAI
-to start another independent measurement cycle. R: remeasure at observation;
+loading confirmation is delivery dispatched. After unloading, click DA DO HANG
+to record it, then QUAY LAI for another independent cycle. R: remeasure;
 S: save; Q/Esc: close. Never run cargo_task.py at the same time.
 """
 import argparse
@@ -19,6 +19,7 @@ import re
 from pathlib import Path
 import sys
 import time
+import uuid
 
 import cv2
 import numpy as np
@@ -53,6 +54,46 @@ MEASURE_KEYS = ('width', 'height', 'z_cam', 'face_yaw_deg')
 PANE_W, PANE_H = 340, 410
 BUTTON_TOP, BUTTON_BOTTOM = 358, 398
 WINDOW_NAME = 'AGV cargo | Observe -> pickup -> confirm -> deliver -> repeat | R: remeasure Q: quit'
+
+
+def emit_cargo_event(node, car, event, now=None, **details):
+    """Record comparable workflow milestones without changing robot commands."""
+    if getattr(node, 'event_log_path', None) is None and getattr(node, 'event_pub', None) is None:
+        return
+    moment = time.monotonic() if now is None else now
+    state = node.cars[car]
+    record = dict(run_id=node.run_id, car=car, cycle=state.get('cycle'),
+                  event=event, t_monotonic=moment, t_unix=time.time(), **details)
+    data = json.dumps(record, ensure_ascii=False, allow_nan=False)
+    if node.event_log_path is not None:
+        with open(node.event_log_path, 'a', encoding='utf-8') as stream:
+            stream.write(data + '\n')
+    if node.event_pub is not None:
+        node.event_pub.publish(String(data=data))
+
+
+def unfinished_observation(path, car):
+    """Find the last started cycle that has not reached its observation cell."""
+    pending = None
+    try:
+        with open(path, encoding='utf-8') as stream:
+            for line in stream:
+                try:
+                    event = json.loads(line)
+                except ValueError:
+                    continue
+                if event.get('car') != car:
+                    continue
+                if event.get('event') == 'started':
+                    pending = event
+                elif (pending is not None and
+                      event.get('run_id') == pending.get('run_id') and
+                      event.get('cycle') == pending.get('cycle') and
+                      event.get('event') == 'observation_arrived'):
+                    pending = None
+    except FileNotFoundError:
+        return None
+    return pending
 
 
 def observation_cell(pickup, heading, board):
@@ -237,8 +278,13 @@ def navigation_error(state, message):
 
 
 class LiveView(Node):
-    def __init__(self, targets=None):
+    def __init__(self, targets=None, event_log_path=None, sim=False):
         super().__init__('cargo_live_view')
+        self.run_id = f'{time.strftime("%Y%m%dT%H%M%S")}-{os.getpid()}-{uuid.uuid4().hex[:8]}'
+        self.event_log_path = Path(event_log_path) if event_log_path else None
+        if self.event_log_path is not None:
+            self.event_log_path.parent.mkdir(parents=True, exist_ok=True)
+        self.event_pub = self.create_publisher(String, '/fleet/cargo_event', 10)
         self.board = Board.load(config_path(True))
         self.targets = dict(TARGETS if targets is None else targets)
         if (not self.targets or not set(self.targets).issubset(TARGETS) or
@@ -267,8 +313,12 @@ class LiveView(Node):
         self.result_pub = self.create_publisher(String, '/fleet/cargo_result', 10)
         self.cars = {}
         for car in self.targets:
+            car_config = cm.car_cfg(self.base_cfg, car, sim=sim)
+            if sim:
+                # fleet_fake_robot publishes scan from the axle centre at 7.5 cm.
+                car_config['lidar'] = dict(car_config['lidar'], x=0.0, z=0.075)
             self.cars[car] = {
-                'cfg': cm.car_cfg(self.base_cfg, car),
+                'cfg': car_config,
                 'scans': deque(maxlen=max(10, self.base_cfg['lidar']['scans'])),
                 'frame': None, 'frame_at': 0.0, 'frame_seq': 0,
                 'last_measured_frame_seq': 0,
@@ -279,7 +329,7 @@ class LiveView(Node):
                 'reported': False, 'slot': None,
                 'near_boundary': False,
                 'sent': False, 'pickup_route_id': None,
-                'delivered_at': None, 'action_note': '',
+                'delivered_at': None, 'unloaded_at': None, 'action_note': '',
                 'phase': 'ready', 'leg_at': 0.0, 'leg_route_id': None,
                 'cycle': 0,
                 'view': None, 'reason': 'Waiting for camera',
@@ -301,7 +351,7 @@ class LiveView(Node):
                         (msg.level >= 40 or msg.msg.startswith(f'[{car}] dung:')))
             precision = (msg.name == f'{car}.fleet_agent' and msg.level >= 40 and
                          'sai so vi tri tai dich' in msg.msg)
-            if (s['phase'] in ('to_observe', 'to_pickup', 'delivering') and
+            if (s['phase'] in ('to_stage', 'to_observe', 'to_pickup', 'delivering') and
                     msg.msg.startswith(f'[{car}]') and (terminal or precision)):
                 navigation_error(s, msg.msg)
 
@@ -386,6 +436,8 @@ class LiveView(Node):
                                               safe_height_slot(average['height'], self.sorting) is None)
                         s['action_note'] = ''
                         s['reason'] = f'FINAL: mean of {SAMPLE_COUNT} valid images'
+                        emit_cargo_event(self, car, 'measured', now, width_m=average['width'],
+                                         height_m=average['height'], deliver_col=s['slot'])
                         if s['slot'] is not None:
                             ok, note = self.send_leg(car, self.targets[car], 'to_pickup', now)
                             if not ok:
@@ -429,7 +481,7 @@ class LiveView(Node):
         # Only observation/pickup need the camera facing the box. At delivery
         # preserve the final route direction; an unnecessary final pivot can
         # displace the axle by centimetres and spoil an otherwise good stop.
-        heading = '' if phase == 'delivering' else self.pick_heading
+        heading = '' if phase in ('to_stage', 'delivering') else self.pick_heading
         if phase == 'delivering':
             s['delivery_yaw'] = None
         self.goal_pub.publish(String(data=f'{car} {cell[0]} {cell[1]} {heading}'.strip()))
@@ -438,7 +490,7 @@ class LiveView(Node):
     def advance(self, car, now):
         s = self.cars[car]
         phase = s['phase']
-        if phase not in ('to_observe', 'to_pickup', 'delivering'):
+        if phase not in ('to_stage', 'to_observe', 'to_pickup', 'delivering'):
             return
         status = s['status'] or {}
         if status.get('state') in ('estop', 'precision_failed'):
@@ -449,9 +501,26 @@ class LiveView(Node):
             return
         if phase == 'delivering':
             return
+        if phase == 'to_stage':
+            stage = observation_cell(self.observations[car], self.pick_heading, self.board)
+            if self.at_cell(car, stage, now, heading=False, new_route=True):
+                emit_cargo_event(self, car, 'recovery_stage_arrived', now,
+                                 row=stage[0], col=stage[1])
+                ok, note = self.send_leg(car, self.observations[car], 'to_observe', now)
+                if ok:
+                    s['reason'] = 'Dang vao lai o quan sat tu phia Tay'
+                    emit_cargo_event(self, car, 'recovery_reapproach_sent', now,
+                                     row=self.observations[car][0],
+                                     col=self.observations[car][1])
+                else:
+                    navigation_error(s, note)
+            return
         cell = self.observations[car] if phase == 'to_observe' else self.targets[car]
         if self.at_cell(car, cell, now, new_route=True):
             s.update(phase='measuring' if phase == 'to_observe' else 'loading', action_note='')
+            emit_cargo_event(self, car,
+                             'observation_arrived' if phase == 'to_observe' else 'pickup_arrived',
+                             now, row=cell[0], col=cell[1])
             s['history'].clear()
             if phase == 'to_observe':
                 s['scans'].clear()  # never fit cargo using scans taken while driving
@@ -459,22 +528,31 @@ class LiveView(Node):
 
     def start_cycle(self, car, now):
         s = self.cars[car]
-        if s['phase'] not in ('ready', 'delivered'):
+        if s['phase'] not in ('ready', 'unloaded'):
             return False, f'{car}: dang thuc hien chu ky'
         ok, note = self.send_leg(car, self.observations[car], 'to_observe', now)
         if not ok:
             return ok, note
         s.update(accepted=None, candidate=None, candidate_at=0., reported=False, slot=None, sent=False,
                  resuming_delivery=False, failed_phase=None,
-                 pickup_route_id=None, delivered_at=None, near_boundary=False,
+                 pickup_route_id=None, delivered_at=None, unloaded_at=None, near_boundary=False,
                  sample_started=0.0, cycle=s['cycle']+1, view=s['frame'])
         s['history'].clear()
+        emit_cargo_event(self, car, 'started', now,
+                         observation_row=self.observations[car][0],
+                         observation_col=self.observations[car][1])
         return True, note
 
     def action(self, car):
         s = self.cars[car]
         now = time.monotonic()
-        if s['phase'] in ('ready', 'delivered'):
+        if s['phase'] == 'delivered':
+            s['unloaded_at'] = now
+            emit_cargo_event(self, car, 'unloaded_confirmed', now,
+                             deliver_row=self.drop_row, deliver_col=s.get('slot'))
+            s['phase'] = 'unloaded'
+            return True, f'{car}: da xac nhan do hang; bam QUAY LAI khi san sang'
+        if s['phase'] in ('ready', 'unloaded'):
             return self.start_cycle(car, now)
         if s['phase'] == 'measuring' and s['accepted'] and s['slot'] is not None:
             return self.send_leg(car, self.targets[car], 'to_pickup', now)
@@ -486,9 +564,16 @@ class LiveView(Node):
             if phase == 'delivering' and s.get('sent') and s.get('slot') is not None:
                 s['pickup_route_id'] = (s.get('status') or {}).get('route_id')
                 return self.send_leg(car, (self.drop_row,s['slot']), phase, now)
-            if phase in ('to_observe','to_pickup'):
-                cell = self.observations[car] if phase == 'to_observe' else self.targets[car]
-                return self.send_leg(car,cell,phase,now)
+            if phase in ('to_observe', 'to_stage'):
+                stage = observation_cell(self.observations[car], self.pick_heading, self.board)
+                ok, note = self.send_leg(car, stage, 'to_stage', now)
+                if ok:
+                    s['reason'] = f'Dang ve o ({stage[0]},{stage[1]}) de vao lai o do'
+                    emit_cargo_event(self, car, 'recovery_stage_sent', now,
+                                     row=stage[0], col=stage[1])
+                return ok, note
+            if phase == 'to_pickup':
+                return self.send_leg(car, self.targets[car], phase, now)
             return False, 'Khong co chang bi loi de thu lai'
         return self.confirm(car)
 
@@ -562,6 +647,9 @@ class LiveView(Node):
         s['sent'] = True
         s['delivery_yaw'] = None
         s['phase'], s['leg_at'] = 'delivering', time.monotonic()
+        emit_cargo_event(self, car, 'loaded_confirmed', s['leg_at'],
+                         pickup_row=r, pickup_col=c,
+                         deliver_row=self.drop_row, deliver_col=slot)
         note = ' (sat nguong, nguoi giam sat da xac nhan)' if s.get('near_boundary') else ''
         return True, (f'{car}: da nhan hang -> giao toi ({self.drop_row},{slot}), '
                       f'cao {s["accepted"]["height"] * 100:.1f} cm{note}')
@@ -589,6 +677,9 @@ class LiveView(Node):
             'route_id': status.get('route_id'),
             't_unix': time.time(),
         })))
+        emit_cargo_event(self, car, 'delivery_arrived', now,
+                         deliver_row=self.drop_row, deliver_col=s['slot'],
+                         resumed_delivery=s.get('resuming_delivery', False))
         return True
 
     def canvas(self):
@@ -638,7 +729,10 @@ class LiveView(Node):
                 cv2.putText(pane, label, (10, 312 + i * 26),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.51, color, 1)
             if s['phase'] == 'delivered':
-                button = 'DA DO HANG - QUAY LAI LAY TIEP'
+                button = 'DA DO HANG (XAC NHAN)'
+                button_color = (40, 125, 45)
+            elif s['phase'] == 'unloaded':
+                button = 'QUAY LAI LAY TIEP'
                 button_color = (40, 125, 45)
             elif s['phase'] == 'delivery_ready':
                 button = f'TIEP TUC GIAO HANG -> ({self.drop_row},{s["slot"]})'
@@ -646,8 +740,9 @@ class LiveView(Node):
             elif s['phase'] == 'ready':
                 button = f'BAT DAU -> O QUAN SAT {self.observations[car]}'
                 button_color = (40, 125, 45)
-            elif s['phase'] in ('to_observe', 'to_pickup', 'error'):
+            elif s['phase'] in ('to_stage', 'to_observe', 'to_pickup', 'error'):
                 button = {'to_observe': 'DANG TOI O QUAN SAT',
+                          'to_stage': 'DANG VE O DUNG TRUOC DE CAN LAI',
                           'to_pickup': 'DA NHAN DIEN - DANG TOI O LAY',
                           'error': 'THU LAI CHANG DANG LOI'}[s['phase']]
                 button_color = (0, 100, 180)
@@ -686,9 +781,15 @@ def main():
                     help='active robots, e.g. --robots agv2')
     ap.add_argument('--resume-delivery', metavar='CAR,COLUMN',
                     help='resume a previously loaded cargo job, e.g. agv2,3; click to dispatch')
+    ap.add_argument('--resume-observation-error', action='store_true',
+                    help='one robot only: reopen an interrupted observation failure; '
+                         'Retry first drives to the preceding grid cell')
     ap.add_argument('--dispatch-resumed', action='store_true',
                     help='dispatch the explicitly resumed, already confirmed delivery once pose is fresh')
     ap.add_argument('--save-dir', default='/tmp/cargo_live', help='folder for S snapshots')
+    ap.add_argument('--event-log', help='JSONL file for pickup/delivery timing events')
+    ap.add_argument('--sim', action='store_true',
+                    help='use virtual-camera calibration from cargo.yaml')
     ap.add_argument('--agv1-pickup', type=pickup_arg, default=TARGETS['agv1'],
                     metavar='ROW,COL', help='pickup cell for AGV 1')
     ap.add_argument('--agv2-pickup', type=pickup_arg, default=TARGETS['agv2'],
@@ -696,6 +797,9 @@ def main():
     ap.add_argument('--success-hold-s', type=float, default=SUCCESS_HOLD_S,
                     help='deprecated; window stays open until Q or close')
     args = ap.parse_args()
+    if args.resume_observation_error and (len(args.robots) != 1 or args.resume_delivery):
+        ap.error('--resume-observation-error requires exactly one --robots car '
+                 'and cannot be combined with --resume-delivery')
     if args.dispatch_resumed and not args.resume_delivery:
         ap.error('--dispatch-resumed requires --resume-delivery')
     if args.success_hold_s < 0:
@@ -704,7 +808,26 @@ def main():
         sys.exit('No graphical display (DISPLAY/WAYLAND_DISPLAY). Run in VS Code desktop terminal.')
     rclpy.init()
     pickups = {'agv1': args.agv1_pickup, 'agv2': args.agv2_pickup}
-    node = LiveView(targets={car: pickups[car] for car in args.robots})
+    event_log = args.event_log or str(Path(args.save_dir) / 'cargo_events.jsonl')
+    node = LiveView(targets={car: pickups[car] for car in args.robots},
+                    event_log_path=event_log, sim=args.sim)
+    print(f'Cargo timing events: {event_log}', flush=True)
+
+    if args.resume_observation_error:
+        car = args.robots[0]
+        previous = unfinished_observation(event_log, car)
+        if previous is None:
+            node.destroy_node()
+            rclpy.shutdown()
+            ap.error('Khong tim thay luot quan sat dang loi trong --event-log')
+        state = node.cars[car]
+        node.run_id = previous['run_id']
+        state.update(phase='error', failed_phase='to_observe', cycle=previous['cycle'],
+                     reason='Bam THU LAI: ve o dung truoc roi vao lai o quan sat')
+        emit_cargo_event(node, car, 'observation_retry_resumed')
+        print(f'{car}: THU LAI se ve o dung truoc '
+              f'{observation_cell(node.observations[car], node.pick_heading, node.board)}',
+              flush=True)
 
     def on_mouse(event, x, y, _flags, _param):
         if event != cv2.EVENT_LBUTTONUP or not BUTTON_TOP <= y <= BUTTON_BOTTOM:

@@ -1,0 +1,5 @@
+# Keep archived experiment bytes unchanged so SHA256SUMS remains valid on clone.
+data/** -text -whitespace
+data/**/*.mcap binary
+# Historical captures also keep their original CSV/log whitespace.
+docs/nckh_2xe_sim_20261026/** -text -whitespace

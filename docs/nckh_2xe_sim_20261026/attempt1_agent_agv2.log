@@ -1,0 +1,11 @@
+[INFO] [1792989258.931498523] [agv2.fleet_agent]: Sa bàn 5x5, ô 0.60 m, (hàng 3, cột 3) = (-0.545, +0.035), xoay +0.0° - /tmp/fleet_sim/grid_fleet.yaml. Đang chờ bản đồ...
+[INFO] [1792989258.935610370] [agv2.fleet_agent]: [agv2] cho lenh tu traffic_manager tren /fleet/agv2/cmd
+[WARN] [1792989259.663378127] [agv2.fleet_agent]: Bỏ điểm (hàng 1, cột 5): cách vật cản trên bản đồ 14 cm < 25 cm
+[INFO] [1792989259.946196358] [agv2.fleet_agent]: Đã đối chiếu sa bàn với bản đồ: 24/25 điểm, bỏ 2 cạnh sát vật cản.
+[INFO] [1792990150.997560059] [agv2.fleet_agent]: [agv2] lo trinh #929898438: (3,3) -> (4,3) -> (4,4), duoc di toi o 0
+[INFO] [1792990151.196839333] [agv2.fleet_agent]: Đoạn thẳng (-0.55, +0.04) -> (-0.55, +0.64), 0.60 m, tới (hàng 4, cột 3)
+[INFO] [1792990151.197347985] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1792990155.048407039] [agv2.fleet_agent]: Xoay mot luot xong sau 3.9 s, con lech -1.24°, khong xoay bu (omega max 37°/s)
+[INFO] [1792990160.001699412] [agv2.fleet_agent]: Đoạn thẳng (-0.55, +0.64) -> (+0.05, +0.64), 0.60 m, tới (hàng 4, cột 4)
+[INFO] [1792990160.002072315] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[ERROR] [1792990163.952939997] [agv2.fleet_agent]: [agv2] xoay mot luot con lech +3.06° >= 2.5° - khong xoay bu

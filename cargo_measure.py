@@ -366,6 +366,12 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     """Tra dict ket qua (m) + anh ve chu thich. raise ValueError neu khong do duoc."""
     lx = cfg['lidar']['x'] if lidar_x is None else lidar_x
     face = fit_face(lidar_points(scans, lx, cfg))
+    # Width from the two outermost ray centres is biased low by up to one
+    # angular bin at EACH box edge. Add half a bin per edge for the central
+    # estimate; retain the raw span below so the correction stays auditable.
+    beam_step = (face['dist'] * abs(math.tan(scans[-1][1]))
+                 if 0 < abs(scans[-1][1]) < math.radians(5) else 0.0)
+    lidar_width = face['width'] + beam_step
     cam = Camera(cfg)
     c = cfg['camera']
     h0, w0 = img_bgr.shape[:2]
@@ -532,8 +538,8 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     if abs(PB[2]-support_z) > 0.015:
         warn.append(f'mep duoi anh o z={PB[2] * 100:+.1f} cm' + (' (khong dung - cao tinh tu mep tren toi san)'
                     if cam.has_pitch else ' (khong tren san? bong do? - chua co camera.pitch)'))
-    if abs(width - face['width']) > 0.03:
-        warn.append(f'rong camera {width * 100:.1f} cm khac LiDAR {face["width"] * 100:.1f} cm')
+    if abs(width - lidar_width) > 0.03:
+        warn.append(f'rong camera {width * 100:.1f} cm khac LiDAR {lidar_width * 100:.1f} cm')
     # anh chu thich
     vis = und.copy()
     cnts, _ = cv2.findContours(mask.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -545,7 +551,8 @@ def measure(img_bgr, scans, cfg, lidar_x=None):
     cv2.putText(vis, f'rong {width * 100:.1f} cm  cao {height * 100:.1f} cm  Z {(-d - cam.C[0]) * 100:.1f} cm',
                 (10, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
     return {'width': width, 'height': height, 'z_cam': float(-d - cam.C[0]),
-            'face_yaw_deg': face['yaw_deg'], 'lidar_width': face['width'],
+            'face_yaw_deg': face['yaw_deg'], 'lidar_width': lidar_width,
+            'lidar_width_raw': face['width'], 'lidar_beam_step_m': beam_step,
             'lidar_points': face['points'], 'bottom_z': float(PB[2]),
             'face_rms_m': face['rms_m'], 'height_source': height_source,
             'rectangle_hint': list(rectangle) if rectangle is not None else None,

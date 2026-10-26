@@ -1,0 +1,241 @@
+[INFO] [launch]: All log files can be found below /home/tai/.ros/log/2026-10-26-15-43-27-838508-tai-Nitro-AN515-57-5284
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [scan_filter.py-1]: process started with pid [5297]
+[INFO] [robot_state_publisher-2]: process started with pid [5299]
+[INFO] [wheel_odometry.py-3]: process started with pid [5301]
+[INFO] [amcl-4]: process started with pid [5303]
+[INFO] [lifecycle_manager-5]: process started with pid [5306]
+[lifecycle_manager-5] [INFO] [1793004208.065810733] [agv2.lifecycle_manager_localization]: Creating
+[lifecycle_manager-5] [INFO] [1793004208.069776965] [agv2.lifecycle_manager_localization]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[amcl-4] [INFO] [1793004208.090243712] [agv2.amcl]: 
+[amcl-4] 	amcl lifecycle node launched. 
+[amcl-4] 	Waiting on external lifecycle transitions to activate
+[amcl-4] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[amcl-4] [INFO] [1793004208.091491280] [agv2.amcl]: Creating
+[robot_state_publisher-2] [INFO] [1793004208.096287139] [agv2.robot_state_publisher]: Robot initialized
+[lifecycle_manager-5] [INFO] [1793004208.260611894] [agv2.lifecycle_manager_localization]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-5] [INFO] [1793004208.260664494] [agv2.lifecycle_manager_localization]: [34m[1mConfiguring amcl[0m[0m
+[amcl-4] [INFO] [1793004208.411312937] [agv2.amcl]: Configuring
+[amcl-4] [INFO] [1793004208.411424327] [agv2.amcl]: initTransforms
+[amcl-4] [INFO] [1793004208.418858962] [agv2.amcl]: initPubSub
+[amcl-4] [INFO] [1793004208.429298355] [agv2.amcl]: Subscribed to map topic.
+[lifecycle_manager-5] [INFO] [1793004208.432281324] [agv2.lifecycle_manager_localization]: [34m[1mActivating amcl[0m[0m
+[amcl-4] [INFO] [1793004208.432366859] [agv2.amcl]: Activating
+[amcl-4] [INFO] [1793004208.432390795] [agv2.amcl]: initialPoseReceived
+[amcl-4] [INFO] [1793004208.432442673] [agv2.amcl]: Setting pose (1793004208.432443): -0.545 -0.565 0.000
+[amcl-4] [INFO] [1793004208.432957788] [agv2.amcl]: Creating bond (amcl) to lifecycle manager.
+[lifecycle_manager-5] [INFO] [1793004208.536448940] [agv2.lifecycle_manager_localization]: Server amcl connected with bond.
+[lifecycle_manager-5] [INFO] [1793004208.536599230] [agv2.lifecycle_manager_localization]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-5] [INFO] [1793004208.536620793] [agv2.lifecycle_manager_localization]: [34m[1mCreating bond timer...[0m[0m
+[wheel_odometry.py-3] [INFO] [1793004208.607170722] [agv2.wheel_odometry]: wheel_radius=0.03281 m, wheel_separation=0.200 m, yaw_source=imu_quaternion
+[amcl-4] [WARN] [1793004211.129722212] [agv2.amcl]: Waiting for map....
+[amcl-4] [INFO] [1793004211.549548466] [agv2.amcl]: Received a 159 X 165 map @ 0.050 m/pix
+[amcl-4] [INFO] [1793004211.564175104] [agv2.amcl]: createLaserObject
+[scan_filter.py-1] [INFO] [1793004218.727342135] [agv2.scan_filter]: 53 scans; removed 1704 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004228.708600093] [agv2.scan_filter]: 72 scans; removed 2405 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004238.706414239] [agv2.scan_filter]: 70 scans; removed 2211 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004248.706369896] [agv2.scan_filter]: 71 scans; removed 2213 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004258.706402821] [agv2.scan_filter]: 70 scans; removed 2446 transient rays / 10 s
+[amcl-4] [INFO] [1793004259.965755397] [agv2.amcl]: initialPoseReceived
+[amcl-4] [WARN] [1793004259.965861826] [agv2.amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 1793004259.965801 but the latest data is at time 1793004259.927835, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-4] [INFO] [1793004259.965876940] [agv2.amcl]: Setting pose (1793004259.965877): -0.542 -0.546 -0.035
+[scan_filter.py-1] [INFO] [1793004268.706770329] [agv2.scan_filter]: 71 scans; removed 2440 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004278.706396788] [agv2.scan_filter]: 70 scans; removed 2380 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004288.706364770] [agv2.scan_filter]: 71 scans; removed 2414 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004298.706503340] [agv2.scan_filter]: 70 scans; removed 2497 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004308.706407264] [agv2.scan_filter]: 71 scans; removed 2450 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004318.706434713] [agv2.scan_filter]: 70 scans; removed 2414 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004328.706534639] [agv2.scan_filter]: 71 scans; removed 2435 transient rays / 10 s
+[amcl-4] [WARN] [1793004335.033036257] [agv2.amcl]: New subscription discovered on topic '/agv2/particle_cloud', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: RELIABILITY_QOS_POLICY
+[scan_filter.py-1] [INFO] [1793004338.706910079] [agv2.scan_filter]: 70 scans; removed 2395 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004348.706493561] [agv2.scan_filter]: 71 scans; removed 2507 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004358.706501113] [agv2.scan_filter]: 70 scans; removed 2407 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004368.707349373] [agv2.scan_filter]: 71 scans; removed 2372 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004378.706460041] [agv2.scan_filter]: 70 scans; removed 2113 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004388.706472821] [agv2.scan_filter]: 70 scans; removed 2186 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004398.706463942] [agv2.scan_filter]: 71 scans; removed 2389 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004408.706482704] [agv2.scan_filter]: 70 scans; removed 2207 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004418.707054739] [agv2.scan_filter]: 71 scans; removed 2242 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004428.706474454] [agv2.scan_filter]: 70 scans; removed 2023 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004438.706498887] [agv2.scan_filter]: 70 scans; removed 1778 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004448.706475481] [agv2.scan_filter]: 70 scans; removed 1547 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004458.706490680] [agv2.scan_filter]: 70 scans; removed 1712 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004468.706501845] [agv2.scan_filter]: 70 scans; removed 1862 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004478.706508844] [agv2.scan_filter]: 70 scans; removed 1974 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004488.706444194] [agv2.scan_filter]: 71 scans; removed 1952 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004498.706491770] [agv2.scan_filter]: 70 scans; removed 1940 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004508.706514980] [agv2.scan_filter]: 70 scans; removed 1803 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004518.706575725] [agv2.scan_filter]: 70 scans; removed 1804 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004528.706863968] [agv2.scan_filter]: 71 scans; removed 1783 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004538.706551464] [agv2.scan_filter]: 70 scans; removed 1779 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004548.706685936] [agv2.scan_filter]: 70 scans; removed 1817 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004558.706662644] [agv2.scan_filter]: 71 scans; removed 1897 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004568.707235591] [agv2.scan_filter]: 70 scans; removed 1872 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004578.706769236] [agv2.scan_filter]: 71 scans; removed 1872 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004588.707224023] [agv2.scan_filter]: 70 scans; removed 1827 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004598.706876507] [agv2.scan_filter]: 71 scans; removed 1911 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004608.707043207] [agv2.scan_filter]: 70 scans; removed 1864 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004618.707001022] [agv2.scan_filter]: 71 scans; removed 1872 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004628.706412701] [agv2.scan_filter]: 71 scans; removed 1951 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004638.706430353] [agv2.scan_filter]: 70 scans; removed 1846 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004648.706561796] [agv2.scan_filter]: 71 scans; removed 1933 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004658.706644457] [agv2.scan_filter]: 70 scans; removed 1881 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004668.706417190] [agv2.scan_filter]: 71 scans; removed 1799 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004678.706427050] [agv2.scan_filter]: 70 scans; removed 1805 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004688.708056181] [agv2.scan_filter]: 71 scans; removed 1816 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004698.706437806] [agv2.scan_filter]: 70 scans; removed 1790 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004708.706467113] [agv2.scan_filter]: 70 scans; removed 1749 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004718.706455571] [agv2.scan_filter]: 70 scans; removed 1777 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004728.706396801] [agv2.scan_filter]: 71 scans; removed 1787 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004738.706438367] [agv2.scan_filter]: 70 scans; removed 1745 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004748.706599354] [agv2.scan_filter]: 70 scans; removed 1837 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004758.706475766] [agv2.scan_filter]: 70 scans; removed 1762 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004768.706451898] [agv2.scan_filter]: 70 scans; removed 1735 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004778.706503068] [agv2.scan_filter]: 70 scans; removed 1689 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004788.706429185] [agv2.scan_filter]: 70 scans; removed 1764 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004798.706473442] [agv2.scan_filter]: 70 scans; removed 1687 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004808.706464956] [agv2.scan_filter]: 70 scans; removed 1737 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004818.706529276] [agv2.scan_filter]: 70 scans; removed 1794 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004828.706484786] [agv2.scan_filter]: 70 scans; removed 1650 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004838.706520066] [agv2.scan_filter]: 69 scans; removed 1624 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004848.706490935] [agv2.scan_filter]: 70 scans; removed 1571 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004858.706516993] [agv2.scan_filter]: 70 scans; removed 1723 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004868.706477437] [agv2.scan_filter]: 70 scans; removed 1640 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004878.706559569] [agv2.scan_filter]: 70 scans; removed 1673 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004888.706446009] [agv2.scan_filter]: 70 scans; removed 1725 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004898.706453658] [agv2.scan_filter]: 70 scans; removed 1635 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004908.706728907] [agv2.scan_filter]: 70 scans; removed 1577 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004918.706475251] [agv2.scan_filter]: 70 scans; removed 1676 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004928.706495643] [agv2.scan_filter]: 70 scans; removed 1682 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004938.706465950] [agv2.scan_filter]: 70 scans; removed 1668 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004948.706415811] [agv2.scan_filter]: 70 scans; removed 1670 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004958.706483485] [agv2.scan_filter]: 70 scans; removed 1687 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004968.706447501] [agv2.scan_filter]: 70 scans; removed 1663 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004978.706491003] [agv2.scan_filter]: 70 scans; removed 1705 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004988.706475076] [agv2.scan_filter]: 70 scans; removed 1666 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793004998.706494069] [agv2.scan_filter]: 70 scans; removed 1682 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005008.706594858] [agv2.scan_filter]: 70 scans; removed 1681 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005018.706487852] [agv2.scan_filter]: 70 scans; removed 1689 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005028.706471384] [agv2.scan_filter]: 70 scans; removed 1672 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005038.706448873] [agv2.scan_filter]: 70 scans; removed 1696 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005048.706477366] [agv2.scan_filter]: 70 scans; removed 1702 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005058.706456689] [agv2.scan_filter]: 70 scans; removed 1731 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005068.706488299] [agv2.scan_filter]: 70 scans; removed 1808 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005078.706719013] [agv2.scan_filter]: 69 scans; removed 1695 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005088.706965104] [agv2.scan_filter]: 70 scans; removed 1767 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005098.706541780] [agv2.scan_filter]: 70 scans; removed 1762 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005108.706352687] [agv2.scan_filter]: 70 scans; removed 1775 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005118.706870840] [agv2.scan_filter]: 70 scans; removed 1926 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005128.706675231] [agv2.scan_filter]: 70 scans; removed 1926 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005138.706413931] [agv2.scan_filter]: 70 scans; removed 1894 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005148.706723772] [agv2.scan_filter]: 70 scans; removed 1853 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005158.706584524] [agv2.scan_filter]: 70 scans; removed 1915 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005168.706681521] [agv2.scan_filter]: 70 scans; removed 1901 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005178.706479053] [agv2.scan_filter]: 70 scans; removed 1861 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005188.706458305] [agv2.scan_filter]: 70 scans; removed 1808 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005198.706431615] [agv2.scan_filter]: 69 scans; removed 1836 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005208.706424025] [agv2.scan_filter]: 70 scans; removed 1964 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005218.706747751] [agv2.scan_filter]: 70 scans; removed 2036 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005228.706511898] [agv2.scan_filter]: 70 scans; removed 1936 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005238.706528248] [agv2.scan_filter]: 70 scans; removed 1940 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005248.706683978] [agv2.scan_filter]: 70 scans; removed 1840 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005258.706874391] [agv2.scan_filter]: 70 scans; removed 1908 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005268.706502349] [agv2.scan_filter]: 70 scans; removed 1913 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005278.706450810] [agv2.scan_filter]: 70 scans; removed 1904 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005288.706757028] [agv2.scan_filter]: 70 scans; removed 1811 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005298.706651906] [agv2.scan_filter]: 70 scans; removed 1818 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005308.706683366] [agv2.scan_filter]: 70 scans; removed 1852 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005318.706446983] [agv2.scan_filter]: 70 scans; removed 1875 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005328.706429421] [agv2.scan_filter]: 70 scans; removed 1776 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005338.706448543] [agv2.scan_filter]: 70 scans; removed 1842 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005348.706429782] [agv2.scan_filter]: 70 scans; removed 1782 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005358.706566457] [agv2.scan_filter]: 70 scans; removed 1789 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005368.706436108] [agv2.scan_filter]: 70 scans; removed 1813 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005378.706429474] [agv2.scan_filter]: 71 scans; removed 1987 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005388.706446453] [agv2.scan_filter]: 70 scans; removed 2056 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005398.706454902] [agv2.scan_filter]: 70 scans; removed 1901 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005408.706429202] [agv2.scan_filter]: 70 scans; removed 1865 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005418.706466075] [agv2.scan_filter]: 70 scans; removed 1826 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005428.706679782] [agv2.scan_filter]: 69 scans; removed 1772 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005438.706475580] [agv2.scan_filter]: 70 scans; removed 1894 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005448.706457454] [agv2.scan_filter]: 70 scans; removed 1756 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005458.706417624] [agv2.scan_filter]: 71 scans; removed 1755 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005468.706472425] [agv2.scan_filter]: 70 scans; removed 1956 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005478.706505231] [agv2.scan_filter]: 70 scans; removed 2162 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005488.706437802] [agv2.scan_filter]: 70 scans; removed 2151 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005498.706935439] [agv2.scan_filter]: 70 scans; removed 2170 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005508.706740477] [agv2.scan_filter]: 70 scans; removed 2083 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005518.706437690] [agv2.scan_filter]: 70 scans; removed 2119 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005528.706486576] [agv2.scan_filter]: 70 scans; removed 2078 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005538.707015808] [agv2.scan_filter]: 71 scans; removed 2243 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005548.706883353] [agv2.scan_filter]: 70 scans; removed 2129 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005558.706494736] [agv2.scan_filter]: 70 scans; removed 2121 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005568.706388978] [agv2.scan_filter]: 70 scans; removed 2192 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005578.706530750] [agv2.scan_filter]: 70 scans; removed 2202 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005588.706669711] [agv2.scan_filter]: 70 scans; removed 2132 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005598.706453519] [agv2.scan_filter]: 70 scans; removed 2374 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005608.706418526] [agv2.scan_filter]: 71 scans; removed 2463 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005618.706440653] [agv2.scan_filter]: 70 scans; removed 2362 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005628.706400355] [agv2.scan_filter]: 70 scans; removed 2240 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005638.706452331] [agv2.scan_filter]: 70 scans; removed 2308 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005648.706392678] [agv2.scan_filter]: 70 scans; removed 2281 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005658.706459625] [agv2.scan_filter]: 70 scans; removed 2463 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005668.706428677] [agv2.scan_filter]: 70 scans; removed 2429 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005678.706441593] [agv2.scan_filter]: 70 scans; removed 2334 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005688.706407136] [agv2.scan_filter]: 70 scans; removed 2374 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005698.706444640] [agv2.scan_filter]: 70 scans; removed 2297 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005708.706754059] [agv2.scan_filter]: 70 scans; removed 2244 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005718.706470588] [agv2.scan_filter]: 70 scans; removed 2147 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005728.706819536] [agv2.scan_filter]: 70 scans; removed 2153 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005738.706598803] [agv2.scan_filter]: 71 scans; removed 2179 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005748.706764082] [agv2.scan_filter]: 70 scans; removed 2183 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005758.706591215] [agv2.scan_filter]: 70 scans; removed 2102 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005768.706718515] [agv2.scan_filter]: 70 scans; removed 2051 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005778.706589508] [agv2.scan_filter]: 70 scans; removed 1846 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005788.707296006] [agv2.scan_filter]: 71 scans; removed 1631 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005798.708197224] [agv2.scan_filter]: 70 scans; removed 1764 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005808.706482900] [agv2.scan_filter]: 70 scans; removed 1675 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005818.707166198] [agv2.scan_filter]: 70 scans; removed 1648 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005828.707036659] [agv2.scan_filter]: 71 scans; removed 1672 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005838.706418363] [agv2.scan_filter]: 70 scans; removed 1868 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005848.706517673] [agv2.scan_filter]: 70 scans; removed 1556 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005858.706634581] [agv2.scan_filter]: 71 scans; removed 1950 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005868.706428045] [agv2.scan_filter]: 70 scans; removed 1979 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005878.706557452] [agv2.scan_filter]: 70 scans; removed 1896 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005888.706400980] [agv2.scan_filter]: 71 scans; removed 1883 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005898.706358013] [agv2.scan_filter]: 70 scans; removed 1882 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005908.706390399] [agv2.scan_filter]: 71 scans; removed 1875 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005918.706450828] [agv2.scan_filter]: 70 scans; removed 1893 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005928.706408310] [agv2.scan_filter]: 71 scans; removed 1899 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005938.706701017] [agv2.scan_filter]: 70 scans; removed 1863 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005948.706504094] [agv2.scan_filter]: 50 scans; removed 1338 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005958.706497290] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005968.706660642] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[wheel_odometry.py-3] [WARN] [1793005975.148457865] [agv2.wheel_odometry]: Goc banh nhay -540.9 / -528.4 rad trong 29.33 s - co le ESP32 vua khoi dong lai. Lay lai moc, giu nguyen vi tri dang co.
+[scan_filter.py-1] [INFO] [1793005978.706437014] [agv2.scan_filter]: 24 scans; removed 745 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005988.706999539] [agv2.scan_filter]: 6 scans; removed 204 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793005998.706504672] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006008.707297925] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006018.707238781] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006028.707240866] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006038.707085103] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006048.706480624] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006058.707212834] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006068.706475985] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006078.707351373] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006088.706489394] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006098.707326199] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006108.707277862] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006118.706657169] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006128.706486416] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006138.707260322] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006148.706467264] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006158.706463807] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006168.707360174] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006178.706463597] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006188.706542116] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006198.706485570] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006208.707254491] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006218.706607279] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006228.706456731] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s
+[scan_filter.py-1] [INFO] [1793006238.706512895] [agv2.scan_filter]: 0 scans; removed 0 transient rays / 10 s

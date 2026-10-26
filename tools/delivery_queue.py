@@ -121,8 +121,8 @@ def bay_exit_clear(pose, board, kind):
 def column_controls(queue, board, poses, entries, entered):
     """One route per vehicle; progressively open its permitted queue row.
 
-    A follower first joins behind its predecessor's entry point. Once that
-    predecessor is physically in the column it advances at occupancy clearance.
+    A follower approaches at its nearby row, then waits outside the column
+    until its predecessor clears the gate. Permissions advance with occupancy.
     No simulated parcel truth is used to grant movement.
     """
     result={}
@@ -147,7 +147,11 @@ def column_controls(queue, board, poses, entries, entered):
                     gate=max(gate,math.ceil(lead_row+gap-1e-6))
                 gate=max(gate,lead['gate_row']+1)
             gate=min(board.rows+1,gate)
-            entry=entries.get(n,min(board.rows,max(2,round(row),gate)))
+            # The gate is a permission limit, not a waypoint. A follower can
+            # approach the column at its nearby row and wait outside until
+            # the preceding car clears it. Forcing entry >= gate sent cars
+            # around the perimeter even when the adjacent approach was free.
+            entry=entries.get(n,min(board.rows,max(2,round(row))))
             if n in entries and abs(lateral)<.08 and row<=entry+.1:entered.add(n)
             result[n]=dict(slot=kind,entry_row=entry,gate_row=gate)
             previous=n

@@ -1,0 +1,47 @@
+[WARN] [ros2bag]: Positional "topics" argument deprecated. Please use optional "--topics" argument instead.
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1793006837.710950678] [rosbag2_recorder]: Press SPACE for pausing/resuming
+[INFO] [1793006837.710960443] [rosbag2_recorder]: Event publisher thread: Started
+[INFO] [1793006837.715301473] [rosbag2_recorder]: Starting recording to '/home/tai/Robot_kho_clone/data/sim_trial_01_20261026/rosbag'
+[INFO] [1793006837.716711210] [rosbag2_recorder]: Listening for topics...
+[INFO] [1793006837.716736705] [rosbag2_recorder]: Recording...
+[INFO] [1793006837.716746307] [rosbag2_recorder]: Topics discovery started.
+[INFO] [1793006837.813099644] [rosbag2_recorder]: Subscribed to topic '/fleet/status'
+[INFO] [1793006838.036610606] [rosbag2_recorder]: Subscribed to topic '/fleet/cargo_event'
+[INFO] [1793006838.084883586] [rosbag2_recorder]: Subscribed to topic '/agv1/cmd_vel'
+[INFO] [1793006838.102473261] [rosbag2_recorder]: Subscribed to topic '/fleet/goal'
+[INFO] [1793006838.113407835] [rosbag2_recorder]: Subscribed to topic '/fleet/markers'
+[INFO] [1793006838.405396920] [rosbag2_recorder]: Subscribed to topic '/fleet/cargo_result'
+[INFO] [1793006838.445928867] [rosbag2_recorder]: Subscribed to topic '/agv2/imu/data'
+[INFO] [1793006838.449594411] [rosbag2_recorder]: Subscribed to topic '/agv2/odom'
+[INFO] [1793006838.452214996] [rosbag2_recorder]: Subscribed to topic '/agv2/scan'
+[INFO] [1793006838.471501483] [rosbag2_recorder]: Subscribed to topic '/agv1/imu/data'
+[INFO] [1793006838.472911068] [rosbag2_recorder]: Subscribed to topic '/agv1/odom'
+[INFO] [1793006838.473840171] [rosbag2_recorder]: Subscribed to topic '/agv1/scan'
+[INFO] [1793006840.157139203] [rosbag2_recorder]: Subscribed to topic '/agv2/cmd_vel'
+[INFO] [1793006841.310589208] [rosbag2_recorder]: Subscribed to topic '/sim/boxes'
+[INFO] [1793006841.317677736] [rosbag2_recorder]: Subscribed to topic '/agv2/camera/image_raw'
+[INFO] [1793006841.321188235] [rosbag2_recorder]: Subscribed to topic '/agv1/camera/image_raw'
+[INFO] [1793006841.321307858] [rosbag2_recorder]: All requested topics are subscribed. Stopping discovery...
+[INFO] [1793006841.321320564] [rosbag2_recorder]: Topics discovery stopped.
+[INFO] [1793006853.046757585] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006865.526863889] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006877.554711968] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006890.029257009] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006902.062236366] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006914.526680683] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006926.541706397] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006939.026711050] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006951.048993037] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006963.512968447] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006975.546791831] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793006988.026759931] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793007000.047287426] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793007012.526816223] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793007024.546450795] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793007037.028670696] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793007049.062151510] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793007061.528441325] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793007063.835342354] [rosbag2_recorder]: Pausing recording.
+[INFO] [1793007063.835483368] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793007063.851097582] [rosbag2_recorder]: Recording stopped
+[INFO] [1793007063.883975255] [rosbag2_recorder]: Event publisher thread: Exited
