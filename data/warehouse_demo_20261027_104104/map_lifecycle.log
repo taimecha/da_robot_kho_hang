@@ -1,0 +1,13 @@
+[INFO] [1793072465.262431682] [warehouse_map_lifecycle]: Creating
+[INFO] [1793072465.264950715] [warehouse_map_lifecycle]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[INFO] [1793072465.277000759] [warehouse_map_lifecycle]: [34m[1mStarting managed nodes bringup...[0m[0m
+[INFO] [1793072465.277048017] [warehouse_map_lifecycle]: [34m[1mConfiguring map_server[0m[0m
+[INFO] [1793072465.466856286] [warehouse_map_lifecycle]: [34m[1mActivating map_server[0m[0m
+[INFO] [1793072465.569482704] [warehouse_map_lifecycle]: Server map_server connected with bond.
+[INFO] [1793072465.569535241] [warehouse_map_lifecycle]: [34m[1mManaged nodes are active[0m[0m
+[INFO] [1793072465.569547783] [warehouse_map_lifecycle]: [34m[1mCreating bond timer...[0m[0m
+[INFO] [1793072658.834649219] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1793072658.834854601] [warehouse_map_lifecycle]: Running Nav2 LifecycleManager rcl preshutdown (warehouse_map_lifecycle)
+[INFO] [1793072658.834958280] [warehouse_map_lifecycle]: [34m[1mTerminating bond timer...[0m[0m
+[INFO] [1793072658.865067101] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1793072658.872694022] [warehouse_map_lifecycle]: Destroying warehouse_map_lifecycle

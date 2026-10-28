@@ -1,0 +1,682 @@
+[INFO] [1793073190.934115901] [warehouse_scene]: {"t_s": 0.209, "event": "scene_ready", "queues": {"agv1": [1, 4, 2, 3, 1, 2, 4, 3, 4, 1], "agv2": [1, 4, 2, 2, 2, 3, 1, 1, 2, 3], "agv3": [1, 4, 3, 3, 2, 4, 2, 3, 1, 3]}, "delivery_mode": "staged", "sync_rounds": false, "delivery_flow": "flexible", "column_queues": true}
+[INFO] [1793073190.971895571] [warehouse_scene]: {"t_s": 0.26, "event": "telemetry_ready"}
+[INFO] [1793073243.348472666] [warehouse_scene]: {"t_s": 52.637, "event": "mission_started"}
+[INFO] [1793073243.349024355] [warehouse_scene]: {"t_s": 52.638, "event": "goal_sent", "robot": "agv1", "phase": "observe", "row": 2, "col": 4, "heading": "d"}
+[INFO] [1793073243.349441507] [warehouse_scene]: {"t_s": 52.639, "event": "goal_sent", "robot": "agv2", "phase": "observe", "row": 3, "col": 4, "heading": "d"}
+[INFO] [1793073243.349846848] [warehouse_scene]: {"t_s": 52.639, "event": "goal_sent", "robot": "agv3", "phase": "observe", "row": 4, "col": 4, "heading": "d"}
+[INFO] [1793073253.773549412] [warehouse_scene]: {"t_s": 63.06, "event": "goal_reached", "robot": "agv1", "phase": "observe", "row": 2, "col": 4}
+[INFO] [1793073253.774705292] [warehouse_scene]: {"t_s": 63.064, "event": "goal_reached", "robot": "agv2", "phase": "observe", "row": 3, "col": 4}
+[INFO] [1793073253.775283625] [warehouse_scene]: {"t_s": 63.064, "event": "goal_reached", "robot": "agv3", "phase": "observe", "row": 4, "col": 4}
+[INFO] [1793073265.221604540] [warehouse_scene]: {"t_s": 74.51, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_1", "width_m": 0.1248036448497309, "height_m": 0.2744191534243311, "kind": 1, "camera_distance_m": 0.8991525513105527, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+[INFO] [1793073265.231773564] [warehouse_scene]: {"t_s": 74.521, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+[INFO] [1793073265.232746536] [warehouse_scene]: {"t_s": 74.522, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_1", "width_m": 0.12453616854949938, "height_m": 0.2749236327289724, "kind": 1, "camera_distance_m": 0.8972319287056003, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+[INFO] [1793073265.243193494] [warehouse_scene]: {"t_s": 74.532, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+[INFO] [1793073265.243672453] [warehouse_scene]: {"t_s": 74.533, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_1", "width_m": 0.1216453314030502, "height_m": 0.2757949811984599, "kind": 1, "camera_distance_m": 0.9000502020474063, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+[INFO] [1793073265.254819098] [warehouse_scene]: {"t_s": 74.544, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+[INFO] [1793073265.271876462] [warehouse_scene]: {"t_s": 74.561, "event": "delivery_intent", "robot": "agv1", "slot": 1}
+[INFO] [1793073265.272309301] [warehouse_scene]: {"t_s": 74.561, "event": "delivery_intent", "robot": "agv2", "slot": 1}
+[INFO] [1793073265.272670044] [warehouse_scene]: {"t_s": 74.562, "event": "delivery_intent", "robot": "agv3", "slot": 1}
+[INFO] [1793073265.275187010] [warehouse_scene]: {"t_s": 74.564, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 2}
+[INFO] [1793073265.275554485] [warehouse_scene]: {"t_s": 74.565, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 3}
+[INFO] [1793073265.275912512] [warehouse_scene]: {"t_s": 74.565, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 4}
+[INFO] [1793073269.972297314] [warehouse_scene]: {"t_s": 79.261, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+[INFO] [1793073269.972687483] [warehouse_scene]: {"t_s": 79.262, "event": "load_started", "robot": "agv1", "package": "agv1_box_1"}
+[INFO] [1793073269.974672953] [warehouse_scene]: {"t_s": 79.264, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+[INFO] [1793073269.975130234] [warehouse_scene]: {"t_s": 79.264, "event": "load_started", "robot": "agv2", "package": "agv2_box_1"}
+[INFO] [1793073269.975539775] [warehouse_scene]: {"t_s": 79.265, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+[INFO] [1793073269.975885561] [warehouse_scene]: {"t_s": 79.265, "event": "load_started", "robot": "agv3", "package": "agv3_box_1"}
+[INFO] [1793073272.020798826] [warehouse_scene]: {"t_s": 81.31, "event": "loaded", "robot": "agv1", "front": "agv1_box_2", "distance_from_pickup_m": 0.008706090613695538}
+[INFO] [1793073272.021198764] [warehouse_scene]: {"t_s": 81.31, "event": "loaded", "robot": "agv2", "front": "agv2_box_2", "distance_from_pickup_m": 0.008291657744092351}
+[INFO] [1793073272.021492365] [warehouse_scene]: {"t_s": 81.311, "event": "loaded", "robot": "agv3", "front": "agv3_box_2", "distance_from_pickup_m": 0.008871097521231164}
+[INFO] [1793073272.022461353] [warehouse_scene]: {"t_s": 81.311, "event": "delivery_queued", "robot": "agv1", "slot": 1, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073272.022810451] [warehouse_scene]: {"t_s": 81.312, "event": "delivery_queued", "robot": "agv2", "slot": 1, "rank": 2, "registration": "column_departure"}
+[INFO] [1793073272.023151725] [warehouse_scene]: {"t_s": 81.312, "event": "delivery_queued", "robot": "agv3", "slot": 1, "rank": 3, "registration": "column_departure"}
+[INFO] [1793073272.023547577] [warehouse_scene]: {"t_s": 81.313, "event": "delivery_admitted", "robot": "agv1", "slot": 1, "wait_s": 6.749169524999957}
+[INFO] [1793073272.032036879] [warehouse_scene]: {"t_s": 81.313, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 1}
+[INFO] [1793073272.032730126] [warehouse_scene]: {"t_s": 81.322, "event": "column_join", "robot": "agv1", "slot": 1, "entry_row": 2}
+[INFO] [1793073272.033174127] [warehouse_scene]: {"t_s": 81.322, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+[INFO] [1793073272.033534923] [warehouse_scene]: {"t_s": 81.323, "event": "column_join", "robot": "agv2", "slot": 1, "entry_row": 3}
+[INFO] [1793073272.033904163] [warehouse_scene]: {"t_s": 81.323, "event": "goal_sent", "robot": "agv2", "phase": "convoy", "row": 1, "col": 1, "heading": "n"}
+[INFO] [1793073272.034245652] [warehouse_scene]: {"t_s": 81.324, "event": "column_join", "robot": "agv3", "slot": 1, "entry_row": 4}
+[INFO] [1793073272.034589686] [warehouse_scene]: {"t_s": 81.324, "event": "goal_sent", "robot": "agv3", "phase": "convoy", "row": 1, "col": 1, "heading": "n"}
+[INFO] [1793073279.220618593] [warehouse_scene]: {"t_s": 88.509, "event": "feed_started", "robot": "agv3", "front": "agv3_box_2", "distance_from_pickup_m": 0.4200704416951792}
+[INFO] [1793073279.270656815] [warehouse_scene]: {"t_s": 88.559, "event": "feed_started", "robot": "agv2", "front": "agv2_box_2", "distance_from_pickup_m": 0.4262909540782835}
+[INFO] [1793073279.370103417] [warehouse_scene]: {"t_s": 88.659, "event": "feed_started", "robot": "agv1", "front": "agv1_box_2", "distance_from_pickup_m": 0.4209052305846649}
+[INFO] [1793073281.721653689] [warehouse_scene]: {"t_s": 91.01, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_2", "distance_from_pickup_m": 0.9392704326179868}
+[INFO] [1793073281.770558912] [warehouse_scene]: {"t_s": 91.06, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_2", "distance_from_pickup_m": 0.9454909386548461}
+[INFO] [1793073281.921591195] [warehouse_scene]: {"t_s": 91.211, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_2", "distance_from_pickup_m": 0.9621052205111391}
+[INFO] [1793073294.922414710] [warehouse_scene]: {"t_s": 104.211, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 2}
+[INFO] [1793073296.970962497] [warehouse_scene]: {"t_s": 106.26, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1}
+[INFO] [1793073296.971539317] [warehouse_scene]: {"t_s": 106.261, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_1", "slot": 1}
+[INFO] [1793073296.971995578] [warehouse_scene]: {"t_s": 106.261, "event": "unload_started", "robot": "agv1", "package": "agv1_box_1"}
+[INFO] [1793073298.470588180] [warehouse_scene]: {"t_s": 107.76, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_1", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+[INFO] [1793073298.471703677] [warehouse_scene]: {"t_s": 107.76, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+[INFO] [1793073303.571378444] [warehouse_scene]: {"t_s": 112.86, "event": "outbound_cleared", "package": "agv1_box_1"}
+[INFO] [1793073304.471987908] [warehouse_scene]: {"t_s": 113.76, "event": "bay_released", "robot": "agv1", "slot": 1, "distance_m": 0.4554453205999102}
+[INFO] [1793073304.472359966] [warehouse_scene]: {"t_s": 113.762, "event": "delivery_admitted", "robot": "agv2", "slot": 1, "wait_s": 39.19880213599993}
+[INFO] [1793073304.472716601] [warehouse_scene]: {"t_s": 113.762, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 1}
+[INFO] [1793073310.220889488] [warehouse_scene]: {"t_s": 119.51, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 3}
+[INFO] [1793073313.074431483] [warehouse_scene]: {"t_s": 122.362, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 2}
+[INFO] [1793073315.174913419] [warehouse_scene]: {"t_s": 124.464, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 1}
+[INFO] [1793073315.175248732] [warehouse_scene]: {"t_s": 124.465, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_1", "slot": 1}
+[INFO] [1793073315.175541413] [warehouse_scene]: {"t_s": 124.465, "event": "unload_started", "robot": "agv2", "package": "agv2_box_1"}
+[INFO] [1793073316.728211759] [warehouse_scene]: {"t_s": 126.015, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_1", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+[INFO] [1793073316.728662827] [warehouse_scene]: {"t_s": 126.018, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+[INFO] [1793073321.820952460] [warehouse_scene]: {"t_s": 131.11, "event": "outbound_cleared", "package": "agv2_box_1"}
+[INFO] [1793073322.821627461] [warehouse_scene]: {"t_s": 132.11, "event": "bay_released", "robot": "agv2", "slot": 1, "distance_m": 0.4554357849223141}
+[INFO] [1793073322.822040517] [warehouse_scene]: {"t_s": 132.111, "event": "delivery_admitted", "robot": "agv3", "slot": 1, "wait_s": 57.54897801799996}
+[INFO] [1793073322.822315465] [warehouse_scene]: {"t_s": 132.112, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 1}
+[INFO] [1793073323.774509350] [warehouse_scene]: {"t_s": 133.063, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+[INFO] [1793073328.421973317] [warehouse_scene]: {"t_s": 137.711, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_2", "width_m": 0.30463994063242944, "height_m": 0.4742901309294675, "kind": 4, "camera_distance_m": 0.8989629749670364, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+[INFO] [1793073328.434280388] [warehouse_scene]: {"t_s": 137.723, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+[INFO] [1793073328.478850512] [warehouse_scene]: {"t_s": 137.764, "event": "delivery_intent", "robot": "agv1", "slot": 4}
+[INFO] [1793073328.480614137] [warehouse_scene]: {"t_s": 137.769, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 2, "gate_row": 2}
+[INFO] [1793073330.172162483] [warehouse_scene]: {"t_s": 139.461, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 1}
+[INFO] [1793073330.172546120] [warehouse_scene]: {"t_s": 139.462, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_1", "slot": 1}
+[INFO] [1793073330.172859221] [warehouse_scene]: {"t_s": 139.462, "event": "unload_started", "robot": "agv3", "package": "agv3_box_1"}
+[INFO] [1793073331.671882553] [warehouse_scene]: {"t_s": 140.961, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_1", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+[INFO] [1793073331.672645164] [warehouse_scene]: {"t_s": 140.962, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+[INFO] [1793073333.174621576] [warehouse_scene]: {"t_s": 142.464, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+[INFO] [1793073333.175513055] [warehouse_scene]: {"t_s": 142.464, "event": "load_started", "robot": "agv1", "package": "agv1_box_2"}
+[INFO] [1793073335.220910749] [warehouse_scene]: {"t_s": 144.51, "event": "loaded", "robot": "agv1", "front": "agv1_box_3", "distance_from_pickup_m": 0.007591284473962785}
+[INFO] [1793073335.230055616] [warehouse_scene]: {"t_s": 144.511, "event": "delivery_queued", "robot": "agv1", "slot": 4, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073335.231600012] [warehouse_scene]: {"t_s": 144.52, "event": "delivery_admitted", "robot": "agv1", "slot": 4, "wait_s": 6.748196821000079}
+[INFO] [1793073335.232013744] [warehouse_scene]: {"t_s": 144.521, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 2, "gate_row": 1}
+[INFO] [1793073335.232933497] [warehouse_scene]: {"t_s": 144.522, "event": "column_join", "robot": "agv1", "slot": 4, "entry_row": 2}
+[INFO] [1793073335.233406376] [warehouse_scene]: {"t_s": 144.523, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4, "heading": "n"}
+[INFO] [1793073336.771287490] [warehouse_scene]: {"t_s": 146.06, "event": "outbound_cleared", "package": "agv3_box_1"}
+[INFO] [1793073339.180111600] [warehouse_scene]: {"t_s": 148.461, "event": "bay_released", "robot": "agv3", "slot": 1, "distance_m": 0.45422380641228344}
+[INFO] [1793073342.420489841] [warehouse_scene]: {"t_s": 151.71, "event": "feed_started", "robot": "agv1", "front": "agv1_box_3", "distance_from_pickup_m": 0.42026852931885306}
+[INFO] [1793073344.372674368] [warehouse_scene]: {"t_s": 153.662, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+[INFO] [1793073344.922561632] [warehouse_scene]: {"t_s": 154.211, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_3", "distance_from_pickup_m": 0.5927033738361772}
+[INFO] [1793073349.473018705] [warehouse_scene]: {"t_s": 158.762, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_2", "width_m": 0.30412857371541235, "height_m": 0.47463021544429473, "kind": 4, "camera_distance_m": 0.8996067872931139, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+[INFO] [1793073349.498656145] [warehouse_scene]: {"t_s": 158.787, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+[INFO] [1793073349.524182781] [warehouse_scene]: {"t_s": 158.812, "event": "delivery_intent", "robot": "agv2", "slot": 4}
+[INFO] [1793073349.524603025] [warehouse_scene]: {"t_s": 158.814, "event": "delivery_queued", "robot": "agv2", "slot": 4, "rank": 1, "registration": "tail_append"}
+[INFO] [1793073349.525028485] [warehouse_scene]: {"t_s": 158.814, "event": "column_permission", "robot": "agv2", "slot": 4, "entry_row": 3, "gate_row": 3}
+[INFO] [1793073349.975494445] [warehouse_scene]: {"t_s": 159.264, "event": "column_permission", "robot": "agv2", "slot": 4, "entry_row": 3, "gate_row": 2}
+[INFO] [1793073351.972214028] [warehouse_scene]: {"t_s": 161.261, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4}
+[INFO] [1793073351.972580382] [warehouse_scene]: {"t_s": 161.262, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_2", "slot": 4}
+[INFO] [1793073351.972984444] [warehouse_scene]: {"t_s": 161.262, "event": "unload_started", "robot": "agv1", "package": "agv1_box_2"}
+[INFO] [1793073353.520868228] [warehouse_scene]: {"t_s": 162.81, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_2", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+[INFO] [1793073353.521270862] [warehouse_scene]: {"t_s": 162.811, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+[INFO] [1793073354.371963803] [warehouse_scene]: {"t_s": 163.66, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+[INFO] [1793073354.372374031] [warehouse_scene]: {"t_s": 163.662, "event": "load_started", "robot": "agv2", "package": "agv2_box_2"}
+[INFO] [1793073356.371962070] [warehouse_scene]: {"t_s": 165.661, "event": "loaded", "robot": "agv2", "front": "agv2_box_3", "distance_from_pickup_m": 0.009116030899061925}
+[INFO] [1793073356.373493060] [warehouse_scene]: {"t_s": 165.663, "event": "column_join", "robot": "agv2", "slot": 4, "entry_row": 3}
+[INFO] [1793073356.374103166] [warehouse_scene]: {"t_s": 165.663, "event": "goal_sent", "robot": "agv2", "phase": "convoy", "row": 1, "col": 4, "heading": "n"}
+[INFO] [1793073358.873664433] [warehouse_scene]: {"t_s": 168.163, "event": "outbound_cleared", "package": "agv1_box_2"}
+[INFO] [1793073359.622234355] [warehouse_scene]: {"t_s": 168.91, "event": "column_permission", "robot": "agv2", "slot": 4, "entry_row": 3, "gate_row": 3}
+[INFO] [1793073359.771661213] [warehouse_scene]: {"t_s": 169.06, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+[INFO] [1793073361.070612519] [warehouse_scene]: {"t_s": 170.36, "event": "bay_released", "robot": "agv1", "slot": 4, "distance_m": 0.4617724190978209}
+[INFO] [1793073361.071496544] [warehouse_scene]: {"t_s": 170.36, "event": "delivery_admitted", "robot": "agv2", "slot": 4, "wait_s": 11.549942378999958}
+[INFO] [1793073361.075035492] [warehouse_scene]: {"t_s": 170.361, "event": "column_permission", "robot": "agv2", "slot": 4, "entry_row": 3, "gate_row": 1}
+[INFO] [1793073363.675023611] [warehouse_scene]: {"t_s": 172.964, "event": "feed_started", "robot": "agv2", "front": "agv2_box_3", "distance_from_pickup_m": 0.4215137038611039}
+[INFO] [1793073364.521984337] [warehouse_scene]: {"t_s": 173.811, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_2", "width_m": 0.304221392143725, "height_m": 0.47363765929362317, "kind": 4, "camera_distance_m": 0.8977246984709577, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+[INFO] [1793073364.535404327] [warehouse_scene]: {"t_s": 173.824, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+[INFO] [1793073364.572210169] [warehouse_scene]: {"t_s": 173.861, "event": "delivery_intent", "robot": "agv3", "slot": 4}
+[INFO] [1793073364.575455740] [warehouse_scene]: {"t_s": 173.862, "event": "delivery_queued", "robot": "agv3", "slot": 4, "rank": 1, "registration": "tail_append"}
+[INFO] [1793073364.576995179] [warehouse_scene]: {"t_s": 173.865, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 4}
+[INFO] [1793073366.220676674] [warehouse_scene]: {"t_s": 175.51, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_3", "distance_from_pickup_m": 0.5904251763804663}
+[INFO] [1793073366.371163418] [warehouse_scene]: {"t_s": 175.66, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+[INFO] [1793073369.177230849] [warehouse_scene]: {"t_s": 178.466, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+[INFO] [1793073369.178461927] [warehouse_scene]: {"t_s": 178.467, "event": "load_started", "robot": "agv3", "package": "agv3_box_2"}
+[INFO] [1793073370.622794654] [warehouse_scene]: {"t_s": 179.91, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_3", "width_m": 0.18963651924885042, "height_m": 0.34495001981762297, "kind": 2, "camera_distance_m": 0.8899866361254759, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+[INFO] [1793073370.634716739] [warehouse_scene]: {"t_s": 179.924, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+[INFO] [1793073370.674973952] [warehouse_scene]: {"t_s": 179.964, "event": "delivery_intent", "robot": "agv1", "slot": 2}
+[INFO] [1793073370.675521069] [warehouse_scene]: {"t_s": 179.965, "event": "column_permission", "robot": "agv1", "slot": 2, "entry_row": 2, "gate_row": 2}
+[INFO] [1793073371.220515079] [warehouse_scene]: {"t_s": 180.51, "event": "loaded", "robot": "agv3", "front": "agv3_box_3", "distance_from_pickup_m": 0.007081981996040883}
+[INFO] [1793073371.221528221] [warehouse_scene]: {"t_s": 180.511, "event": "column_join", "robot": "agv3", "slot": 4, "entry_row": 4}
+[INFO] [1793073371.222167188] [warehouse_scene]: {"t_s": 180.511, "event": "goal_sent", "robot": "agv3", "phase": "convoy", "row": 1, "col": 4, "heading": "n"}
+[INFO] [1793073375.373866640] [warehouse_scene]: {"t_s": 184.662, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+[INFO] [1793073375.374209455] [warehouse_scene]: {"t_s": 184.663, "event": "load_started", "robot": "agv1", "package": "agv1_box_3"}
+[INFO] [1793073377.421814866] [warehouse_scene]: {"t_s": 186.71, "event": "loaded", "robot": "agv1", "front": "agv1_box_4", "distance_from_pickup_m": 0.008878036807208672}
+[INFO] [1793073377.422930277] [warehouse_scene]: {"t_s": 186.712, "event": "delivery_queued", "robot": "agv1", "slot": 2, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073377.423509785] [warehouse_scene]: {"t_s": 186.713, "event": "delivery_admitted", "robot": "agv1", "slot": 2, "wait_s": 6.750612212999954}
+[INFO] [1793073377.424007625] [warehouse_scene]: {"t_s": 186.713, "event": "column_permission", "robot": "agv1", "slot": 2, "entry_row": 2, "gate_row": 1}
+[INFO] [1793073377.425181581] [warehouse_scene]: {"t_s": 186.714, "event": "column_join", "robot": "agv1", "slot": 2, "entry_row": 2}
+[INFO] [1793073377.426292961] [warehouse_scene]: {"t_s": 186.715, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+[INFO] [1793073378.422640578] [warehouse_scene]: {"t_s": 187.711, "event": "feed_started", "robot": "agv3", "front": "agv3_box_3", "distance_from_pickup_m": 0.425720817344141}
+[INFO] [1793073379.024003336] [warehouse_scene]: {"t_s": 188.31, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 3}
+[INFO] [1793073380.972400318] [warehouse_scene]: {"t_s": 190.261, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_3", "distance_from_pickup_m": 0.5929899507398746}
+[INFO] [1793073381.821757666] [warehouse_scene]: {"t_s": 191.11, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 2}
+[INFO] [1793073383.972312309] [warehouse_scene]: {"t_s": 193.261, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 4}
+[INFO] [1793073383.972910759] [warehouse_scene]: {"t_s": 193.262, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_2", "slot": 4}
+[INFO] [1793073383.973267356] [warehouse_scene]: {"t_s": 193.263, "event": "unload_started", "robot": "agv2", "package": "agv2_box_2"}
+[INFO] [1793073385.522634824] [warehouse_scene]: {"t_s": 194.81, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_2", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+[INFO] [1793073385.523211445] [warehouse_scene]: {"t_s": 194.812, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+[INFO] [1793073389.221798462] [warehouse_scene]: {"t_s": 198.509, "event": "feed_started", "robot": "agv1", "front": "agv1_box_4", "distance_from_pickup_m": 0.4234767214112276}
+[INFO] [1793073390.872119466] [warehouse_scene]: {"t_s": 200.161, "event": "outbound_cleared", "package": "agv2_box_2"}
+[INFO] [1793073391.671432778] [warehouse_scene]: {"t_s": 200.96, "event": "bay_released", "robot": "agv2", "slot": 4, "distance_m": 0.45847137492604934}
+[INFO] [1793073391.672071631] [warehouse_scene]: {"t_s": 200.961, "event": "delivery_admitted", "robot": "agv3", "slot": 4, "wait_s": 27.09970969199992}
+[INFO] [1793073391.672493684] [warehouse_scene]: {"t_s": 200.962, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 1}
+[INFO] [1793073391.722930324] [warehouse_scene]: {"t_s": 201.011, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_4", "distance_from_pickup_m": 0.9602767003631091}
+[INFO] [1793073399.773848684] [warehouse_scene]: {"t_s": 209.062, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 4}
+[INFO] [1793073399.774321723] [warehouse_scene]: {"t_s": 209.063, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_2", "slot": 4}
+[INFO] [1793073399.774620095] [warehouse_scene]: {"t_s": 209.064, "event": "unload_started", "robot": "agv3", "package": "agv3_box_2"}
+[INFO] [1793073401.320859227] [warehouse_scene]: {"t_s": 210.61, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_2", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+[INFO] [1793073401.321372518] [warehouse_scene]: {"t_s": 210.611, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+[INFO] [1793073403.971577100] [warehouse_scene]: {"t_s": 213.26, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 2}
+[INFO] [1793073403.972150756] [warehouse_scene]: {"t_s": 213.261, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_3", "slot": 2}
+[INFO] [1793073403.972398058] [warehouse_scene]: {"t_s": 213.262, "event": "unload_started", "robot": "agv1", "package": "agv1_box_3"}
+[INFO] [1793073405.477099440] [warehouse_scene]: {"t_s": 214.763, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_3", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+[INFO] [1793073405.477874520] [warehouse_scene]: {"t_s": 214.767, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+[INFO] [1793073406.670449693] [warehouse_scene]: {"t_s": 215.959, "event": "outbound_cleared", "package": "agv3_box_2"}
+[INFO] [1793073408.970347268] [warehouse_scene]: {"t_s": 218.259, "event": "bay_released", "robot": "agv3", "slot": 4, "distance_m": 0.454126582519155}
+[INFO] [1793073410.670472635] [warehouse_scene]: {"t_s": 219.959, "event": "outbound_cleared", "package": "agv1_box_3"}
+[INFO] [1793073412.970533665] [warehouse_scene]: {"t_s": 222.26, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+[INFO] [1793073413.171167193] [warehouse_scene]: {"t_s": 222.46, "event": "bay_released", "robot": "agv1", "slot": 2, "distance_m": 0.45543500125255776}
+[INFO] [1793073417.279610905] [warehouse_scene]: {"t_s": 226.565, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_3", "width_m": 0.18747311788948282, "height_m": 0.3446779120457931, "kind": 2, "camera_distance_m": 0.8987187062998988, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+[INFO] [1793073417.291089236] [warehouse_scene]: {"t_s": 226.58, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+[INFO] [1793073417.320839905] [warehouse_scene]: {"t_s": 226.61, "event": "delivery_intent", "robot": "agv2", "slot": 2}
+[INFO] [1793073417.321241474] [warehouse_scene]: {"t_s": 226.611, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 2}
+[INFO] [1793073422.170875780] [warehouse_scene]: {"t_s": 231.46, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+[INFO] [1793073422.171416367] [warehouse_scene]: {"t_s": 231.461, "event": "load_started", "robot": "agv2", "package": "agv2_box_3"}
+[INFO] [1793073424.171446629] [warehouse_scene]: {"t_s": 233.46, "event": "loaded", "robot": "agv2", "front": "agv2_box_4", "distance_from_pickup_m": 0.008880279565845493}
+[INFO] [1793073424.173130863] [warehouse_scene]: {"t_s": 233.462, "event": "delivery_queued", "robot": "agv2", "slot": 2, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073424.173511971] [warehouse_scene]: {"t_s": 233.463, "event": "delivery_admitted", "robot": "agv2", "slot": 2, "wait_s": 6.849982009999962}
+[INFO] [1793073424.173979650] [warehouse_scene]: {"t_s": 233.463, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 1}
+[INFO] [1793073424.175056211] [warehouse_scene]: {"t_s": 233.464, "event": "column_join", "robot": "agv2", "slot": 2, "entry_row": 3}
+[INFO] [1793073424.176202180] [warehouse_scene]: {"t_s": 233.465, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+[INFO] [1793073427.374498839] [warehouse_scene]: {"t_s": 236.66, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+[INFO] [1793073430.576028279] [warehouse_scene]: {"t_s": 239.865, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+[INFO] [1793073432.425381082] [warehouse_scene]: {"t_s": 241.714, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_4", "width_m": 0.24405577246071397, "height_m": 0.40457062134892086, "kind": 3, "camera_distance_m": 0.8988829127077486, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+[INFO] [1793073432.437171663] [warehouse_scene]: {"t_s": 241.726, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+[INFO] [1793073432.472399857] [warehouse_scene]: {"t_s": 241.761, "event": "delivery_intent", "robot": "agv1", "slot": 3}
+[INFO] [1793073432.473303269] [warehouse_scene]: {"t_s": 241.762, "event": "column_permission", "robot": "agv1", "slot": 3, "entry_row": 2, "gate_row": 2}
+[INFO] [1793073432.975659378] [warehouse_scene]: {"t_s": 242.264, "event": "feed_started", "robot": "agv2", "front": "agv2_box_4", "distance_from_pickup_m": 0.42147937681847564}
+[INFO] [1793073435.522200994] [warehouse_scene]: {"t_s": 244.811, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_4", "distance_from_pickup_m": 0.9318793657996115}
+[INFO] [1793073435.921453448] [warehouse_scene]: {"t_s": 245.21, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_3", "width_m": 0.24381370513309153, "height_m": 0.40453721057036196, "kind": 3, "camera_distance_m": 0.889952899165716, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+[INFO] [1793073435.931306425] [warehouse_scene]: {"t_s": 245.22, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+[INFO] [1793073435.974091266] [warehouse_scene]: {"t_s": 245.262, "event": "delivery_intent", "robot": "agv3", "slot": 3}
+[INFO] [1793073435.975034414] [warehouse_scene]: {"t_s": 245.264, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 3}
+[INFO] [1793073437.376270852] [warehouse_scene]: {"t_s": 246.665, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+[INFO] [1793073437.377179719] [warehouse_scene]: {"t_s": 246.666, "event": "load_started", "robot": "agv1", "package": "agv1_box_4"}
+[INFO] [1793073439.420867415] [warehouse_scene]: {"t_s": 248.71, "event": "loaded", "robot": "agv1", "front": "agv1_box_5", "distance_from_pickup_m": 0.007662792899153982}
+[INFO] [1793073439.421643567] [warehouse_scene]: {"t_s": 248.711, "event": "delivery_queued", "robot": "agv1", "slot": 3, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073439.421928632] [warehouse_scene]: {"t_s": 248.711, "event": "delivery_queued", "robot": "agv3", "slot": 3, "rank": 2, "registration": "column_departure"}
+[INFO] [1793073439.422248913] [warehouse_scene]: {"t_s": 248.712, "event": "delivery_admitted", "robot": "agv1", "slot": 3, "wait_s": 6.9500276530000065}
+[INFO] [1793073439.422521443] [warehouse_scene]: {"t_s": 248.712, "event": "column_permission", "robot": "agv1", "slot": 3, "entry_row": 2, "gate_row": 1}
+[INFO] [1793073439.422911323] [warehouse_scene]: {"t_s": 248.712, "event": "column_join", "robot": "agv1", "slot": 3, "entry_row": 2}
+[INFO] [1793073439.423234296] [warehouse_scene]: {"t_s": 248.713, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+[INFO] [1793073440.575239358] [warehouse_scene]: {"t_s": 249.864, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+[INFO] [1793073440.575629155] [warehouse_scene]: {"t_s": 249.865, "event": "load_started", "robot": "agv3", "package": "agv3_box_3"}
+[INFO] [1793073442.620815542] [warehouse_scene]: {"t_s": 251.91, "event": "loaded", "robot": "agv3", "front": "agv3_box_4", "distance_from_pickup_m": 0.008639130234991518}
+[INFO] [1793073442.621708711] [warehouse_scene]: {"t_s": 251.911, "event": "column_join", "robot": "agv3", "slot": 3, "entry_row": 4}
+[INFO] [1793073442.622171122] [warehouse_scene]: {"t_s": 251.911, "event": "goal_sent", "robot": "agv3", "phase": "convoy", "row": 1, "col": 3, "heading": "n"}
+[INFO] [1793073446.721245402] [warehouse_scene]: {"t_s": 256.01, "event": "feed_started", "robot": "agv1", "front": "agv1_box_5", "distance_from_pickup_m": 0.4242620159827568}
+[INFO] [1793073449.271341941] [warehouse_scene]: {"t_s": 258.56, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_5", "distance_from_pickup_m": 0.9610619997987216}
+[INFO] [1793073449.870263927] [warehouse_scene]: {"t_s": 259.159, "event": "feed_started", "robot": "agv3", "front": "agv3_box_4", "distance_from_pickup_m": 0.42823843178702886}
+[INFO] [1793073450.773934069] [warehouse_scene]: {"t_s": 260.063, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2}
+[INFO] [1793073450.774284762] [warehouse_scene]: {"t_s": 260.064, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_3", "slot": 2}
+[INFO] [1793073450.775819986] [warehouse_scene]: {"t_s": 260.064, "event": "unload_started", "robot": "agv2", "package": "agv2_box_3"}
+[INFO] [1793073452.321641130] [warehouse_scene]: {"t_s": 261.611, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_3", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+[INFO] [1793073452.322393440] [warehouse_scene]: {"t_s": 261.611, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+[INFO] [1793073452.371709570] [warehouse_scene]: {"t_s": 261.66, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_4", "distance_from_pickup_m": 0.9606384268342087}
+[INFO] [1793073456.877195097] [warehouse_scene]: {"t_s": 266.166, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 2}
+[INFO] [1793073457.520688630] [warehouse_scene]: {"t_s": 266.81, "event": "outbound_cleared", "package": "agv2_box_3"}
+[INFO] [1793073458.970571744] [warehouse_scene]: {"t_s": 268.26, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 3}
+[INFO] [1793073458.971133889] [warehouse_scene]: {"t_s": 268.26, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_4", "slot": 3}
+[INFO] [1793073458.971481490] [warehouse_scene]: {"t_s": 268.261, "event": "unload_started", "robot": "agv1", "package": "agv1_box_4"}
+[INFO] [1793073459.837448996] [warehouse_scene]: {"t_s": 269.113, "event": "bay_released", "robot": "agv2", "slot": 2, "distance_m": 0.45759062101655734}
+[INFO] [1793073460.479312959] [warehouse_scene]: {"t_s": 269.764, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_4", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+[INFO] [1793073460.482178415] [warehouse_scene]: {"t_s": 269.77, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+[INFO] [1793073465.720472187] [warehouse_scene]: {"t_s": 275.01, "event": "outbound_cleared", "package": "agv1_box_4"}
+[INFO] [1793073466.575997341] [warehouse_scene]: {"t_s": 275.863, "event": "bay_released", "robot": "agv1", "slot": 3, "distance_m": 0.4583003770055709}
+[INFO] [1793073466.576433798] [warehouse_scene]: {"t_s": 275.866, "event": "delivery_admitted", "robot": "agv3", "slot": 3, "wait_s": 30.602060951}
+[INFO] [1793073466.576735331] [warehouse_scene]: {"t_s": 275.866, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 1}
+[INFO] [1793073473.771488362] [warehouse_scene]: {"t_s": 283.06, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3}
+[INFO] [1793073473.771819601] [warehouse_scene]: {"t_s": 283.061, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_3", "slot": 3}
+[INFO] [1793073473.772069652] [warehouse_scene]: {"t_s": 283.061, "event": "unload_started", "robot": "agv3", "package": "agv3_box_3"}
+[INFO] [1793073475.273007049] [warehouse_scene]: {"t_s": 284.561, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_3", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+[INFO] [1793073475.273696755] [warehouse_scene]: {"t_s": 284.563, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+[INFO] [1793073478.771308468] [warehouse_scene]: {"t_s": 288.06, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+[INFO] [1793073479.794053079] [warehouse_scene]: {"t_s": 289.065, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+[INFO] [1793073480.526167963] [warehouse_scene]: {"t_s": 289.813, "event": "outbound_cleared", "package": "agv3_box_3"}
+[INFO] [1793073483.024644503] [warehouse_scene]: {"t_s": 292.314, "event": "bay_released", "robot": "agv3", "slot": 3, "distance_m": 0.45325743357830584}
+[INFO] [1793073485.271996880] [warehouse_scene]: {"t_s": 294.56, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_5", "width_m": 0.12136393005866834, "height_m": 0.2748673816515076, "kind": 1, "camera_distance_m": 0.8899528653535802, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+[INFO] [1793073485.283030621] [warehouse_scene]: {"t_s": 294.572, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+[INFO] [1793073485.328984019] [warehouse_scene]: {"t_s": 294.611, "event": "delivery_intent", "robot": "agv1", "slot": 1}
+[INFO] [1793073485.329590441] [warehouse_scene]: {"t_s": 294.619, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 2}
+[INFO] [1793073487.071954140] [warehouse_scene]: {"t_s": 296.361, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_4", "width_m": 0.188075188495068, "height_m": 0.34510858710116, "kind": 2, "camera_distance_m": 0.8998379952311936, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+[INFO] [1793073487.097698074] [warehouse_scene]: {"t_s": 296.386, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+[INFO] [1793073487.124226677] [warehouse_scene]: {"t_s": 296.411, "event": "delivery_intent", "robot": "agv2", "slot": 2}
+[INFO] [1793073487.124794891] [warehouse_scene]: {"t_s": 296.414, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 2}
+[INFO] [1793073490.177350527] [warehouse_scene]: {"t_s": 299.463, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+[INFO] [1793073490.178682235] [warehouse_scene]: {"t_s": 299.467, "event": "load_started", "robot": "agv1", "package": "agv1_box_5"}
+[INFO] [1793073491.970849682] [warehouse_scene]: {"t_s": 301.26, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+[INFO] [1793073491.971302656] [warehouse_scene]: {"t_s": 301.261, "event": "load_started", "robot": "agv2", "package": "agv2_box_4"}
+[INFO] [1793073492.221521599] [warehouse_scene]: {"t_s": 301.51, "event": "loaded", "robot": "agv1", "front": "agv1_box_6", "distance_from_pickup_m": 0.009770969941336517}
+[INFO] [1793073492.222384041] [warehouse_scene]: {"t_s": 301.512, "event": "delivery_queued", "robot": "agv1", "slot": 1, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073492.222632129] [warehouse_scene]: {"t_s": 301.512, "event": "delivery_admitted", "robot": "agv1", "slot": 1, "wait_s": 6.899528500000088}
+[INFO] [1793073492.222857598] [warehouse_scene]: {"t_s": 301.512, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 1}
+[INFO] [1793073492.223225177] [warehouse_scene]: {"t_s": 301.512, "event": "column_join", "robot": "agv1", "slot": 1, "entry_row": 2}
+[INFO] [1793073492.223712894] [warehouse_scene]: {"t_s": 301.513, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+[INFO] [1793073493.972177451] [warehouse_scene]: {"t_s": 303.261, "event": "loaded", "robot": "agv2", "front": "agv2_box_5", "distance_from_pickup_m": 0.00891617746731607}
+[INFO] [1793073493.974574255] [warehouse_scene]: {"t_s": 303.264, "event": "delivery_queued", "robot": "agv2", "slot": 2, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073493.974928817] [warehouse_scene]: {"t_s": 303.264, "event": "delivery_admitted", "robot": "agv2", "slot": 2, "wait_s": 6.850393659000019}
+[INFO] [1793073493.975229165] [warehouse_scene]: {"t_s": 303.265, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 1}
+[INFO] [1793073493.975563209] [warehouse_scene]: {"t_s": 303.265, "event": "column_join", "robot": "agv2", "slot": 2, "entry_row": 3}
+[INFO] [1793073493.975955364] [warehouse_scene]: {"t_s": 303.265, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+[INFO] [1793073497.571190735] [warehouse_scene]: {"t_s": 306.86, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+[INFO] [1793073499.570924676] [warehouse_scene]: {"t_s": 308.86, "event": "feed_started", "robot": "agv1", "front": "agv1_box_6", "distance_from_pickup_m": 0.42877009722805}
+[INFO] [1793073501.470333557] [warehouse_scene]: {"t_s": 310.759, "event": "feed_started", "robot": "agv2", "front": "agv2_box_5", "distance_from_pickup_m": 0.4245154260726038}
+[INFO] [1793073502.071354646] [warehouse_scene]: {"t_s": 311.36, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_6", "distance_from_pickup_m": 0.930370085872826}
+[INFO] [1793073502.523741583] [warehouse_scene]: {"t_s": 311.812, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_4", "width_m": 0.24431485555027455, "height_m": 0.40476172126496435, "kind": 3, "camera_distance_m": 0.8985007162857539, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+[INFO] [1793073502.538239621] [warehouse_scene]: {"t_s": 311.827, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+[INFO] [1793073502.572854326] [warehouse_scene]: {"t_s": 311.862, "event": "delivery_intent", "robot": "agv3", "slot": 3}
+[INFO] [1793073502.573332053] [warehouse_scene]: {"t_s": 311.863, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 2}
+[INFO] [1793073503.971845085] [warehouse_scene]: {"t_s": 313.261, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_5", "distance_from_pickup_m": 0.9349154094959846}
+[INFO] [1793073507.171570324] [warehouse_scene]: {"t_s": 316.46, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+[INFO] [1793073507.172241088] [warehouse_scene]: {"t_s": 316.461, "event": "load_started", "robot": "agv3", "package": "agv3_box_4"}
+[INFO] [1793073509.170286097] [warehouse_scene]: {"t_s": 318.459, "event": "loaded", "robot": "agv3", "front": "agv3_box_5", "distance_from_pickup_m": 0.007921475656452874}
+[INFO] [1793073509.171044849] [warehouse_scene]: {"t_s": 318.46, "event": "delivery_queued", "robot": "agv3", "slot": 3, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073509.171388101] [warehouse_scene]: {"t_s": 318.461, "event": "delivery_admitted", "robot": "agv3", "slot": 3, "wait_s": 6.598727832999998}
+[INFO] [1793073509.171687483] [warehouse_scene]: {"t_s": 318.461, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 1}
+[INFO] [1793073509.172066514] [warehouse_scene]: {"t_s": 318.461, "event": "column_join", "robot": "agv3", "slot": 3, "entry_row": 4}
+[INFO] [1793073509.172450170] [warehouse_scene]: {"t_s": 318.462, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+[INFO] [1793073516.520335017] [warehouse_scene]: {"t_s": 325.809, "event": "feed_started", "robot": "agv3", "front": "agv3_box_5", "distance_from_pickup_m": 0.42832115509320523}
+[INFO] [1793073517.370621931] [warehouse_scene]: {"t_s": 326.66, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1}
+[INFO] [1793073517.370951027] [warehouse_scene]: {"t_s": 326.66, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_5", "slot": 1}
+[INFO] [1793073517.371250360] [warehouse_scene]: {"t_s": 326.661, "event": "unload_started", "robot": "agv1", "package": "agv1_box_5"}
+[INFO] [1793073518.872558241] [warehouse_scene]: {"t_s": 328.162, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_5", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+[INFO] [1793073518.875126039] [warehouse_scene]: {"t_s": 328.162, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+[INFO] [1793073519.020500751] [warehouse_scene]: {"t_s": 328.31, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_5", "distance_from_pickup_m": 0.9519211527475118}
+[INFO] [1793073519.373685193] [warehouse_scene]: {"t_s": 328.662, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2}
+[INFO] [1793073519.374148757] [warehouse_scene]: {"t_s": 328.663, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_4", "slot": 2}
+[INFO] [1793073519.374450451] [warehouse_scene]: {"t_s": 328.664, "event": "unload_started", "robot": "agv2", "package": "agv2_box_4"}
+[INFO] [1793073520.927160634] [warehouse_scene]: {"t_s": 330.216, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_4", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+[INFO] [1793073520.927522787] [warehouse_scene]: {"t_s": 330.217, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+[INFO] [1793073523.970197300] [warehouse_scene]: {"t_s": 333.259, "event": "outbound_cleared", "package": "agv1_box_5"}
+[INFO] [1793073526.122105865] [warehouse_scene]: {"t_s": 335.411, "event": "outbound_cleared", "package": "agv2_box_4"}
+[INFO] [1793073526.372711221] [warehouse_scene]: {"t_s": 335.661, "event": "bay_released", "robot": "agv1", "slot": 1, "distance_m": 0.45467300458275894}
+[INFO] [1793073533.971986941] [warehouse_scene]: {"t_s": 343.261, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3}
+[INFO] [1793073533.973039702] [warehouse_scene]: {"t_s": 343.262, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_4", "slot": 3}
+[INFO] [1793073533.973933788] [warehouse_scene]: {"t_s": 343.263, "event": "unload_started", "robot": "agv3", "package": "agv3_box_4"}
+[INFO] [1793073535.521210238] [warehouse_scene]: {"t_s": 344.81, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_4", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+[INFO] [1793073535.521565398] [warehouse_scene]: {"t_s": 344.811, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+[INFO] [1793073540.773390538] [warehouse_scene]: {"t_s": 350.06, "event": "outbound_cleared", "package": "agv3_box_4"}
+[INFO] [1793073541.973488693] [warehouse_scene]: {"t_s": 351.261, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+[INFO] [1793073543.722509196] [warehouse_scene]: {"t_s": 353.011, "event": "bay_released", "robot": "agv2", "slot": 2, "distance_m": 0.46272285677825126}
+[INFO] [1793073546.622000298] [warehouse_scene]: {"t_s": 355.911, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_6", "width_m": 0.18062339026844523, "height_m": 0.3393520737139407, "kind": 2, "camera_distance_m": 0.8990978813713438, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+[INFO] [1793073546.633421248] [warehouse_scene]: {"t_s": 355.922, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+[INFO] [1793073546.672834749] [warehouse_scene]: {"t_s": 355.962, "event": "delivery_intent", "robot": "agv1", "slot": 2}
+[INFO] [1793073546.673356714] [warehouse_scene]: {"t_s": 355.963, "event": "column_permission", "robot": "agv1", "slot": 2, "entry_row": 2, "gate_row": 2}
+[INFO] [1793073547.371224849] [warehouse_scene]: {"t_s": 356.66, "event": "bay_released", "robot": "agv3", "slot": 3, "distance_m": 0.458818911183417}
+[INFO] [1793073551.422553889] [warehouse_scene]: {"t_s": 360.711, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+[INFO] [1793073551.423282292] [warehouse_scene]: {"t_s": 360.712, "event": "load_started", "robot": "agv1", "package": "agv1_box_6"}
+[INFO] [1793073553.471229283] [warehouse_scene]: {"t_s": 362.76, "event": "loaded", "robot": "agv1", "front": "agv1_box_7", "distance_from_pickup_m": 0.008756787230073093}
+[INFO] [1793073553.472133526] [warehouse_scene]: {"t_s": 362.761, "event": "delivery_queued", "robot": "agv1", "slot": 2, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073553.472535709] [warehouse_scene]: {"t_s": 362.762, "event": "delivery_admitted", "robot": "agv1", "slot": 2, "wait_s": 6.799138211000013}
+[INFO] [1793073553.472902936] [warehouse_scene]: {"t_s": 362.762, "event": "column_permission", "robot": "agv1", "slot": 2, "entry_row": 2, "gate_row": 1}
+[INFO] [1793073553.473276225] [warehouse_scene]: {"t_s": 362.763, "event": "column_join", "robot": "agv1", "slot": 2, "entry_row": 2}
+[INFO] [1793073553.473799891] [warehouse_scene]: {"t_s": 362.763, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+[INFO] [1793073560.970974355] [warehouse_scene]: {"t_s": 370.26, "event": "feed_started", "robot": "agv1", "front": "agv1_box_7", "distance_from_pickup_m": 0.42975599794016317}
+[INFO] [1793073562.172183584] [warehouse_scene]: {"t_s": 371.461, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+[INFO] [1793073563.471222879] [warehouse_scene]: {"t_s": 372.76, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_7", "distance_from_pickup_m": 0.9665559835684202}
+[INFO] [1793073563.771542797] [warehouse_scene]: {"t_s": 373.06, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+[INFO] [1793073571.522315047] [warehouse_scene]: {"t_s": 380.811, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_5", "width_m": 0.1880241963329846, "height_m": 0.3450146144314665, "kind": 2, "camera_distance_m": 0.8995918690967482, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+[INFO] [1793073571.535167289] [warehouse_scene]: {"t_s": 380.824, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+[INFO] [1793073571.575063828] [warehouse_scene]: {"t_s": 380.863, "event": "delivery_intent", "robot": "agv2", "slot": 2}
+[INFO] [1793073571.576358157] [warehouse_scene]: {"t_s": 380.865, "event": "delivery_queued", "robot": "agv2", "slot": 2, "rank": 1, "registration": "tail_append"}
+[INFO] [1793073571.577273798] [warehouse_scene]: {"t_s": 380.866, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 3}
+[INFO] [1793073573.974198342] [warehouse_scene]: {"t_s": 383.263, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_5", "width_m": 0.1785133936515809, "height_m": 0.3388125436493817, "kind": 2, "camera_distance_m": 0.8976746756907457, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+[INFO] [1793073573.991332243] [warehouse_scene]: {"t_s": 383.28, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+[INFO] [1793073573.996207356] [warehouse_scene]: {"t_s": 383.284, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 2}
+[INFO] [1793073574.024058166] [warehouse_scene]: {"t_s": 383.313, "event": "delivery_intent", "robot": "agv3", "slot": 2}
+[INFO] [1793073574.028337678] [warehouse_scene]: {"t_s": 383.314, "event": "delivery_queued", "robot": "agv3", "slot": 2, "rank": 2, "registration": "tail_append"}
+[INFO] [1793073574.029096964] [warehouse_scene]: {"t_s": 383.318, "event": "column_permission", "robot": "agv3", "slot": 2, "entry_row": 4, "gate_row": 4}
+[INFO] [1793073575.976153606] [warehouse_scene]: {"t_s": 385.265, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 2}
+[INFO] [1793073575.976923771] [warehouse_scene]: {"t_s": 385.266, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_6", "slot": 2}
+[INFO] [1793073575.977546202] [warehouse_scene]: {"t_s": 385.267, "event": "unload_started", "robot": "agv1", "package": "agv1_box_6"}
+[INFO] [1793073576.373586567] [warehouse_scene]: {"t_s": 385.663, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+[INFO] [1793073576.374109154] [warehouse_scene]: {"t_s": 385.663, "event": "load_started", "robot": "agv2", "package": "agv2_box_5"}
+[INFO] [1793073577.522845934] [warehouse_scene]: {"t_s": 386.812, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_6", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+[INFO] [1793073577.523259338] [warehouse_scene]: {"t_s": 386.813, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+[INFO] [1793073578.421245791] [warehouse_scene]: {"t_s": 387.71, "event": "loaded", "robot": "agv2", "front": "agv2_box_6", "distance_from_pickup_m": 0.009800604987536517}
+[INFO] [1793073578.421996040] [warehouse_scene]: {"t_s": 387.711, "event": "column_join", "robot": "agv2", "slot": 2, "entry_row": 3}
+[INFO] [1793073578.422418561] [warehouse_scene]: {"t_s": 387.712, "event": "goal_sent", "robot": "agv2", "phase": "convoy", "row": 1, "col": 2, "heading": "n"}
+[INFO] [1793073578.771229710] [warehouse_scene]: {"t_s": 388.06, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+[INFO] [1793073578.771629471] [warehouse_scene]: {"t_s": 388.061, "event": "load_started", "robot": "agv3", "package": "agv3_box_5"}
+[INFO] [1793073580.771534045] [warehouse_scene]: {"t_s": 390.06, "event": "loaded", "robot": "agv3", "front": "agv3_box_6", "distance_from_pickup_m": 0.0061162032884952665}
+[INFO] [1793073580.773130229] [warehouse_scene]: {"t_s": 390.062, "event": "column_join", "robot": "agv3", "slot": 2, "entry_row": 4}
+[INFO] [1793073580.773702301] [warehouse_scene]: {"t_s": 390.063, "event": "goal_sent", "robot": "agv3", "phase": "convoy", "row": 1, "col": 2, "heading": "n"}
+[INFO] [1793073582.721727387] [warehouse_scene]: {"t_s": 392.011, "event": "outbound_cleared", "package": "agv1_box_6"}
+[INFO] [1793073583.521565104] [warehouse_scene]: {"t_s": 392.81, "event": "bay_released", "robot": "agv1", "slot": 2, "distance_m": 0.45422774247062087}
+[INFO] [1793073583.522055959] [warehouse_scene]: {"t_s": 392.811, "event": "delivery_admitted", "robot": "agv2", "slot": 2, "wait_s": 11.948931351999931}
+[INFO] [1793073583.522331618] [warehouse_scene]: {"t_s": 392.812, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 1}
+[INFO] [1793073585.672698760] [warehouse_scene]: {"t_s": 394.962, "event": "feed_started", "robot": "agv2", "front": "agv2_box_6", "distance_from_pickup_m": 0.4209997281212872}
+[INFO] [1793073588.120555722] [warehouse_scene]: {"t_s": 397.41, "event": "feed_started", "robot": "agv3", "front": "agv3_box_6", "distance_from_pickup_m": 0.4285154026467119}
+[INFO] [1793073588.221356815] [warehouse_scene]: {"t_s": 397.51, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_6", "distance_from_pickup_m": 0.9577997047235886}
+[INFO] [1793073590.620360805] [warehouse_scene]: {"t_s": 399.91, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_6", "distance_from_pickup_m": 0.9565153960401682}
+[INFO] [1793073598.622730530] [warehouse_scene]: {"t_s": 407.911, "event": "column_permission", "robot": "agv3", "slot": 2, "entry_row": 4, "gate_row": 3}
+[INFO] [1793073599.772311436] [warehouse_scene]: {"t_s": 409.06, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+[INFO] [1793073601.474044881] [warehouse_scene]: {"t_s": 410.762, "event": "column_permission", "robot": "agv3", "slot": 2, "entry_row": 4, "gate_row": 2}
+[INFO] [1793073603.572330994] [warehouse_scene]: {"t_s": 412.861, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2}
+[INFO] [1793073603.572876818] [warehouse_scene]: {"t_s": 412.862, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_5", "slot": 2}
+[INFO] [1793073603.573286063] [warehouse_scene]: {"t_s": 412.862, "event": "unload_started", "robot": "agv2", "package": "agv2_box_5"}
+[INFO] [1793073604.321867396] [warehouse_scene]: {"t_s": 413.611, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_7", "width_m": 0.3048809076375881, "height_m": 0.47466850118453985, "kind": 4, "camera_distance_m": 0.8996861650620762, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+[INFO] [1793073604.334228112] [warehouse_scene]: {"t_s": 413.622, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+[INFO] [1793073604.372020939] [warehouse_scene]: {"t_s": 413.661, "event": "delivery_intent", "robot": "agv1", "slot": 4}
+[INFO] [1793073604.372873141] [warehouse_scene]: {"t_s": 413.662, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 2, "gate_row": 2}
+[INFO] [1793073605.125080264] [warehouse_scene]: {"t_s": 414.414, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_5", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+[INFO] [1793073605.125485679] [warehouse_scene]: {"t_s": 414.415, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+[INFO] [1793073609.171279486] [warehouse_scene]: {"t_s": 418.46, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+[INFO] [1793073609.171943320] [warehouse_scene]: {"t_s": 418.461, "event": "load_started", "robot": "agv1", "package": "agv1_box_7"}
+[INFO] [1793073610.321784352] [warehouse_scene]: {"t_s": 419.611, "event": "outbound_cleared", "package": "agv2_box_5"}
+[INFO] [1793073611.173168026] [warehouse_scene]: {"t_s": 420.461, "event": "loaded", "robot": "agv1", "front": "agv1_box_8", "distance_from_pickup_m": 0.009551202421691628}
+[INFO] [1793073611.175099728] [warehouse_scene]: {"t_s": 420.464, "event": "delivery_queued", "robot": "agv1", "slot": 4, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073611.175653709] [warehouse_scene]: {"t_s": 420.465, "event": "delivery_admitted", "robot": "agv1", "slot": 4, "wait_s": 6.798969778000014}
+[INFO] [1793073611.176171246] [warehouse_scene]: {"t_s": 420.465, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 2, "gate_row": 1}
+[INFO] [1793073611.176601829] [warehouse_scene]: {"t_s": 420.466, "event": "column_join", "robot": "agv1", "slot": 4, "entry_row": 2}
+[INFO] [1793073611.177292383] [warehouse_scene]: {"t_s": 420.466, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4, "heading": "n"}
+[INFO] [1793073611.178107800] [warehouse_scene]: {"t_s": 420.467, "event": "bay_released", "robot": "agv2", "slot": 2, "distance_m": 0.45400611752183345}
+[INFO] [1793073611.179008092] [warehouse_scene]: {"t_s": 420.468, "event": "delivery_admitted", "robot": "agv3", "slot": 2, "wait_s": 37.147941220999996}
+[INFO] [1793073611.179496015] [warehouse_scene]: {"t_s": 420.469, "event": "column_permission", "robot": "agv3", "slot": 2, "entry_row": 4, "gate_row": 1}
+[INFO] [1793073618.372342983] [warehouse_scene]: {"t_s": 427.661, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 2}
+[INFO] [1793073618.372823965] [warehouse_scene]: {"t_s": 427.662, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_5", "slot": 2}
+[INFO] [1793073618.373115666] [warehouse_scene]: {"t_s": 427.662, "event": "unload_started", "robot": "agv3", "package": "agv3_box_5"}
+[INFO] [1793073618.420545723] [warehouse_scene]: {"t_s": 427.71, "event": "feed_started", "robot": "agv1", "front": "agv1_box_8", "distance_from_pickup_m": 0.42620206527581583}
+[INFO] [1793073619.921239097] [warehouse_scene]: {"t_s": 429.21, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_5", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+[INFO] [1793073619.921735174] [warehouse_scene]: {"t_s": 429.211, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+[INFO] [1793073620.974260301] [warehouse_scene]: {"t_s": 430.263, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_8", "distance_from_pickup_m": 0.591628834464276}
+[INFO] [1793073625.121466194] [warehouse_scene]: {"t_s": 434.41, "event": "outbound_cleared", "package": "agv3_box_5"}
+[INFO] [1793073627.376491876] [warehouse_scene]: {"t_s": 436.664, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4}
+[INFO] [1793073627.377117324] [warehouse_scene]: {"t_s": 436.666, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_7", "slot": 4}
+[INFO] [1793073627.377467211] [warehouse_scene]: {"t_s": 436.667, "event": "unload_started", "robot": "agv1", "package": "agv1_box_7"}
+[INFO] [1793073627.378194853] [warehouse_scene]: {"t_s": 436.667, "event": "bay_released", "robot": "agv3", "slot": 2, "distance_m": 0.45179448691567586}
+[INFO] [1793073628.921185338] [warehouse_scene]: {"t_s": 438.21, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_7", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+[INFO] [1793073628.921681212] [warehouse_scene]: {"t_s": 438.211, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+[INFO] [1793073629.970745279] [warehouse_scene]: {"t_s": 439.26, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+[INFO] [1793073634.270309652] [warehouse_scene]: {"t_s": 443.559, "event": "outbound_cleared", "package": "agv1_box_7"}
+[INFO] [1793073634.623005104] [warehouse_scene]: {"t_s": 443.912, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_6", "width_m": 0.24406529591101855, "height_m": 0.40435171484981486, "kind": 3, "camera_distance_m": 0.8975980066816189, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+[INFO] [1793073634.636896584] [warehouse_scene]: {"t_s": 443.926, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+[INFO] [1793073634.674127548] [warehouse_scene]: {"t_s": 443.963, "event": "delivery_intent", "robot": "agv2", "slot": 3}
+[INFO] [1793073634.674970811] [warehouse_scene]: {"t_s": 443.964, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 2}
+[INFO] [1793073636.321945151] [warehouse_scene]: {"t_s": 445.61, "event": "bay_released", "robot": "agv1", "slot": 4, "distance_m": 0.4596313559017734}
+[INFO] [1793073639.372159320] [warehouse_scene]: {"t_s": 448.661, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+[INFO] [1793073639.372680764] [warehouse_scene]: {"t_s": 448.662, "event": "load_started", "robot": "agv2", "package": "agv2_box_6"}
+[INFO] [1793073641.422824698] [warehouse_scene]: {"t_s": 450.711, "event": "loaded", "robot": "agv2", "front": "agv2_box_7", "distance_from_pickup_m": 0.009703989433936116}
+[INFO] [1793073641.429974464] [warehouse_scene]: {"t_s": 450.715, "event": "delivery_queued", "robot": "agv2", "slot": 3, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073641.431565494] [warehouse_scene]: {"t_s": 450.72, "event": "delivery_admitted", "robot": "agv2", "slot": 3, "wait_s": 6.748467397000013}
+[INFO] [1793073641.432288263] [warehouse_scene]: {"t_s": 450.721, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 1}
+[INFO] [1793073641.434615843] [warehouse_scene]: {"t_s": 450.723, "event": "column_join", "robot": "agv2", "slot": 3, "entry_row": 3}
+[INFO] [1793073641.435498082] [warehouse_scene]: {"t_s": 450.725, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+[INFO] [1793073641.572166912] [warehouse_scene]: {"t_s": 450.861, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+[INFO] [1793073644.975379554] [warehouse_scene]: {"t_s": 454.264, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+[INFO] [1793073646.823048010] [warehouse_scene]: {"t_s": 456.112, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_8", "width_m": 0.24381476497217766, "height_m": 0.40453302207988096, "kind": 3, "camera_distance_m": 0.889930309167099, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+[INFO] [1793073646.834363391] [warehouse_scene]: {"t_s": 456.123, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+[INFO] [1793073646.874554089] [warehouse_scene]: {"t_s": 456.164, "event": "delivery_intent", "robot": "agv1", "slot": 3}
+[INFO] [1793073646.874872197] [warehouse_scene]: {"t_s": 456.164, "event": "delivery_queued", "robot": "agv1", "slot": 3, "rank": 1, "registration": "tail_append"}
+[INFO] [1793073646.875390333] [warehouse_scene]: {"t_s": 456.165, "event": "column_permission", "robot": "agv1", "slot": 3, "entry_row": 2, "gate_row": 4}
+[INFO] [1793073649.073393403] [warehouse_scene]: {"t_s": 458.362, "event": "feed_started", "robot": "agv2", "front": "agv2_box_7", "distance_from_pickup_m": 0.4317033058267615}
+[INFO] [1793073650.376030667] [warehouse_scene]: {"t_s": 459.664, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_6", "width_m": 0.30448169911937156, "height_m": 0.47404324936990144, "kind": 4, "camera_distance_m": 0.8984940628881816, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+[INFO] [1793073650.391439522] [warehouse_scene]: {"t_s": 459.681, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+[INFO] [1793073650.424816537] [warehouse_scene]: {"t_s": 459.714, "event": "delivery_intent", "robot": "agv3", "slot": 4}
+[INFO] [1793073650.425797632] [warehouse_scene]: {"t_s": 459.715, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 2}
+[INFO] [1793073651.621433754] [warehouse_scene]: {"t_s": 460.91, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_7", "distance_from_pickup_m": 0.9685032917707249}
+[INFO] [1793073651.776309848] [warehouse_scene]: {"t_s": 461.062, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+[INFO] [1793073651.777122166] [warehouse_scene]: {"t_s": 461.066, "event": "load_started", "robot": "agv1", "package": "agv1_box_8"}
+[INFO] [1793073653.773416236] [warehouse_scene]: {"t_s": 463.063, "event": "loaded", "robot": "agv1", "front": "agv1_box_9", "distance_from_pickup_m": 0.007748423398370599}
+[INFO] [1793073653.774108530] [warehouse_scene]: {"t_s": 463.063, "event": "column_join", "robot": "agv1", "slot": 3, "entry_row": 2}
+[INFO] [1793073653.774457504] [warehouse_scene]: {"t_s": 463.064, "event": "goal_sent", "robot": "agv1", "phase": "convoy", "row": 1, "col": 3, "heading": "n"}
+[INFO] [1793073655.173137925] [warehouse_scene]: {"t_s": 464.461, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+[INFO] [1793073655.175111903] [warehouse_scene]: {"t_s": 464.463, "event": "load_started", "robot": "agv3", "package": "agv3_box_6"}
+[INFO] [1793073657.220756894] [warehouse_scene]: {"t_s": 466.51, "event": "loaded", "robot": "agv3", "front": "agv3_box_7", "distance_from_pickup_m": 0.007612578311016689}
+[INFO] [1793073657.221370532] [warehouse_scene]: {"t_s": 466.511, "event": "delivery_queued", "robot": "agv3", "slot": 4, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073657.221646069] [warehouse_scene]: {"t_s": 466.511, "event": "delivery_admitted", "robot": "agv3", "slot": 4, "wait_s": 6.799601338000002}
+[INFO] [1793073657.221924368] [warehouse_scene]: {"t_s": 466.511, "event": "column_permission", "robot": "agv3", "slot": 4, "entry_row": 4, "gate_row": 1}
+[INFO] [1793073657.222359764] [warehouse_scene]: {"t_s": 466.512, "event": "column_join", "robot": "agv3", "slot": 4, "entry_row": 4}
+[INFO] [1793073657.222810689] [warehouse_scene]: {"t_s": 466.512, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 4, "heading": "n"}
+[INFO] [1793073659.031435269] [warehouse_scene]: {"t_s": 468.314, "event": "column_permission", "robot": "agv1", "slot": 3, "entry_row": 2, "gate_row": 3}
+[INFO] [1793073661.070231542] [warehouse_scene]: {"t_s": 470.359, "event": "feed_started", "robot": "agv1", "front": "agv1_box_9", "distance_from_pickup_m": 0.43292862235581364}
+[INFO] [1793073661.872310160] [warehouse_scene]: {"t_s": 471.161, "event": "column_permission", "robot": "agv1", "slot": 3, "entry_row": 2, "gate_row": 2}
+[INFO] [1793073663.570506747] [warehouse_scene]: {"t_s": 472.859, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_9", "distance_from_pickup_m": 0.5915354908360577}
+[INFO] [1793073663.772566430] [warehouse_scene]: {"t_s": 473.061, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 3}
+[INFO] [1793073663.778100705] [warehouse_scene]: {"t_s": 473.062, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_6", "slot": 3}
+[INFO] [1793073663.778873090] [warehouse_scene]: {"t_s": 473.068, "event": "unload_started", "robot": "agv2", "package": "agv2_box_6"}
+[INFO] [1793073664.470683441] [warehouse_scene]: {"t_s": 473.76, "event": "feed_started", "robot": "agv3", "front": "agv3_box_7", "distance_from_pickup_m": 0.4264621861367412}
+[INFO] [1793073665.320982568] [warehouse_scene]: {"t_s": 474.61, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_6", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+[INFO] [1793073665.321471265] [warehouse_scene]: {"t_s": 474.611, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+[INFO] [1793073667.021315535] [warehouse_scene]: {"t_s": 476.31, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_7", "distance_from_pickup_m": 0.5965068873692461}
+[INFO] [1793073670.579421837] [warehouse_scene]: {"t_s": 479.868, "event": "outbound_cleared", "package": "agv2_box_6"}
+[INFO] [1793073671.221239914] [warehouse_scene]: {"t_s": 480.51, "event": "bay_released", "robot": "agv2", "slot": 3, "distance_m": 0.4541142292619979}
+[INFO] [1793073671.272865162] [warehouse_scene]: {"t_s": 480.562, "event": "delivery_admitted", "robot": "agv1", "slot": 3, "wait_s": 24.397212508999928}
+[INFO] [1793073671.273230928] [warehouse_scene]: {"t_s": 480.562, "event": "column_permission", "robot": "agv1", "slot": 3, "entry_row": 2, "gate_row": 1}
+[INFO] [1793073680.972203384] [warehouse_scene]: {"t_s": 490.261, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 4}
+[INFO] [1793073680.972707875] [warehouse_scene]: {"t_s": 490.262, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_6", "slot": 4}
+[INFO] [1793073680.973171212] [warehouse_scene]: {"t_s": 490.262, "event": "unload_started", "robot": "agv3", "package": "agv3_box_6"}
+[INFO] [1793073682.472026479] [warehouse_scene]: {"t_s": 491.76, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_6", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+[INFO] [1793073682.472857883] [warehouse_scene]: {"t_s": 491.762, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+[INFO] [1793073682.771260496] [warehouse_scene]: {"t_s": 492.06, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 3}
+[INFO] [1793073682.771527772] [warehouse_scene]: {"t_s": 492.061, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_8", "slot": 3}
+[INFO] [1793073682.771777206] [warehouse_scene]: {"t_s": 492.061, "event": "unload_started", "robot": "agv1", "package": "agv1_box_8"}
+[INFO] [1793073684.328242766] [warehouse_scene]: {"t_s": 493.614, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_8", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+[INFO] [1793073684.328935501] [warehouse_scene]: {"t_s": 493.618, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+[INFO] [1793073687.820929764] [warehouse_scene]: {"t_s": 497.11, "event": "outbound_cleared", "package": "agv3_box_6"}
+[INFO] [1793073689.570512798] [warehouse_scene]: {"t_s": 498.86, "event": "outbound_cleared", "package": "agv1_box_8"}
+[INFO] [1793073690.020715687] [warehouse_scene]: {"t_s": 499.31, "event": "bay_released", "robot": "agv3", "slot": 4, "distance_m": 0.4531149739809282}
+[INFO] [1793073691.921561129] [warehouse_scene]: {"t_s": 501.21, "event": "bay_released", "robot": "agv1", "slot": 3, "distance_m": 0.45046483649001384}
+[INFO] [1793073692.975317653] [warehouse_scene]: {"t_s": 502.263, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+[INFO] [1793073697.522066816] [warehouse_scene]: {"t_s": 506.811, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_7", "width_m": 0.12409737448594078, "height_m": 0.2737411815916782, "kind": 1, "camera_distance_m": 0.8993204265883767, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+[INFO] [1793073697.539410877] [warehouse_scene]: {"t_s": 506.829, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+[INFO] [1793073697.572140351] [warehouse_scene]: {"t_s": 506.861, "event": "delivery_intent", "robot": "agv2", "slot": 1}
+[INFO] [1793073697.572767140] [warehouse_scene]: {"t_s": 506.862, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 2}
+[INFO] [1793073709.973370804] [warehouse_scene]: {"t_s": 519.262, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+[INFO] [1793073714.622259834] [warehouse_scene]: {"t_s": 523.911, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_9", "width_m": 0.30364698499131054, "height_m": 0.4738832879655341, "kind": 4, "camera_distance_m": 0.8981993112706069, "truth_kind": 4, "truth_width_m": 0.3, "truth_height_m": 0.47}
+[INFO] [1793073714.639020566] [warehouse_scene]: {"t_s": 523.928, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+[INFO] [1793073714.673666767] [warehouse_scene]: {"t_s": 523.96, "event": "delivery_intent", "robot": "agv1", "slot": 4}
+[INFO] [1793073714.674422684] [warehouse_scene]: {"t_s": 523.964, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 2, "gate_row": 2}
+[INFO] [1793073716.776343482] [warehouse_scene]: {"t_s": 526.061, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+[INFO] [1793073716.777568246] [warehouse_scene]: {"t_s": 526.066, "event": "load_started", "robot": "agv2", "package": "agv2_box_7"}
+[INFO] [1793073718.774661625] [warehouse_scene]: {"t_s": 528.063, "event": "loaded", "robot": "agv2", "front": "agv2_box_8", "distance_from_pickup_m": 0.009479827920326402}
+[INFO] [1793073718.780168858] [warehouse_scene]: {"t_s": 528.067, "event": "delivery_queued", "robot": "agv2", "slot": 1, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073718.780643150] [warehouse_scene]: {"t_s": 528.07, "event": "delivery_admitted", "robot": "agv2", "slot": 1, "wait_s": 21.20407998999997}
+[INFO] [1793073718.781069380] [warehouse_scene]: {"t_s": 528.07, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 1}
+[INFO] [1793073718.781508854] [warehouse_scene]: {"t_s": 528.071, "event": "column_join", "robot": "agv2", "slot": 1, "entry_row": 3}
+[INFO] [1793073718.782538902] [warehouse_scene]: {"t_s": 528.071, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+[INFO] [1793073719.172618493] [warehouse_scene]: {"t_s": 528.462, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+[INFO] [1793073719.173032292] [warehouse_scene]: {"t_s": 528.462, "event": "load_started", "robot": "agv1", "package": "agv1_box_9"}
+[INFO] [1793073721.220868362] [warehouse_scene]: {"t_s": 530.51, "event": "loaded", "robot": "agv1", "front": "agv1_box_10", "distance_from_pickup_m": 0.009172243545689398}
+[INFO] [1793073721.221678002] [warehouse_scene]: {"t_s": 530.511, "event": "delivery_queued", "robot": "agv1", "slot": 4, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073721.221978770] [warehouse_scene]: {"t_s": 530.511, "event": "delivery_admitted", "robot": "agv1", "slot": 4, "wait_s": 6.549904749000007}
+[INFO] [1793073721.222257160] [warehouse_scene]: {"t_s": 530.512, "event": "column_permission", "robot": "agv1", "slot": 4, "entry_row": 2, "gate_row": 1}
+[INFO] [1793073721.222603976] [warehouse_scene]: {"t_s": 530.512, "event": "column_join", "robot": "agv1", "slot": 4, "entry_row": 2}
+[INFO] [1793073721.222998341] [warehouse_scene]: {"t_s": 530.512, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4, "heading": "n"}
+[INFO] [1793073725.773047318] [warehouse_scene]: {"t_s": 535.061, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+[INFO] [1793073726.071104314] [warehouse_scene]: {"t_s": 535.36, "event": "feed_started", "robot": "agv2", "front": "agv2_box_8", "distance_from_pickup_m": 0.4230791469496868}
+[INFO] [1793073728.520839264] [warehouse_scene]: {"t_s": 537.81, "event": "feed_started", "robot": "agv1", "front": "agv1_box_10", "distance_from_pickup_m": 0.4219774387387761}
+[INFO] [1793073728.571464214] [warehouse_scene]: {"t_s": 537.86, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_8", "distance_from_pickup_m": 0.9510791385474088}
+[INFO] [1793073730.422209579] [warehouse_scene]: {"t_s": 539.711, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_7", "width_m": 0.18961631518615685, "height_m": 0.3434638653080977, "kind": 2, "camera_distance_m": 0.8815761828958337, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+[INFO] [1793073730.435353657] [warehouse_scene]: {"t_s": 539.724, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+[INFO] [1793073730.471514883] [warehouse_scene]: {"t_s": 539.76, "event": "delivery_intent", "robot": "agv3", "slot": 2}
+[INFO] [1793073730.472220627] [warehouse_scene]: {"t_s": 539.761, "event": "column_permission", "robot": "agv3", "slot": 2, "entry_row": 4, "gate_row": 2}
+[INFO] [1793073731.022068612] [warehouse_scene]: {"t_s": 540.311, "event": "feed_finished", "robot": "agv1", "front": "agv1_box_10", "distance_from_pickup_m": 0.5923644318184982}
+[INFO] [1793073734.972532564] [warehouse_scene]: {"t_s": 544.262, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+[INFO] [1793073734.980050266] [warehouse_scene]: {"t_s": 544.262, "event": "load_started", "robot": "agv3", "package": "agv3_box_7"}
+[INFO] [1793073737.022395890] [warehouse_scene]: {"t_s": 546.311, "event": "loaded", "robot": "agv3", "front": "agv3_box_8", "distance_from_pickup_m": 0.007593779442957411}
+[INFO] [1793073737.026334122] [warehouse_scene]: {"t_s": 546.313, "event": "delivery_queued", "robot": "agv3", "slot": 2, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073737.027009057] [warehouse_scene]: {"t_s": 546.316, "event": "delivery_admitted", "robot": "agv3", "slot": 2, "wait_s": 6.550828920000072}
+[INFO] [1793073737.027285705] [warehouse_scene]: {"t_s": 546.317, "event": "column_permission", "robot": "agv3", "slot": 2, "entry_row": 4, "gate_row": 1}
+[INFO] [1793073737.027830884] [warehouse_scene]: {"t_s": 546.317, "event": "column_join", "robot": "agv3", "slot": 2, "entry_row": 4}
+[INFO] [1793073737.028573442] [warehouse_scene]: {"t_s": 546.318, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+[INFO] [1793073737.774138808] [warehouse_scene]: {"t_s": 547.063, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 4}
+[INFO] [1793073737.774702289] [warehouse_scene]: {"t_s": 547.064, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_9", "slot": 4}
+[INFO] [1793073737.775235661] [warehouse_scene]: {"t_s": 547.064, "event": "unload_started", "robot": "agv1", "package": "agv1_box_9"}
+[INFO] [1793073739.273350877] [warehouse_scene]: {"t_s": 548.563, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_9", "slot": 4, "receiving_position_m": [0.6, -1.68, 0.06]}
+[INFO] [1793073739.273788717] [warehouse_scene]: {"t_s": 548.563, "event": "goal_sent", "robot": "agv1", "phase": "returning", "row": 2, "col": 4, "heading": "d"}
+[INFO] [1793073744.275195445] [warehouse_scene]: {"t_s": 553.563, "event": "feed_started", "robot": "agv3", "front": "agv3_box_8", "distance_from_pickup_m": 0.42559322606458627}
+[INFO] [1793073744.620417848] [warehouse_scene]: {"t_s": 553.909, "event": "outbound_cleared", "package": "agv1_box_9"}
+[INFO] [1793073746.571266220] [warehouse_scene]: {"t_s": 555.86, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 1}
+[INFO] [1793073746.571686066] [warehouse_scene]: {"t_s": 555.861, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_7", "slot": 1}
+[INFO] [1793073746.571971232] [warehouse_scene]: {"t_s": 555.861, "event": "unload_started", "robot": "agv2", "package": "agv2_box_7"}
+[INFO] [1793073746.822399877] [warehouse_scene]: {"t_s": 556.111, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_8", "distance_from_pickup_m": 0.9535932224022808}
+[INFO] [1793073746.871030732] [warehouse_scene]: {"t_s": 556.16, "event": "bay_released", "robot": "agv1", "slot": 4, "distance_m": 0.4546257276515397}
+[INFO] [1793073748.122816873] [warehouse_scene]: {"t_s": 557.411, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_7", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+[INFO] [1793073748.123649560] [warehouse_scene]: {"t_s": 557.413, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+[INFO] [1793073752.172925735] [warehouse_scene]: {"t_s": 561.461, "event": "goal_reached", "robot": "agv1", "phase": "returning", "row": 2, "col": 4}
+[INFO] [1793073753.220924476] [warehouse_scene]: {"t_s": 562.51, "event": "outbound_cleared", "package": "agv2_box_7"}
+[INFO] [1793073755.673806370] [warehouse_scene]: {"t_s": 564.963, "event": "bay_released", "robot": "agv2", "slot": 1, "distance_m": 0.46195873524455217}
+[INFO] [1793073756.621081347] [warehouse_scene]: {"t_s": 565.91, "event": "vision_locked", "robot": "agv1", "package": "agv1_box_10", "width_m": 0.12280764353654276, "height_m": 0.2745018064156022, "kind": 1, "camera_distance_m": 0.8899318765452456, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+[INFO] [1793073756.631720974] [warehouse_scene]: {"t_s": 565.92, "event": "goal_sent", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5, "heading": "d"}
+[INFO] [1793073756.677580002] [warehouse_scene]: {"t_s": 565.967, "event": "delivery_intent", "robot": "agv1", "slot": 1}
+[INFO] [1793073756.678033027] [warehouse_scene]: {"t_s": 565.967, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 2}
+[INFO] [1793073761.171467480] [warehouse_scene]: {"t_s": 570.46, "event": "goal_reached", "robot": "agv1", "phase": "pickup", "row": 2, "col": 5}
+[INFO] [1793073761.172168824] [warehouse_scene]: {"t_s": 570.461, "event": "load_started", "robot": "agv1", "package": "agv1_box_10"}
+[INFO] [1793073763.170527336] [warehouse_scene]: {"t_s": 572.459, "event": "loaded", "robot": "agv1", "front": null, "distance_from_pickup_m": 0.008098604543954451}
+[INFO] [1793073763.171571940] [warehouse_scene]: {"t_s": 572.461, "event": "delivery_queued", "robot": "agv1", "slot": 1, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073763.172013296] [warehouse_scene]: {"t_s": 572.461, "event": "delivery_admitted", "robot": "agv1", "slot": 1, "wait_s": 6.493384024999955}
+[INFO] [1793073763.172398377] [warehouse_scene]: {"t_s": 572.462, "event": "column_permission", "robot": "agv1", "slot": 1, "entry_row": 2, "gate_row": 1}
+[INFO] [1793073763.172848118] [warehouse_scene]: {"t_s": 572.462, "event": "column_join", "robot": "agv1", "slot": 1, "entry_row": 2}
+[INFO] [1793073763.173365842] [warehouse_scene]: {"t_s": 572.463, "event": "goal_sent", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+[INFO] [1793073764.771344882] [warehouse_scene]: {"t_s": 574.06, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 2}
+[INFO] [1793073764.771779059] [warehouse_scene]: {"t_s": 574.061, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_7", "slot": 2}
+[INFO] [1793073764.772119139] [warehouse_scene]: {"t_s": 574.061, "event": "unload_started", "robot": "agv3", "package": "agv3_box_7"}
+[INFO] [1793073766.273166497] [warehouse_scene]: {"t_s": 575.562, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_7", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+[INFO] [1793073766.274037354] [warehouse_scene]: {"t_s": 575.563, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+[INFO] [1793073770.421235150] [warehouse_scene]: {"t_s": 579.71, "event": "empty", "robot": "agv1", "front": null, "distance_from_pickup_m": 0.42469744601906545}
+[INFO] [1793073771.471042414] [warehouse_scene]: {"t_s": 580.76, "event": "outbound_cleared", "package": "agv3_box_7"}
+[INFO] [1793073772.171004019] [warehouse_scene]: {"t_s": 581.46, "event": "bay_released", "robot": "agv3", "slot": 2, "distance_m": 0.45435961385493767}
+[INFO] [1793073773.570739236] [warehouse_scene]: {"t_s": 582.86, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+[INFO] [1793073777.721627250] [warehouse_scene]: {"t_s": 587.011, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_8", "width_m": 0.12596508978212664, "height_m": 0.27383442345431447, "kind": 1, "camera_distance_m": 0.89962789097917, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+[INFO] [1793073777.753933004] [warehouse_scene]: {"t_s": 587.043, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+[INFO] [1793073777.774325496] [warehouse_scene]: {"t_s": 587.06, "event": "delivery_intent", "robot": "agv2", "slot": 1}
+[INFO] [1793073777.774674520] [warehouse_scene]: {"t_s": 587.064, "event": "delivery_queued", "robot": "agv2", "slot": 1, "rank": 1, "registration": "tail_append"}
+[INFO] [1793073777.775173078] [warehouse_scene]: {"t_s": 587.064, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 3}
+[INFO] [1793073782.576133905] [warehouse_scene]: {"t_s": 591.861, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+[INFO] [1793073782.577007966] [warehouse_scene]: {"t_s": 591.866, "event": "load_started", "robot": "agv2", "package": "agv2_box_8"}
+[INFO] [1793073784.571270496] [warehouse_scene]: {"t_s": 593.86, "event": "loaded", "robot": "agv2", "front": "agv2_box_9", "distance_from_pickup_m": 0.00983740841524192}
+[INFO] [1793073784.574916347] [warehouse_scene]: {"t_s": 593.862, "event": "column_join", "robot": "agv2", "slot": 1, "entry_row": 3}
+[INFO] [1793073784.575506188] [warehouse_scene]: {"t_s": 593.865, "event": "goal_sent", "robot": "agv2", "phase": "convoy", "row": 1, "col": 1, "heading": "n"}
+[INFO] [1793073785.921803725] [warehouse_scene]: {"t_s": 595.211, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 2}
+[INFO] [1793073787.971943877] [warehouse_scene]: {"t_s": 597.261, "event": "goal_reached", "robot": "agv1", "phase": "deliver", "row": 1, "col": 1}
+[INFO] [1793073787.972274782] [warehouse_scene]: {"t_s": 597.262, "event": "delivery_arrived", "robot": "agv1", "package": "agv1_box_10", "slot": 1}
+[INFO] [1793073787.972561391] [warehouse_scene]: {"t_s": 597.262, "event": "unload_started", "robot": "agv1", "package": "agv1_box_10"}
+[INFO] [1793073789.521607529] [warehouse_scene]: {"t_s": 598.81, "event": "delivery_success", "robot": "agv1", "package": "agv1_box_10", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+[INFO] [1793073789.522215605] [warehouse_scene]: {"t_s": 598.811, "event": "goal_sent", "robot": "agv1", "phase": "parking", "row": 5, "col": 1, "heading": "d"}
+[INFO] [1793073791.870880837] [warehouse_scene]: {"t_s": 601.16, "event": "feed_started", "robot": "agv2", "front": "agv2_box_9", "distance_from_pickup_m": 0.4302368092713004}
+[INFO] [1793073794.373625914] [warehouse_scene]: {"t_s": 603.662, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_9", "distance_from_pickup_m": 0.9670367968274708}
+[INFO] [1793073794.620608989] [warehouse_scene]: {"t_s": 603.91, "event": "outbound_cleared", "package": "agv1_box_10"}
+[INFO] [1793073795.471513061] [warehouse_scene]: {"t_s": 604.76, "event": "bay_released", "robot": "agv1", "slot": 1, "distance_m": 0.4569360800312362}
+[INFO] [1793073795.472160923] [warehouse_scene]: {"t_s": 604.761, "event": "delivery_admitted", "robot": "agv2", "slot": 1, "wait_s": 17.700326113000074}
+[INFO] [1793073795.472711341] [warehouse_scene]: {"t_s": 604.762, "event": "column_permission", "robot": "agv2", "slot": 1, "entry_row": 3, "gate_row": 1}
+[INFO] [1793073796.371465534] [warehouse_scene]: {"t_s": 605.661, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+[INFO] [1793073800.670817233] [warehouse_scene]: {"t_s": 609.96, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_8", "width_m": 0.24451248274524318, "height_m": 0.405088411036809, "kind": 3, "camera_distance_m": 0.8992243177004257, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+[INFO] [1793073800.683290021] [warehouse_scene]: {"t_s": 609.972, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+[INFO] [1793073800.727121211] [warehouse_scene]: {"t_s": 610.011, "event": "delivery_intent", "robot": "agv3", "slot": 3}
+[INFO] [1793073800.727987605] [warehouse_scene]: {"t_s": 610.017, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 2}
+[INFO] [1793073805.371198544] [warehouse_scene]: {"t_s": 614.66, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+[INFO] [1793073805.372666798] [warehouse_scene]: {"t_s": 614.661, "event": "load_started", "robot": "agv3", "package": "agv3_box_8"}
+[INFO] [1793073807.423431406] [warehouse_scene]: {"t_s": 616.711, "event": "loaded", "robot": "agv3", "front": "agv3_box_9", "distance_from_pickup_m": 0.008223665889516856}
+[INFO] [1793073807.430183512] [warehouse_scene]: {"t_s": 616.716, "event": "delivery_queued", "robot": "agv3", "slot": 3, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073807.432896901] [warehouse_scene]: {"t_s": 616.72, "event": "delivery_admitted", "robot": "agv3", "slot": 3, "wait_s": 6.700621464000051}
+[INFO] [1793073807.433455459] [warehouse_scene]: {"t_s": 616.723, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 1}
+[INFO] [1793073807.433979859] [warehouse_scene]: {"t_s": 616.723, "event": "column_join", "robot": "agv3", "slot": 3, "entry_row": 4}
+[INFO] [1793073807.434466278] [warehouse_scene]: {"t_s": 616.724, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+[INFO] [1793073812.374454200] [warehouse_scene]: {"t_s": 621.664, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 1}
+[INFO] [1793073812.376994338] [warehouse_scene]: {"t_s": 621.664, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_8", "slot": 1}
+[INFO] [1793073812.377620511] [warehouse_scene]: {"t_s": 621.667, "event": "unload_started", "robot": "agv2", "package": "agv2_box_8"}
+[INFO] [1793073813.921293664] [warehouse_scene]: {"t_s": 623.21, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_8", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+[INFO] [1793073813.921722421] [warehouse_scene]: {"t_s": 623.211, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+[INFO] [1793073814.520617856] [warehouse_scene]: {"t_s": 623.81, "event": "feed_started", "robot": "agv3", "front": "agv3_box_9", "distance_from_pickup_m": 0.42282308851005973}
+[INFO] [1793073817.021178165] [warehouse_scene]: {"t_s": 626.31, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_9", "distance_from_pickup_m": 0.96842308428216}
+[INFO] [1793073819.020613856] [warehouse_scene]: {"t_s": 628.31, "event": "outbound_cleared", "package": "agv2_box_8"}
+[INFO] [1793073821.470525380] [warehouse_scene]: {"t_s": 630.76, "event": "bay_released", "robot": "agv2", "slot": 1, "distance_m": 0.45465745704006}
+[INFO] [1793073825.770967969] [warehouse_scene]: {"t_s": 635.06, "event": "goal_reached", "robot": "agv1", "phase": "parking", "row": 5, "col": 1}
+[INFO] [1793073831.772502104] [warehouse_scene]: {"t_s": 641.061, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3}
+[INFO] [1793073831.772959161] [warehouse_scene]: {"t_s": 641.062, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_8", "slot": 3}
+[INFO] [1793073831.773343538] [warehouse_scene]: {"t_s": 641.063, "event": "unload_started", "robot": "agv3", "package": "agv3_box_8"}
+[INFO] [1793073833.273964980] [warehouse_scene]: {"t_s": 642.563, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_8", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+[INFO] [1793073833.274433781] [warehouse_scene]: {"t_s": 642.564, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+[INFO] [1793073838.520508624] [warehouse_scene]: {"t_s": 647.809, "event": "outbound_cleared", "package": "agv3_box_8"}
+[INFO] [1793073838.972015345] [warehouse_scene]: {"t_s": 648.261, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+[INFO] [1793073840.721524316] [warehouse_scene]: {"t_s": 650.01, "event": "bay_released", "robot": "agv3", "slot": 3, "distance_m": 0.4531676529423003}
+[INFO] [1793073843.222616399] [warehouse_scene]: {"t_s": 652.512, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_9", "width_m": 0.1879191461318997, "height_m": 0.3448211348667671, "kind": 2, "camera_distance_m": 0.8990854364615946, "truth_kind": 2, "truth_width_m": 0.185, "truth_height_m": 0.34}
+[INFO] [1793073843.233524241] [warehouse_scene]: {"t_s": 652.522, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+[INFO] [1793073843.274869663] [warehouse_scene]: {"t_s": 652.563, "event": "delivery_intent", "robot": "agv2", "slot": 2}
+[INFO] [1793073843.278152062] [warehouse_scene]: {"t_s": 652.565, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 2}
+[INFO] [1793073847.975165062] [warehouse_scene]: {"t_s": 657.261, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+[INFO] [1793073847.975574383] [warehouse_scene]: {"t_s": 657.265, "event": "load_started", "robot": "agv2", "package": "agv2_box_9"}
+[INFO] [1793073850.021841339] [warehouse_scene]: {"t_s": 659.311, "event": "loaded", "robot": "agv2", "front": "agv2_box_10", "distance_from_pickup_m": 0.008968715206640996}
+[INFO] [1793073850.025553940] [warehouse_scene]: {"t_s": 659.312, "event": "delivery_queued", "robot": "agv2", "slot": 2, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073850.026235400] [warehouse_scene]: {"t_s": 659.315, "event": "delivery_admitted", "robot": "agv2", "slot": 2, "wait_s": 6.750462233999997}
+[INFO] [1793073850.026675737] [warehouse_scene]: {"t_s": 659.316, "event": "column_permission", "robot": "agv2", "slot": 2, "entry_row": 3, "gate_row": 1}
+[INFO] [1793073850.027263324] [warehouse_scene]: {"t_s": 659.316, "event": "column_join", "robot": "agv2", "slot": 2, "entry_row": 3}
+[INFO] [1793073850.027920388] [warehouse_scene]: {"t_s": 659.317, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2, "heading": "n"}
+[INFO] [1793073855.176712110] [warehouse_scene]: {"t_s": 664.46, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+[INFO] [1793073857.270659295] [warehouse_scene]: {"t_s": 666.56, "event": "feed_started", "robot": "agv2", "front": "agv2_box_10", "distance_from_pickup_m": 0.4201680000394623}
+[INFO] [1793073859.273585584] [warehouse_scene]: {"t_s": 668.561, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_9", "width_m": 0.12150479594827265, "height_m": 0.27438502399009385, "kind": 1, "camera_distance_m": 0.8990488783216986, "truth_kind": 1, "truth_width_m": 0.12, "truth_height_m": 0.27}
+[INFO] [1793073859.285091376] [warehouse_scene]: {"t_s": 668.574, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+[INFO] [1793073859.320790941] [warehouse_scene]: {"t_s": 668.61, "event": "delivery_intent", "robot": "agv3", "slot": 1}
+[INFO] [1793073859.321256173] [warehouse_scene]: {"t_s": 668.611, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 2}
+[INFO] [1793073859.821727377] [warehouse_scene]: {"t_s": 669.111, "event": "feed_finished", "robot": "agv2", "front": "agv2_box_10", "distance_from_pickup_m": 0.9481679836684498}
+[INFO] [1793073863.977001120] [warehouse_scene]: {"t_s": 673.262, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+[INFO] [1793073863.979811268] [warehouse_scene]: {"t_s": 673.267, "event": "load_started", "robot": "agv3", "package": "agv3_box_9"}
+[INFO] [1793073866.021785445] [warehouse_scene]: {"t_s": 675.31, "event": "loaded", "robot": "agv3", "front": "agv3_box_10", "distance_from_pickup_m": 0.009111941322001053}
+[INFO] [1793073866.022385688] [warehouse_scene]: {"t_s": 675.312, "event": "delivery_queued", "robot": "agv3", "slot": 1, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073866.022626198] [warehouse_scene]: {"t_s": 675.312, "event": "delivery_admitted", "robot": "agv3", "slot": 1, "wait_s": 6.700119389000065}
+[INFO] [1793073866.022861113] [warehouse_scene]: {"t_s": 675.312, "event": "column_permission", "robot": "agv3", "slot": 1, "entry_row": 4, "gate_row": 1}
+[INFO] [1793073866.023128113] [warehouse_scene]: {"t_s": 675.312, "event": "column_join", "robot": "agv3", "slot": 1, "entry_row": 4}
+[INFO] [1793073866.023394370] [warehouse_scene]: {"t_s": 675.313, "event": "goal_sent", "robot": "agv3", "phase": "deliver", "row": 1, "col": 1, "heading": "n"}
+[INFO] [1793073873.220529934] [warehouse_scene]: {"t_s": 682.509, "event": "feed_started", "robot": "agv3", "front": "agv3_box_10", "distance_from_pickup_m": 0.4287113782348104}
+[INFO] [1793073874.971250031] [warehouse_scene]: {"t_s": 684.26, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 2}
+[INFO] [1793073874.971679443] [warehouse_scene]: {"t_s": 684.261, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_9", "slot": 2}
+[INFO] [1793073874.972198837] [warehouse_scene]: {"t_s": 684.261, "event": "unload_started", "robot": "agv2", "package": "agv2_box_9"}
+[INFO] [1793073875.723720342] [warehouse_scene]: {"t_s": 685.012, "event": "feed_finished", "robot": "agv3", "front": "agv3_box_10", "distance_from_pickup_m": 0.9655113749292902}
+[INFO] [1793073876.474865326] [warehouse_scene]: {"t_s": 685.764, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_9", "slot": 2, "receiving_position_m": [-0.6, -1.68, 0.06]}
+[INFO] [1793073876.476090193] [warehouse_scene]: {"t_s": 685.765, "event": "goal_sent", "robot": "agv2", "phase": "returning", "row": 3, "col": 4, "heading": "d"}
+[INFO] [1793073881.671927201] [warehouse_scene]: {"t_s": 690.961, "event": "outbound_cleared", "package": "agv2_box_9"}
+[INFO] [1793073883.920904174] [warehouse_scene]: {"t_s": 693.21, "event": "bay_released", "robot": "agv2", "slot": 2, "distance_m": 0.4513567035729507}
+[INFO] [1793073896.171181576] [warehouse_scene]: {"t_s": 705.46, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 1}
+[INFO] [1793073896.171571427] [warehouse_scene]: {"t_s": 705.461, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_9", "slot": 1}
+[INFO] [1793073896.171836954] [warehouse_scene]: {"t_s": 705.461, "event": "unload_started", "robot": "agv3", "package": "agv3_box_9"}
+[INFO] [1793073897.670741419] [warehouse_scene]: {"t_s": 706.96, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_9", "slot": 1, "receiving_position_m": [-1.2, -1.68, 0.06]}
+[INFO] [1793073897.671112894] [warehouse_scene]: {"t_s": 706.96, "event": "goal_sent", "robot": "agv3", "phase": "returning", "row": 4, "col": 4, "heading": "d"}
+[INFO] [1793073898.571406084] [warehouse_scene]: {"t_s": 707.86, "event": "goal_reached", "robot": "agv2", "phase": "returning", "row": 3, "col": 4}
+[INFO] [1793073902.771039072] [warehouse_scene]: {"t_s": 712.06, "event": "outbound_cleared", "package": "agv3_box_9"}
+[INFO] [1793073902.772201545] [warehouse_scene]: {"t_s": 712.061, "event": "vision_locked", "robot": "agv2", "package": "agv2_box_10", "width_m": 0.24433030186279656, "height_m": 0.40478600149621136, "kind": 3, "camera_distance_m": 0.8985519338725162, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+[INFO] [1793073902.785468186] [warehouse_scene]: {"t_s": 712.074, "event": "goal_sent", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5, "heading": "d"}
+[INFO] [1793073902.822136828] [warehouse_scene]: {"t_s": 712.111, "event": "delivery_intent", "robot": "agv2", "slot": 3}
+[INFO] [1793073902.822540608] [warehouse_scene]: {"t_s": 712.112, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 2}
+[INFO] [1793073905.221649038] [warehouse_scene]: {"t_s": 714.511, "event": "bay_released", "robot": "agv3", "slot": 1, "distance_m": 0.45148214657846936}
+[INFO] [1793073907.571552555] [warehouse_scene]: {"t_s": 716.86, "event": "goal_reached", "robot": "agv2", "phase": "pickup", "row": 3, "col": 5}
+[INFO] [1793073907.572076131] [warehouse_scene]: {"t_s": 716.861, "event": "load_started", "robot": "agv2", "package": "agv2_box_10"}
+[INFO] [1793073909.620511770] [warehouse_scene]: {"t_s": 718.91, "event": "loaded", "robot": "agv2", "front": null, "distance_from_pickup_m": 0.009720424250065135}
+[INFO] [1793073909.621737192] [warehouse_scene]: {"t_s": 718.911, "event": "delivery_queued", "robot": "agv2", "slot": 3, "rank": 1, "registration": "column_departure"}
+[INFO] [1793073909.622118965] [warehouse_scene]: {"t_s": 718.911, "event": "delivery_admitted", "robot": "agv2", "slot": 3, "wait_s": 6.7995806589999574}
+[INFO] [1793073909.622417451] [warehouse_scene]: {"t_s": 718.912, "event": "column_permission", "robot": "agv2", "slot": 3, "entry_row": 3, "gate_row": 1}
+[INFO] [1793073909.622782597] [warehouse_scene]: {"t_s": 718.912, "event": "column_join", "robot": "agv2", "slot": 3, "entry_row": 3}
+[INFO] [1793073909.623310270] [warehouse_scene]: {"t_s": 718.912, "event": "goal_sent", "robot": "agv2", "phase": "deliver", "row": 1, "col": 3, "heading": "n"}
+[INFO] [1793073916.720768128] [warehouse_scene]: {"t_s": 726.01, "event": "empty", "robot": "agv2", "front": null, "distance_from_pickup_m": 0.42731959668096103}
+[INFO] [1793073925.371592023] [warehouse_scene]: {"t_s": 734.66, "event": "goal_reached", "robot": "agv3", "phase": "returning", "row": 4, "col": 4}
+[INFO] [1793073929.373424537] [warehouse_scene]: {"t_s": 738.66, "event": "vision_locked", "robot": "agv3", "package": "agv3_box_10", "width_m": 0.24424228783071072, "height_m": 0.4052479174472232, "kind": 3, "camera_distance_m": 0.899576369700409, "truth_kind": 3, "truth_width_m": 0.24, "truth_height_m": 0.4}
+[INFO] [1793073929.385571571] [warehouse_scene]: {"t_s": 738.674, "event": "goal_sent", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5, "heading": "d"}
+[INFO] [1793073929.422539719] [warehouse_scene]: {"t_s": 738.711, "event": "delivery_intent", "robot": "agv3", "slot": 3}
+[INFO] [1793073929.424263342] [warehouse_scene]: {"t_s": 738.712, "event": "delivery_queued", "robot": "agv3", "slot": 3, "rank": 1, "registration": "tail_append"}
+[INFO] [1793073929.425624829] [warehouse_scene]: {"t_s": 738.714, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 3}
+[INFO] [1793073929.776134909] [warehouse_scene]: {"t_s": 739.065, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 2}
+[INFO] [1793073931.971949993] [warehouse_scene]: {"t_s": 741.26, "event": "goal_reached", "robot": "agv2", "phase": "deliver", "row": 1, "col": 3}
+[INFO] [1793073931.972299287] [warehouse_scene]: {"t_s": 741.262, "event": "delivery_arrived", "robot": "agv2", "package": "agv2_box_10", "slot": 3}
+[INFO] [1793073931.972629838] [warehouse_scene]: {"t_s": 741.262, "event": "unload_started", "robot": "agv2", "package": "agv2_box_10"}
+[INFO] [1793073933.472134388] [warehouse_scene]: {"t_s": 742.761, "event": "delivery_success", "robot": "agv2", "package": "agv2_box_10", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+[INFO] [1793073933.473327211] [warehouse_scene]: {"t_s": 742.762, "event": "goal_sent", "robot": "agv2", "phase": "parking", "row": 5, "col": 2, "heading": "d"}
+[INFO] [1793073934.171483512] [warehouse_scene]: {"t_s": 743.46, "event": "goal_reached", "robot": "agv3", "phase": "pickup", "row": 4, "col": 5}
+[INFO] [1793073934.172163558] [warehouse_scene]: {"t_s": 743.461, "event": "load_started", "robot": "agv3", "package": "agv3_box_10"}
+[INFO] [1793073936.172827731] [warehouse_scene]: {"t_s": 745.462, "event": "loaded", "robot": "agv3", "front": null, "distance_from_pickup_m": 0.009474420800792496}
+[INFO] [1793073936.176448006] [warehouse_scene]: {"t_s": 745.465, "event": "column_join", "robot": "agv3", "slot": 3, "entry_row": 4}
+[INFO] [1793073936.182041577] [warehouse_scene]: {"t_s": 745.466, "event": "goal_sent", "robot": "agv3", "phase": "convoy", "row": 1, "col": 3, "heading": "n"}
+[INFO] [1793073938.721236166] [warehouse_scene]: {"t_s": 748.01, "event": "outbound_cleared", "package": "agv2_box_10"}
+[INFO] [1793073939.422332429] [warehouse_scene]: {"t_s": 748.711, "event": "bay_released", "robot": "agv2", "slot": 3, "distance_m": 0.45097699549772025}
+[INFO] [1793073939.423475886] [warehouse_scene]: {"t_s": 748.712, "event": "delivery_admitted", "robot": "agv3", "slot": 3, "wait_s": 10.000289282999802}
+[INFO] [1793073939.423933431] [warehouse_scene]: {"t_s": 748.713, "event": "column_permission", "robot": "agv3", "slot": 3, "entry_row": 4, "gate_row": 1}
+[INFO] [1793073943.522523443] [warehouse_scene]: {"t_s": 752.811, "event": "empty", "robot": "agv3", "front": null, "distance_from_pickup_m": 0.42747394159795293}
+[INFO] [1793073959.973146314] [warehouse_scene]: {"t_s": 769.262, "event": "goal_reached", "robot": "agv2", "phase": "parking", "row": 5, "col": 2}
+[INFO] [1793073960.970967753] [warehouse_scene]: {"t_s": 770.26, "event": "goal_reached", "robot": "agv3", "phase": "deliver", "row": 1, "col": 3}
+[INFO] [1793073960.971343058] [warehouse_scene]: {"t_s": 770.261, "event": "delivery_arrived", "robot": "agv3", "package": "agv3_box_10", "slot": 3}
+[INFO] [1793073960.971653055] [warehouse_scene]: {"t_s": 770.261, "event": "unload_started", "robot": "agv3", "package": "agv3_box_10"}
+[INFO] [1793073962.522261854] [warehouse_scene]: {"t_s": 771.811, "event": "delivery_success", "robot": "agv3", "package": "agv3_box_10", "slot": 3, "receiving_position_m": [0.0, -1.68, 0.06]}
+[INFO] [1793073962.523885360] [warehouse_scene]: {"t_s": 771.813, "event": "goal_sent", "robot": "agv3", "phase": "parking", "row": 5, "col": 3, "heading": "d"}
+[INFO] [1793073967.772485560] [warehouse_scene]: {"t_s": 777.061, "event": "outbound_cleared", "package": "agv3_box_10"}
+[INFO] [1793073969.925131412] [warehouse_scene]: {"t_s": 779.212, "event": "bay_released", "robot": "agv3", "slot": 3, "distance_m": 0.451336647026758}
+[INFO] [1793073983.371388021] [warehouse_scene]: {"t_s": 792.66, "event": "goal_reached", "robot": "agv3", "phase": "parking", "row": 5, "col": 3}
+[INFO] [1793073983.371902548] [warehouse_scene]: {"t_s": 792.661, "event": "mission_complete", "deliveries": 30}

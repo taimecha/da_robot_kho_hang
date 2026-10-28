@@ -1,0 +1,75 @@
+{
+  "video": 6,
+  "output": "video_6_thuc_te_rviz_camera_2x.mp4",
+  "speed_relative_to_inputs": 2,
+  "source_motion_duration_s": 116.325544,
+  "final_hold_s": 2.0,
+  "output_duration_s": 60.142,
+  "sources": [
+    {
+      "path": "/home/tai/Downloads/7244486068532648805.mp4",
+      "sha256": "45f00273d197637e695daef3c30cd3ec2b476e5809ca2d40fe0b3467defcdfb4"
+    },
+    {
+      "path": "/home/tai/Videos/Screencasts/Screencast from 2026-10-26 16-09-05.webm",
+      "sha256": "bb6806d805d3e6354b486bb0076ee49141213d6c1c2c52b92ecba17684712e70"
+    }
+  ],
+  "output_sha256": "3f67ac89c8c7b08227fb9748716e800f99b3d8290205d452408db62c3eb58fd8",
+  "ffmpeg_command": [
+    "ffmpeg",
+    "-hide_banner",
+    "-loglevel",
+    "warning",
+    "-y",
+    "-threads",
+    "4",
+    "-i",
+    "/home/tai/Downloads/7244486068532648805.mp4",
+    "-i",
+    "/home/tai/Videos/Screencasts/Screencast from 2026-10-26 16-09-05.webm",
+    "-filter_complex_threads",
+    "2",
+    "-filter_complex_script",
+    "/home/tai/Robot_kho_clone/docs/video_demo_2x/_nguon/video6_filter.ffgraph",
+    "-map",
+    "[outv]",
+    "-map",
+    "[outa]",
+    "-c:a",
+    "aac",
+    "-b:a",
+    "128k",
+    "-t",
+    "60.162772",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "medium",
+    "-crf",
+    "19",
+    "-threads",
+    "4",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "-metadata",
+    "title=AGV demo 6 - 2x",
+    "/home/tai/Robot_kho_clone/docs/video_demo_2x/video_6_thuc_te_rviz_camera_2x.mp4"
+  ],
+  "screen_time_minus_real_time_s": 9.6,
+  "synchronization": "Ước lượng từ chuyển động và các mốc cùng lượt thử; không phải đồng bộ phần cứng.",
+  "camera_crop_xywh": [
+    0,
+    66,
+    680,
+    410
+  ],
+  "rviz_crop_xywh": [
+    780,
+    150,
+    680,
+    680
+  ]
+}

@@ -1,0 +1,12 @@
+[INFO] [1793072230.215398654] [lifecycle_manager_map]: Creating
+[INFO] [1793072230.227465260] [lifecycle_manager_map]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[INFO] [1793072230.399472321] [lifecycle_manager_map]: [34m[1mStarting managed nodes bringup...[0m[0m
+[INFO] [1793072230.399527378] [lifecycle_manager_map]: [34m[1mConfiguring map_server[0m[0m
+[INFO] [1793072230.412511506] [lifecycle_manager_map]: [34m[1mActivating map_server[0m[0m
+[INFO] [1793072230.517159837] [lifecycle_manager_map]: Server map_server connected with bond.
+[INFO] [1793072230.517200440] [lifecycle_manager_map]: [34m[1mManaged nodes are active[0m[0m
+[INFO] [1793072230.517208103] [lifecycle_manager_map]: [34m[1mCreating bond timer...[0m[0m
+[INFO] [1793072665.405602258] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1793072665.405695670] [lifecycle_manager_map]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_map)
+[INFO] [1793072665.405725637] [lifecycle_manager_map]: [34m[1mTerminating bond timer...[0m[0m
+[INFO] [1793072665.419879772] [lifecycle_manager_map]: Destroying lifecycle_manager_map

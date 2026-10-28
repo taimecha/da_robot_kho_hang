@@ -2,6 +2,19 @@
 
 **Dành cho người sửa báo cáo:** [hướng dẫn cập nhật theo số liệu xe thật và mô phỏng mới](docs/HUONG_DAN_CAP_NHAT_BAO_CAO_2_XE_2026-10-26.md).
 
+## Báo cáo và video
+
+- [Bản báo cáo Word hiện tại](docs/Bao_cao_NCKH.docx).
+- [Bộ sáu video demo tốc độ 2×](docs/video_demo_2x/README.md), gồm Video 6 ghép cảnh thực tế, RViz và hai camera.
+- [Video mô phỏng ba xe trong kho, tốc độ 3×](docs/video_mo_phong_3xe_3x.mp4).
+- [Ảnh minh chứng Video 6 và thông tin nguồn](docs/minh_chung_video_6/).
+- [Đề xuất kiểm chứng mục tiêu 95% và phản hồi 2 giây](docs/QUY_UOC_KIEM_CHUNG_95_PHAN_TRAM_VA_2_GIAY.md).
+- [Chỉ mục các lượt mô phỏng bổ sung](data/README_cac_luot_mo_phong_bo_sung.md).
+
+Các video được lưu trực tiếp trong kho mã; trên GitHub có thể cần tải tệp MP4 về để xem.
+
+## Dữ liệu thử nghiệm
+
 Dữ liệu xe thật: [thử nghiệm hai xe ngày 26/10/2026](data/real_trial_03/README.md),
 gồm rosbag, nhật ký lấy/giao hàng, bảng CSV và log điều hướng.
 Mô phỏng hai xe theo cùng kích thước thùng: [kết quả, ảnh chụp và dữ liệu](data/sim_trial_01_20261026/README.md).

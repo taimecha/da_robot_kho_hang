@@ -1,0 +1,13 @@
+[INFO] [1793072486.647555115] [fleet_viz]: Gop TF agv1, agv2, agv3 -> /tf (frame agvN/...), scan -> /fleet_viz/agvN/scan
+Traceback (most recent call last):
+  File "/home/tai/Robot_kho_clone/tools/fleet_viz.py", line 110, in <module>
+    main()
+  File "/home/tai/Robot_kho_clone/tools/fleet_viz.py", line 104, in main
+    node.destroy_node()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py", line 1956, in destroy_node
+    self.destroy_publisher(self._publishers[0])
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py", line 1836, in destroy_publisher
+    publisher.destroy()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/publisher.py", line 105, in destroy
+    self.__publisher.destroy_when_not_in_use()
+KeyboardInterrupt

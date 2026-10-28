@@ -1,0 +1,21 @@
+{
+  "camera_source": "/home/tai/Videos/Screencasts/Screencast from 2026-10-26 16-09-05.webm",
+  "camera_source_sha256": "bb6806d805d3e6354b486bb0076ee49141213d6c1c2c52b92ecba17684712e70",
+  "camera_source_frame_playback_seconds": 65,
+  "physical_video_source": "/home/tai/Downloads/06. Video demo/video_6_hoan_chinh_1.5x_dong_bo.mp4",
+  "physical_source_frame_playback_seconds": 36.7,
+  "note": "Hai vùng ảnh được trích từ cùng lượt thử; ghép để đối chiếu hiện trường và giao diện, không khẳng định đồng bộ tới từng khung hình.",
+  "motor_limit_rpm": 60,
+  "rpm_sources": [
+    "Thông số tối đa do chủ dự án cung cấp từ nhà sản xuất",
+    "firmware/xe1/xe1.ino: MAX_WHEEL_RPM",
+    "firmware/xe2/xe2.ino: MAX_WHEEL_RPM"
+  ],
+  "retained_measurement": "Khoảng 49–51 RPM khi thử trên sàn là kết quả có tải, không phải thông số tối đa của nhà sản xuất.",
+  "flowchart_correction": {
+    "figure": "Hình 2.9",
+    "threshold": "max(|RPM trái|, |RPM phải|) > 60",
+    "scaling": "k = 60 / max(|RPM trái|, |RPM phải|)",
+    "connectors": "Giữ nguyên toàn bộ đường nối và mũi tên gốc"
+  }
+}

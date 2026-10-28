@@ -1,0 +1,48 @@
+{
+  "video": 2,
+  "output": "video_2_doi_dau_doi_cho_2x.mp4",
+  "speed_relative_to_inputs": 2,
+  "source_motion_duration_s": 79.5,
+  "final_hold_s": 0,
+  "output_duration_s": 39.766667,
+  "sources": [
+    {
+      "path": "/home/tai/Downloads/06. Video demo/Video 2 - Hai xe đối đầu, đổi chỗ.mp4",
+      "sha256": "60d883a3f957ebedd078ff8cbe1c187251dd6782e754b566aebe62dda8b17683"
+    }
+  ],
+  "output_sha256": "86028c278775ea5c99f7d5700de8c85e7ee2ea6ea509c245215f625edcb68be2",
+  "ffmpeg_command": [
+    "ffmpeg",
+    "-hide_banner",
+    "-loglevel",
+    "warning",
+    "-y",
+    "-threads",
+    "4",
+    "-i",
+    "/home/tai/Downloads/06. Video demo/Video 2 - Hai xe đối đầu, đổi chỗ.mp4",
+    "-filter_threads",
+    "2",
+    "-vf",
+    "setpts=(PTS-STARTPTS)/2,fps=30,setsar=1",
+    "-map",
+    "0:v:0",
+    "-an",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "medium",
+    "-crf",
+    "19",
+    "-threads",
+    "4",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "-metadata",
+    "title=AGV demo 2 - 2x",
+    "/home/tai/Robot_kho_clone/docs/video_demo_2x/video_2_doi_dau_doi_cho_2x.mp4"
+  ]
+}

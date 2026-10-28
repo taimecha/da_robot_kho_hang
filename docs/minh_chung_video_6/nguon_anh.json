@@ -1,0 +1,56 @@
+{
+  "source_video": "/home/tai/Downloads/06. Video demo/video_6_hoan_chinh_1.5x_dong_bo.mp4",
+  "source_sha256": "8fe492f18515ac3f5b958d4137199cb1428570e8f48516c8f7690433a695060f",
+  "frames_playback_seconds": {
+    "AGV1_measure": 27.5,
+    "AGV2_measure": 42.5,
+    "both_at_delivery": 77.5
+  },
+  "note": "Mốc giây là vị trí trích khung hình trên video tăng tốc, không phải thời gian thử nghiệm. Ảnh chỉ được cắt và ghép từ khung hình gốc; số liệu báo cáo lấy từ nhật ký.",
+  "trial_data": "data/real_trial_03/cargo_times_latest.csv",
+  "figures": {
+    "video6_nhan_dien_hai_xe.png": [
+      "Hình 3.6",
+      "Hình B.4"
+    ],
+    "video6_hai_xe_toi_o_giao.png": [
+      "Hình 3.7",
+      "Hình B.5"
+    ]
+  },
+  "start_pose_verified_from_rosbag": {
+    "agv2": {
+      "cell": [
+        1,
+        1
+      ],
+      "heading_deg": -90,
+      "state": "done",
+      "route_goal_0_based": [
+        0,
+        0
+      ]
+    },
+    "agv1": {
+      "cell": [
+        1,
+        2
+      ],
+      "heading_deg": -90,
+      "state": "done",
+      "route_goal_0_based": [
+        0,
+        1
+      ]
+    }
+  },
+  "simulation_distance_figure": {
+    "file": "mo_phong_khoang_cach_theo_mau.png",
+    "source_data": "docs/figures/mo_phong_nckh/du_lieu_mo_phong.json",
+    "horizontal_axis": "Thứ tự mẫu trạng thái",
+    "sample_counts": {
+      "doi_cho": 234,
+      "giao_cat": 141
+    }
+  }
+}

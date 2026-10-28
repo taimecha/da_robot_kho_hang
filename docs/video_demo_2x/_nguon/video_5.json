@@ -1,0 +1,48 @@
+{
+  "video": 5,
+  "output": "video_5_ne_vat_can_dong_2x.mp4",
+  "speed_relative_to_inputs": 2,
+  "source_motion_duration_s": 55.266667,
+  "final_hold_s": 0,
+  "output_duration_s": 27.633333,
+  "sources": [
+    {
+      "path": "/home/tai/Downloads/06. Video demo/Video 5 - Né vật cản động.mp4",
+      "sha256": "1d9e312d2f28ecbf736cc403b0285be4d3a2c2db7633cd847ef25d6e51ca7074"
+    }
+  ],
+  "output_sha256": "2b6de7ee40dc6503b3aa2b3d0d806bf3ca536599f60420a1c94b0f7906c40794",
+  "ffmpeg_command": [
+    "ffmpeg",
+    "-hide_banner",
+    "-loglevel",
+    "warning",
+    "-y",
+    "-threads",
+    "4",
+    "-i",
+    "/home/tai/Downloads/06. Video demo/Video 5 - Né vật cản động.mp4",
+    "-filter_threads",
+    "2",
+    "-vf",
+    "setpts=(PTS-STARTPTS)/2,fps=30,setsar=1",
+    "-map",
+    "0:v:0",
+    "-an",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "medium",
+    "-crf",
+    "19",
+    "-threads",
+    "4",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "-metadata",
+    "title=AGV demo 5 - 2x",
+    "/home/tai/Robot_kho_clone/docs/video_demo_2x/video_5_ne_vat_can_dong_2x.mp4"
+  ]
+}

@@ -1,0 +1,222 @@
+[INFO] [1793073189.523978743] [agv2.fleet_agent]: Sa bàn 5x5, ô 0.60 m, (hàng 3, cột 3) = (+0.000, +0.000), xoay +0.0° - /home/tai/Robot_kho_clone/data/warehouse_demo_20261027_105246/grid.yaml. Đang chờ bản đồ...
+[INFO] [1793073189.550045862] [agv2.fleet_agent]: [agv2] cho lenh tu traffic_manager tren /fleet/agv2/cmd
+[INFO] [1793073189.799707402] [agv2.fleet_agent]: Đã đối chiếu sa bàn với bản đồ: 25/25 điểm, bỏ 0 cạnh sát vật cản.
+[INFO] [1793073243.469734255] [agv2.fleet_agent]: [agv2] lo trinh #930731892: (3,1) -> (3,2) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793073243.671255948] [agv2.fleet_agent]: Đoạn thẳng (-1.20, +0.00) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073253.633397969] [agv2.fleet_agent]: [agv2] da toi (3,4), sai so vi tri 1.2 cm, sai so goc 0.00°
+[INFO] [1793073265.275976083] [agv2.fleet_agent]: [agv2] lo trinh #930731896: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793073265.468476056] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+1.20, +0.00), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793073269.828940632] [agv2.fleet_agent]: [agv2] da toi (3,5), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793073272.068233431] [agv2.fleet_agent]: [agv2] lo trinh #930731898: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (3,1) -> (2,1) -> (1,1), duoc di toi o 0
+[INFO] [1793073272.274461817] [agv2.fleet_agent]: Đoạn thẳng (+1.20, +0.00) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073272.275737979] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073277.127606911] [agv2.fleet_agent]: Xoay mot luot xong sau 4.9 s, con lech +0.41°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073304.668205235] [agv2.fleet_agent]: Đoạn thẳng (-1.20, +0.00) -> (-1.20, -1.20), 1.20 m, tới (hàng 1, cột 1)
+[INFO] [1793073304.668774094] [agv2.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793073307.922191549] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech +0.43°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073314.979298675] [agv2.fleet_agent]: [agv2] da toi (1,1), sai so vi tri 1.1 cm, sai so goc 0.01°
+[INFO] [1793073316.869559113] [agv2.fleet_agent]: [agv2] lo trinh #930731901: (1,1) -> (1,2) -> (2,2) -> (3,2) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793073317.068140239] [agv2.fleet_agent]: Đoạn thẳng (-1.20, -1.20) -> (-0.60, -1.20), 0.60 m, tới (hàng 1, cột 2)
+[INFO] [1793073317.070772625] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073320.374884630] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech +0.42°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073324.180727086] [agv2.fleet_agent]: Đoạn thẳng (-0.60, -1.20) -> (-0.60, +0.00), 1.20 m, tới (hàng 3, cột 2)
+[INFO] [1793073324.185196952] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1793073327.387763677] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech +0.32°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073334.059405201] [agv2.fleet_agent]: Đoạn thẳng (-0.60, +0.00) -> (+0.60, +0.00), 1.20 m, tới (hàng 3, cột 4)
+[INFO] [1793073334.060123619] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073337.161842739] [agv2.fleet_agent]: Xoay mot luot xong sau 3.1 s, con lech -0.42°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073344.318359787] [agv2.fleet_agent]: [agv2] da toi (3,4), sai so vi tri 1.2 cm, sai so goc 0.01°
+[INFO] [1793073349.674520313] [agv2.fleet_agent]: [agv2] lo trinh #930731905: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793073349.871828619] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+1.20, +0.00), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793073354.279901261] [agv2.fleet_agent]: [agv2] da toi (3,5), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793073356.479070654] [agv2.fleet_agent]: [agv2] lo trinh #930731907: (3,5) -> (3,4) -> (2,4) -> (1,4), duoc di toi o 0
+[INFO] [1793073356.669213313] [agv2.fleet_agent]: Đoạn thẳng (+1.20, +0.00) -> (+0.60, +0.00), 0.60 m, tới (hàng 3, cột 4)
+[INFO] [1793073356.669598756] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073361.472554448] [agv2.fleet_agent]: Xoay mot luot xong sau 4.8 s, con lech -0.41°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073373.469296690] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+0.60, -1.20), 1.20 m, tới (hàng 1, cột 4)
+[INFO] [1793073373.470039929] [agv2.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793073376.676337100] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech +0.46°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073383.779724711] [agv2.fleet_agent]: [agv2] da toi (1,4), sai so vi tri 1.2 cm, sai so goc 0.01°
+[INFO] [1793073385.672481302] [agv2.fleet_agent]: [agv2] lo trinh #930731912: (1,4) -> (1,3) -> (2,3) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793073385.870276605] [agv2.fleet_agent]: Đoạn thẳng (+0.60, -1.20) -> (+0.00, -1.20), 0.60 m, tới (hàng 1, cột 3)
+[INFO] [1793073385.871030302] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073389.272841418] [agv2.fleet_agent]: Xoay mot luot xong sau 3.4 s, con lech -0.34°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073395.271479990] [agv2.fleet_agent]: Đoạn thẳng (+0.00, -1.20) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073395.271953498] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1793073398.523529508] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech -0.48°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073405.229728572] [agv2.fleet_agent]: Đoạn thẳng (+0.00, +0.00) -> (+0.60, +0.00), 0.60 m, tới (hàng 3, cột 4)
+[INFO] [1793073405.230198619] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073408.584316696] [agv2.fleet_agent]: Xoay mot luot xong sau 3.4 s, con lech -0.45°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073412.844095384] [agv2.fleet_agent]: [agv2] da toi (3,4), sai so vi tri 1.1 cm, sai so goc 0.23°
+[INFO] [1793073417.476875137] [agv2.fleet_agent]: [agv2] lo trinh #930731915: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793073417.667619866] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+1.20, +0.00), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793073421.975398661] [agv2.fleet_agent]: [agv2] da toi (3,5), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793073424.268019134] [agv2.fleet_agent]: [agv2] lo trinh #930731916: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (2,2) -> (1,2), duoc di toi o 0
+[INFO] [1793073425.668394120] [agv2.fleet_agent]: Đoạn thẳng (+1.20, +0.00) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073425.669307651] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073430.676814390] [agv2.fleet_agent]: Xoay mot luot xong sau 5.0 s, con lech +0.48°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073440.289744025] [agv2.fleet_agent]: Đoạn thẳng (-0.60, +0.00) -> (-0.60, -1.20), 1.20 m, tới (hàng 1, cột 2)
+[INFO] [1793073440.290163108] [agv2.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793073443.543617486] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech +0.34°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073450.600764869] [agv2.fleet_agent]: [agv2] da toi (1,2), sai so vi tri 1.2 cm, sai so goc 0.01°
+[INFO] [1793073452.479163388] [agv2.fleet_agent]: [agv2] lo trinh #930731921: (1,2) -> (2,2) -> (3,2) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793073452.669464282] [agv2.fleet_agent]: Đoạn thẳng (-0.60, -1.20) -> (-0.60, +0.00), 1.20 m, tới (hàng 3, cột 2)
+[INFO] [1793073452.670296142] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1793073457.522346429] [agv2.fleet_agent]: Xoay mot luot xong sau 4.9 s, con lech -0.48°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073469.268257101] [agv2.fleet_agent]: Đoạn thẳng (-0.60, +0.00) -> (+0.60, +0.00), 1.20 m, tới (hàng 3, cột 4)
+[INFO] [1793073469.269363314] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073472.471446242] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech -0.48°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073479.576468082] [agv2.fleet_agent]: [agv2] da toi (3,4), sai so vi tri 1.2 cm, sai so goc 0.01°
+[INFO] [1793073487.268363748] [agv2.fleet_agent]: [agv2] lo trinh #930731925: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793073487.467964982] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+1.20, +0.00), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793073491.872773121] [agv2.fleet_agent]: [agv2] da toi (3,5), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793073494.074396114] [agv2.fleet_agent]: [agv2] lo trinh #930731927: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (2,2) -> (1,2), duoc di toi o 0
+[INFO] [1793073494.266682586] [agv2.fleet_agent]: Đoạn thẳng (+1.20, +0.00) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073494.267114621] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073499.269643531] [agv2.fleet_agent]: Xoay mot luot xong sau 5.0 s, con lech -0.43°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073508.878371859] [agv2.fleet_agent]: Đoạn thẳng (-0.60, +0.00) -> (-0.60, -1.20), 1.20 m, tới (hàng 1, cột 2)
+[INFO] [1793073508.879143049] [agv2.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793073512.082868942] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech +0.44°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073519.190647918] [agv2.fleet_agent]: [agv2] da toi (1,2), sai so vi tri 1.2 cm, sai so goc 0.01°
+[INFO] [1793073521.068993925] [agv2.fleet_agent]: [agv2] lo trinh #930731931: (1,2) -> (2,2) -> (3,2) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793073536.468265653] [agv2.fleet_agent]: Đoạn thẳng (-0.60, -1.20) -> (-0.60, +0.00), 1.20 m, tới (hàng 3, cột 2)
+[INFO] [1793073536.469057527] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1793073541.322423825] [agv2.fleet_agent]: Xoay mot luot xong sau 4.9 s, con lech -0.40°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073553.273460720] [agv2.fleet_agent]: Đoạn thẳng (-0.60, +0.00) -> (+0.60, +0.00), 1.20 m, tới (hàng 3, cột 4)
+[INFO] [1793073553.276209848] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073556.577768352] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech -0.45°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073563.744443065] [agv2.fleet_agent]: [agv2] da toi (3,4), sai so vi tri 1.2 cm, sai so goc 0.01°
+[INFO] [1793073571.670252349] [agv2.fleet_agent]: [agv2] lo trinh #930731935: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793073571.867789124] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+1.20, +0.00), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793073576.274666031] [agv2.fleet_agent]: [agv2] da toi (3,5), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793073578.472681104] [agv2.fleet_agent]: [agv2] lo trinh #930731938: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (2,2) -> (1,2), duoc di toi o 0
+[INFO] [1793073578.669640613] [agv2.fleet_agent]: Đoạn thẳng (+1.20, +0.00) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073578.670359844] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073583.522755015] [agv2.fleet_agent]: Xoay mot luot xong sau 4.9 s, con lech -0.44°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073593.030453519] [agv2.fleet_agent]: Đoạn thẳng (-0.60, +0.00) -> (-0.60, -1.20), 1.20 m, tới (hàng 1, cột 2)
+[INFO] [1793073593.031412162] [agv2.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793073596.282825368] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech +0.40°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073603.386232818] [agv2.fleet_agent]: [agv2] da toi (1,2), sai so vi tri 1.2 cm, sai so goc 0.01°
+[INFO] [1793073605.268226909] [agv2.fleet_agent]: [agv2] lo trinh #930731941: (1,2) -> (1,3) -> (2,3) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793073605.466476651] [agv2.fleet_agent]: Đoạn thẳng (-0.60, -1.20) -> (+0.00, -1.20), 0.60 m, tới (hàng 1, cột 3)
+[INFO] [1793073605.466880615] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073608.719166850] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech +0.46°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073612.573120779] [agv2.fleet_agent]: Đoạn thẳng (+0.00, -1.20) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073612.573648814] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1793073615.827500741] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech +0.55°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073622.432438254] [agv2.fleet_agent]: Đoạn thẳng (+0.00, +0.00) -> (+0.60, +0.00), 0.60 m, tới (hàng 3, cột 4)
+[INFO] [1793073622.433170829] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073625.585192735] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech -0.33°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073629.840143925] [agv2.fleet_agent]: [agv2] da toi (3,4), sai so vi tri 1.1 cm, sai so goc 0.28°
+[INFO] [1793073634.672575015] [agv2.fleet_agent]: [agv2] lo trinh #930731945: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793073634.870193212] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+1.20, +0.00), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793073639.276517593] [agv2.fleet_agent]: [agv2] da toi (3,5), sai so vi tri 1.2 cm, sai so goc 0.00°
+[INFO] [1793073641.471295162] [agv2.fleet_agent]: [agv2] lo trinh #930731946: (3,5) -> (3,4) -> (3,3) -> (2,3) -> (1,3), duoc di toi o 0
+[INFO] [1793073641.675084557] [agv2.fleet_agent]: Đoạn thẳng (+1.20, +0.00) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073641.675527475] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073646.676846135] [agv2.fleet_agent]: Xoay mot luot xong sau 5.0 s, con lech +0.41°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073653.532797631] [agv2.fleet_agent]: Đoạn thẳng (+0.00, +0.00) -> (+0.00, -1.20), 1.20 m, tới (hàng 1, cột 3)
+[INFO] [1793073653.534020865] [agv2.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793073656.686688817] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech +0.32°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073663.649389582] [agv2.fleet_agent]: [agv2] da toi (1,3), sai so vi tri 1.1 cm, sai so goc 0.01°
+[INFO] [1793073665.467329625] [agv2.fleet_agent]: [agv2] lo trinh #930731951: (1,3) -> (1,2) -> (2,2) -> (3,2) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793073665.670592010] [agv2.fleet_agent]: Đoạn thẳng (+0.00, -1.20) -> (-0.60, -1.20), 0.60 m, tới (hàng 1, cột 2)
+[INFO] [1793073665.671089799] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073668.838792216] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech -0.43°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073672.643252948] [agv2.fleet_agent]: Đoạn thẳng (-0.60, -1.20) -> (-0.60, +0.00), 1.20 m, tới (hàng 3, cột 2)
+[INFO] [1793073672.644171128] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1793073675.846127734] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech -0.36°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073682.451257532] [agv2.fleet_agent]: Đoạn thẳng (-0.60, +0.00) -> (+0.60, +0.00), 1.20 m, tới (hàng 3, cột 4)
+[INFO] [1793073682.451855076] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073685.703458929] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech -0.43°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073692.858477833] [agv2.fleet_agent]: [agv2] da toi (3,4), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793073697.670222273] [agv2.fleet_agent]: [agv2] lo trinh #930731955: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793073712.269444333] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+1.20, +0.00), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793073716.581590583] [agv2.fleet_agent]: [agv2] da toi (3,5), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793073718.874186002] [agv2.fleet_agent]: [agv2] lo trinh #930731957: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (3,1) -> (2,1) -> (1,1), duoc di toi o 0
+[INFO] [1793073719.068698500] [agv2.fleet_agent]: Đoạn thẳng (+1.20, +0.00) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073719.069135727] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073723.923405914] [agv2.fleet_agent]: Xoay mot luot xong sau 4.9 s, con lech +0.44°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073736.144054203] [agv2.fleet_agent]: Đoạn thẳng (-1.20, +0.00) -> (-1.20, -1.20), 1.20 m, tới (hàng 1, cột 1)
+[INFO] [1793073736.144776997] [agv2.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793073739.396557958] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech +0.32°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073746.358972646] [agv2.fleet_agent]: [agv2] da toi (1,1), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793073748.269703852] [agv2.fleet_agent]: [agv2] lo trinh #930731962: (1,1) -> (2,1) -> (3,1) -> (3,2) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793073748.473290311] [agv2.fleet_agent]: Đoạn thẳng (-1.20, -1.20) -> (-1.20, +0.00), 1.20 m, tới (hàng 3, cột 1)
+[INFO] [1793073748.475129804] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1793073753.378202673] [agv2.fleet_agent]: Xoay mot luot xong sau 4.9 s, con lech -0.52°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073760.269587942] [agv2.fleet_agent]: Đoạn thẳng (-1.20, +0.00) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073760.269953694] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073763.424716558] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech -0.46°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073773.380082923] [agv2.fleet_agent]: [agv2] da toi (3,4), sai so vi tri 1.1 cm, sai so goc 0.02°
+[INFO] [1793073777.869067434] [agv2.fleet_agent]: [agv2] lo trinh #930731966: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793073778.072321934] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+1.20, +0.00), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793073782.377772708] [agv2.fleet_agent]: [agv2] da toi (3,5), sai so vi tri 1.2 cm, sai so goc 0.00°
+[INFO] [1793073784.668746894] [agv2.fleet_agent]: [agv2] lo trinh #930731967: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (3,1) -> (2,1) -> (1,1), duoc di toi o 0
+[INFO] [1793073784.868060685] [agv2.fleet_agent]: Đoạn thẳng (+1.20, +0.00) -> (+0.60, +0.00), 0.60 m, tới (hàng 3, cột 4)
+[INFO] [1793073784.868527795] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073789.720098101] [agv2.fleet_agent]: Xoay mot luot xong sau 4.9 s, con lech +0.37°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073801.977364833] [agv2.fleet_agent]: Đoạn thẳng (-1.20, +0.00) -> (-1.20, -1.20), 1.20 m, tới (hàng 1, cột 1)
+[INFO] [1793073801.978306669] [agv2.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793073805.180155463] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech +0.43°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073812.334475470] [agv2.fleet_agent]: [agv2] da toi (1,1), sai so vi tri 1.1 cm, sai so goc 0.01°
+[INFO] [1793073814.072306582] [agv2.fleet_agent]: [agv2] lo trinh #930731971: (1,1) -> (2,1) -> (3,1) -> (3,2) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793073814.268536867] [agv2.fleet_agent]: Đoạn thẳng (-1.20, -1.20) -> (-1.20, +0.00), 1.20 m, tới (hàng 3, cột 1)
+[INFO] [1793073814.454480004] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1793073819.256158729] [agv2.fleet_agent]: Xoay mot luot xong sau 4.8 s, con lech -0.43°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073825.760664727] [agv2.fleet_agent]: Đoạn thẳng (-1.20, +0.00) -> (-0.60, +0.00), 0.60 m, tới (hàng 3, cột 2)
+[INFO] [1793073825.761162490] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073828.963358016] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech -0.41°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073838.818572343] [agv2.fleet_agent]: [agv2] da toi (3,4), sai so vi tri 1.1 cm, sai so goc 0.01°
+[INFO] [1793073843.277364707] [agv2.fleet_agent]: [agv2] lo trinh #930731973: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793073843.472991632] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+1.20, +0.00), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793073847.780682902] [agv2.fleet_agent]: [agv2] da toi (3,5), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793073850.067928623] [agv2.fleet_agent]: [agv2] lo trinh #930731974: (3,5) -> (3,4) -> (3,3) -> (3,2) -> (2,2) -> (1,2), duoc di toi o 0
+[INFO] [1793073850.267533165] [agv2.fleet_agent]: Đoạn thẳng (+1.20, +0.00) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073850.269273429] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073855.120615607] [agv2.fleet_agent]: Xoay mot luot xong sau 4.9 s, con lech +0.40°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073864.572952337] [agv2.fleet_agent]: Đoạn thẳng (-0.60, +0.00) -> (-0.60, -1.20), 1.20 m, tới (hàng 1, cột 2)
+[INFO] [1793073864.573329218] [agv2.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793073867.776923902] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech +0.46°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073874.829571945] [agv2.fleet_agent]: [agv2] da toi (1,2), sai so vi tri 1.1 cm, sai so goc 0.01°
+[INFO] [1793073876.669239569] [agv2.fleet_agent]: [agv2] lo trinh #930731977: (1,2) -> (2,2) -> (3,2) -> (3,3) -> (3,4), duoc di toi o 0
+[INFO] [1793073876.866960325] [agv2.fleet_agent]: Đoạn thẳng (-0.60, -1.20) -> (-0.60, +0.00), 1.20 m, tới (hàng 3, cột 2)
+[INFO] [1793073876.867325558] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1793073881.672071350] [agv2.fleet_agent]: Xoay mot luot xong sau 4.8 s, con lech -0.52°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073888.236729447] [agv2.fleet_agent]: Đoạn thẳng (-0.60, +0.00) -> (+0.60, +0.00), 1.20 m, tới (hàng 3, cột 4)
+[INFO] [1793073888.237541794] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073891.440124638] [agv2.fleet_agent]: Xoay mot luot xong sau 3.2 s, con lech -0.31°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073898.451901061] [agv2.fleet_agent]: [agv2] da toi (3,4), sai so vi tri 1.1 cm, sai so goc 0.01°
+[INFO] [1793073902.869018816] [agv2.fleet_agent]: [agv2] lo trinh #930731979: (3,4) -> (3,5), duoc di toi o 0
+[INFO] [1793073903.067287685] [agv2.fleet_agent]: Đoạn thẳng (+0.60, +0.00) -> (+1.20, +0.00), 0.60 m, tới (hàng 3, cột 5)
+[INFO] [1793073907.369896195] [agv2.fleet_agent]: [agv2] da toi (3,5), sai so vi tri 1.1 cm, sai so goc 0.00°
+[INFO] [1793073909.674333257] [agv2.fleet_agent]: [agv2] lo trinh #930731980: (3,5) -> (3,4) -> (3,3) -> (2,3) -> (1,3), duoc di toi o 0
+[INFO] [1793073909.867350255] [agv2.fleet_agent]: Đoạn thẳng (+1.20, +0.00) -> (+0.00, +0.00), 1.20 m, tới (hàng 3, cột 3)
+[INFO] [1793073909.867893493] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073914.619257255] [agv2.fleet_agent]: Xoay mot luot xong sau 4.8 s, con lech -0.47°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073921.223361387] [agv2.fleet_agent]: Đoạn thẳng (+0.00, +0.00) -> (+0.00, -1.20), 1.20 m, tới (hàng 1, cột 3)
+[INFO] [1793073921.223725164] [agv2.fleet_agent]: Xoay mot luot toi huong -90°
+[INFO] [1793073924.475377156] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech +0.44°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073931.779075874] [agv2.fleet_agent]: [agv2] da toi (1,3), sai so vi tri 1.1 cm, sai so goc 0.01°
+[INFO] [1793073933.667855280] [agv2.fleet_agent]: [agv2] lo trinh #930731982: (1,3) -> (1,2) -> (2,2) -> (3,2) -> (4,2) -> (5,2), duoc di toi o 0
+[INFO] [1793073933.870342798] [agv2.fleet_agent]: Đoạn thẳng (+0.00, -1.20) -> (-0.60, -1.20), 0.60 m, tới (hàng 1, cột 2)
+[INFO] [1793073933.871176114] [agv2.fleet_agent]: Xoay mot luot toi huong +180°
+[INFO] [1793073937.123509227] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech -0.42°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073940.828381675] [agv2.fleet_agent]: Đoạn thẳng (-0.60, -1.20) -> (-0.60, +0.00), 1.20 m, tới (hàng 3, cột 2)
+[INFO] [1793073940.828812337] [agv2.fleet_agent]: Xoay mot luot toi huong +90°
+[INFO] [1793073944.081078700] [agv2.fleet_agent]: Xoay mot luot xong sau 3.3 s, con lech -0.33°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073956.734979247] [agv2.fleet_agent]: Xoay mot luot toi huong +0°
+[INFO] [1793073959.787462923] [agv2.fleet_agent]: Xoay mot luot xong sau 3.1 s, con lech -0.42°, khong xoay bu (omega max 57°/s)
+[INFO] [1793073959.790207969] [agv2.fleet_agent]: [agv2] da toi (5,2), sai so vi tri 0.7 cm, sai so goc 0.42°
+Traceback (most recent call last):
+  File "/home/tai/Robot_kho_clone/fleet_agent.py", line 693, in <module>
+    main()
+  File "/home/tai/Robot_kho_clone/fleet_agent.py", line 687, in main
+    agent.destroy_node()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py", line 1956, in destroy_node
+    self.destroy_publisher(self._publishers[0])
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py", line 1836, in destroy_publisher
+    publisher.destroy()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/publisher.py", line 105, in destroy
+    self.__publisher.destroy_when_not_in_use()
+KeyboardInterrupt

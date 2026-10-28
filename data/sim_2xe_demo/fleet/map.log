@@ -1,0 +1,26 @@
+[INFO] [1793072230.214787749] [map_server]: 
+	map_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1793072230.214865335] [map_server]: Creating
+[INFO] [1793072230.399805798] [map_server]: Configuring
+[INFO] [1793072230.399876582] [map_io]: Loading yaml file: /home/tai/Robot_kho_clone/src/my_bot_bringup/config/real_room_map.yaml
+[INFO] [1793072230.400738828] [map_io]: resolution: 0.05
+[INFO] [1793072230.400756898] [map_io]: origin[0]: -4.763
+[INFO] [1793072230.400761478] [map_io]: origin[1]: -2.581
+[INFO] [1793072230.400765314] [map_io]: origin[2]: 0
+[INFO] [1793072230.400768980] [map_io]: free_thresh: 0.196
+[INFO] [1793072230.400772612] [map_io]: occupied_thresh: 0.65
+[INFO] [1793072230.400777546] [map_io]: mode: trinary
+[INFO] [1793072230.400781913] [map_io]: negate: 0
+[INFO] [1793072230.401874825] [map_io]: Loading image_file: /home/tai/Robot_kho_clone/src/my_bot_bringup/config/real_room_map.pgm
+[INFO] [1793072230.402940999] [map_io]: Read map /home/tai/Robot_kho_clone/src/my_bot_bringup/config/real_room_map.pgm: 159 X 165 map @ 0.05 m/cell
+[INFO] [1793072230.412662873] [map_server]: Activating
+[INFO] [1793072230.412772868] [map_server]: Creating bond (map_server) to lifecycle manager.
+[INFO] [1793072665.404235187] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1793072665.404346533] [map_server]: Running Nav2 LifecycleNode rcl preshutdown (map_server)
+[INFO] [1793072665.404413893] [map_server]: Deactivating
+[INFO] [1793072665.404423136] [map_server]: Destroying bond (map_server) to lifecycle manager.
+[INFO] [1793072665.414708127] [map_server]: Cleaning up
+[INFO] [1793072665.414781691] [map_server]: Destroying bond (map_server) to lifecycle manager.
+[INFO] [1793072665.418044582] [map_server]: Destroying

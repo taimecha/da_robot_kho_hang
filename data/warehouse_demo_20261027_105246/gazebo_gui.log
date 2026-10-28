@@ -1,0 +1,12 @@
+libEGL warning: pci id for fd 87: 10de:25b8, driver (null)
+
+pci id for fd 88: 10de:25b8, driver (null)
+pci id for fd 89: 10de:25b8, driver (null)
+libEGL warning: egl: failed to create dri2 screen
+libEGL warning: pci id for fd 87: 10de:25b8, driver (null)
+
+pci id for fd 88: 10de:25b8, driver (null)
+pci id for fd 89: 10de:25b8, driver (null)
+libEGL warning: egl: failed to create dri2 screen
+libEGL warning: pci id for fd 87: 10de:25b8, driver (null)
+

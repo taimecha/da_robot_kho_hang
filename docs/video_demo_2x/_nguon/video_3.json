@@ -1,0 +1,48 @@
+{
+  "video": 3,
+  "output": "video_3_giao_nhau_3_3_2x.mp4",
+  "speed_relative_to_inputs": 2,
+  "source_motion_duration_s": 34.8,
+  "final_hold_s": 0,
+  "output_duration_s": 17.4,
+  "sources": [
+    {
+      "path": "/home/tai/Downloads/06. Video demo/Video 3 - Hai tuyến giao nhau tại ô (3,3).mp4",
+      "sha256": "d5200172fa32cde7c1248c3991d28b026919bcffb83b20d877c349f1deb1a8de"
+    }
+  ],
+  "output_sha256": "d9ea406dd098c073edb40be66d07e612824df9230bc3821d313ebac3b2b28c80",
+  "ffmpeg_command": [
+    "ffmpeg",
+    "-hide_banner",
+    "-loglevel",
+    "warning",
+    "-y",
+    "-threads",
+    "4",
+    "-i",
+    "/home/tai/Downloads/06. Video demo/Video 3 - Hai tuyến giao nhau tại ô (3,3).mp4",
+    "-filter_threads",
+    "2",
+    "-vf",
+    "setpts=(PTS-STARTPTS)/2,fps=30,setsar=1",
+    "-map",
+    "0:v:0",
+    "-an",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "medium",
+    "-crf",
+    "19",
+    "-threads",
+    "4",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "-metadata",
+    "title=AGV demo 3 - 2x",
+    "/home/tai/Robot_kho_clone/docs/video_demo_2x/video_3_giao_nhau_3_3_2x.mp4"
+  ]
+}

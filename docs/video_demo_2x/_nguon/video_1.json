@@ -1,0 +1,48 @@
+{
+  "video": 1,
+  "output": "video_1_nhap_dich_2x.mp4",
+  "speed_relative_to_inputs": 2,
+  "source_motion_duration_s": 36.366667,
+  "final_hold_s": 0,
+  "output_duration_s": 18.2,
+  "sources": [
+    {
+      "path": "/home/tai/Downloads/06. Video demo/Video 1 - Nhập đích cho hai xe.mp4",
+      "sha256": "193349cd760a0e9d485825dc1b66bf0c8c636dec2fcb7e75afb0a1f6bf1e54c1"
+    }
+  ],
+  "output_sha256": "2f317ece41510bb2bbe3282edd7076afc21aa7c9c94971b0a5a65fbc3158fbbe",
+  "ffmpeg_command": [
+    "ffmpeg",
+    "-hide_banner",
+    "-loglevel",
+    "warning",
+    "-y",
+    "-threads",
+    "4",
+    "-i",
+    "/home/tai/Downloads/06. Video demo/Video 1 - Nhập đích cho hai xe.mp4",
+    "-filter_threads",
+    "2",
+    "-vf",
+    "setpts=(PTS-STARTPTS)/2,fps=30,setsar=1",
+    "-map",
+    "0:v:0",
+    "-an",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "medium",
+    "-crf",
+    "19",
+    "-threads",
+    "4",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "-metadata",
+    "title=AGV demo 1 - 2x",
+    "/home/tai/Robot_kho_clone/docs/video_demo_2x/video_1_nhap_dich_2x.mp4"
+  ]
+}

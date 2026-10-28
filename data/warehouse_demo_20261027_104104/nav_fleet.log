@@ -1,0 +1,1098 @@
+[INFO] [launch]: All log files can be found below /home/tai/.ros/log/2026-10-27-10-41-05-321845-tai-Nitro-AN515-57-13262
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [component_container_isolated-1]: process started with pid [13350]
+[component_container_isolated-1] [INFO] [1793072466.089681673] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libcontroller_server_core.so
+[component_container_isolated-1] [INFO] [1793072466.096409638] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-1] [INFO] [1793072466.096443634] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-1] [INFO] [1793072466.102319391] [agv1.controller_server]: 
+[component_container_isolated-1] 	controller_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1793072466.104384716] [agv1.controller_server]: Creating controller server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/controller_server' in container 'agv1/nav2_container'
+[component_container_isolated-1] [INFO] [1793072466.112758043] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libsmoother_server_core.so
+[component_container_isolated-1] [INFO] [1793072466.114696461] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-1] [INFO] [1793072466.114721497] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-1] [INFO] [1793072466.121042663] [agv1.smoother_server]: 
+[component_container_isolated-1] 	smoother_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1793072466.121900265] [agv1.smoother_server]: Creating smoother server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/smoother_server' in container 'agv1/nav2_container'
+[component_container_isolated-1] [INFO] [1793072466.123302479] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libplanner_server_core.so
+[component_container_isolated-1] [INFO] [1793072466.124294781] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-1] [INFO] [1793072466.124311936] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-1] [INFO] [1793072466.130553000] [agv1.planner_server]: 
+[component_container_isolated-1] 	planner_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1793072466.131428631] [agv1.planner_server]: Creating
+[component_container_isolated-1] [INFO] [1793072466.138862245] [agv1.global_costmap.global_costmap]: 
+[component_container_isolated-1] 	global_costmap lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1793072466.139090796] [agv1.global_costmap.global_costmap]: Creating Costmap
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/planner_server' in container 'agv1/nav2_container'
+[component_container_isolated-1] [INFO] [1793072466.140715151] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libroute_server_core.so
+[component_container_isolated-1] [INFO] [1793072466.141878322] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_route::RouteServer>
+[component_container_isolated-1] [INFO] [1793072466.141891165] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_route::RouteServer>
+[component_container_isolated-1] [INFO] [1793072466.149235837] [agv1.route_server]: 
+[component_container_isolated-1] 	route_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/route_server' in container 'agv1/nav2_container'
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1793072466.150761353] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libbehavior_server_core.so
+[component_container_isolated-1] [INFO] [1793072466.151883017] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-1] [INFO] [1793072466.151903552] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-1] [INFO] [1793072466.161709612] [agv1.behavior_server]: 
+[component_container_isolated-1] 	behavior_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/behavior_server' in container 'agv1/nav2_container'
+[component_container_isolated-1] [INFO] [1793072466.164265176] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libbt_navigator_core.so
+[component_container_isolated-1] [INFO] [1793072466.167104366] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-1] [INFO] [1793072466.167119968] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-1] [INFO] [1793072466.175149929] [agv1.bt_navigator]: 
+[component_container_isolated-1] 	bt_navigator lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1793072466.176076729] [agv1.bt_navigator]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/bt_navigator' in container 'agv1/nav2_container'
+[component_container_isolated-1] [INFO] [1793072466.177250130] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libwaypoint_follower_core.so
+[component_container_isolated-1] [INFO] [1793072466.178154642] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-1] [INFO] [1793072466.178169661] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-1] [INFO] [1793072466.186627788] [agv1.waypoint_follower]: 
+[component_container_isolated-1] 	waypoint_follower lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1793072466.186870278] [agv1.waypoint_follower]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/waypoint_follower' in container 'agv1/nav2_container'
+[component_container_isolated-1] [INFO] [1793072466.188566119] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libvelocity_smoother_core.so
+[component_container_isolated-1] [INFO] [1793072466.189355623] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-1] [INFO] [1793072466.189367139] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-1] [INFO] [1793072466.199150598] [agv1.velocity_smoother]: 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/velocity_smoother' in container 'agv1/nav2_container'
+[component_container_isolated-1] 	velocity_smoother lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1793072466.200725354] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libcollision_monitor_core.so
+[component_container_isolated-1] [INFO] [1793072466.202998259] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_collision_monitor::CollisionMonitor>
+[component_container_isolated-1] [INFO] [1793072466.203010948] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_collision_monitor::CollisionMonitor>
+[component_container_isolated-1] [INFO] [1793072466.212559863] [agv1.collision_monitor]: 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/collision_monitor' in container 'agv1/nav2_container'
+[component_container_isolated-1] 	collision_monitor lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1793072466.214244233] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libopennav_docking_core.so
+[component_container_isolated-1] [INFO] [1793072466.215976703] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<opennav_docking::DockingServer>
+[component_container_isolated-1] [INFO] [1793072466.215993608] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<opennav_docking::DockingServer>
+[component_container_isolated-1] [INFO] [1793072466.226912187] [agv1.docking_server]: 
+[component_container_isolated-1] 	docking_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1793072466.226948894] [agv1.docking_server]: Creating docking_server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/docking_server' in container 'agv1/nav2_container'
+[component_container_isolated-1] [INFO] [1793072466.228582701] [agv1.nav2_container]: Load Library: /opt/ros/jazzy/lib/libnav2_lifecycle_manager_core.so
+[component_container_isolated-1] [INFO] [1793072466.229629718] [agv1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-1] [INFO] [1793072466.229646340] [agv1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-1] [INFO] [1793072466.238360303] [agv1.lifecycle_manager_navigation]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv1/lifecycle_manager_navigation' in container 'agv1/nav2_container'
+[component_container_isolated-1] [INFO] [1793072466.242030423] [agv1.lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.255307409] [agv1.lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.255338442] [agv1.lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.255488981] [agv1.controller_server]: Configuring controller interface
+[component_container_isolated-1] [INFO] [1793072466.255507492] [agv1.controller_server]: getting progress checker plugins..
+[component_container_isolated-1] [INFO] [1793072466.255521829] [agv1.controller_server]: getting goal checker plugins..
+[component_container_isolated-1] [INFO] [1793072466.255544538] [agv1.controller_server]: Controller frequency set to 20.0000Hz
+[component_container_isolated-1] [INFO] [1793072466.282918134] [agv1.controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[component_container_isolated-1] [INFO] [1793072466.283225329] [agv1.controller_server]: Created progress_checker : precision_progress_checker of type nav2_controller::SimpleProgressChecker
+[component_container_isolated-1] [INFO] [1793072466.283380461] [agv1.controller_server]: Controller Server has progress_checker precision_progress_checker  progress checkers available.
+[component_container_isolated-1] [INFO] [1793072466.283690222] [agv1.controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[component_container_isolated-1] [INFO] [1793072466.284091793] [agv1.controller_server]: Created goal checker : precision_goal_checker of type nav2_controller::SimpleGoalChecker
+[component_container_isolated-1] [INFO] [1793072466.284369542] [agv1.controller_server]: Controller Server has general_goal_checker precision_goal_checker  goal checkers available.
+[component_container_isolated-1] [INFO] [1793072466.284974595] [agv1.controller_server]: Created controller : FollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-1] [INFO] [1793072466.289933292] [agv1.controller_server]: Created controller : PrecisionFollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-1] [INFO] [1793072466.294326501] [agv1.controller_server]: Controller Server has FollowPath PrecisionFollowPath  controllers available.
+[component_container_isolated-1] [INFO] [1793072466.301891540] [agv1.lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.301990667] [agv1.smoother_server]: Configuring smoother server
+[component_container_isolated-1] [INFO] [1793072466.307181948] [agv1.smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[component_container_isolated-1] [INFO] [1793072466.307590123] [agv1.smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[component_container_isolated-1] [INFO] [1793072466.312228814] [agv1.lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.312330576] [agv1.planner_server]: Configuring
+[component_container_isolated-1] [INFO] [1793072466.312355792] [agv1.global_costmap.global_costmap]: Configuring
+[component_container_isolated-1] [INFO] [1793072466.316544323] [agv1.global_costmap.global_costmap]: Using plugin "static_layer"
+[component_container_isolated-1] [INFO] [1793072466.317015393] [agv1.global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[component_container_isolated-1] [INFO] [1793072466.317579514] [agv1.global_costmap.global_costmap]: Initialized plugin "static_layer"
+[component_container_isolated-1] [INFO] [1793072466.317591035] [agv1.global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[component_container_isolated-1] [INFO] [1793072466.317930705] [agv1.global_costmap.global_costmap]: Subscribed to Topics: scan
+[component_container_isolated-1] [INFO] [1793072466.320316307] [agv1.global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[component_container_isolated-1] [INFO] [1793072466.320331476] [agv1.global_costmap.global_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-1] [INFO] [1793072466.320716354] [agv1.global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-1] [INFO] [1793072466.334498371] [agv1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 187 X 116 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1793072466.334915803] [agv1.planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner::NavfnPlanner
+[component_container_isolated-1] [INFO] [1793072466.334939195] [agv1.planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[component_container_isolated-1] [INFO] [1793072466.335394678] [agv1.planner_server]: Planner Server has GridBased  planners available.
+[component_container_isolated-1] [INFO] [1793072466.343342956] [agv1.lifecycle_manager_navigation]: [34m[1mConfiguring route_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.343413001] [agv1.route_server]: Configuring
+[component_container_isolated-1] [INFO] [1793072466.356906315] [agv1.route_server]: Created GraphFileLoader GeoJsonGraphFileLoader of type nav2_route::GeoJsonGraphFileLoader
+[component_container_isolated-1] [INFO] [1793072466.356929538] [agv1.route_server]: Configuring geojson graph file loader
+[component_container_isolated-1] [INFO] [1793072466.356935145] [agv1.route_server]: No graph file provided to load yet.
+[component_container_isolated-1] [INFO] [1793072466.358496429] [agv1.route_server]: Created edge cost function plugin DistanceScorer of type nav2_route::DistanceScorer
+[component_container_isolated-1] [INFO] [1793072466.358513883] [agv1.route_server]: Configuring distance scorer.
+[component_container_isolated-1] [INFO] [1793072466.358711039] [agv1.route_server]: Created edge cost function plugin DynamicEdgesScorer of type nav2_route::DynamicEdgesScorer
+[component_container_isolated-1] [INFO] [1793072466.358721645] [agv1.route_server]: Configuring adjust edges scorer.
+[component_container_isolated-1] [INFO] [1793072466.360918362] [agv1.route_server]: Created route operation AdjustSpeedLimit of type nav2_route::AdjustSpeedLimit
+[component_container_isolated-1] [INFO] [1793072466.360934878] [agv1.route_server]: Configuring Adjust speed limit operation.
+[component_container_isolated-1] [INFO] [1793072466.361712216] [agv1.route_server]: Created route operation ReroutingService of type nav2_route::ReroutingService
+[component_container_isolated-1] [INFO] [1793072466.361724362] [agv1.route_server]: Configuring Rerouting service operation.
+[component_container_isolated-1] [INFO] [1793072466.363396778] [agv1.lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.363461313] [agv1.behavior_server]: Configuring
+[component_container_isolated-1] [INFO] [1793072466.365315940] [agv1.behavior_server]: Creating behavior plugin spin of type nav2_behaviors::Spin
+[component_container_isolated-1] [INFO] [1793072466.365955320] [agv1.behavior_server]: Creating behavior plugin backup of type nav2_behaviors::BackUp
+[component_container_isolated-1] [INFO] [1793072466.366464229] [agv1.behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors::DriveOnHeading
+[component_container_isolated-1] [INFO] [1793072466.366962035] [agv1.behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[component_container_isolated-1] [INFO] [1793072466.369153662] [agv1.behavior_server]: Configuring spin
+[component_container_isolated-1] [INFO] [1793072466.375912797] [agv1.behavior_server]: Configuring backup
+[component_container_isolated-1] [INFO] [1793072466.381239344] [agv1.behavior_server]: Configuring drive_on_heading
+[component_container_isolated-1] [INFO] [1793072466.385482059] [agv1.behavior_server]: Configuring wait
+[component_container_isolated-1] [INFO] [1793072466.389690435] [agv1.lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.389768973] [agv1.velocity_smoother]: Configuring velocity smoother
+[component_container_isolated-1] [INFO] [1793072466.392166227] [agv1.lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.392227616] [agv1.collision_monitor]: Configuring
+[component_container_isolated-1] [INFO] [1793072466.395312837] [collision_monitor]: [scan]: Creating Scan
+[component_container_isolated-1] [INFO] [1793072466.396321842] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[component_container_isolated-1] [INFO] [1793072466.396433518] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[component_container_isolated-1] [INFO] [1793072466.397077287] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /agv1/local_costmap/published_footprint topic
+[component_container_isolated-1] [INFO] [1793072466.400704411] [agv1.lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.400766527] [agv1.bt_navigator]: Configuring
+[component_container_isolated-1] [INFO] [1793072466.403547350] [agv1.bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[component_container_isolated-1] [WARN] [1793072466.405292761] [agv1.bt_navigator]: Error_code parameters were not set. Using default values of: follow_path_error_code compute_path_error_code
+[component_container_isolated-1] Make sure these match your BT and there are not other sources of error codes youreported to your application
+[component_container_isolated-1] [INFO] [1793072466.451060281] [agv1.bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[component_container_isolated-1] [INFO] [1793072466.470733057] [agv1.lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.470803898] [agv1.waypoint_follower]: Configuring
+[component_container_isolated-1] [INFO] [1793072466.485633687] [agv1.waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[component_container_isolated-1] [INFO] [1793072466.486035553] [agv1.waypoint_follower]: Waypoint pause duration is set to zero, disabling task executor plugin.
+[component_container_isolated-1] [INFO] [1793072466.486278112] [agv1.lifecycle_manager_navigation]: [34m[1mConfiguring docking_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.486357618] [agv1.docking_server]: Configuring docking_server
+[component_container_isolated-1] [INFO] [1793072466.486389230] [agv1.docking_server]: Controller frequency set to 50.0000Hz
+[component_container_isolated-1] [INFO] [1793072466.503586511] [agv1.docking_server]: Created charging dock plugin simple_charging_dock of type opennav_docking::SimpleChargingDock
+[component_container_isolated-1] [WARN] [1793072466.508182811] [agv1.docking_server]: Dock database filepath nor dock parameters set. Docking actions can only be executed specifying the dock pose via the action request. Or update the dock database via the reload_database service.
+[component_container_isolated-1] [INFO] [1793072466.508207296] [agv1.docking_server]: Docking Server has 1 dock types and 0 dock instances available.
+[component_container_isolated-1] [INFO] [1793072466.509499809] [agv1.lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.509609670] [agv1.controller_server]: Activating
+[component_container_isolated-1] [INFO] [1793072466.710730279] [agv1.controller_server]: Activating controller: PrecisionFollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-1] [INFO] [1793072466.710786347] [agv1.controller_server]: Activating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-1] [INFO] [1793072466.710820707] [agv1.controller_server]: Creating bond (controller_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072466.817400195] [agv1.lifecycle_manager_navigation]: Server controller_server connected with bond.
+[component_container_isolated-1] [INFO] [1793072466.817455303] [agv1.lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.817882533] [agv1.smoother_server]: Activating
+[component_container_isolated-1] [INFO] [1793072466.817923932] [agv1.smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072466.924150563] [agv1.lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[component_container_isolated-1] [INFO] [1793072466.924198256] [agv1.lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072466.924538949] [agv1.planner_server]: Activating
+[component_container_isolated-1] [INFO] [1793072466.924584589] [agv1.global_costmap.global_costmap]: Activating
+[component_container_isolated-1] [INFO] [1793072466.924607732] [agv1.global_costmap.global_costmap]: Checking transform
+[component_container_isolated-1] [INFO] [1793072466.924724925] [agv1.global_costmap.global_costmap]: start
+[component_container_isolated-1] [INFO] [1793072467.926354404] [agv1.planner_server]: Activating plugin GridBased of type NavfnPlanner
+[component_container_isolated-1] [INFO] [1793072467.928166289] [agv1.planner_server]: Creating bond (planner_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072468.032227890] [agv1.lifecycle_manager_navigation]: Server planner_server connected with bond.
+[component_container_isolated-1] [INFO] [1793072468.032258283] [agv1.lifecycle_manager_navigation]: [34m[1mActivating route_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072468.032618825] [agv1.route_server]: Activating
+[component_container_isolated-1] [INFO] [1793072468.032865593] [agv1.route_server]: Creating bond (route_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072468.137730225] [agv1.lifecycle_manager_navigation]: Server route_server connected with bond.
+[component_container_isolated-1] [INFO] [1793072468.137793510] [agv1.lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072468.138062382] [agv1.behavior_server]: Activating
+[component_container_isolated-1] [INFO] [1793072468.138078313] [agv1.behavior_server]: Activating spin
+[component_container_isolated-1] [INFO] [1793072468.138097815] [agv1.behavior_server]: Activating backup
+[component_container_isolated-1] [INFO] [1793072468.138104005] [agv1.behavior_server]: Activating drive_on_heading
+[component_container_isolated-1] [INFO] [1793072468.138110823] [agv1.behavior_server]: Activating wait
+[component_container_isolated-1] [INFO] [1793072468.138120888] [agv1.behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072468.242941650] [agv1.lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[component_container_isolated-1] [INFO] [1793072468.243037879] [agv1.lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[component_container_isolated-1] [INFO] [1793072468.243735650] [agv1.velocity_smoother]: Activating
+[component_container_isolated-1] [INFO] [1793072468.243815741] [agv1.velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072468.349851944] [agv1.lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[component_container_isolated-1] [INFO] [1793072468.349893840] [agv1.lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[component_container_isolated-1] [INFO] [1793072468.350223902] [agv1.collision_monitor]: Activating
+[component_container_isolated-1] [INFO] [1793072468.350332417] [agv1.collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072468.457489538] [agv1.lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[component_container_isolated-1] [INFO] [1793072468.457556127] [agv1.lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[component_container_isolated-1] [INFO] [1793072468.457794616] [agv1.bt_navigator]: Activating
+[component_container_isolated-1] [INFO] [1793072468.523935374] [agv1.bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072468.629121287] [agv1.lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[component_container_isolated-1] [INFO] [1793072468.629150822] [agv1.lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[component_container_isolated-1] [INFO] [1793072468.629439514] [agv1.waypoint_follower]: Activating
+[component_container_isolated-1] [INFO] [1793072468.629478414] [agv1.waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072468.735495331] [agv1.lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[component_container_isolated-1] [INFO] [1793072468.735548602] [agv1.lifecycle_manager_navigation]: [34m[1mActivating docking_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072468.735780150] [agv1.docking_server]: Activating docking_server
+[component_container_isolated-1] [INFO] [1793072468.744349458] [agv1.docking_server]: Creating bond (docking_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072468.850713466] [agv1.lifecycle_manager_navigation]: Server docking_server connected with bond.
+[component_container_isolated-1] [INFO] [1793072468.850744431] [agv1.lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[component_container_isolated-1] [INFO] [1793072468.850767691] [agv1.lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[INFO] [component_container_isolated-2]: process started with pid [13498]
+[component_container_isolated-2] [INFO] [1793072473.926491574] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libcontroller_server_core.so
+[component_container_isolated-2] [INFO] [1793072473.933340601] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-2] [INFO] [1793072473.933363103] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-2] [INFO] [1793072473.941205256] [agv2.controller_server]: 
+[component_container_isolated-2] 	controller_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1793072473.943522240] [agv2.controller_server]: Creating controller server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/controller_server' in container 'agv2/nav2_container'
+[component_container_isolated-2] [INFO] [1793072473.951193728] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libsmoother_server_core.so
+[component_container_isolated-2] [INFO] [1793072473.952674272] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-2] [INFO] [1793072473.952691886] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-2] [INFO] [1793072473.959096623] [agv2.smoother_server]: 
+[component_container_isolated-2] 	smoother_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1793072473.960113486] [agv2.smoother_server]: Creating smoother server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/smoother_server' in container 'agv2/nav2_container'
+[component_container_isolated-2] [INFO] [1793072473.961765970] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libplanner_server_core.so
+[component_container_isolated-2] [INFO] [1793072473.962674768] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-2] [INFO] [1793072473.962694182] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-2] [INFO] [1793072473.970359853] [agv2.planner_server]: 
+[component_container_isolated-2] 	planner_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1793072473.971345779] [agv2.planner_server]: Creating
+[component_container_isolated-2] [INFO] [1793072473.978947172] [agv2.global_costmap.global_costmap]: 
+[component_container_isolated-2] 	global_costmap lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1793072473.979286234] [agv2.global_costmap.global_costmap]: Creating Costmap
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/planner_server' in container 'agv2/nav2_container'
+[component_container_isolated-2] [INFO] [1793072473.981435295] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libroute_server_core.so
+[component_container_isolated-2] [INFO] [1793072473.982652638] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_route::RouteServer>
+[component_container_isolated-2] [INFO] [1793072473.982667334] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_route::RouteServer>
+[component_container_isolated-2] [INFO] [1793072473.989657293] [agv2.route_server]: 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/route_server' in container 'agv2/nav2_container'
+[component_container_isolated-2] 	route_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1793072473.991104210] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libbehavior_server_core.so
+[component_container_isolated-2] [INFO] [1793072473.991875816] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-2] [INFO] [1793072473.991888600] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-2] [INFO] [1793072474.000503519] [agv2.behavior_server]: 
+[component_container_isolated-2] 	behavior_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/behavior_server' in container 'agv2/nav2_container'
+[component_container_isolated-2] [INFO] [1793072474.003787995] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libbt_navigator_core.so
+[component_container_isolated-2] [INFO] [1793072474.006218371] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-2] [INFO] [1793072474.006235899] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-2] [INFO] [1793072474.016684162] [agv2.bt_navigator]: 
+[component_container_isolated-2] 	bt_navigator lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1793072474.017723886] [agv2.bt_navigator]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/bt_navigator' in container 'agv2/nav2_container'
+[component_container_isolated-2] [INFO] [1793072474.019098347] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libwaypoint_follower_core.so
+[component_container_isolated-2] [INFO] [1793072474.019951630] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-2] [INFO] [1793072474.019964673] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-2] [INFO] [1793072474.036611917] [agv2.waypoint_follower]: 
+[component_container_isolated-2] 	waypoint_follower lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1793072474.036917600] [agv2.waypoint_follower]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/waypoint_follower' in container 'agv2/nav2_container'
+[component_container_isolated-2] [INFO] [1793072474.038524855] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libvelocity_smoother_core.so
+[component_container_isolated-2] [INFO] [1793072474.039266376] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-2] [INFO] [1793072474.039281411] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-2] [INFO] [1793072474.049079431] [agv2.velocity_smoother]: 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/velocity_smoother' in container 'agv2/nav2_container'
+[component_container_isolated-2] 	velocity_smoother lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1793072474.050702924] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libcollision_monitor_core.so
+[component_container_isolated-2] [INFO] [1793072474.053392111] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_collision_monitor::CollisionMonitor>
+[component_container_isolated-2] [INFO] [1793072474.053408941] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_collision_monitor::CollisionMonitor>
+[component_container_isolated-2] [INFO] [1793072474.063864496] [agv2.collision_monitor]: 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/collision_monitor' in container 'agv2/nav2_container'
+[component_container_isolated-2] 	collision_monitor lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1793072474.065559095] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libopennav_docking_core.so
+[component_container_isolated-2] [INFO] [1793072474.067005801] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<opennav_docking::DockingServer>
+[component_container_isolated-2] [INFO] [1793072474.067022639] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<opennav_docking::DockingServer>
+[component_container_isolated-2] [INFO] [1793072474.081294768] [agv2.docking_server]: 
+[component_container_isolated-2] 	docking_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1793072474.081380964] [agv2.docking_server]: Creating docking_server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/docking_server' in container 'agv2/nav2_container'
+[component_container_isolated-2] [INFO] [1793072474.083468229] [agv2.nav2_container]: Load Library: /opt/ros/jazzy/lib/libnav2_lifecycle_manager_core.so
+[component_container_isolated-2] [INFO] [1793072474.084230855] [agv2.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-2] [INFO] [1793072474.084242015] [agv2.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-2] [INFO] [1793072474.093548607] [agv2.lifecycle_manager_navigation]: Creating
+[component_container_isolated-2] [INFO] [1793072474.097995924] [agv2.lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv2/lifecycle_manager_navigation' in container 'agv2/nav2_container'
+[component_container_isolated-2] [INFO] [1793072474.112621085] [agv2.lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.112659334] [agv2.lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.112838846] [agv2.controller_server]: Configuring controller interface
+[component_container_isolated-2] [INFO] [1793072474.112862545] [agv2.controller_server]: getting progress checker plugins..
+[component_container_isolated-2] [INFO] [1793072474.112879911] [agv2.controller_server]: getting goal checker plugins..
+[component_container_isolated-2] [INFO] [1793072474.112911023] [agv2.controller_server]: Controller frequency set to 20.0000Hz
+[component_container_isolated-2] [INFO] [1793072474.144140999] [agv2.controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[component_container_isolated-2] [INFO] [1793072474.144500515] [agv2.controller_server]: Created progress_checker : precision_progress_checker of type nav2_controller::SimpleProgressChecker
+[component_container_isolated-2] [INFO] [1793072474.144702013] [agv2.controller_server]: Controller Server has progress_checker precision_progress_checker  progress checkers available.
+[component_container_isolated-2] [INFO] [1793072474.145113261] [agv2.controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[component_container_isolated-2] [INFO] [1793072474.145584517] [agv2.controller_server]: Created goal checker : precision_goal_checker of type nav2_controller::SimpleGoalChecker
+[component_container_isolated-2] [INFO] [1793072474.145927910] [agv2.controller_server]: Controller Server has general_goal_checker precision_goal_checker  goal checkers available.
+[component_container_isolated-2] [INFO] [1793072474.146543209] [agv2.controller_server]: Created controller : FollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-2] [INFO] [1793072474.152439444] [agv2.controller_server]: Created controller : PrecisionFollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-2] [INFO] [1793072474.157748743] [agv2.controller_server]: Controller Server has FollowPath PrecisionFollowPath  controllers available.
+[component_container_isolated-2] [INFO] [1793072474.164583657] [agv2.lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.164692627] [agv2.smoother_server]: Configuring smoother server
+[component_container_isolated-2] [INFO] [1793072474.169635825] [agv2.smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[component_container_isolated-2] [INFO] [1793072474.170161151] [agv2.smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[component_container_isolated-2] [INFO] [1793072474.175382826] [agv2.lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.175467184] [agv2.planner_server]: Configuring
+[component_container_isolated-2] [INFO] [1793072474.175494138] [agv2.global_costmap.global_costmap]: Configuring
+[component_container_isolated-2] [INFO] [1793072474.179918519] [agv2.global_costmap.global_costmap]: Using plugin "static_layer"
+[component_container_isolated-2] [INFO] [1793072474.180868745] [agv2.global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[component_container_isolated-2] [INFO] [1793072474.181775703] [agv2.global_costmap.global_costmap]: Initialized plugin "static_layer"
+[component_container_isolated-2] [INFO] [1793072474.181794075] [agv2.global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[component_container_isolated-2] [INFO] [1793072474.182449395] [agv2.global_costmap.global_costmap]: Subscribed to Topics: scan
+[component_container_isolated-2] [INFO] [1793072474.186470599] [agv2.global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[component_container_isolated-2] [INFO] [1793072474.186503102] [agv2.global_costmap.global_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-2] [INFO] [1793072474.187195589] [agv2.global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-2] [INFO] [1793072474.203747099] [agv2.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 187 X 116 at 0.050000 m/pix
+[component_container_isolated-2] [INFO] [1793072474.204131698] [agv2.planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner::NavfnPlanner
+[component_container_isolated-2] [INFO] [1793072474.204152304] [agv2.planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[component_container_isolated-2] [INFO] [1793072474.204647480] [agv2.planner_server]: Planner Server has GridBased  planners available.
+[component_container_isolated-2] [INFO] [1793072474.214130929] [agv2.lifecycle_manager_navigation]: [34m[1mConfiguring route_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.214278268] [agv2.route_server]: Configuring
+[component_container_isolated-2] [INFO] [1793072474.234622153] [agv2.route_server]: Created GraphFileLoader GeoJsonGraphFileLoader of type nav2_route::GeoJsonGraphFileLoader
+[component_container_isolated-2] [INFO] [1793072474.234651247] [agv2.route_server]: Configuring geojson graph file loader
+[component_container_isolated-2] [INFO] [1793072474.234656805] [agv2.route_server]: No graph file provided to load yet.
+[component_container_isolated-2] [INFO] [1793072474.236604035] [agv2.route_server]: Created edge cost function plugin DistanceScorer of type nav2_route::DistanceScorer
+[component_container_isolated-2] [INFO] [1793072474.236623910] [agv2.route_server]: Configuring distance scorer.
+[component_container_isolated-2] [INFO] [1793072474.236845190] [agv2.route_server]: Created edge cost function plugin DynamicEdgesScorer of type nav2_route::DynamicEdgesScorer
+[component_container_isolated-2] [INFO] [1793072474.236857410] [agv2.route_server]: Configuring adjust edges scorer.
+[component_container_isolated-2] [INFO] [1793072474.239579528] [agv2.route_server]: Created route operation AdjustSpeedLimit of type nav2_route::AdjustSpeedLimit
+[component_container_isolated-2] [INFO] [1793072474.239598352] [agv2.route_server]: Configuring Adjust speed limit operation.
+[component_container_isolated-2] [INFO] [1793072474.240526731] [agv2.route_server]: Created route operation ReroutingService of type nav2_route::ReroutingService
+[component_container_isolated-2] [INFO] [1793072474.240539742] [agv2.route_server]: Configuring Rerouting service operation.
+[component_container_isolated-2] [INFO] [1793072474.242685949] [agv2.lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.242784984] [agv2.behavior_server]: Configuring
+[component_container_isolated-2] [INFO] [1793072474.246187957] [agv2.behavior_server]: Creating behavior plugin spin of type nav2_behaviors::Spin
+[component_container_isolated-2] [INFO] [1793072474.247457127] [agv2.behavior_server]: Creating behavior plugin backup of type nav2_behaviors::BackUp
+[component_container_isolated-2] [INFO] [1793072474.248446825] [agv2.behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors::DriveOnHeading
+[component_container_isolated-2] [INFO] [1793072474.249279820] [agv2.behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[component_container_isolated-2] [INFO] [1793072474.268173450] [agv2.behavior_server]: Configuring spin
+[component_container_isolated-2] [INFO] [1793072474.274075041] [agv2.behavior_server]: Configuring backup
+[component_container_isolated-2] [INFO] [1793072474.279300680] [agv2.behavior_server]: Configuring drive_on_heading
+[component_container_isolated-2] [INFO] [1793072474.283298800] [agv2.behavior_server]: Configuring wait
+[component_container_isolated-2] [INFO] [1793072474.288190944] [agv2.lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.288329464] [agv2.velocity_smoother]: Configuring velocity smoother
+[component_container_isolated-2] [INFO] [1793072474.292699714] [agv2.lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.292858703] [agv2.collision_monitor]: Configuring
+[component_container_isolated-2] [INFO] [1793072474.299214996] [collision_monitor]: [scan]: Creating Scan
+[component_container_isolated-2] [INFO] [1793072474.301072550] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[component_container_isolated-2] [INFO] [1793072474.301256407] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[component_container_isolated-2] [INFO] [1793072474.302331468] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /agv2/local_costmap/published_footprint topic
+[component_container_isolated-2] [INFO] [1793072474.306967379] [agv2.lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.307081634] [agv2.bt_navigator]: Configuring
+[component_container_isolated-2] [INFO] [1793072474.310975206] [agv2.bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[component_container_isolated-2] [WARN] [1793072474.312958499] [agv2.bt_navigator]: Error_code parameters were not set. Using default values of: follow_path_error_code compute_path_error_code
+[component_container_isolated-2] Make sure these match your BT and there are not other sources of error codes youreported to your application
+[component_container_isolated-2] [INFO] [1793072474.370077696] [agv2.bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[component_container_isolated-2] [INFO] [1793072474.393833808] [agv2.lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.394007828] [agv2.waypoint_follower]: Configuring
+[component_container_isolated-2] [INFO] [1793072474.416691493] [agv2.waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[component_container_isolated-2] [INFO] [1793072474.417118725] [agv2.waypoint_follower]: Waypoint pause duration is set to zero, disabling task executor plugin.
+[component_container_isolated-2] [INFO] [1793072474.417588240] [agv2.lifecycle_manager_navigation]: [34m[1mConfiguring docking_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.417675018] [agv2.docking_server]: Configuring docking_server
+[component_container_isolated-2] [INFO] [1793072474.417707106] [agv2.docking_server]: Controller frequency set to 50.0000Hz
+[component_container_isolated-2] [INFO] [1793072474.436766591] [agv2.docking_server]: Created charging dock plugin simple_charging_dock of type opennav_docking::SimpleChargingDock
+[component_container_isolated-2] [WARN] [1793072474.443281541] [agv2.docking_server]: Dock database filepath nor dock parameters set. Docking actions can only be executed specifying the dock pose via the action request. Or update the dock database via the reload_database service.
+[component_container_isolated-2] [INFO] [1793072474.443326250] [agv2.docking_server]: Docking Server has 1 dock types and 0 dock instances available.
+[component_container_isolated-2] [INFO] [1793072474.445230253] [agv2.lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.445383659] [agv2.controller_server]: Activating
+[component_container_isolated-2] [INFO] [1793072474.646745744] [agv2.controller_server]: Activating controller: PrecisionFollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-2] [INFO] [1793072474.646773109] [agv2.controller_server]: Activating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-2] [INFO] [1793072474.646786465] [agv2.controller_server]: Creating bond (controller_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072474.752014923] [agv2.lifecycle_manager_navigation]: Server controller_server connected with bond.
+[component_container_isolated-2] [INFO] [1793072474.752052754] [agv2.lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.752437893] [agv2.smoother_server]: Activating
+[component_container_isolated-2] [INFO] [1793072474.752466733] [agv2.smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072474.858217759] [agv2.lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[component_container_isolated-2] [INFO] [1793072474.858294966] [agv2.lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072474.858706874] [agv2.planner_server]: Activating
+[component_container_isolated-2] [INFO] [1793072474.858747299] [agv2.global_costmap.global_costmap]: Activating
+[component_container_isolated-2] [INFO] [1793072474.858756542] [agv2.global_costmap.global_costmap]: Checking transform
+[component_container_isolated-2] [INFO] [1793072474.858834287] [agv2.global_costmap.global_costmap]: start
+[component_container_isolated-2] [INFO] [1793072475.860261832] [agv2.planner_server]: Activating plugin GridBased of type NavfnPlanner
+[component_container_isolated-2] [INFO] [1793072475.862561627] [agv2.planner_server]: Creating bond (planner_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072475.969053708] [agv2.lifecycle_manager_navigation]: Server planner_server connected with bond.
+[component_container_isolated-2] [INFO] [1793072475.969084625] [agv2.lifecycle_manager_navigation]: [34m[1mActivating route_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072475.969516909] [agv2.route_server]: Activating
+[component_container_isolated-2] [INFO] [1793072475.969711481] [agv2.route_server]: Creating bond (route_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072476.075876708] [agv2.lifecycle_manager_navigation]: Server route_server connected with bond.
+[component_container_isolated-2] [INFO] [1793072476.075906343] [agv2.lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072476.076232502] [agv2.behavior_server]: Activating
+[component_container_isolated-2] [INFO] [1793072476.076251355] [agv2.behavior_server]: Activating spin
+[component_container_isolated-2] [INFO] [1793072476.076270222] [agv2.behavior_server]: Activating backup
+[component_container_isolated-2] [INFO] [1793072476.076278102] [agv2.behavior_server]: Activating drive_on_heading
+[component_container_isolated-2] [INFO] [1793072476.076286214] [agv2.behavior_server]: Activating wait
+[component_container_isolated-2] [INFO] [1793072476.076296342] [agv2.behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072476.181402930] [agv2.lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[component_container_isolated-2] [INFO] [1793072476.181432011] [agv2.lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[component_container_isolated-2] [INFO] [1793072476.181810350] [agv2.velocity_smoother]: Activating
+[component_container_isolated-2] [INFO] [1793072476.181851473] [agv2.velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072476.286933351] [agv2.lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[component_container_isolated-2] [INFO] [1793072476.286961687] [agv2.lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[component_container_isolated-2] [INFO] [1793072476.287378443] [agv2.collision_monitor]: Activating
+[component_container_isolated-2] [INFO] [1793072476.287428419] [agv2.collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072476.393276252] [agv2.lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[component_container_isolated-2] [INFO] [1793072476.393362141] [agv2.lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[component_container_isolated-2] [INFO] [1793072476.393893442] [agv2.bt_navigator]: Activating
+[component_container_isolated-2] [INFO] [1793072476.473910535] [agv2.bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072476.579163979] [agv2.lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[component_container_isolated-2] [INFO] [1793072476.579200740] [agv2.lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[component_container_isolated-2] [INFO] [1793072476.579617028] [agv2.waypoint_follower]: Activating
+[component_container_isolated-2] [INFO] [1793072476.579651947] [agv2.waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072476.686269716] [agv2.lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[component_container_isolated-2] [INFO] [1793072476.686298367] [agv2.lifecycle_manager_navigation]: [34m[1mActivating docking_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072476.686655989] [agv2.docking_server]: Activating docking_server
+[component_container_isolated-2] [INFO] [1793072476.697474312] [agv2.docking_server]: Creating bond (docking_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072476.803274110] [agv2.lifecycle_manager_navigation]: Server docking_server connected with bond.
+[component_container_isolated-2] [INFO] [1793072476.803307936] [agv2.lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[component_container_isolated-2] [INFO] [1793072476.803333386] [agv2.lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[INFO] [component_container_isolated-3]: process started with pid [13616]
+[component_container_isolated-3] [INFO] [1793072481.935473326] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libcontroller_server_core.so
+[component_container_isolated-3] [INFO] [1793072481.942219837] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-3] [INFO] [1793072481.942253323] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-3] [INFO] [1793072481.952910254] [agv3.controller_server]: 
+[component_container_isolated-3] 	controller_server lifecycle node launched. 
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-3] [INFO] [1793072481.956374526] [agv3.controller_server]: Creating controller server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/controller_server' in container 'agv3/nav2_container'
+[component_container_isolated-3] [INFO] [1793072481.969195777] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libsmoother_server_core.so
+[component_container_isolated-3] [INFO] [1793072481.970705211] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-3] [INFO] [1793072481.970723324] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-3] [INFO] [1793072481.979752907] [agv3.smoother_server]: 
+[component_container_isolated-3] 	smoother_server lifecycle node launched. 
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-3] [INFO] [1793072481.980860742] [agv3.smoother_server]: Creating smoother server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/smoother_server' in container 'agv3/nav2_container'
+[component_container_isolated-3] [INFO] [1793072481.982686220] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libplanner_server_core.so
+[component_container_isolated-3] [INFO] [1793072481.983489889] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-3] [INFO] [1793072481.983505163] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-3] [INFO] [1793072481.992943476] [agv3.planner_server]: 
+[component_container_isolated-3] 	planner_server lifecycle node launched. 
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-3] [INFO] [1793072481.994904603] [agv3.planner_server]: Creating
+[component_container_isolated-3] [INFO] [1793072482.010241810] [agv3.global_costmap.global_costmap]: 
+[component_container_isolated-3] 	global_costmap lifecycle node launched. 
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-3] [INFO] [1793072482.010662405] [agv3.global_costmap.global_costmap]: Creating Costmap
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/planner_server' in container 'agv3/nav2_container'
+[component_container_isolated-3] [INFO] [1793072482.013846196] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libroute_server_core.so
+[component_container_isolated-3] [INFO] [1793072482.015409760] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_route::RouteServer>
+[component_container_isolated-3] [INFO] [1793072482.015431485] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_route::RouteServer>
+[component_container_isolated-3] [INFO] [1793072482.024839164] [agv3.route_server]: 
+[component_container_isolated-3] 	route_server lifecycle node launched. 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/route_server' in container 'agv3/nav2_container'
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-3] [INFO] [1793072482.027509243] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libbehavior_server_core.so
+[component_container_isolated-3] [INFO] [1793072482.028964547] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-3] [INFO] [1793072482.028994637] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-3] [INFO] [1793072482.056023036] [agv3.behavior_server]: 
+[component_container_isolated-3] 	behavior_server lifecycle node launched. 
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/behavior_server' in container 'agv3/nav2_container'
+[component_container_isolated-3] [INFO] [1793072482.061024890] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libbt_navigator_core.so
+[component_container_isolated-3] [INFO] [1793072482.063402909] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-3] [INFO] [1793072482.063422862] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-3] [INFO] [1793072482.078310712] [agv3.bt_navigator]: 
+[component_container_isolated-3] 	bt_navigator lifecycle node launched. 
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-3] [INFO] [1793072482.079450838] [agv3.bt_navigator]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/bt_navigator' in container 'agv3/nav2_container'
+[component_container_isolated-3] [INFO] [1793072482.080954659] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libwaypoint_follower_core.so
+[component_container_isolated-3] [INFO] [1793072482.081854074] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-3] [INFO] [1793072482.081870263] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-3] [INFO] [1793072482.094350367] [agv3.waypoint_follower]: 
+[component_container_isolated-3] 	waypoint_follower lifecycle node launched. 
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-3] [INFO] [1793072482.094929213] [agv3.waypoint_follower]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/waypoint_follower' in container 'agv3/nav2_container'
+[component_container_isolated-3] [INFO] [1793072482.097259067] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libvelocity_smoother_core.so
+[component_container_isolated-3] [INFO] [1793072482.098344192] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-3] [INFO] [1793072482.098363872] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-3] [INFO] [1793072482.119374122] [agv3.velocity_smoother]: 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/velocity_smoother' in container 'agv3/nav2_container'
+[component_container_isolated-3] 	velocity_smoother lifecycle node launched. 
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-3] [INFO] [1793072482.121439438] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libcollision_monitor_core.so
+[component_container_isolated-3] [INFO] [1793072482.123811613] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_collision_monitor::CollisionMonitor>
+[component_container_isolated-3] [INFO] [1793072482.123828348] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_collision_monitor::CollisionMonitor>
+[component_container_isolated-3] [INFO] [1793072482.147651794] [agv3.collision_monitor]: 
+[component_container_isolated-3] 	collision_monitor lifecycle node launched. 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/collision_monitor' in container 'agv3/nav2_container'
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-3] [INFO] [1793072482.150746365] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libopennav_docking_core.so
+[component_container_isolated-3] [INFO] [1793072482.152418365] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<opennav_docking::DockingServer>
+[component_container_isolated-3] [INFO] [1793072482.152439071] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<opennav_docking::DockingServer>
+[component_container_isolated-3] [INFO] [1793072482.176737571] [agv3.docking_server]: 
+[component_container_isolated-3] 	docking_server lifecycle node launched. 
+[component_container_isolated-3] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-3] [INFO] [1793072482.176837796] [agv3.docking_server]: Creating docking_server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/docking_server' in container 'agv3/nav2_container'
+[component_container_isolated-3] [INFO] [1793072482.180275512] [agv3.nav2_container]: Load Library: /opt/ros/jazzy/lib/libnav2_lifecycle_manager_core.so
+[component_container_isolated-3] [INFO] [1793072482.181022714] [agv3.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-3] [INFO] [1793072482.181038984] [agv3.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-3] [INFO] [1793072482.196680060] [agv3.lifecycle_manager_navigation]: Creating
+[component_container_isolated-3] [INFO] [1793072482.201969592] [agv3.lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/agv3/lifecycle_manager_navigation' in container 'agv3/nav2_container'
+[component_container_isolated-3] [INFO] [1793072482.227624714] [agv3.lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.227658029] [agv3.lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.227901168] [agv3.controller_server]: Configuring controller interface
+[component_container_isolated-3] [INFO] [1793072482.227921691] [agv3.controller_server]: getting progress checker plugins..
+[component_container_isolated-3] [INFO] [1793072482.227936720] [agv3.controller_server]: getting goal checker plugins..
+[component_container_isolated-3] [INFO] [1793072482.227962086] [agv3.controller_server]: Controller frequency set to 20.0000Hz
+[component_container_isolated-3] [INFO] [1793072482.296328294] [agv3.controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[component_container_isolated-3] [INFO] [1793072482.296933689] [agv3.controller_server]: Created progress_checker : precision_progress_checker of type nav2_controller::SimpleProgressChecker
+[component_container_isolated-3] [INFO] [1793072482.297240745] [agv3.controller_server]: Controller Server has progress_checker precision_progress_checker  progress checkers available.
+[component_container_isolated-3] [INFO] [1793072482.297762229] [agv3.controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[component_container_isolated-3] [INFO] [1793072482.298344929] [agv3.controller_server]: Created goal checker : precision_goal_checker of type nav2_controller::SimpleGoalChecker
+[component_container_isolated-3] [INFO] [1793072482.298864090] [agv3.controller_server]: Controller Server has general_goal_checker precision_goal_checker  goal checkers available.
+[component_container_isolated-3] [INFO] [1793072482.299705148] [agv3.controller_server]: Created controller : FollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-3] [INFO] [1793072482.307859474] [agv3.controller_server]: Created controller : PrecisionFollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-3] [INFO] [1793072482.315331109] [agv3.controller_server]: Controller Server has FollowPath PrecisionFollowPath  controllers available.
+[component_container_isolated-3] [INFO] [1793072482.328815083] [agv3.lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.328957985] [agv3.smoother_server]: Configuring smoother server
+[component_container_isolated-3] [INFO] [1793072482.337598216] [agv3.smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[component_container_isolated-3] [INFO] [1793072482.338382025] [agv3.smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[component_container_isolated-3] [INFO] [1793072482.345629762] [agv3.lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.345807065] [agv3.planner_server]: Configuring
+[component_container_isolated-3] [INFO] [1793072482.345836399] [agv3.global_costmap.global_costmap]: Configuring
+[component_container_isolated-3] [INFO] [1793072482.353364546] [agv3.global_costmap.global_costmap]: Using plugin "static_layer"
+[component_container_isolated-3] [INFO] [1793072482.354355342] [agv3.global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[component_container_isolated-3] [INFO] [1793072482.356137382] [agv3.global_costmap.global_costmap]: Initialized plugin "static_layer"
+[component_container_isolated-3] [INFO] [1793072482.356183941] [agv3.global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[component_container_isolated-3] [INFO] [1793072482.357430071] [agv3.global_costmap.global_costmap]: Subscribed to Topics: scan
+[component_container_isolated-3] [INFO] [1793072482.363374451] [agv3.global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[component_container_isolated-3] [INFO] [1793072482.363407689] [agv3.global_costmap.global_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-3] [INFO] [1793072482.364387116] [agv3.global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-3] [INFO] [1793072482.398946461] [agv3.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 187 X 116 at 0.050000 m/pix
+[component_container_isolated-3] [INFO] [1793072482.399397821] [agv3.planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner::NavfnPlanner
+[component_container_isolated-3] [INFO] [1793072482.399422115] [agv3.planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[component_container_isolated-3] [INFO] [1793072482.400137343] [agv3.planner_server]: Planner Server has GridBased  planners available.
+[component_container_isolated-3] [INFO] [1793072482.412364469] [agv3.lifecycle_manager_navigation]: [34m[1mConfiguring route_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.412517815] [agv3.route_server]: Configuring
+[component_container_isolated-3] [INFO] [1793072482.442234559] [agv3.route_server]: Created GraphFileLoader GeoJsonGraphFileLoader of type nav2_route::GeoJsonGraphFileLoader
+[component_container_isolated-3] [INFO] [1793072482.442302746] [agv3.route_server]: Configuring geojson graph file loader
+[component_container_isolated-3] [INFO] [1793072482.442325092] [agv3.route_server]: No graph file provided to load yet.
+[component_container_isolated-3] [INFO] [1793072482.444905481] [agv3.route_server]: Created edge cost function plugin DistanceScorer of type nav2_route::DistanceScorer
+[component_container_isolated-3] [INFO] [1793072482.444936474] [agv3.route_server]: Configuring distance scorer.
+[component_container_isolated-3] [INFO] [1793072482.445277339] [agv3.route_server]: Created edge cost function plugin DynamicEdgesScorer of type nav2_route::DynamicEdgesScorer
+[component_container_isolated-3] [INFO] [1793072482.445296430] [agv3.route_server]: Configuring adjust edges scorer.
+[component_container_isolated-3] [INFO] [1793072482.449406285] [agv3.route_server]: Created route operation AdjustSpeedLimit of type nav2_route::AdjustSpeedLimit
+[component_container_isolated-3] [INFO] [1793072482.449434882] [agv3.route_server]: Configuring Adjust speed limit operation.
+[component_container_isolated-3] [INFO] [1793072482.450773481] [agv3.route_server]: Created route operation ReroutingService of type nav2_route::ReroutingService
+[component_container_isolated-3] [INFO] [1793072482.450796976] [agv3.route_server]: Configuring Rerouting service operation.
+[component_container_isolated-3] [INFO] [1793072482.454442204] [agv3.lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.454639771] [agv3.behavior_server]: Configuring
+[component_container_isolated-3] [INFO] [1793072482.458082678] [agv3.behavior_server]: Creating behavior plugin spin of type nav2_behaviors::Spin
+[component_container_isolated-3] [INFO] [1793072482.458936135] [agv3.behavior_server]: Creating behavior plugin backup of type nav2_behaviors::BackUp
+[component_container_isolated-3] [INFO] [1793072482.459593883] [agv3.behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors::DriveOnHeading
+[component_container_isolated-3] [INFO] [1793072482.460227064] [agv3.behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[component_container_isolated-3] [INFO] [1793072482.463663462] [agv3.behavior_server]: Configuring spin
+[component_container_isolated-3] [INFO] [1793072482.472769690] [agv3.behavior_server]: Configuring backup
+[component_container_isolated-3] [INFO] [1793072482.482230023] [agv3.behavior_server]: Configuring drive_on_heading
+[component_container_isolated-3] [INFO] [1793072482.488719248] [agv3.behavior_server]: Configuring wait
+[component_container_isolated-3] [INFO] [1793072482.502857130] [agv3.lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.502986051] [agv3.velocity_smoother]: Configuring velocity smoother
+[component_container_isolated-3] [INFO] [1793072482.508037494] [agv3.lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.508198043] [agv3.collision_monitor]: Configuring
+[component_container_isolated-3] [INFO] [1793072482.513275473] [collision_monitor]: [scan]: Creating Scan
+[component_container_isolated-3] [INFO] [1793072482.516228125] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[component_container_isolated-3] [INFO] [1793072482.516574984] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[component_container_isolated-3] [INFO] [1793072482.518182600] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /agv3/local_costmap/published_footprint topic
+[component_container_isolated-3] [INFO] [1793072482.524763476] [agv3.lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.524955316] [agv3.bt_navigator]: Configuring
+[component_container_isolated-3] [INFO] [1793072482.530090292] [agv3.bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[component_container_isolated-3] [WARN] [1793072482.532544155] [agv3.bt_navigator]: Error_code parameters were not set. Using default values of: follow_path_error_code compute_path_error_code
+[component_container_isolated-3] Make sure these match your BT and there are not other sources of error codes youreported to your application
+[component_container_isolated-3] [INFO] [1793072482.602479992] [agv3.bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[component_container_isolated-3] [INFO] [1793072482.638727016] [agv3.lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.638912698] [agv3.waypoint_follower]: Configuring
+[component_container_isolated-3] [INFO] [1793072482.666670069] [agv3.waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[component_container_isolated-3] [INFO] [1793072482.667160691] [agv3.waypoint_follower]: Waypoint pause duration is set to zero, disabling task executor plugin.
+[component_container_isolated-3] [INFO] [1793072482.667852835] [agv3.lifecycle_manager_navigation]: [34m[1mConfiguring docking_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.668018496] [agv3.docking_server]: Configuring docking_server
+[component_container_isolated-3] [INFO] [1793072482.668056068] [agv3.docking_server]: Controller frequency set to 50.0000Hz
+[component_container_isolated-3] [INFO] [1793072482.692703653] [agv3.docking_server]: Created charging dock plugin simple_charging_dock of type opennav_docking::SimpleChargingDock
+[component_container_isolated-3] [WARN] [1793072482.701006207] [agv3.docking_server]: Dock database filepath nor dock parameters set. Docking actions can only be executed specifying the dock pose via the action request. Or update the dock database via the reload_database service.
+[component_container_isolated-3] [INFO] [1793072482.701075954] [agv3.docking_server]: Docking Server has 1 dock types and 0 dock instances available.
+[component_container_isolated-3] [INFO] [1793072482.703198358] [agv3.lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072482.703388264] [agv3.controller_server]: Activating
+[component_container_isolated-3] [INFO] [1793072482.904852310] [agv3.controller_server]: Activating controller: PrecisionFollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-3] [INFO] [1793072482.904906360] [agv3.controller_server]: Activating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-3] [INFO] [1793072482.904925938] [agv3.controller_server]: Creating bond (controller_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072483.016728655] [agv3.lifecycle_manager_navigation]: Server controller_server connected with bond.
+[component_container_isolated-3] [INFO] [1793072483.016766798] [agv3.lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072483.017475050] [agv3.smoother_server]: Activating
+[component_container_isolated-3] [INFO] [1793072483.017532723] [agv3.smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072483.124278092] [agv3.lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[component_container_isolated-3] [INFO] [1793072483.124311408] [agv3.lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072483.124808693] [agv3.planner_server]: Activating
+[component_container_isolated-3] [INFO] [1793072483.124839876] [agv3.global_costmap.global_costmap]: Activating
+[component_container_isolated-3] [INFO] [1793072483.124846620] [agv3.global_costmap.global_costmap]: Checking transform
+[component_container_isolated-3] [INFO] [1793072483.124918298] [agv3.global_costmap.global_costmap]: start
+[component_container_isolated-3] [INFO] [1793072484.126806714] [agv3.planner_server]: Activating plugin GridBased of type NavfnPlanner
+[component_container_isolated-3] [INFO] [1793072484.129634994] [agv3.planner_server]: Creating bond (planner_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072484.235730929] [agv3.lifecycle_manager_navigation]: Server planner_server connected with bond.
+[component_container_isolated-3] [INFO] [1793072484.235766476] [agv3.lifecycle_manager_navigation]: [34m[1mActivating route_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072484.236287441] [agv3.route_server]: Activating
+[component_container_isolated-3] [INFO] [1793072484.236569329] [agv3.route_server]: Creating bond (route_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072484.342592905] [agv3.lifecycle_manager_navigation]: Server route_server connected with bond.
+[component_container_isolated-3] [INFO] [1793072484.342665887] [agv3.lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072484.343672505] [agv3.behavior_server]: Activating
+[component_container_isolated-3] [INFO] [1793072484.343695176] [agv3.behavior_server]: Activating spin
+[component_container_isolated-3] [INFO] [1793072484.343724980] [agv3.behavior_server]: Activating backup
+[component_container_isolated-3] [INFO] [1793072484.343733639] [agv3.behavior_server]: Activating drive_on_heading
+[component_container_isolated-3] [INFO] [1793072484.343741193] [agv3.behavior_server]: Activating wait
+[component_container_isolated-3] [INFO] [1793072484.343757233] [agv3.behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072484.451092718] [agv3.lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[component_container_isolated-3] [INFO] [1793072484.451124016] [agv3.lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[component_container_isolated-3] [INFO] [1793072484.451737406] [agv3.velocity_smoother]: Activating
+[component_container_isolated-3] [INFO] [1793072484.451812353] [agv3.velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072484.560228420] [agv3.lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[component_container_isolated-3] [INFO] [1793072484.560275628] [agv3.lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[component_container_isolated-3] [INFO] [1793072484.560828565] [agv3.collision_monitor]: Activating
+[component_container_isolated-3] [INFO] [1793072484.560888876] [agv3.collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072484.667412503] [agv3.lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[component_container_isolated-3] [INFO] [1793072484.667507555] [agv3.lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[component_container_isolated-3] [INFO] [1793072484.668043587] [agv3.bt_navigator]: Activating
+[component_container_isolated-3] [INFO] [1793072484.789700021] [agv3.bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072484.896469473] [agv3.lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[component_container_isolated-3] [INFO] [1793072484.896511891] [agv3.lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[component_container_isolated-3] [INFO] [1793072484.897160415] [agv3.waypoint_follower]: Activating
+[component_container_isolated-3] [INFO] [1793072484.897193648] [agv3.waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072485.004749026] [agv3.lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[component_container_isolated-3] [INFO] [1793072485.004784621] [agv3.lifecycle_manager_navigation]: [34m[1mActivating docking_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072485.005634967] [agv3.docking_server]: Activating docking_server
+[component_container_isolated-3] [INFO] [1793072485.021108255] [agv3.docking_server]: Creating bond (docking_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072485.132625435] [agv3.lifecycle_manager_navigation]: Server docking_server connected with bond.
+[component_container_isolated-3] [INFO] [1793072485.132668448] [agv3.lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[component_container_isolated-3] [INFO] [1793072485.132689575] [agv3.lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[component_container_isolated-3] [INFO] [1793072506.839772900] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1793072506.840935147] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1793072506.842413620] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072507.251866489] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.0303 Hz.
+[component_container_isolated-3] [WARN] [1793072507.311415013] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 8.2452 Hz.
+[component_container_isolated-2] [WARN] [1793072508.254068269] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.5810 Hz.
+[component_container_isolated-3] [WARN] [1793072508.313099342] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.8635 Hz.
+[component_container_isolated-2] [WARN] [1793072509.258232842] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.5236 Hz.
+[component_container_isolated-3] [WARN] [1793072509.306802220] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 10.9334 Hz.
+[component_container_isolated-3] [INFO] [1793072509.457058917] [agv3.controller_server]: Passing new path to controller.
+[component_container_isolated-3] [INFO] [1793072509.457735323] [agv3.controller_server]: Change of progress checker precision_progress_checker requested, resetting it
+[component_container_isolated-2] [INFO] [1793072509.459529163] [agv2.controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1793072509.460444996] [agv2.controller_server]: Change of progress checker precision_progress_checker requested, resetting it
+[component_container_isolated-1] [INFO] [1793072509.492638713] [agv1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1793072509.493992141] [agv1.controller_server]: Change of progress checker precision_progress_checker requested, resetting it
+[component_container_isolated-2] [WARN] [1793072510.250706840] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0752 Hz.
+[component_container_isolated-3] [WARN] [1793072510.307906743] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9183 Hz.
+[component_container_isolated-1] [WARN] [1793072510.314195764] [agv1.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 5.8358 Hz.
+[component_container_isolated-2] [WARN] [1793072511.253559259] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.5791 Hz.
+[component_container_isolated-3] [WARN] [1793072511.309567010] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.8841 Hz.
+[component_container_isolated-2] [WARN] [1793072512.255089163] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6105 Hz.
+[component_container_isolated-3] [WARN] [1793072512.312541716] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9573 Hz.
+[component_container_isolated-2] [WARN] [1793072513.256550850] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6111 Hz.
+[component_container_isolated-3] [WARN] [1793072513.313105183] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6473 Hz.
+[component_container_isolated-2] [WARN] [1793072514.248626537] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.1234 Hz.
+[component_container_isolated-3] [WARN] [1793072514.314336684] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6190 Hz.
+[component_container_isolated-2] [WARN] [1793072515.249418818] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6406 Hz.
+[component_container_isolated-3] [WARN] [1793072515.306052349] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0668 Hz.
+[component_container_isolated-2] [WARN] [1793072516.253399114] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.5132 Hz.
+[component_container_isolated-3] [WARN] [1793072516.306687006] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9538 Hz.
+[component_container_isolated-2] [INFO] [1793072516.803922627] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1793072516.964687903] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-3] [INFO] [1793072517.006877406] [agv3.controller_server]: Reached the goal!
+[component_container_isolated-2] [INFO] [1793072527.641110570] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072528.251760244] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.0534 Hz.
+[component_container_isolated-1] [INFO] [1793072529.239575801] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-3] [INFO] [1793072529.241486494] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072529.252854548] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6228 Hz.
+[component_container_isolated-3] [WARN] [1793072529.311894879] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 14.2127 Hz.
+[component_container_isolated-2] [WARN] [1793072530.253341403] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6513 Hz.
+[component_container_isolated-3] [WARN] [1793072530.312482305] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6472 Hz.
+[component_container_isolated-2] [WARN] [1793072531.253726565] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6561 Hz.
+[component_container_isolated-3] [WARN] [1793072531.312973201] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9663 Hz.
+[component_container_isolated-2] [INFO] [1793072531.753980294] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072532.313481046] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9743 Hz.
+[component_container_isolated-3] [WARN] [1793072533.314030454] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9656 Hz.
+[component_container_isolated-3] [INFO] [1793072533.514257031] [agv3.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1793072533.541127025] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-2] [INFO] [1793072538.944031763] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072539.256124302] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.1760 Hz.
+[component_container_isolated-2] [WARN] [1793072540.248261537] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0483 Hz.
+[component_container_isolated-3] [INFO] [1793072540.748186389] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1793072540.842471463] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072541.249110991] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6360 Hz.
+[component_container_isolated-3] [WARN] [1793072541.309764294] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 8.9867 Hz.
+[component_container_isolated-2] [INFO] [1793072541.449271731] [agv2.controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1793072542.249609847] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6517 Hz.
+[component_container_isolated-3] [WARN] [1793072542.310677985] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9270 Hz.
+[component_container_isolated-3] [INFO] [1793072543.060986530] [agv3.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1793072543.242777695] [agv1.controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1793072543.250089428] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6513 Hz.
+[component_container_isolated-3] [WARN] [1793072543.312199016] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.8701 Hz.
+[component_container_isolated-2] [INFO] [1793072544.250292419] [agv2.controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1793072544.251038060] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6308 Hz.
+[component_container_isolated-3] [WARN] [1793072544.312837672] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9623 Hz.
+[component_container_isolated-2] [WARN] [1793072545.251846083] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6355 Hz.
+[component_container_isolated-3] [WARN] [1793072545.313358315] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9602 Hz.
+[component_container_isolated-3] [INFO] [1793072545.863501288] [agv3.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1793072546.042755893] [agv1.controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1793072546.252463122] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6468 Hz.
+[component_container_isolated-3] [WARN] [1793072546.314084831] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9454 Hz.
+[component_container_isolated-2] [WARN] [1793072547.252972063] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6518 Hz.
+[component_container_isolated-3] [WARN] [1793072547.305479807] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0836 Hz.
+[component_container_isolated-2] [WARN] [1793072548.253482223] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6516 Hz.
+[component_container_isolated-3] [WARN] [1793072548.305893749] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9759 Hz.
+[component_container_isolated-2] [WARN] [1793072549.253925026] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6527 Hz.
+[component_container_isolated-3] [WARN] [1793072549.306577632] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9484 Hz.
+[component_container_isolated-2] [WARN] [1793072550.254985109] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6274 Hz.
+[component_container_isolated-3] [WARN] [1793072550.307183308] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9582 Hz.
+[component_container_isolated-2] [INFO] [1793072550.955206852] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072551.307917792] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9468 Hz.
+[component_container_isolated-3] [WARN] [1793072552.308473618] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9610 Hz.
+[component_container_isolated-3] [INFO] [1793072552.658636447] [agv3.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1793072552.842867878] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1793072556.054554296] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1793072560.404842288] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1793072565.694856184] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1793072571.246954793] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072572.247861128] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6492 Hz.
+[component_container_isolated-1] [INFO] [1793072572.395136262] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-2] [WARN] [1793072573.248580730] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6410 Hz.
+[component_container_isolated-2] [WARN] [1793072574.249128747] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6490 Hz.
+[component_container_isolated-2] [WARN] [1793072575.249549357] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6549 Hz.
+[component_container_isolated-1] [INFO] [1793072575.453408677] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072576.250231637] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6421 Hz.
+[component_container_isolated-3] [INFO] [1793072576.898814506] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072577.253593954] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.5883 Hz.
+[component_container_isolated-3] [WARN] [1793072577.309724210] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.0326 Hz.
+[component_container_isolated-2] [INFO] [1793072578.254391647] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072578.310565661] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9416 Hz.
+[component_container_isolated-3] [WARN] [1793072579.310920429] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9781 Hz.
+[component_container_isolated-1] [INFO] [1793072579.353751806] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072580.311274516] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9754 Hz.
+[component_container_isolated-3] [INFO] [1793072580.612306320] [agv3.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1793072582.511789250] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1793072583.295370197] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072584.256218900] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.2261 Hz.
+[component_container_isolated-2] [WARN] [1793072585.248279942] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0487 Hz.
+[component_container_isolated-3] [INFO] [1793072585.650816301] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-3] [INFO] [1793072585.851139556] [agv3.controller_server]: Passing new path to controller.
+[component_container_isolated-3] [INFO] [1793072585.851445235] [agv3.controller_server]: Change of progress checker precision_progress_checker requested, resetting it
+[component_container_isolated-2] [WARN] [1793072586.249422169] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6270 Hz.
+[component_container_isolated-3] [WARN] [1793072586.312057945] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.0170 Hz.
+[component_container_isolated-1] [INFO] [1793072586.714205768] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-2] [INFO] [1793072587.049717807] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072587.312938783] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9533 Hz.
+[component_container_isolated-3] [WARN] [1793072588.313529472] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9622 Hz.
+[component_container_isolated-3] [WARN] [1793072589.314188401] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6448 Hz.
+[component_container_isolated-2] [INFO] [1793072590.256923063] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-3] [WARN] [1793072590.306241250] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0477 Hz.
+[component_container_isolated-2] [WARN] [1793072591.248140955] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0891 Hz.
+[component_container_isolated-3] [WARN] [1793072591.306781538] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9644 Hz.
+[component_container_isolated-1] [INFO] [1793072592.240471887] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072592.251606990] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.5580 Hz.
+[component_container_isolated-3] [WARN] [1793072592.309160160] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9592 Hz.
+[component_container_isolated-3] [INFO] [1793072592.759640232] [agv3.controller_server]: Reached the goal!
+[component_container_isolated-2] [WARN] [1793072593.252560460] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6543 Hz.
+[component_container_isolated-2] [WARN] [1793072594.253015249] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6532 Hz.
+[component_container_isolated-2] [WARN] [1793072595.253473347] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6532 Hz.
+[component_container_isolated-2] [WARN] [1793072596.253960819] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6522 Hz.
+[component_container_isolated-1] [INFO] [1793072596.491392530] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-2] [INFO] [1793072596.854119294] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-3] [INFO] [1793072599.451055734] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1793072600.008553727] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072600.250899426] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.1053 Hz.
+[component_container_isolated-3] [WARN] [1793072600.313174502] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 8.9371 Hz.
+[component_container_isolated-2] [WARN] [1793072601.252865813] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.5873 Hz.
+[component_container_isolated-3] [WARN] [1793072601.317138241] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.6414 Hz.
+[component_container_isolated-3] [INFO] [1793072601.867456379] [agv3.controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1793072602.253567753] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6493 Hz.
+[component_container_isolated-3] [WARN] [1793072602.307948483] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.1150 Hz.
+[component_container_isolated-2] [WARN] [1793072603.254190594] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6467 Hz.
+[component_container_isolated-3] [WARN] [1793072603.308715413] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9565 Hz.
+[component_container_isolated-1] [INFO] [1793072603.557468211] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072604.248441714] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.9410 Hz.
+[component_container_isolated-3] [WARN] [1793072604.310112463] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.8871 Hz.
+[component_container_isolated-2] [WARN] [1793072605.249149353] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6493 Hz.
+[component_container_isolated-3] [WARN] [1793072605.310801675] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9611 Hz.
+[component_container_isolated-2] [WARN] [1793072606.251406962] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.5820 Hz.
+[component_container_isolated-3] [WARN] [1793072606.311497408] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9466 Hz.
+[component_container_isolated-2] [INFO] [1793072606.952279130] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072607.311976103] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9713 Hz.
+[component_container_isolated-1] [INFO] [1793072607.407694540] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072608.313610432] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.8522 Hz.
+[component_container_isolated-3] [INFO] [1793072608.914024189] [agv3.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1793072610.668361471] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-3] [INFO] [1793072612.077154619] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-3] [WARN] [1793072612.307652839] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.6714 Hz.
+[component_container_isolated-2] [INFO] [1793072612.437547325] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072613.248917914] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.0404 Hz.
+[component_container_isolated-3] [WARN] [1793072613.308314105] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9477 Hz.
+[component_container_isolated-2] [WARN] [1793072614.249753901] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6392 Hz.
+[component_container_isolated-3] [WARN] [1793072614.308908344] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9562 Hz.
+[component_container_isolated-3] [INFO] [1793072614.659127067] [agv3.controller_server]: Passing new path to controller.
+[component_container_isolated-3] [INFO] [1793072614.660003479] [agv3.controller_server]: Change of progress checker precision_progress_checker requested, resetting it
+[component_container_isolated-1] [INFO] [1793072614.969331171] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-2] [WARN] [1793072615.251419498] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6005 Hz.
+[component_container_isolated-3] [WARN] [1793072615.309843197] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9248 Hz.
+[component_container_isolated-2] [WARN] [1793072616.251955198] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6540 Hz.
+[component_container_isolated-3] [WARN] [1793072616.310856745] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9165 Hz.
+[component_container_isolated-2] [INFO] [1793072616.702183307] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072617.311386601] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9662 Hz.
+[component_container_isolated-3] [WARN] [1793072618.311933554] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9597 Hz.
+[component_container_isolated-3] [WARN] [1793072619.312543808] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9529 Hz.
+[component_container_isolated-3] [WARN] [1793072620.314438315] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.8367 Hz.
+[component_container_isolated-3] [WARN] [1793072621.305656870] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0928 Hz.
+[component_container_isolated-3] [INFO] [1793072621.856450266] [agv3.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1793072621.891155011] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1793072623.691396065] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072624.252047180] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.0579 Hz.
+[component_container_isolated-2] [WARN] [1793072625.252718569] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6511 Hz.
+[component_container_isolated-1] [INFO] [1793072626.091582253] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-2] [WARN] [1793072626.253196884] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6532 Hz.
+[component_container_isolated-3] [INFO] [1793072627.043099417] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072627.253709009] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6471 Hz.
+[component_container_isolated-3] [WARN] [1793072627.314285434] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 8.3002 Hz.
+[component_container_isolated-2] [INFO] [1793072627.403873863] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072628.305488228] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0919 Hz.
+[component_container_isolated-3] [WARN] [1793072629.306023330] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9659 Hz.
+[component_container_isolated-3] [WARN] [1793072630.306655765] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9568 Hz.
+[component_container_isolated-3] [INFO] [1793072631.106966091] [agv3.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1793072633.838286910] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1793072637.988483951] [agv1.controller_server]: Reached the goal!
+[component_container_isolated-3] [INFO] [1793072638.193294904] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-3] [WARN] [1793072638.314801375] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 8.2397 Hz.
+[component_container_isolated-3] [WARN] [1793072639.306552501] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0652 Hz.
+[component_container_isolated-2] [INFO] [1793072639.342625581] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072640.253701030] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.2178 Hz.
+[component_container_isolated-3] [WARN] [1793072640.307091699] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9673 Hz.
+[component_container_isolated-2] [WARN] [1793072641.254756926] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6338 Hz.
+[component_container_isolated-3] [WARN] [1793072641.307974612] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9367 Hz.
+[component_container_isolated-3] [INFO] [1793072641.958215088] [agv3.controller_server]: Reached the goal!
+[component_container_isolated-2] [WARN] [1793072642.255836690] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6312 Hz.
+[component_container_isolated-2] [WARN] [1793072643.247581520] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0651 Hz.
+[component_container_isolated-2] [WARN] [1793072644.248161994] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6477 Hz.
+[component_container_isolated-3] [INFO] [1793072645.164077361] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1793072645.248521402] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6559 Hz.
+[component_container_isolated-3] [WARN] [1793072645.305942733] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0520 Hz.
+[component_container_isolated-2] [INFO] [1793072646.248769542] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072646.306436781] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9674 Hz.
+[component_container_isolated-3] [WARN] [1793072647.306796853] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9768 Hz.
+[component_container_isolated-3] [WARN] [1793072648.307310895] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.9667 Hz.
+[component_container_isolated-3] [INFO] [1793072649.007538219] [agv3.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1793072649.155962374] [agv1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1793072651.442743169] [agv2.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1793072651.656180079] [agv1.controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1793072652.253646081] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.0312 Hz.
+[component_container_isolated-2] [WARN] [1793072653.254393039] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6425 Hz.
+[component_container_isolated-2] [WARN] [1793072654.255022139] [agv2.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6465 Hz.
+[component_container_isolated-3] [INFO] [1793072654.440115175] [agv3.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1793072655.256008198] [agv2.controller_server]: Reached the goal!
+[component_container_isolated-3] [WARN] [1793072655.311144325] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 8.2716 Hz.
+[component_container_isolated-3] [WARN] [1793072656.312421742] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 9.8865 Hz.
+[component_container_isolated-3] [WARN] [1793072657.313800038] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 6.6211 Hz.
+[component_container_isolated-3] [WARN] [1793072658.305877323] [agv3.controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.0509 Hz.
+[component_container_isolated-1] [INFO] [1793072658.506242666] [agv1.controller_server]: Reached the goal!
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[component_container_isolated-3] [INFO] [1793072658.834575913] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[component_container_isolated-3] [INFO] [1793072658.834685623] [agv3.controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[component_container_isolated-3] [INFO] [1793072658.834828435] [agv3.controller_server]: Deactivating
+[component_container_isolated-3] [WARN] [1793072658.834852090] [agv3.controller_server]: [follow_path] [ActionServer] Requested to deactivate server but goal is still executing. Should check if action server is running before deactivating.
+[component_container_isolated-2] [INFO] [1793072658.834706613] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[component_container_isolated-2] [INFO] [1793072658.834801145] [agv2.controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[component_container_isolated-1] [INFO] [1793072658.835267115] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[component_container_isolated-1] [INFO] [1793072658.835339237] [agv1.controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[component_container_isolated-1] [INFO] [1793072658.835435977] [agv1.controller_server]: Deactivating
+[component_container_isolated-1] [INFO] [1793072658.835462718] [agv1.controller_server]: Deactivating controller: PrecisionFollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-1] [INFO] [1793072658.835476291] [agv1.controller_server]: Deactivating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-2] [INFO] [1793072658.834938387] [agv2.controller_server]: Deactivating
+[component_container_isolated-2] [INFO] [1793072658.837326727] [agv2.controller_server]: Deactivating controller: PrecisionFollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-2] [INFO] [1793072658.837345957] [agv2.controller_server]: Deactivating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-2] [INFO] [1793072658.847862828] [agv2.controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072658.859472925] [agv2.controller_server]: Cleaning up
+[component_container_isolated-2] [INFO] [1793072658.859535916] [agv2.controller_server]: Cleaning up controller: PrecisionFollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-2] [INFO] [1793072659.007427116] [agv2.controller_server]: Cleaning up controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-2] [INFO] [1793072659.009281161] [agv2.lifecycle_manager_navigation]: [34m[1mHave not received a heartbeat from controller_server.[0m[0m
+[component_container_isolated-2] [ERROR] [1793072659.009380055] [agv2.lifecycle_manager_navigation]: CRITICAL FAILURE: SERVER controller_server IS DOWN after not receiving a heartbeat for 4000 ms. Shutting down related nodes.
+[component_container_isolated-2] [INFO] [1793072659.009535589] [agv2.lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[component_container_isolated-2] [INFO] [1793072659.009549093] [agv2.lifecycle_manager_navigation]: [34m[1mResetting managed nodes...[0m[0m
+[component_container_isolated-2] [INFO] [1793072659.009560813] [agv2.lifecycle_manager_navigation]: [34m[1mDeactivating docking_server[0m[0m
+[component_container_isolated-2] [INFO] [1793072659.018314118] [agv2.docking_server]: Deactivating docking_server
+[component_container_isolated-2] [ERROR] [1793072659.035673562] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072658.832056 but the latest data is at time 1793072658.824595, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-2] [WARN] [1793072659.035944166] [agv2.collision_monitor]: Robot to stop due to invalid source. Either due to data not published yet, or to lack of new data received within the sensor timeout, or if impossible to transform data to base frame
+[component_container_isolated-2] [INFO] [1793072659.117843860] [agv2.global_costmap.global_costmap]: Message Filter dropping message: frame 'lidar_link' at time 1793072658.795 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-2] [ERROR] [1793072659.241758735] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.036611 but the latest data is at time 1793072658.824595, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-3] [WARN] [1793072658.856133642] [agv3.controller_server]: [follow_path] [ActionServer] Stopping the thread per request.
+[component_container_isolated-3] [WARN] [1793072658.856226629] [agv3.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[component_container_isolated-3] [INFO] [1793072658.857732840] [agv3.controller_server]: Deactivating controller: PrecisionFollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-3] [INFO] [1793072658.857788088] [agv3.controller_server]: Deactivating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-3] [INFO] [1793072658.904722555] [agv3.controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072658.917908814] [agv3.controller_server]: Cleaning up
+[component_container_isolated-3] [INFO] [1793072658.918637193] [agv3.controller_server]: Cleaning up controller: PrecisionFollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-3] [INFO] [1793072658.918698768] [agv3.controller_server]: Cleaning up controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-3] [INFO] [1793072658.932890616] [agv3.lifecycle_manager_navigation]: [34m[1mHave not received a heartbeat from controller_server.[0m[0m
+[component_container_isolated-3] [ERROR] [1793072658.933001498] [agv3.lifecycle_manager_navigation]: CRITICAL FAILURE: SERVER controller_server IS DOWN after not receiving a heartbeat for 4000 ms. Shutting down related nodes.
+[component_container_isolated-3] [INFO] [1793072658.933226960] [agv3.lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[component_container_isolated-3] [INFO] [1793072658.933242789] [agv3.lifecycle_manager_navigation]: [34m[1mResetting managed nodes...[0m[0m
+[component_container_isolated-3] [INFO] [1793072658.933269936] [agv3.lifecycle_manager_navigation]: [34m[1mDeactivating docking_server[0m[0m
+[component_container_isolated-3] [INFO] [1793072658.949903484] [agv3.docking_server]: Deactivating docking_server
+[component_container_isolated-3] [ERROR] [1793072659.066166768] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072658.856815 but the latest data is at time 1793072658.828489, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-3] [WARN] [1793072659.067085288] [agv3.collision_monitor]: Robot to stop due to invalid source. Either due to data not published yet, or to lack of new data received within the sensor timeout, or if impossible to transform data to base frame
+[component_container_isolated-3] [ERROR] [1793072659.273437519] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.068192 but the latest data is at time 1793072658.828489, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-1] [INFO] [1793072658.910152493] [agv1.controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072658.932379192] [agv1.controller_server]: Cleaning up
+[component_container_isolated-1] [INFO] [1793072658.932489159] [agv1.controller_server]: Cleaning up controller: PrecisionFollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-1] [ERROR] [1793072659.045970527] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072658.844329 but the latest data is at time 1793072658.828428, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-1] [WARN] [1793072659.046272045] [agv1.collision_monitor]: Robot to stop due to invalid source. Either due to data not published yet, or to lack of new data received within the sensor timeout, or if impossible to transform data to base frame
+[component_container_isolated-1] [INFO] [1793072659.050959989] [agv1.lifecycle_manager_navigation]: [34m[1mHave not received a heartbeat from controller_server.[0m[0m
+[component_container_isolated-1] [ERROR] [1793072659.051104570] [agv1.lifecycle_manager_navigation]: CRITICAL FAILURE: SERVER controller_server IS DOWN after not receiving a heartbeat for 4000 ms. Shutting down related nodes.
+[component_container_isolated-1] [INFO] [1793072659.051379722] [agv1.lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[component_container_isolated-1] [INFO] [1793072659.051395006] [agv1.lifecycle_manager_navigation]: [34m[1mResetting managed nodes...[0m[0m
+[component_container_isolated-1] [INFO] [1793072659.051407532] [agv1.lifecycle_manager_navigation]: [34m[1mDeactivating docking_server[0m[0m
+[component_container_isolated-1] [INFO] [1793072659.059481041] [agv1.docking_server]: Deactivating docking_server
+[component_container_isolated-1] [INFO] [1793072659.159432701] [agv1.controller_server]: Cleaning up controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[component_container_isolated-1] [ERROR] [1793072659.255563910] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.048072 but the latest data is at time 1793072658.828428, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-1] [INFO] [1793072659.399040238] [agv1.docking_server]: Destroying bond (docking_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072659.411996378] [agv2.docking_server]: Destroying bond (docking_server) to lifecycle manager.
+[component_container_isolated-2] [ERROR] [1793072659.446044540] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.242513 but the latest data is at time 1793072658.824595, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-1] [ERROR] [1793072659.459274622] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.256473 but the latest data is at time 1793072658.828428, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-3] [ERROR] [1793072659.482899077] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.274118 but the latest data is at time 1793072658.828489, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-3] [INFO] [1793072659.484888744] [agv3.docking_server]: Destroying bond (docking_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072659.519056594] [agv1.lifecycle_manager_navigation]: [34m[1mDeactivating waypoint_follower[0m[0m
+[component_container_isolated-1] [INFO] [1793072659.519807515] [agv1.waypoint_follower]: Deactivating
+[component_container_isolated-1] [INFO] [1793072659.519861324] [agv1.waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072659.524093514] [agv2.controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072659.524125851] [agv2.smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[component_container_isolated-2] [INFO] [1793072659.524146004] [agv2.smoother_server]: Deactivating
+[component_container_isolated-2] [INFO] [1793072659.524169862] [agv2.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072659.527591666] [agv1.controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072659.527619745] [agv1.smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[component_container_isolated-1] [INFO] [1793072659.527639926] [agv1.smoother_server]: Deactivating
+[component_container_isolated-1] [INFO] [1793072659.527653412] [agv1.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072659.531923315] [agv2.lifecycle_manager_navigation]: [34m[1mDeactivating waypoint_follower[0m[0m
+[component_container_isolated-2] [INFO] [1793072659.533184871] [agv2.waypoint_follower]: Deactivating
+[component_container_isolated-2] [INFO] [1793072659.533279344] [agv2.waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072659.534568122] [agv2.smoother_server]: Cleaning up
+[component_container_isolated-3] [INFO] [1793072659.536293387] [agv3.controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072659.536351110] [agv3.smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[component_container_isolated-3] [INFO] [1793072659.536395779] [agv3.smoother_server]: Deactivating
+[component_container_isolated-3] [INFO] [1793072659.536423123] [agv3.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072659.540862970] [agv1.smoother_server]: Cleaning up
+[component_container_isolated-3] [INFO] [1793072659.546747367] [agv3.smoother_server]: Cleaning up
+[component_container_isolated-1] [INFO] [1793072659.563605737] [agv1.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072659.563640210] [agv1.planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[component_container_isolated-1] [INFO] [1793072659.563657698] [agv1.planner_server]: Deactivating
+[component_container_isolated-1] [INFO] [1793072659.563693796] [agv1.global_costmap.global_costmap]: Deactivating
+[component_container_isolated-2] [INFO] [1793072659.564424106] [agv2.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072659.564453950] [agv2.planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[component_container_isolated-2] [INFO] [1793072659.564477124] [agv2.planner_server]: Deactivating
+[component_container_isolated-2] [INFO] [1793072659.564513274] [agv2.global_costmap.global_costmap]: Deactivating
+[component_container_isolated-3] [INFO] [1793072659.571821540] [agv3.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072659.571854507] [agv3.planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[component_container_isolated-3] [INFO] [1793072659.571875843] [agv3.planner_server]: Deactivating
+[component_container_isolated-3] [INFO] [1793072659.571914036] [agv3.global_costmap.global_costmap]: Deactivating
+[component_container_isolated-3] [INFO] [1793072659.599817920] [agv3.lifecycle_manager_navigation]: [34m[1mDeactivating waypoint_follower[0m[0m
+[component_container_isolated-3] [INFO] [1793072659.600922082] [agv3.waypoint_follower]: Deactivating
+[component_container_isolated-3] [INFO] [1793072659.600977703] [agv3.waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072659.635809721] [agv1.lifecycle_manager_navigation]: [34m[1mDeactivating bt_navigator[0m[0m
+[component_container_isolated-1] [INFO] [1793072659.637046476] [agv1.bt_navigator]: Deactivating
+[component_container_isolated-1] [INFO] [1793072659.637188429] [agv1.bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072659.651210040] [agv2.lifecycle_manager_navigation]: [34m[1mDeactivating bt_navigator[0m[0m
+[component_container_isolated-2] [INFO] [1793072659.651992465] [agv2.bt_navigator]: Deactivating
+[component_container_isolated-2] [INFO] [1793072659.652057733] [agv2.bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[component_container_isolated-2] [ERROR] [1793072659.652076153] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.446967 but the latest data is at time 1793072658.824595, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-1] [ERROR] [1793072659.662015121] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.459790 but the latest data is at time 1793072658.828428, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-3] [ERROR] [1793072659.686805073] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.484721 but the latest data is at time 1793072658.828489, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-3] [INFO] [1793072659.718241040] [agv3.lifecycle_manager_navigation]: [34m[1mDeactivating bt_navigator[0m[0m
+[component_container_isolated-3] [INFO] [1793072659.719781874] [agv3.bt_navigator]: Deactivating
+[component_container_isolated-3] [INFO] [1793072659.719833685] [agv3.bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072659.751869366] [agv1.lifecycle_manager_navigation]: [34m[1mDeactivating collision_monitor[0m[0m
+[component_container_isolated-2] [INFO] [1793072659.768988537] [agv2.lifecycle_manager_navigation]: [34m[1mDeactivating collision_monitor[0m[0m
+[component_container_isolated-3] [INFO] [1793072659.835404753] [agv3.lifecycle_manager_navigation]: [34m[1mDeactivating collision_monitor[0m[0m
+[component_container_isolated-2] [ERROR] [1793072659.854346733] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.652299 but the latest data is at time 1793072658.824595, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-2] [INFO] [1793072659.859045116] [agv2.planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[component_container_isolated-2] [INFO] [1793072659.859111135] [agv2.planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[component_container_isolated-1] [ERROR] [1793072659.864196876] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.662252 but the latest data is at time 1793072658.828428, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-2] [INFO] [1793072659.869297341] [agv2.planner_server]: Cleaning up
+[component_container_isolated-3] [ERROR] [1793072659.889157700] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.687156 but the latest data is at time 1793072658.828489, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-2] [INFO] [1793072659.889610753] [agv2.global_costmap.global_costmap]: Cleaning up
+[component_container_isolated-2] [INFO] [1793072659.900421906] [agv2.planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[component_container_isolated-2] [INFO] [1793072659.900672863] [agv2.planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[component_container_isolated-1] [INFO] [1793072659.925060697] [agv1.planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[component_container_isolated-1] [INFO] [1793072659.925175012] [agv1.planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072659.935559405] [agv1.planner_server]: Cleaning up
+[component_container_isolated-2] [INFO] [1793072659.940535354] [agv2.planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072659.940576403] [agv2.route_server]: Running Nav2 LifecycleNode rcl preshutdown (route_server)
+[component_container_isolated-2] [INFO] [1793072659.940591612] [agv2.route_server]: Deactivating
+[component_container_isolated-2] [INFO] [1793072659.940621963] [agv2.route_server]: Destroying bond (route_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1793072659.950852445] [agv2.route_server]: Cleaning up
+[component_container_isolated-1] [INFO] [1793072659.953481133] [agv1.global_costmap.global_costmap]: Cleaning up
+[component_container_isolated-1] [INFO] [1793072659.963293108] [agv1.planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[component_container_isolated-1] [INFO] [1793072659.963526798] [agv1.planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[component_container_isolated-1] [INFO] [1793072659.992805469] [agv1.planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072659.992836883] [agv1.route_server]: Running Nav2 LifecycleNode rcl preshutdown (route_server)
+[component_container_isolated-1] [INFO] [1793072659.992855007] [agv1.route_server]: Deactivating
+[component_container_isolated-1] [INFO] [1793072659.992878126] [agv1.route_server]: Destroying bond (route_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072660.003151060] [agv1.route_server]: Cleaning up
+[component_container_isolated-1] [INFO] [1793072660.022129360] [agv1.route_server]: Destroying bond (route_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1793072660.022155968] [agv1.behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[component_container_isolated-1] [INFO] [1793072660.022170237] [agv1.behavior_server]: Deactivating
+[component_container_isolated-1] [INFO] [1793072660.022196974] [agv1.behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[component_container_isolated-3] [ERROR] [1793072660.091425560] [getTransform]: Failed to get "lidar_link"->"base_footprint" frame transform: Lookup would require extrapolation into the future.  Requested time 1793072659.889447 but the latest data is at time 1793072658.828489, when looking up transform from frame [odom] to frame [base_footprint]
+[component_container_isolated-3] [INFO] [1793072660.091556058] [agv3.collision_monitor]: Deactivating
+[component_container_isolated-3] [INFO] [1793072660.091599075] [agv3.collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072660.125272262] [agv3.planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[component_container_isolated-3] [INFO] [1793072660.125358745] [agv3.planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072660.135688110] [agv3.planner_server]: Cleaning up
+[component_container_isolated-3] [INFO] [1793072660.154867160] [agv3.global_costmap.global_costmap]: Cleaning up
+[component_container_isolated-3] [INFO] [1793072660.164206907] [agv3.planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[component_container_isolated-3] [INFO] [1793072660.164390709] [agv3.planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[component_container_isolated-3] [INFO] [1793072660.191918222] [agv3.planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072660.191943194] [agv3.route_server]: Running Nav2 LifecycleNode rcl preshutdown (route_server)
+[component_container_isolated-3] [INFO] [1793072660.191958733] [agv3.route_server]: Deactivating
+[component_container_isolated-3] [INFO] [1793072660.191975483] [agv3.route_server]: Destroying bond (route_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072660.202168056] [agv3.route_server]: Cleaning up
+[component_container_isolated-3] [INFO] [1793072660.204675695] [agv3.lifecycle_manager_navigation]: [34m[1mDeactivating velocity_smoother[0m[0m
+[component_container_isolated-3] [INFO] [1793072660.205158365] [agv3.velocity_smoother]: Deactivating
+[component_container_isolated-3] [INFO] [1793072660.205204157] [agv3.velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072660.221947161] [agv3.route_server]: Destroying bond (route_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072660.221963212] [agv3.behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[component_container_isolated-3] [INFO] [1793072660.221990187] [agv3.behavior_server]: Deactivating
+[component_container_isolated-3] [INFO] [1793072660.222007074] [agv3.behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072660.232162795] [agv3.behavior_server]: Cleaning up
+[component_container_isolated-3] [INFO] [1793072660.234363772] [agv3.behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[component_container_isolated-3] [INFO] [1793072660.234376946] [agv3.bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[component_container_isolated-3] [INFO] [1793072660.234387192] [agv3.bt_navigator]: Cleaning up
+[component_container_isolated-3] [INFO] [1793072660.320479113] [agv3.lifecycle_manager_navigation]: [34m[1mDeactivating behavior_server[0m[0m
+[component_container_isolated-3] [WARN] [1793072660.320963216] [rcl_lifecycle]: No transition matching 4 found for current state unconfigured
+[component_container_isolated-3] [WARN] [1793072660.320992410] [rcl_lifecycle]: No transition matching 4 found for current state unconfigured
+[component_container_isolated-3] [ERROR] [1793072660.321008044] [agv3.behavior_server]: Unable to start transition 4 from current state unconfigured: Transition is not registered., at ./src/rcl_lifecycle.c:355
+[component_container_isolated-3] [ERROR] [1793072660.321377193] [agv3.lifecycle_manager_navigation]: Failed to change state for node: behavior_server
+[component_container_isolated-3] [INFO] [1793072660.321408322] [agv3.lifecycle_manager_navigation]: [34m[1mDeactivating route_server[0m[0m
+[ERROR] [component_container_isolated-1]: process has died [pid 13350, exit code -11, cmd '/opt/ros/jazzy/lib/rclcpp_components/component_container_isolated --ros-args --log-level agv1.local_costmap.local_costmap:=warn --ros-args -r __node:=nav2_container -r __ns:=/agv1 --params-file /tmp/launch_params_mix9ino9 --params-file /tmp/launch_params_6p2qqnma -r /tf:=tf -r /tf_static:=tf_static'].

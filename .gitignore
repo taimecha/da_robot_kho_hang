@@ -17,3 +17,6 @@ wifi_config.h
 
 # Rac NTFS cua Windows khi tai file ve
 *:Zone.Identifier
+
+# RViz system resources copied automatically into local simulation runs.
+data/warehouse_demo_*/rviz_resources/
